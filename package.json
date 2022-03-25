@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "webcash": "^1.0.3"
+  },
+  "devDependencies": {
+    "parcel": "^2.4.0"
+  }
+}
