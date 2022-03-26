@@ -1,4 +1,4 @@
-function WidgetConnect() {
+export function ConnectButton() {
   return <input type="file" id="wallet_file" name="wallet_file" onChange={readFile}/>;
 }
 
