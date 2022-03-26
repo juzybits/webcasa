@@ -211,7 +211,7 @@ a {
     }
 
     /* These are position:fixed; elements that will be in the left 500px of the screen */
-    #nav, #list {
+    #nav, #list, #connect_page {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -234,11 +234,14 @@ a {
         display: none;
     }
 
-    #list {
+    #list, #connect_page {
         margin-left: -350px;
         width: 100%;
         height: 33%;
         border-bottom: 1px solid #ddd;
+    }
+    #connect_page {
+        border: none;
     }
 
     #main {
@@ -293,4 +296,8 @@ a {
     position: absolute;
     padding: 0 10px;
     color: #eee;
+}
+
+#layout #connect_page {
+    padding: 35px 40px;
 }
