@@ -8,19 +8,32 @@ export class Navigation extends React.Component {
     render() {
         return (
             <div id="nav" className="pure-u">
-                <a href="#" id="menuLink">☰</a>
+
                 <label id="logo">🐮 CowCash</label>
+
+                <a href="#" id="menuLink">☰</a>
+
                 <div className="nav-inner">
                     {/*<button className="primary-button pure-button">Connect</button> -->*/}
                     <div className="pure-menu">
                         <ul className="pure-menu-list">
-                            <li className="pure-menu-item"><a href="#" className="pure-menu-link">Wallet</a></li>
-                            <li className="pure-menu-item"><a href="#" className="pure-menu-link">Send</a></li>
-                            <li className="pure-menu-item"><a href="#" className="pure-menu-link">History <span className="email-count">(2)</span></a></li>
+                            <MenuItem name="Wallet"/>
+                            <MenuItem name="Send"/>
+                            <MenuItem name="History"/>
                         </ul>
                     </div>
                 </div>
+
             </div>
+        );
+    }
+}
+
+class MenuItem extends React.Component {
+    render() {
+        const name = this.props.name;
+        return (
+            <li className="pure-menu-item"><a href="#" className="pure-menu-link">{name}</a></li>
         );
     }
 }
