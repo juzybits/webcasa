@@ -43,7 +43,7 @@ export class Wallet extends React.Component {
         if (active === 'connect') {
             page = <PageConnect onFileUpload={this.handleWalletUpload}/>;
         } else if (active === 'overview') {
-            page = <PageOverview/>;
+            page = <PageOverview wallet={this.state.wallet}/>;
         } else if (active === 'send') {
             page = <PageSend/>;
         } else if (active === 'history') {
