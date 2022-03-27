@@ -211,7 +211,7 @@ a {
     }
 
     /* These are position:fixed; elements that will be in the left 500px of the screen */
-    #nav, #list, #connect_page {
+    #nav, #list, #PageConnect {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -234,13 +234,13 @@ a {
         display: none;
     }
 
-    #list, #connect_page {
+    #list, #PageConnect {
         margin-left: -350px;
         width: 100%;
         height: 33%;
         border-bottom: 1px solid #ddd;
     }
-    #connect_page {
+    #PageConnect {
         border: none;
     }
 
@@ -298,6 +298,6 @@ a {
     color: #eee;
 }
 
-#layout #connect_page {
+#layout #PageConnect {
     padding: 30px;
 }

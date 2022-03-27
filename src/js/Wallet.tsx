@@ -1,6 +1,8 @@
 import React from "react";
 import { Navigation } from "./Navigation";
 import { PageConnect } from "./PageConnect";
+import { PageOverview } from "./PageOverview";
+import { PageSend } from "./PageSend";
 import { PageHistory } from "./PageHistory";
 
 export class Wallet extends React.Component {
@@ -9,7 +11,8 @@ export class Wallet extends React.Component {
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.state = {
             wallet: null,
-        }
+            activePage: 'connect',
+        };
     }
 
     handleWalletUpload(event) {
@@ -19,7 +22,10 @@ export class Wallet extends React.Component {
 
         reader.onload = function() {
             var wallet = JSON.parse(reader.result);
-            dis.state.wallet = wallet;
+            dis.setState({
+                wallet: wallet,
+                activePage: 'overview'
+            });
         };
         reader.onerror = function() {
             alert(reader.error);
@@ -28,13 +34,23 @@ export class Wallet extends React.Component {
     }
 
     render() {
+        var active = this.state.activePage;
+        var page = '';
+
+        if (active === 'connect') {
+            page = <PageConnect onFileUpload={this.handleWalletUpload}/>;
+        } else if (active === 'overview') {
+            page = <PageOverview/>;
+        } else if (active === 'send') {
+            page = <PageSend/>;
+        } else if (active === 'history') {
+            page = <PageHistory/>;
+        }
+
         return (
             <div id="layout" className="content pure-g">
                 <Navigation/>
-                <PageConnect onFileUpload={this.handleWalletUpload}/>
-                {/*<PageWallet/>*/}
-                {/*<PageSend/>*/}
-                <PageHistory/>
+                {page}
             </div>
         );
     }
