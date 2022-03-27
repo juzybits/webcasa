@@ -230,7 +230,7 @@ a {
     }
 
     /* Hide the "Menu" button on larger screens */
-    #nav #menuLink {
+    #nav #menuToggle {
         display: none;
     }
 
@@ -288,7 +288,7 @@ a {
     position: absolute;
 }
 
-#menuLink {
+#menuToggle {
     font-size: 2em;
     display: block;
     top: 0em;
