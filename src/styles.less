@@ -1,27 +1,17 @@
-/*
- * -- BASE STYLES --
- * Most of these are inherited from Base, but I want to change a few.
- */
 body {
     color: #333;
 }
-
-
 
 a {
     text-decoration: none;
     color: #1b98f8;
 }
 
-
 /*
  * -- HELPER STYLES --
  * Over-riding some of the .pure-button styles to make my buttons look unique
  */
-.primary-button,
-.secondary-button {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
+.primary-button, .secondary-button {
     box-shadow: none;
     border-radius: 20px;
 }
@@ -54,18 +44,19 @@ a {
     position: relative;
     background: rgb(37, 42, 58);
     text-align: center;
-}
-/* Show the "Menu" button on phones */
-#nav .nav-menu-button {
-    display: block;
-    top: 0.5em;
-    right: 0.5em;
-    position: absolute;
-}
 
-/* When "Menu" is clicked, the navbar should be 80% height */
-#nav.active {
-    height: 80%;
+    /* When "Menu" is clicked, the navbar should be 80% height */
+    &.active {
+        height: 80%;
+    }
+
+    /* Show the "Menu" button on phones */
+    .nav-menu-button {
+        display: block;
+        top: 0.5em;
+        right: 0.5em;
+        position: absolute;
+    }
 }
 /* Don't show the navigation items... */
 .nav-inner {
@@ -83,27 +74,28 @@ a {
  * -- NAV BAR STYLES --
  * Styling the default .pure-menu to look a little more unique.
  */
-#nav .pure-menu {
-    background: transparent;
-    border: none;
-    text-align: left;
-}
-    #nav .pure-menu-link:hover,
-    #nav .pure-menu-link:focus {
-        background: rgb(55, 60, 90);
+#nav {
+    .pure-menu {
+        background: transparent;
+        border: none;
+        text-align: left;
     }
-    #nav .pure-menu-link {
+    .pure-menu-link {
         color: #eee;
         margin-left: 0.5em;
+        &:hover, &:focus {
+            background: rgb(55, 60, 90);
+        }
     }
-    #nav .pure-menu-heading {
+    .pure-menu-heading {
         border-bottom: none;
         font-size:110%;
         color: rgb(75, 113, 151);
     }
-    #nav .pure-menu-list {
+    .pure-menu-list {
         margin-top: 20px;
     }
+}
 
 
 /*
