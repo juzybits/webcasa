@@ -97,6 +97,120 @@ a {
     }
 }
 
+#logo {
+    color: #eee;
+    display: block;
+    font-size: 1.1em;
+    margin-left: 0.5em;
+    padding: .6em 1em;
+    position: absolute;
+}
+
+#menuToggle {
+    font-size: 2em;
+    display: block;
+    top: 0em;
+    right: 0em;
+    position: absolute;
+    padding: 0 10px;
+    color: #eee;
+}
+
+#input_file {
+    display: none;
+}
+
+#ButtonConnect {
+    margin: 30px 0 0 0;
+    label {
+        font-family: monospace;
+        font-weight: bold;
+    }
+}
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 40em) {
+
+    /* Move the layout over so we can fit the nav + list in on the left */
+    #layout {
+        padding-left:550px; /* "left col (nav + list)" width */
+        position: relative;
+    }
+
+    /* These are position:fixed; elements that will be in the left 500px of the screen */
+    #nav, #list {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+    #nav {
+        margin-left:-550px; /* "left col (nav + list)" width */
+        width: 200px;
+        height: 100%;
+    }
+
+    /* Show the menu items on the larger screen */
+    .nav-inner {
+        display: block;
+        padding: 2em 0;
+    }
+
+    /* Hide the "Menu" button on larger screens */
+    #nav #menuToggle {
+        display: none;
+    }
+
+    #list {
+        margin-left: -350px;
+        width: 100%;
+        height: 33%;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #main {
+        position: fixed;
+        top: 33%;
+        right: 0;
+        bottom: 0;
+        left: 200px;
+        overflow: auto;
+        width: auto; /* so that it's not 100% */
+    }
+
+    #logo {
+        font-size: 1.4em;
+        padding: 1em;
+    }
+
+}
+
+/*
+ * -- DESKTOP (AND UP) MEDIA QUERIES --
+ * On desktops and other large-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 60em) {
+
+    /* This will take up the entire height, and be a little thinner */
+    #list {
+        margin-left: -350px;
+        width:350px;
+        height: 100%;
+        border-right: 1px solid #ddd;
+    }
+
+    /* This will now take up it's own column, so don't need position: fixed; */
+    #main {
+        position: static;
+        margin: 0;
+        padding: 0;
+    }
+}
 
 /*
  * -- EMAIL STYLES --
@@ -187,118 +301,3 @@ a {
         width: 40px;
         height: 40px;
     }
-
-#logo {
-    color: #eee;
-    display: block;
-    font-size: 1.1em;
-    margin-left: 0.5em;
-    padding: .6em 1em;
-    position: absolute;
-}
-
-/*
- * -- TABLET (AND UP) MEDIA QUERIES --
- * On tablets and other medium-sized devices, we want to customize some
- * of the mobile styles.
- */
-@media (min-width: 40em) {
-
-    /* Move the layout over so we can fit the nav + list in on the left */
-    #layout {
-        padding-left:550px; /* "left col (nav + list)" width */
-        position: relative;
-    }
-
-    /* These are position:fixed; elements that will be in the left 500px of the screen */
-    #nav, #list {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        overflow: auto;
-    }
-    #nav {
-        margin-left:-550px; /* "left col (nav + list)" width */
-        width: 200px;
-        height: 100%;
-    }
-
-    /* Show the menu items on the larger screen */
-    .nav-inner {
-        display: block;
-        padding: 2em 0;
-    }
-
-    /* Hide the "Menu" button on larger screens */
-    #nav #menuToggle {
-        display: none;
-    }
-
-    #list {
-        margin-left: -350px;
-        width: 100%;
-        height: 33%;
-        border-bottom: 1px solid #ddd;
-    }
-
-    #main {
-        position: fixed;
-        top: 33%;
-        right: 0;
-        bottom: 0;
-        left: 200px;
-        overflow: auto;
-        width: auto; /* so that it's not 100% */
-    }
-
-    #logo {
-        font-size: 1.4em;
-        padding: 1em;
-    }
-
-}
-
-/*
- * -- DESKTOP (AND UP) MEDIA QUERIES --
- * On desktops and other large-sized devices, we want to customize some
- * of the mobile styles.
- */
-@media (min-width: 60em) {
-
-    /* This will take up the entire height, and be a little thinner */
-    #list {
-        margin-left: -350px;
-        width:350px;
-        height: 100%;
-        border-right: 1px solid #ddd;
-    }
-
-    /* This will now take up it's own column, so don't need position: fixed; */
-    #main {
-        position: static;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-#menuToggle {
-    font-size: 2em;
-    display: block;
-    top: 0em;
-    right: 0em;
-    position: absolute;
-    padding: 0 10px;
-    color: #eee;
-}
-
-#input_file {
-    display: none;
-}
-
-#ButtonConnect {
-    margin: 30px 0 0 0;
-    label {
-        font-family: monospace;
-        font-weight: bold;
-    }
-}
