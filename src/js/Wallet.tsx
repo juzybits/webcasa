@@ -1,35 +1,40 @@
 import React from "react";
 import { Navigation } from "./Navigation";
-import { ConnectButton } from "./ConnectButton";
-import { History } from "./History";
+import { PageConnect } from "./PageConnect";
+import { PageHistory } from "./PageHistory";
 
 export class Wallet extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            version: '',
-            legalese: {},
-            log: [],
-            webcash: [],
-            unconfirmed: [],
-            master_secret: '',
-            wallet_depths: {},
-        }
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
+        this.state = {
+            wallet: null,
+        }
     }
 
     handleWalletUpload(event) {
-        // TODO
-        this.setState({
-        });
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        var dis = this;
+
+        reader.onload = function() {
+            var wallet = JSON.parse(reader.result);
+            dis.state.wallet = wallet;
+        };
+        reader.onerror = function() {
+            alert(reader.error);
+        };
+        reader.readAsText(file);
     }
 
     render() {
         return (
             <div id="layout" className="content pure-g">
                 <Navigation/>
-                <ConnectButton/>
-                <History/>
+                <PageConnect onFileUpload={this.handleWalletUpload}/>
+                {/*<PageWallet/>*/}
+                {/*<PageSend/>*/}
+                <PageHistory/>
             </div>
         );
     }

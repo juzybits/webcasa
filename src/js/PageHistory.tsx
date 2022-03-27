@@ -1,4 +1,4 @@
-export function History() {
+export function PageHistory() {
     return (
 <div id="history_page" className="hidden">
 
