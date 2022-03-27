@@ -11,21 +11,22 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
+        this.handleMenuClick = this.handleMenuClick.bind(this);
         this.state = {
-            view: 'info',
+            view: 'Info',
             wallet: new WebcashWallet(),
         };
     }
 
     render() {
         var view = '';
-        if ('info' === this.state.view) {
+        if ('Info' === this.state.view) {
             view = <ViewInfo wallet={this.state.wallet}/>;
         } else
-        if ('send' === this.state.view) {
+        if ('Send' === this.state.view) {
             view = <ViewSend/>;
         } else
-        if ('history' === this.state.view) {
+        if ('History' === this.state.view) {
             view = <ViewHistory/>;
         }
 
@@ -33,11 +34,16 @@ export class App extends React.Component {
             <div id="layout" className="content pure-g">
                 <Navigation
                     handleWalletUpload={this.handleWalletUpload}
+                    handleMenuClick={this.handleMenuClick}
                     wallet={this.state.wallet}
                 />
                 {view}
             </div>
         );
+    }
+
+    handleMenuClick(itemName) {
+        this.setState({view: itemName});
     }
 
     handleWalletUpload(event) {
@@ -51,7 +57,7 @@ export class App extends React.Component {
 
             dis.setState({
                 wallet: walletObj,
-                page: 'info'
+                page: 'Info'
             });
         };
         reader.onerror = function() {

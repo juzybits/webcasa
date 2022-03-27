@@ -8,6 +8,7 @@ export class Navigation extends React.Component {
         super(props);
         this.toggleVisibility = this.toggleVisibility.bind(this);
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
+        this.handleMenuClick = this.handleMenuClick.bind(this);
         this.state = { visible: false }
     }
 
@@ -15,11 +16,18 @@ export class Navigation extends React.Component {
         this.setState({ visible: !this.state.visible });
     }
 
+    handleMenuClick(itemName) {
+        this.props.handleMenuClick(itemName);
+    }
+
     handleWalletUpload(event) {
         this.props.handleWalletUpload(event);
     }
 
     render() {
+        const menuItems = ["Info", "Send", "History"].map((item) =>
+            <MenuItem key={item} name={item} onClick={this.handleMenuClick}/>
+        );
         return (
             <div id="nav" className={"pure-u " + (this.state.visible ? "active" : '')}>
 
@@ -35,9 +43,7 @@ export class Navigation extends React.Component {
 
                     <div className="pure-menu">
                         <ul className="pure-menu-list">
-                            <MenuItem name="Wallet"/>
-                            <MenuItem name="Send"/>
-                            <MenuItem name="History"/>
+                            {menuItems}
                         </ul>
                     </div>
                 </div>
@@ -48,10 +54,21 @@ export class Navigation extends React.Component {
 }
 
 class MenuItem extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(event) {
+        this.props.onClick(this.props.name);
+    }
+
     render() {
-        const name = this.props.name;
         return (
-            <li className="pure-menu-item"><a href="#" className="pure-menu-link">{name}</a></li>
+            <li className="pure-menu-item">
+                <a href="#" className="pure-menu-link" onClick={this.onClick}>{this.props.name}</a>
+            </li>
         );
     }
 }
