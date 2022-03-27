@@ -5,6 +5,7 @@
     "webcash": "^1.0.3"
   },
   "devDependencies": {
+    "@parcel/transformer-less": "^2.4.0",
     "buffer": "^6.0.3",
     "events": "^3.3.0",
     "parcel": "^2.4.0",
