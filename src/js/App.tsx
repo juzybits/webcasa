@@ -24,10 +24,7 @@ export class App extends React.Component {
             view = <ViewOverview wallet={this.state.wallet}/>;
         } else
         if ('Log' === this.state.view) {
-            view = <ViewLog/>;
-        } else
-        if ('History' === this.state.view) {
-            view = <ViewHistory/>;
+            view = <ViewLog wallet={this.state.wallet}/>;
         }
 
         return (

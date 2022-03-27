@@ -60,7 +60,7 @@ function MenuItem(props) {
         extra = props.wallet.getContents().unconfirmed.length;
     }
     if (extra !== '') {
-        extra = <span class="email-count"> ({extra})</span>;
+        extra = <span className="email-count"> ({extra})</span>;
     }
 
     return (
