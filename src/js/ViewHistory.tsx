@@ -1,6 +1,6 @@
-export function PageHistory() {
+export function ViewHistory() {
     return (
-<div id="PageHistory">
+<div id="ViewHistory">
 
     <div id="list" className="pure-u-1">
         <div className="email-item email-item-selected pure-g">

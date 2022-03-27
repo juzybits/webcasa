@@ -1,11 +1,11 @@
 import React from "react";
 
-export class PageOverview extends React.Component {
+export class ViewInfo extends React.Component {
     render() {
         var balance = this.props.wallet.getBalance().toString();
         var data = this.props.wallet.getContents();
         return (
-            <div id="PageOverview" className="pure-u">
+            <div id="ViewInfo" className="pure-u">
                 <pre>
                     <br/> master secret: {this.prettySecret(data.master_secret)}
                     <br/> balance: {balance}

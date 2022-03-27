@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
-import { Wallet } from "./Wallet";
+import { App } from "./App";
 
 ReactDOM.render(
-  <Wallet />,
+  <App />,
   document.getElementById('app')
 );
