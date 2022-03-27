@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getShortMasterSecret } from "./_util";
+import { formatMasterSecret } from "./_util";
 
 export class ViewOverview extends React.Component {
     render() {
@@ -10,7 +10,7 @@ export class ViewOverview extends React.Component {
             <div id="ViewOverview" className="pure-u">
             <table className="pure-table">
             <tbody>
-                <tr><td>master secret:</td><td><pre>{getShortMasterSecret(this.props.wallet)}</pre></td></tr>
+                <tr><td>master secret:</td><td><pre>{formatMasterSecret(this.props.wallet)}</pre></td></tr>
                 <tr><td>balance:</td><td>{balance}</td></tr>
                 <tr><td>depths:</td><td>{JSON.stringify(data.walletdepths,null,4)}</td></tr>
                 <tr><td>log:</td><td>{data.log.length}</td></tr>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getShortMasterSecret } from "./_util";
+import { formatMasterSecret } from "./_util";
 import { ButtonConnect } from "./ButtonConnect";
 
 export class Navigation extends React.Component {
@@ -28,7 +28,7 @@ export class Navigation extends React.Component {
                 <div className="nav-inner">
                     <ButtonConnect
                         onFileUpload={this.props.handleWalletUpload}
-                        buttonLabel={getShortMasterSecret(this.props.wallet)}
+                        buttonLabel={formatMasterSecret(this.props.wallet)}
                     />
 
                     <div className="pure-menu">
