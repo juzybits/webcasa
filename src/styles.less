@@ -78,7 +78,7 @@ a {
     .pure-menu {
         background: transparent;
         border: none;
-        text-align: left;
+        // text-align: left;
     }
     .pure-menu-link {
         color: #eee;
@@ -93,7 +93,7 @@ a {
         color: rgb(75, 113, 151);
     }
     .pure-menu-list {
-        margin-top: 20px;
+        margin-top: 5px;
     }
 }
 
@@ -188,6 +188,14 @@ a {
         height: 40px;
     }
 
+#logo {
+    color: #eee;
+    display: block;
+    font-size: 1.1em;
+    margin-left: 0.5em;
+    padding: .6em 1em;
+    position: absolute;
+}
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
@@ -243,6 +251,11 @@ a {
         width: auto; /* so that it's not 100% */
     }
 
+    #logo {
+        font-size: 1.4em;
+        padding: 1em;
+    }
+
 }
 
 /*
@@ -268,15 +281,6 @@ a {
     }
 }
 
-#logo {
-    color: #eee;
-    display: block;
-    font-size: 1.1em;
-    margin-left: 0.5em;
-    padding: .6em 1em;
-    position: absolute;
-}
-
 #menuToggle {
     font-size: 2em;
     display: block;
@@ -292,6 +296,7 @@ a {
 }
 
 #ButtonConnect {
+    margin: 30px 0 0 0;
     label {
         font-family: monospace;
         font-weight: bold;
