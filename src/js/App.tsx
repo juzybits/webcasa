@@ -4,7 +4,7 @@ import { WebcashWallet } from "webcash";
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
 import { ViewOverview } from "./ViewOverview";
-import { ViewSend } from "./ViewSend";
+import { ViewLog } from "./ViewLog";
 
 export class App extends React.Component {
 
@@ -23,8 +23,8 @@ export class App extends React.Component {
         if ('Overview' === this.state.view) {
             view = <ViewOverview wallet={this.state.wallet}/>;
         } else
-        if ('Send' === this.state.view) {
-            view = <ViewSend/>;
+        if ('Log' === this.state.view) {
+            view = <ViewLog/>;
         } else
         if ('History' === this.state.view) {
             view = <ViewHistory/>;
