@@ -1,14 +1,21 @@
 import React from "react";
 
+import { ButtonConnect } from "./ButtonConnect";
+
 export class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.toggleVisibility = this.toggleVisibility.bind(this);
+        this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.state = { visible: false }
     }
 
     toggleVisibility() {
         this.setState({ visible: !this.state.visible });
+    }
+
+    handleWalletUpload(event) {
+        this.props.handleWalletUpload(event);
     }
 
     render() {
@@ -20,7 +27,8 @@ export class Navigation extends React.Component {
                 <a href="#" id="menuToggle" onClick={this.toggleVisibility}>☰</a>
 
                 <div className="nav-inner">
-                    <button className="primary-button pure-button">Connect</button>
+                    <ButtonConnect onFileUpload={this.handleWalletUpload}/>
+
                     <div className="pure-menu">
                         <ul className="pure-menu-list">
                             <MenuItem name="Wallet"/>

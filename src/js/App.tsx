@@ -2,7 +2,6 @@ import React from "react";
 import { WebcashWallet } from "webcash";
 
 import { Navigation } from "./Navigation";
-import { ButtonConnect } from "./ButtonConnect";
 import { ViewHistory } from "./ViewHistory";
 import { ViewInfo } from "./ViewInfo";
 import { ViewSend } from "./ViewSend";
@@ -20,9 +19,6 @@ export class App extends React.Component {
 
     render() {
         var view = '';
-        if ('connect' === this.state.view) {
-            view = <ButtonConnect onFileUpload={this.handleWalletUpload}/>;
-        } else
         if ('info' === this.state.view) {
             view = <ViewInfo wallet={this.state.wallet}/>;
         } else
@@ -35,7 +31,7 @@ export class App extends React.Component {
 
         return (
             <div id="layout" className="content pure-g">
-                <Navigation/>
+                <Navigation handleWalletUpload={this.handleWalletUpload}/>
                 {view}
             </div>
         );
