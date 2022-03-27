@@ -3,25 +3,25 @@ import { WebcashWallet } from "webcash";
 
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
-import { ViewInfo } from "./ViewInfo";
+import { ViewOverview } from "./ViewOverview";
 import { ViewSend } from "./ViewSend";
 
 export class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.handleMenuClick = this.handleMenuClick.bind(this);
+        this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.state = {
-            view: 'Info',
+            view: 'Overview',
             wallet: new WebcashWallet(),
         };
     }
 
     render() {
         var view = '';
-        if ('Info' === this.state.view) {
-            view = <ViewInfo wallet={this.state.wallet}/>;
+        if ('Overview' === this.state.view) {
+            view = <ViewOverview wallet={this.state.wallet}/>;
         } else
         if ('Send' === this.state.view) {
             view = <ViewSend/>;
@@ -57,7 +57,7 @@ export class App extends React.Component {
 
             dis.setState({
                 wallet: walletObj,
-                page: 'Info'
+                page: 'Overview'
             });
         };
         reader.onerror = function() {

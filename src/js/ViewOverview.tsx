@@ -2,12 +2,12 @@ import React from "react";
 
 import { getShortMasterSecret } from "./_util";
 
-export class ViewInfo extends React.Component {
+export class ViewOverview extends React.Component {
     render() {
         var balance = this.props.wallet.getBalance().toString();
         var data = this.props.wallet.getContents();
         return (
-            <div id="ViewInfo" className="pure-u">
+            <div id="ViewOverview" className="pure-u">
                 <pre>
                     <br/> master secret: {getShortMasterSecret(this.props.wallet)}
                     <br/> balance: {balance}
