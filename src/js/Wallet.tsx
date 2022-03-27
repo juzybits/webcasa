@@ -1,4 +1,5 @@
 import React from "react";
+import { WebcashWallet } from "webcash";
 import { Navigation } from "./Navigation";
 import { PageConnect } from "./PageConnect";
 import { PageOverview } from "./PageOverview";
@@ -21,9 +22,11 @@ export class Wallet extends React.Component {
         var dis = this;
 
         reader.onload = function() {
-            var wallet = JSON.parse(reader.result);
+            var walletMap = JSON.parse(reader.result);
+            var walletObj = new WebcashWallet(walletMap);
+
             dis.setState({
-                wallet: wallet,
+                wallet: walletObj,
                 activePage: 'overview'
             });
         };
