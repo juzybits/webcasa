@@ -2,17 +2,27 @@ import React from "react";
 
 export class PageOverview extends React.Component {
     render() {
-
         var balance = this.props.wallet.getBalance().toString();
-        var depths = JSON.stringify(this.props.wallet.walletdepths, null, 4);
+        var data = this.props.wallet.getContents();
         return (
             <div id="PageOverview" className="pure-u">
                 <pre>
-                balance: {balance}
-                <br/>
-                depths: {depths}
+                    <br/> master secret: {this.prettySecret(data.master_secret)}
+                    <br/> balance: {balance}
+                    <br/> version: {JSON.stringify(data.version, null, 4)}
+                    <br/> terms: {data.legalese === true ? 'yes' :'no'}
+                    <br/> depths: {JSON.stringify(data.walletdepths, null, 4)}
+                    <br/> webcash: {data.webcash.length}
+                    <br/> unconfirmed: {data.unconfirmed.length}
+                    <br/> log: {data.log.length}
                 </pre>
             </div>
         );
+    }
+
+    prettySecret(secret) {
+        var start = secret.slice(0, 4);
+        var end = secret.slice(-4);
+        return `${start}...${end}`;
     }
 }

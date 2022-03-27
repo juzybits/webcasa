@@ -11,8 +11,8 @@ export class Wallet extends React.Component {
         super(props);
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.state = {
-            wallet: null,
-            activePage: 'connect',
+            wallet: new WebcashWallet(),
+            activePage: 'overview',
         };
     }
 
