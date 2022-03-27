@@ -1,5 +1,6 @@
 import React from "react";
 
+import { getShortMasterSecret } from "./_util";
 import { ButtonConnect } from "./ButtonConnect";
 
 export class Navigation extends React.Component {
@@ -27,7 +28,10 @@ export class Navigation extends React.Component {
                 <a href="#" id="menuToggle" onClick={this.toggleVisibility}>☰</a>
 
                 <div className="nav-inner">
-                    <ButtonConnect onFileUpload={this.handleWalletUpload}/>
+                    <ButtonConnect
+                        onFileUpload={this.handleWalletUpload}
+                        buttonLabel={getShortMasterSecret(this.props.wallet)}
+                    />
 
                     <div className="pure-menu">
                         <ul className="pure-menu-list">

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { getShortMasterSecret } from "./_util";
+
 export class ViewInfo extends React.Component {
     render() {
         var balance = this.props.wallet.getBalance().toString();
@@ -7,7 +9,7 @@ export class ViewInfo extends React.Component {
         return (
             <div id="ViewInfo" className="pure-u">
                 <pre>
-                    <br/> master secret: {this.prettySecret(data.master_secret)}
+                    <br/> master secret: {getShortMasterSecret(this.props.wallet)}
                     <br/> balance: {balance}
                     <br/> version: {JSON.stringify(data.version, null, 4)}
                     <br/> terms: {data.legalese === true ? 'yes' :'no'}
@@ -18,11 +20,5 @@ export class ViewInfo extends React.Component {
                 </pre>
             </div>
         );
-    }
-
-    prettySecret(secret) {
-        var start = secret.slice(0, 4);
-        var end = secret.slice(-4);
-        return `${start}...${end}`;
     }
 }

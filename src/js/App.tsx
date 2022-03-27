@@ -31,7 +31,10 @@ export class App extends React.Component {
 
         return (
             <div id="layout" className="content pure-g">
-                <Navigation handleWalletUpload={this.handleWalletUpload}/>
+                <Navigation
+                    handleWalletUpload={this.handleWalletUpload}
+                    wallet={this.state.wallet}
+                />
                 {view}
             </div>
         );
