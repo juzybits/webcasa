@@ -2,8 +2,10 @@ import React from "react";
 
 import { formatTimestamp } from "./_util";
 
+// TODO: paginate
+// TODO: search
+// TODO: sorting
 export class ViewLog extends React.Component {
-
     constructor(props) {
         super(props);
         this.handleItemClick = this.handleItemClick.bind(this);
@@ -17,37 +19,49 @@ export class ViewLog extends React.Component {
     }
 
     render() {
+        var key = 0;
+        const items = this.props.logs.map((item) =>
+            <Item key={key++} item={item} onClick={this.handleItemClick} />
+        );
         return (
             <div id="ViewLog">
                 <div id="list" className="pure-u-1">
-                    <ItemList logs={this.props.logs} onClick={this.handleItemClick} />
+                    {items}
                 </div>
 
                 <div id="main" className="pure-u-1">
                     <ContentPanel item={this.state.activeItem} />
                 </div>
-
             </div>
         );
     }
 }
 
-// TODO: paginate
-// TODO: search
-// TODO: sorting
-function ItemList(props) {
-    var key = 0;
-    return props.logs.map((item) => (
-        <div key={key++} className="email-item pure-g">
-            <div className="pure-u-3-4" onClick={() => props.onClick(item)}>
-                <h5 className="email-name">{formatTimestamp(item.timestamp)}</h5>
-                <h4 className="email-subject">{item.type} {item.amount}</h4>
-                <p className="email-desc">
-                    <ItemDescription item={item} />
-                </p>
+class Item extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: false
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick() {
+        this.props.onClick(this.props.item)
+    }
+    render() {
+        const item = this.props.item;
+        return (
+            <div className="email-item pure-g">
+                <div className="pure-u-3-4" onClick={this.handleClick}>
+                    <h5 className="email-name">{formatTimestamp(item.timestamp)}</h5>
+                    <h4 className="email-subject">{item.type} {item.amount}</h4>
+                    <p className="email-desc">
+                        <ItemDescription item={item} />
+                    </p>
+                </div>
             </div>
-        </div>
-    ));
+        );
+    }
 }
 
 function ItemDescription(props) {
