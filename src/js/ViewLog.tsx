@@ -8,33 +8,31 @@ import { formatTimestamp } from "./_util";
 export class ViewLog extends React.Component {
     constructor(props) {
         super(props);
-        this.handleItemClick = this.handleItemClick.bind(this);
+        this.handleListItemClick = this.handleListItemClick.bind(this);
         this.state = {
-            activeItem: this.props.logs ? this.props.logs[0] : null,
-            item2: null
+            listItem: null,
+            logEntry: this.props.logs ? this.props.logs[0] : null,
         };
     }
 
-    handleItemClick(item, item2) {
-        if (this.state.item2) {
-            this.state.item2.setActive(false);
-        }
-        this.setState({activeItem: item, item2: item2})
+    handleListItemClick(item, log) {
+        this.state.listItem && this.state.listItem.setActive(false);
+        this.setState({listItem: item, logEntry: log});
     }
 
     render() {
         var key = 0;
-        const items = this.props.logs.map((item) =>
-            <Item key={key++} item={item} onClick={this.handleItemClick} />
+        const listItems = this.props.logs.map((log) =>
+            <Item key={key++} log={log} onClick={this.handleListItemClick} />
         );
         return (
             <div id="ViewLog">
                 <div id="list" className="pure-u-1">
-                    {items}
+                    {listItems}
                 </div>
 
                 <div id="main" className="pure-u-1">
-                    <ContentPanel item={this.state.activeItem} />
+                    <ContentPanel log={this.state.logEntry} />
                 </div>
             </div>
         );
@@ -54,18 +52,18 @@ class Item extends React.Component {
     }
     handleClick() {
         this.setActive(true);
-        this.props.onClick(this.props.item, this)
+        this.props.onClick(this, this.props.log)
     }
     render() {
-        const item = this.props.item;
+        const log = this.props.log;
         const clazz = this.state.active ? ' email-item-unread' : '';
         return (
             <div className={"email-item pure-g"+clazz}>
                 <div className="pure-u-3-4" onClick={this.handleClick}>
-                    <h5 className="email-name">{formatTimestamp(item.timestamp)}</h5>
-                    <h4 className="email-subject">{item.type} {item.amount}</h4>
+                    <h5 className="email-name">{formatTimestamp(log.timestamp)}</h5>
+                    <h4 className="email-subject">{log.type} {log.amount}</h4>
                     <p className="email-desc">
-                        <ItemDescription item={item} />
+                        <ItemDescription log={log} />
                     </p>
                 </div>
             </div>
@@ -74,7 +72,7 @@ class Item extends React.Component {
 }
 
 function ItemDescription(props) {
-    const log = props.item;
+    const log = props.log;
     const memo = !log.memo ? '' : <React.Fragment> <br/>memo: <i>"{log.memo}"</i> </React.Fragment>;
     const inputs = log.input_webcash ?? log.input_webcashes ?? [];
     const outputs = log.output_webcash ?? [];
@@ -89,8 +87,8 @@ function ItemDescription(props) {
 }
 
 function ContentPanel(props) {
-    const item = props.item;
-    if (!item) {
+    const log = props.log;
+    if (!log) {
         return '';
     }
 
@@ -98,15 +96,15 @@ function ContentPanel(props) {
         <div className="email-content">
             <div className="email-content-header pure-g">
                 <div className="pure-u-1">
-                    <h1 className="email-content-title">{item.type} {item.amount}</h1>
+                    <h1 className="email-content-title">{log.type} {log.amount}</h1>
                     <p className="email-content-subtitle">
-                        <span>{formatTimestamp(item.timestamp)}</span>
+                        <span>{formatTimestamp(log.timestamp)}</span>
                     </p>
                 </div>
             </div>
 
             <div className="email-content-body">
-                <textarea value={JSON.stringify(item, null, 4)} readOnly />
+                <textarea value={JSON.stringify(log, null, 4)} readOnly />
             </div>
         </div>
     );
