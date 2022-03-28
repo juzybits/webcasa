@@ -24,7 +24,8 @@ export class App extends React.Component {
             view = <ViewOverview wallet={this.state.wallet}/>;
         } else
         if ('Log' === this.state.view) {
-            view = <ViewLog wallet={this.state.wallet}/>;
+            const logs = this.state.wallet.getContents().log;
+            view = <ViewLog logs={logs}/>;
         }
 
         return (
