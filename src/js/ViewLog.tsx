@@ -10,12 +10,16 @@ export class ViewLog extends React.Component {
         super(props);
         this.handleItemClick = this.handleItemClick.bind(this);
         this.state = {
-            activeItem: this.props.logs ? this.props.logs[0] : null
+            activeItem: this.props.logs ? this.props.logs[0] : null,
+            item2: null
         };
     }
 
-    handleItemClick(item) {
-        this.setState({activeItem: item})
+    handleItemClick(item, item2) {
+        if (this.state.item2) {
+            this.state.item2.setActive(false);
+        }
+        this.setState({activeItem: item, item2: item2})
     }
 
     render() {
@@ -40,18 +44,23 @@ export class ViewLog extends React.Component {
 class Item extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
         this.state = {
             active: false
         };
-        this.handleClick = this.handleClick.bind(this);
+    }
+    setActive(val: bool) {
+        this.setState({active: val})
     }
     handleClick() {
-        this.props.onClick(this.props.item)
+        this.setActive(true);
+        this.props.onClick(this.props.item, this)
     }
     render() {
         const item = this.props.item;
+        const clazz = this.state.active ? ' email-item-unread' : '';
         return (
-            <div className="email-item pure-g">
+            <div className={"email-item pure-g"+clazz}>
                 <div className="pure-u-3-4" onClick={this.handleClick}>
                     <h5 className="email-name">{formatTimestamp(item.timestamp)}</h5>
                     <h4 className="email-subject">{item.type} {item.amount}</h4>
