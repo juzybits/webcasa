@@ -7,5 +7,8 @@ export function formatMasterSecret(wallet: WebcashWallet) {
 }
 
 export function formatTimestamp(ts: string) {
+    if (!ts) {
+        return '';
+    }
     return ts.slice(0, -10);
 }

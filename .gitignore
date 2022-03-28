@@ -1,5 +1,6 @@
 .DS_Store
 /.parcel-cache/
+/default_wallet.webcash
 /dist/
+/LOCK
 /node_modules/
-default_wallet.webcash
