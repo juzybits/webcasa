@@ -1,3 +1,5 @@
+@grey-border: 1px solid #ddd;
+
 body {
     color: #333;
 }
@@ -22,7 +24,7 @@ a {
 }
 .secondary-button {
     background: #eee;
-    border: 1px solid #ddd;
+    border: @grey-border;
     color: #666;
     padding: 0.5em 2em;
     font-size: 80%;
@@ -169,7 +171,7 @@ a {
         margin-left: -350px;
         width: 100%;
         height: 33%;
-        border-bottom: 1px solid #ddd;
+        border-bottom: @grey-border;
     }
 
     #main {
@@ -194,18 +196,19 @@ a {
  * On desktops and other large-sized devices, we want to customize some
  * of the mobile styles.
  */
-@media (min-width: 60em) {
+@media (min-width: 70em) {
 
     /* This will take up the entire height, and be a little thinner */
     #list {
         margin-left: -350px;
         width:350px;
         height: 100%;
-        border-right: 1px solid #ddd;
+        border-right: @grey-border;
     }
 
     /* This will now take up it's own column, so don't need position: fixed; */
     #main {
+        min-width: 550px;
         position: static;
         margin: 0;
         padding: 0;
@@ -243,7 +246,7 @@ a {
 /* Email Item Styles */
 .email-item {
     padding: 0.9em 1em;
-    border-bottom: 1px solid #ddd;
+    border-bottom: @grey-border;
     border-left: 6px solid transparent;
 }
     .email-avatar {
@@ -277,7 +280,7 @@ a {
     padding: 1em 2em;
 }
     .email-content-header {
-        border-bottom: 1px solid #ddd;
+        border-bottom: @grey-border;
     }
 
         .email-content-title {
@@ -303,3 +306,18 @@ a {
         width: 40px;
         height: 40px;
     }
+
+.email-content-body {
+    textarea {
+        border-radius: 10px;
+        border: @grey-border;
+        font-family: monospace;
+        line-height: 1.5em;
+        height: 300px;
+        padding: 10px;
+        width: 97%;
+        &:hover {
+            cursor: default;
+        }
+    }
+}

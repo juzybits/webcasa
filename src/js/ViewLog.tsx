@@ -8,16 +8,12 @@ export class ViewLog extends React.Component {
         super(props);
         this.handleItemClick = this.handleItemClick.bind(this);
         this.state = {
-            activeItem: null
+            activeItem: this.props.logs ? this.props.logs[0] : null
         };
     }
 
     handleItemClick(item) {
         this.setState({activeItem: item})
-    }
-
-    componentDidMount() {
-        this.handleItemClick(this.props.logs[0]);
     }
 
     render() {
@@ -70,25 +66,24 @@ function ItemDescription(props) {
 }
 
 function ContentPanel(props) {
-    const body = JSON.stringify(props.item);
+    const item = props.item;
+    if (!item) {
+        return '';
+    }
+
     return (
         <div className="email-content">
             <div className="email-content-header pure-g">
-                <div className="pure-u-1-2">
-                    <h1 className="email-content-title">Memo for third transfer</h1>
+                <div className="pure-u-1">
+                    <h1 className="email-content-title">{item.type} {item.amount}</h1>
                     <p className="email-content-subtitle">
-                        From <a>John Doe</a> at <span>Fri Mar 25 11:49:03</span>
+                        <span>{formatTimestamp(item.timestamp)}</span>
                     </p>
-                </div>
-
-                <div className="email-content-controls pure-u-1-2">
-                    <button className="secondary-button pure-button">Inspect</button>
-                    <button className="secondary-button pure-button">Delete</button>
                 </div>
             </div>
 
             <div className="email-content-body">
-                {body}
+                <textarea value={JSON.stringify(item, null, 4)} readOnly />
             </div>
         </div>
     );
