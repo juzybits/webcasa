@@ -1,20 +1,36 @@
 import React from "react";
 
+import { formatTimestamp } from "./_util";
+
 export class ViewLog extends React.Component {
+    makeItemDesc(log) {
+        const memo = !log.memo ? '' : <React.Fragment> <br/>memo: <i>"{log.memo}"</i> </React.Fragment>;
+        const inputs = log.input_webcash ?? log.input_webcashes ?? [];
+        const outputs = log.output_webcash ?? [];
+        const inCount = (typeof inputs === 'string') ? 1 : inputs.length;
+        const outCount = (typeof outputs === 'string') ? 1 : outputs.length;
+        return (
+            <React.Fragment>
+                in={inCount}, out={outCount}
+                {memo}
+            </React.Fragment>
+        );
+
+    }
+
     // TODO: paginate
     // TODO: search
+    // TODO: sorting
     makeItems() {
         var key = 0;
         const logs = this.props.wallet.getContents().log;
         return logs.map((log) => (
             <div key={key++} className="email-item pure-g">
                 <div className="pure-u-3-4">
-                    <h5 className="email-name">{log.timestamp}</h5>
+                    <h5 className="email-name">{formatTimestamp(log.timestamp)}</h5>
                     <h4 className="email-subject">{log.type} {log.amount}</h4>
                     <p className="email-desc">
-                        inputs: {JSON.stringify(log.input_webcash)}
-                        <br/>
-                        outputs: {JSON.stringify(log.output_webcash)}
+                        {this.makeItemDesc(log)}
                     </p>
                 </div>
             </div>
