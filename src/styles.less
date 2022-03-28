@@ -247,7 +247,11 @@ a {
 .email-item {
     padding: 0.9em 1em;
     border-bottom: @grey-border;
-    border-left: 6px solid transparent;
+    border-left: 7px solid transparent;
+    &:hover {
+        background: #f5f5f5;
+        cursor: pointer;
+    }
 }
     .email-avatar {
         border-radius: 3px;
@@ -272,7 +276,7 @@ a {
     background: #eee;
 }
 .email-item-unread {
-    border-left: 6px solid #1b98f8;
+    border-left: 7px solid #1b98f8;
 }
 
 /* Email Content Styles */

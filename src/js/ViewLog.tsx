@@ -11,13 +11,13 @@ export class ViewLog extends React.Component {
         this.handleListItemClick = this.handleListItemClick.bind(this);
         this.state = {
             listItem: null,
-            logEntry: this.props.logs ? this.props.logs[0] : null,
+            logEntry: null,
         };
     }
 
     handleListItemClick(item) {
-        item.setActive(true);
         this.state.listItem && this.state.listItem.setActive(false);
+        item.setActive(true);
         this.setState({listItem: item, logEntry: item.getLogEntry()});
     }
 
@@ -33,7 +33,7 @@ export class ViewLog extends React.Component {
                 </div>
 
                 <div id="main" className="pure-u-1">
-                    <ContentPanel log={this.state.logEntry} />
+                    <ContentPanel count={this.props.logs.length} log={this.state.logEntry} />
                 </div>
             </div>
         );
@@ -55,8 +55,8 @@ class Item extends React.Component {
         const log = this.props.log;
         const clazz = this.state.active ? ' email-item-unread' : '';
         return (
-            <div className={"email-item pure-g"+clazz}>
-                <div className="pure-u-3-4" onClick={() => this.props.onClick(this)}>
+            <div className={"email-item pure-g"+clazz} onClick={() => this.props.onClick(this)}>
+                <div className="pure-u-3-4">
                     <h5 className="email-name">{formatTimestamp(log.timestamp)}</h5>
                     <h4 className="email-subject">{log.type} {log.amount}</h4>
                     <p className="email-desc">
@@ -86,7 +86,7 @@ function ItemDescription(props) {
 function ContentPanel(props) {
     const log = props.log;
     if (!log) {
-        return '';
+        return <div>There are <b>{props.count}</b> logs in your wallet.</div>
     }
 
     return (
