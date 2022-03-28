@@ -15,9 +15,10 @@ export class ViewLog extends React.Component {
         };
     }
 
-    handleListItemClick(item, log) {
+    handleListItemClick(item) {
+        item.setActive(true);
         this.state.listItem && this.state.listItem.setActive(false);
-        this.setState({listItem: item, logEntry: log});
+        this.setState({listItem: item, logEntry: item.getLogEntry()});
     }
 
     render() {
@@ -42,24 +43,20 @@ export class ViewLog extends React.Component {
 class Item extends React.Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
-        this.state = {
-            active: false
-        };
+        this.state = { active: false };
     }
-    setActive(val: bool) {
-        this.setState({active: val})
+    setActive(active: bool) {
+        this.setState({active: active})
     }
-    handleClick() {
-        this.setActive(true);
-        this.props.onClick(this, this.props.log)
+    getLogEntry() {
+        return this.props.log;
     }
     render() {
         const log = this.props.log;
         const clazz = this.state.active ? ' email-item-unread' : '';
         return (
             <div className={"email-item pure-g"+clazz}>
-                <div className="pure-u-3-4" onClick={this.handleClick}>
+                <div className="pure-u-3-4" onClick={() => this.props.onClick(this)}>
                     <h5 className="email-name">{formatTimestamp(log.timestamp)}</h5>
                     <h4 className="email-subject">{log.type} {log.amount}</h4>
                     <p className="email-desc">
