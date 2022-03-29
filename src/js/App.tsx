@@ -4,6 +4,7 @@ import { WebcashWallet } from "webcash";
 import { Navigation } from "./Navigation";
 import { ViewLog } from "./ViewLog";
 import { ViewWallet } from "./ViewWallet";
+import { ViewReceive } from "./ViewReceive";
 import { ViewSend } from "./ViewSend";
 
 export class App extends React.Component {
@@ -26,6 +27,9 @@ export class App extends React.Component {
         } else
         if ('Send' === this.state.view) {
             view = <ViewSend wallet={this.state.wallet} />;
+        } else
+        if ('Receive' === this.state.view) {
+            view = <ViewReceive wallet={this.state.wallet} />;
         } else
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
