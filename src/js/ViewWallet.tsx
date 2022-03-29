@@ -8,7 +8,8 @@ export class ViewWallet extends React.Component {
         const balance = this.props.wallet.getBalance().toString();
         const data = this.props.wallet.getContents();
         return (
-            <div id="ViewWallet" className="pure-u">
+            <div id="ViewWallet" className="pure-u card">
+                <h1>Wallet</h1>
 
                 <WalletControls handleWalletUpload={this.props.handleWalletUpload} />
 

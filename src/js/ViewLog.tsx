@@ -12,6 +12,15 @@ export class ViewLog extends React.Component {
         this.state = { activeListItem: null };
     }
 
+    componentDidMount() {
+        this.originalBackground = document.body.style.background;
+        document.body.style.background = '#f5f5f5';
+    }
+
+    componentWillUnmount() {
+        document.body.style.background = this.originalBackground;
+    }
+
     handleListItemClick(item) {
         this.state.activeListItem && this.state.activeListItem.setActive(false);
         item.setActive(true);
