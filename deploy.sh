@@ -7,7 +7,6 @@ cd $DIST_DIR
 
 git init .
 git remote add origin git@github.com:wayfzbee/dist-cowcash.git
-git init .
 git add .
 git commit -am"Initial commit"
 git push -f -u origin master

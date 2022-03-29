@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formatTimestamp } from "./_util";
+import { formatTimestamp, json } from "./_util";
 
 // TODO: paginate
 // TODO: search
@@ -106,7 +106,7 @@ function ContentPanel(props) {
             </div>
 
             <div className="email-content-body">
-                <textarea value={JSON.stringify(log, null, 4)} readOnly />
+                <textarea value={json(log)} readOnly />
             </div>
         </div>
     );
