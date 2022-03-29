@@ -33,10 +33,10 @@ export class ViewWallet extends React.Component {
 function WalletControls(props) {
         return (
             <div id="wallet_buttons">
-                <ButtonConnect
-                    handleWalletUpload={props.handleWalletUpload}
-                    buttonLabel="Load"
-                />
+                <label className="pure-button primary-button" htmlFor="loadwallet-file-input">Load wallet</label>
+                <input type="file" id="loadwallet-file-input" className="connect-file-input" name="connect-file-input" onChange={props.handleWalletUpload}/>
+                <button className="pure-button primary-button orange-button">Create new</button>{/*TODO*/}
+                <button className="pure-button primary-button orange-button">Download</button>{/*TODO*/}
             </div>
         )
 }
