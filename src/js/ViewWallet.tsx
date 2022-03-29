@@ -33,11 +33,11 @@ export class ViewWallet extends React.Component {
 
 function WalletControls(props) {
         return (
-            <div id="wallet_buttons">
-                <label className="pure-button primary-button" htmlFor="loadwallet-file-input">Load wallet</label>
+            <div className="wallet_buttons">
+                <label className="pure-button wallet-button" htmlFor="loadwallet-file-input">Load</label>
                 <input type="file" id="loadwallet-file-input" className="connect-file-input" name="connect-file-input" onChange={props.handleWalletUpload}/>
-                <button className="pure-button primary-button orange-button">Create new</button>{/*TODO*/}
-                <button className="pure-button primary-button orange-button">Download</button>{/*TODO*/}
+                <button className="pure-button wallet-button">New</button>{/*TODO*/}
+                <button className="pure-button wallet-button">Save</button>{/*TODO*/}
             </div>
         )
 }
