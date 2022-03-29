@@ -9,31 +9,28 @@ export class ViewLog extends React.Component {
     constructor(props) {
         super(props);
         this.handleListItemClick = this.handleListItemClick.bind(this);
-        this.state = {
-            listItem: null,
-            logEntry: null,
-        };
+        this.state = { activeListItem: null };
     }
 
     handleListItemClick(item) {
-        this.state.listItem && this.state.listItem.setActive(false);
+        this.state.activeListItem && this.state.activeListItem.setActive(false);
         item.setActive(true);
-        this.setState({listItem: item, logEntry: item.getLogEntry()});
+        this.setState({activeListItem: item});
     }
 
     render() {
         var key = 0;
-        const listItems = this.props.logs.map((log) =>
+        const items = this.props.logs.map((log) =>
             <Item key={key++} log={log} onClick={this.handleListItemClick} />
         );
         return (
             <div id="ViewLog">
                 <div id="list" className="pure-u-1">
-                    {listItems}
+                    {items}
                 </div>
 
                 <div id="main" className="pure-u-1">
-                    <ContentPanel count={this.props.logs.length} log={this.state.logEntry} />
+                    <ContentPanel count={this.props.logs.length} activeListItem={this.state.activeListItem} />
                 </div>
             </div>
         );
@@ -52,7 +49,7 @@ class Item extends React.Component {
         return this.props.log;
     }
     render() {
-        const log = this.props.log;
+        const log = this.getLogEntry();
         const clazz = this.state.active ? ' email-item-unread' : '';
         return (
             <div className={"email-item pure-g"+clazz} onClick={() => this.props.onClick(this)}>
@@ -84,11 +81,10 @@ function ItemDescription(props) {
 }
 
 function ContentPanel(props) {
-    const log = props.log;
-    if (!log) {
-        return <div>There are <b>{props.count}</b> logs in your wallet.</div>
+    if (!props.activeListItem) {
+        return <div className="contentInfo">There are <b>{props.count}</b> logs in your wallet.</div>
     }
-
+    const log = props.activeListItem.getLogEntry();
     return (
         <div className="email-content">
             <div className="email-content-header pure-g">
