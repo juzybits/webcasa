@@ -4,7 +4,7 @@ import { WebcashWallet } from "webcash";
 import { Navigation } from "./Navigation";
 import { ViewLog } from "./ViewLog";
 import { ViewWallet } from "./ViewWallet";
-import { ViewPay } from "./ViewPay";
+import { ViewSend } from "./ViewSend";
 
 export class App extends React.Component {
 
@@ -24,8 +24,8 @@ export class App extends React.Component {
             view = <ViewWallet wallet={this.state.wallet}
                             handleWalletUpload={this.handleWalletUpload}/>;
         } else
-        if ('Pay' === this.state.view) {
-            view = <ViewPay wallet={this.state.wallet} />;
+        if ('Send' === this.state.view) {
+            view = <ViewSend wallet={this.state.wallet} />;
         } else
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;

@@ -15,7 +15,7 @@ export class Navigation extends React.Component {
     }
 
     render() {
-        const menuItems = ["Wallet", "Pay", "Log"].map((item) =>
+        const menuItems = ["Wallet", "Send", "Log"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet} onClick={this.props.handleMenuClick}/>
         );
         return (
