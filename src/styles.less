@@ -31,6 +31,62 @@ a {
     font-size: 80%;
 }
 
+.green-button {
+    background: rgb(28, 184, 65);
+}
+
+.red-button {
+    background: rgb(202, 60, 60);
+}
+
+.orange-button {
+    background: rgb(223, 117, 20);
+}
+
+.blue-button {
+    background: rgb(66, 184, 221);
+}
+
+#logo {
+    color: #eee;
+    display: block;
+    font-size: 1.1em;
+    margin-left: 0.5em;
+    padding: .6em 1em;
+    position: absolute;
+}
+
+#menuToggle {
+    font-size: 2em;
+    display: block;
+    top: 0em;
+    right: 0em;
+    position: absolute;
+    padding: 0 10px;
+    color: #eee;
+}
+
+.connect-file-input {
+    display: none;
+}
+
+.ButtonConnect {
+    margin: 30px 0 0 0;
+}
+
+#main .content-info {
+    text-align: center;
+    padding: 25px;
+}
+
+.card {
+    background: #f5f5f5;
+    padding: 2em;
+    h1 {
+        margin-top: 0;
+    }
+}
+
 /*
  * -- LAYOUT STYLES --
  * This layout consists of three main elements, `#nav` (navigation bar), `#list` (email list), and `#main` (email content). All 3 elements are within `#layout`
@@ -100,38 +156,6 @@ a {
     }
 }
 
-#logo {
-    color: #eee;
-    display: block;
-    font-size: 1.1em;
-    margin-left: 0.5em;
-    padding: .6em 1em;
-    position: absolute;
-}
-
-#menuToggle {
-    font-size: 2em;
-    display: block;
-    top: 0em;
-    right: 0em;
-    position: absolute;
-    padding: 0 10px;
-    color: #eee;
-}
-
-.connect-file-input {
-    display: none;
-}
-
-.ButtonConnect {
-    margin: 30px 0 0 0;
-}
-
-#main .content-info {
-    text-align: center;
-    padding: 25px;
-}
-
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
@@ -190,6 +214,10 @@ a {
         font-size: 1.4em;
         padding: 1em;
     }
+    .card {
+        margin-left: -350px;
+        box-shadow: 1px 1px 10px #33668d;
+    }
 
 }
 
@@ -217,9 +245,9 @@ a {
     }
 
     .card {
-        margin-top: 2em;
+        margin-left: -300px;
         border-radius: 8px;
-        box-shadow: 1px 1px 10px #33668d;
+        margin-top: 2em;
     }
 }
 
@@ -332,29 +360,5 @@ a {
         &:hover {
             cursor: default;
         }
-    }
-}
-
-.green-button {
-    background: rgb(28, 184, 65);
-}
-
-.red-button {
-    background: rgb(202, 60, 60);
-}
-
-.orange-button {
-    background: rgb(223, 117, 20);
-}
-
-.blue-button {
-    background: rgb(66, 184, 221);
-}
-
-.card {
-    background: #f5f5f5;
-    padding: 2em;
-    h1 {
-        margin-top: 0;
     }
 }
