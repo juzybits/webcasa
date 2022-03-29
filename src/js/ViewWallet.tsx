@@ -13,16 +13,16 @@ export class ViewWallet extends React.Component {
 
                 <WalletControls handleWalletUpload={this.props.handleWalletUpload} />
 
-                <table className="pure-table">
+                <table className="pure-table wallet-table">
                 <tbody>
-                    <tr><td>master secret:</td><td><pre>{formatMasterSecret(this.props.wallet)}</pre></td></tr>
+                    <tr><td>master secret:</td><td>{formatMasterSecret(this.props.wallet)}</td></tr>
                     <tr><td>balance:</td><td>{balance}</td></tr>
-                    <tr><td>depths:</td><td>{JSON.stringify(data.walletdepths,null,4)}</td></tr>
+                    <tr><td>version:</td><td>{JSON.stringify(data.version,null,4)}</td></tr>
+                    <tr><td>terms accepted:</td><td>{data.legalese===true?'yes':'no'}</td></tr>
                     <tr><td>log:</td><td>{data.log.length}</td></tr>
                     <tr><td>webcashes:</td><td>{data.webcash.length}</td></tr>
                     <tr><td>unconfirmed:</td><td>{data.unconfirmed.length}</td></tr>
-                    <tr><td>terms accepted:</td><td>{data.legalese===true?'yes':'no'}</td></tr>
-                    <tr><td>version:</td><td>{JSON.stringify(data.version,null,4)}</td></tr>
+                    <tr><td>depths:</td><td><tt>{JSON.stringify(data.walletdepths,null,4)}</tt></td></tr>
                 </tbody>
                 </table>
 
