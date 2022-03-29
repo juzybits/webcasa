@@ -2,12 +2,12 @@ import React from "react";
 
 import { formatMasterSecret } from "./_util";
 
-export class ViewOverview extends React.Component {
+export class ViewWallet extends React.Component {
     render() {
         const balance = this.props.wallet.getBalance().toString();
         const data = this.props.wallet.getContents();
         return (
-            <div id="ViewOverview" className="pure-u">
+            <div id="ViewWallet" className="pure-u">
             <table className="pure-table">
             <tbody>
                 <tr><td>master secret:</td><td><pre>{formatMasterSecret(this.props.wallet)}</pre></td></tr>

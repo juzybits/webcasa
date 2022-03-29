@@ -82,7 +82,7 @@ function ItemDescription(props) {
 
 function ContentPanel(props) {
     if (!props.activeListItem) {
-        return <div className="contentInfo">There are <b>{props.count}</b> logs in your wallet.</div>
+        return <div className="content-info">There are <b>{props.count}</b> logs in your wallet.</div>
     }
     const log = props.activeListItem.getLogEntry();
     return (
