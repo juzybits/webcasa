@@ -12,3 +12,8 @@ export function formatTimestamp(ts: string) {
     }
     return ts.slice(0, -10);
 }
+
+export function randomId(prefix: string) {
+    prefix = prefix ? prefix+"-" : '';
+    return prefix + Math.random().toString(36).replace(/[^a-z]+/g, 'x').substring(6);
+}

@@ -21,10 +21,11 @@ export class App extends React.Component {
     render() {
         var view = '';
         if ('Wallet' === this.state.view) {
-            view = <ViewWallet wallet={this.state.wallet}/>;
+            view = <ViewWallet wallet={this.state.wallet}
+                            handleWalletUpload={this.handleWalletUpload}/>;
         } else
         if ('Pay' === this.state.view) {
-            view = <ViewPay wallet={this.state.wallet}/>;
+            view = <ViewPay wallet={this.state.wallet} />;
         } else
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
@@ -34,9 +35,9 @@ export class App extends React.Component {
         return (
             <div id="layout" className="content pure-g">
                 <Navigation
+                    wallet={this.state.wallet}
                     handleWalletUpload={this.handleWalletUpload}
                     handleMenuClick={this.handleMenuClick}
-                    wallet={this.state.wallet}
                 />
                 {view}
             </div>
