@@ -19,6 +19,7 @@ export class App extends React.Component {
         this.state = {
             view: 'Wallet',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
+            saved: true, // did the user download the latest wallet file
         };
     }
 
@@ -61,10 +62,15 @@ export class App extends React.Component {
         );
     }
 
-    // TODO: warn about replacing un-downloaded changes
-    replaceWallet(wallet) {
-        this.setState({ wallet: wallet });
-        wallet.save();
+    replaceWallet(wallet: WebcashWallet): bool {
+        if (this.state.saved === false) {
+            alert("Please download your updated wallet first (so you don't lose the changes you made)");
+            return false;
+        } else {
+            this.setState({ wallet: wallet });
+            wallet.save();
+            return true;
+        }
     }
 
     handleMenuClick(itemName) {
