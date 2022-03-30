@@ -18,6 +18,7 @@ export class ViewWallet extends React.Component {
                 <WalletControls
                     handleWalletUpload={this.props.handleWalletUpload}
                     handleCreateWallet={this.props.handleCreateWallet}
+                    handleDownloadWallet={this.props.handleDownloadWallet}
                 />
 
                 <table className="pure-table wallet-table">
@@ -40,11 +41,15 @@ export class ViewWallet extends React.Component {
 function WalletControls(props) {
         return (
             <div className="wallet-buttons">
-                <label className="pure-button wallet-button" htmlFor="loadwallet-file-input">Load</label>
-                <input type="file" id="loadwallet-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={props.handleWalletUpload}/>
-                <button className="pure-button wallet-button" onClick={props.handleCreateWallet}>New</button>
-                <button className="pure-button wallet-button">Save</button>{/*TODO*/}
+                <label className="pure-button wallet-button" htmlFor="wc-file-input">Load</label>
+                <input type="file" id="wc-file-input" name="connect-file-input" className="connect-file-input"
+                    onChange={props.handleWalletUpload}/>
+
+                <button className="pure-button wallet-button"
+                    onClick={props.handleCreateWallet}>New</button>
+
+                <button className="pure-button wallet-button"
+                    onClick={props.handleDownloadWallet}>Download</button>
             </div>
         )
 }
