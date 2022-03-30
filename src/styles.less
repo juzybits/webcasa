@@ -31,6 +31,24 @@ a {
     font-size: 80%;
 }
 
+.ItemTable table {
+    margin-top: 30px;
+    border: 0;
+    font-family: monospace;
+    font-size: 1.1em;
+    table-layout:fixed;
+    width: 100%;
+    word-wrap: break-word;
+    td {
+        border: 0;
+        border-radius: 8px;
+        &:hover {
+            background: #cee1f5;
+            cursor: pointer;
+        }
+    }
+}
+
 .wallet-buttons {
     margin: -10px 0 15px 0;
     text-align: center;
@@ -39,12 +57,12 @@ a {
 .BalanceIndicator {
     background: #eee;
     color: #666;
-    font-size: 0.9em;
+    font-size: 0.85em;
     float: right;
     border: 1px solid #bbb;
     display: inline;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
 }
 
 .menu-divider {

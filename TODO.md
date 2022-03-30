@@ -1,3 +1,6 @@
+# UX ideas
+	- "Copy" button next to various items
+
 # State management ideas
 	- store "_cow" property in default_wallet.webcash
 	- "unsaved changes" UI indicator
