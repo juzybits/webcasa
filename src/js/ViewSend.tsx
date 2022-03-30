@@ -2,6 +2,7 @@ import React from "react";
 
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
+import { ItemTable } from "./ItemTable";
 
 export class ViewSend extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export class ViewSend extends React.Component {
         this.state = {
             sendAmount: null,
             sendMemo: '',
+            history: []
         };
     }
 
@@ -49,6 +51,8 @@ export class ViewSend extends React.Component {
                     </fieldset>
                     <button type="submit" className="pure-button pure-button-primary">Create payment</button>
                 </form>
+
+                <ItemTable title="History" items={this.state.history} />
 
             </div>
         );

@@ -2,6 +2,7 @@ import React from "react";
 
 import { json, tooltip } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
+import { ItemTable } from "./ItemTable";
 
 export class ViewReceive extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export class ViewReceive extends React.Component {
         this.state = {
             receiveWebcash: null,
             receiveMemo: '',
+            history: []
         };
     }
 
@@ -22,11 +24,8 @@ export class ViewReceive extends React.Component {
         });
     }
 
-    // TODO: validate
-    // TODO: call "insert" on wallet
     async handleSubmit() {
         event.preventDefault();
-        tooltip("Coming soon!");
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
         // console.log("-----")
@@ -53,6 +52,8 @@ export class ViewReceive extends React.Component {
                     </fieldset>
                     <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
                 </form>
+
+                <ItemTable title="History" items={this.state.history} />
 
             </div>
         );
