@@ -1,6 +1,6 @@
 import React from "react";
 
-import { json } from "./_util";
+import { json, tooltip } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 
 export class ViewReceive extends React.Component {
@@ -24,10 +24,14 @@ export class ViewReceive extends React.Component {
 
     // TODO: validate
     // TODO: call "insert" on wallet
-    handleSubmit() {
-        alert("Coming soon!");
-        console.log(json(this.state));
+    async handleSubmit() {
         event.preventDefault();
+        tooltip("Coming soon!");
+        const webcash = this.state.receiveWebcash;
+        const memo = this.state.receiveMemo;
+        // console.log("-----")
+        // let result = await this.props.wallet.insert(webcash, memo);
+        // console.log(json(result));
     }
 
     render() {
@@ -41,7 +45,7 @@ export class ViewReceive extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
                         <label htmlFor="receiveWebcash">Webcash</label>
-                        <input type="number" id="receiveWebcash" min="0" step="0.00000001" onChange={this.handleChange} />
+                        <input type="text" id="receiveWebcash" onChange={this.handleChange} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="receiveMemo">Memo</label>
