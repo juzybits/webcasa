@@ -15,6 +15,7 @@ export class App extends React.Component {
         super(props);
         this.handleMenuClick = this.handleMenuClick.bind(this);
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
+        this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.state = {
             view: 'Wallet',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
@@ -24,8 +25,11 @@ export class App extends React.Component {
     render() {
         var view = '';
         if ('Wallet' === this.state.view) {
-            view = <ViewWallet wallet={this.state.wallet}
-                            handleWalletUpload={this.handleWalletUpload}/>;
+            view = <ViewWallet
+                        wallet={this.state.wallet}
+                        handleWalletUpload={this.handleWalletUpload}
+                        handleCreateWallet={this.handleCreateWallet}
+                    />;
         } else
         if ('Send' === this.state.view) {
             view = <ViewSend wallet={this.state.wallet} />;
@@ -61,22 +65,31 @@ export class App extends React.Component {
         this.setState({view: itemName});
     }
 
-    // TODO: warn about replacing un-saved changes
     handleWalletUpload(event) {
         var file = event.target.files[0];
         var reader = new FileReader();
         var dis = this;
 
         reader.onload = function() {
-            var walletMap = JSON.parse(reader.result);
-            var walletObj = new WebcashWalletLocalStorage(walletMap);
-            walletObj.save();
-            dis.setState({ wallet: walletObj });
+            const walletData = JSON.parse(reader.result);
+            const wallet = new WebcashWalletLocalStorage(walletData);
+            dis.replaceWallet(wallet);
         };
         reader.onerror = function() {
             alert(reader.error);
         };
         reader.readAsText(file);
+    }
+
+    handleCreateWallet(event) {
+        const wallet = new WebcashWalletLocalStorage();
+        this.replaceWallet(wallet);
+    }
+
+    // TODO: warn about replacing un-saved changes
+    replaceWallet(wallet) {
+        this.setState({ wallet: wallet });
+        wallet.save();
     }
 
 }
