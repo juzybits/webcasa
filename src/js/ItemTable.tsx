@@ -1,5 +1,7 @@
 import React from "react";
 
+import { tooltip } from "./_util"
+
 export class ItemTable extends React.Component {
     constructor(props) {
         super(props)
@@ -7,11 +9,10 @@ export class ItemTable extends React.Component {
     }
 
     handleClick(event) {
-        console.log(event);
         const text = event.target.getInnerHTML();
 
         navigator.clipboard.writeText(text).then(function() {
-            // TODO: notify user
+            tooltip("Copied to clipboard");
         }, function(err) {
         });
 

@@ -46,6 +46,7 @@ export class App extends React.Component {
 
         return (
             <div id="layout" className="content pure-g">
+                <div id="tooltip">Copied to clipboard</div>
                 <Navigation
                     wallet={this.state.wallet}
                     handleWalletUpload={this.handleWalletUpload}

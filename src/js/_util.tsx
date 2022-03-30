@@ -17,6 +17,13 @@ export function json(value: any): string {
     return JSON.stringify(value, null, 4);
 }
 
+export function tooltip(text: string): void {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.innerHTML = text;
+    tooltip.style.display = "block";
+    setTimeout(() => tooltip.style.display = "none", 1500);
+}
+
 /*export function randomId(prefix: string) {
     prefix = prefix ? prefix+"-" : '';
     return prefix + Math.random().toString(36).replace(/[^a-z]+/g, 'x').substring(6);

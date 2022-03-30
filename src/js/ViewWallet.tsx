@@ -10,6 +10,7 @@ export class ViewWallet extends React.Component {
         const data = this.props.wallet.getContents();
         return (
             <div id="ViewWallet" className="pure-u card">
+
                 <BalanceIndicator wallet={this.props.wallet} />
 
                 <h1>Wallet</h1>
