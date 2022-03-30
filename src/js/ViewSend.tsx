@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formatMasterSecret, json } from "./_util";
+import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 
 export class ViewSend extends React.Component {

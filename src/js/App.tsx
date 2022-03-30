@@ -3,9 +3,11 @@ import { WebcashWallet } from "webcash";
 
 import { Navigation } from "./Navigation";
 import { ViewLog } from "./ViewLog";
-import { ViewWallet } from "./ViewWallet";
 import { ViewReceive } from "./ViewReceive";
 import { ViewSend } from "./ViewSend";
+import { ViewUnconfirmed } from "./ViewUnconfirmed";
+import { ViewWallet } from "./ViewWallet";
+import { ViewWebcashes } from "./ViewWebcashes";
 
 export class App extends React.Component {
 
@@ -34,6 +36,12 @@ export class App extends React.Component {
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
             view = <ViewLog logs={logs}/>;
+        } else
+        if ('Webcashes' === this.state.view) {
+            view = <ViewWebcashes wallet={this.state.wallet} />;
+        } else
+        if ('Unconfirmed' === this.state.view) {
+            view = <ViewUnconfirmed wallet={this.state.wallet} />;
         }
 
         return (
