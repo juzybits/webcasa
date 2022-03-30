@@ -12,7 +12,7 @@ export class ViewSend extends React.Component {
         this.state = {
             sendAmount: null,
             sendMemo: '',
-            history: []
+            history: [], // TODO bubble up to App
         };
     }
 
@@ -24,12 +24,20 @@ export class ViewSend extends React.Component {
         });
     }
 
-    // TODO: validate
-    // TODO: call "pay" on wallet
-    handleSubmit() {
-        alert("Coming soon!");
-        console.log(json(this.state));
+    async handleSubmit() {
         event.preventDefault();
+        const amount = this.state.sendAmount;
+        const memo = this.state.sendMemo;
+
+        var result = '';
+        try {
+            result = await this.props.wallet.pay(amount, memo);
+        } catch (e) {
+            result = `ERROR: ${e.message} | amount=${amount}, memo=${memo}`;
+        } finally {
+            this.setState({history: [...this.state.history, result]}); // TODO bubble up to App
+            // TODO this.handleHistoryUpdate(history_entry);
+        }
     }
 
     render() {

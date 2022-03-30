@@ -11,15 +11,15 @@
 # 1:1 UI for commands and wallet state
 
 ## COMMANDS
-status/info (done with additional info, but ugly UI)
-setup (done with refresh page)
-pay (ui)
-insert (ui)
+status/info (done)
+load/create/download wallet (done)
+pay (done, missing history)
+insert (done, missing history)
 insertmany
 check
 recover
 
 ## STATE
 logs (done)
-webcash
-unconfirmed
+webcash (done)
+unconfirmed (done)

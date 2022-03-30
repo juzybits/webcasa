@@ -1,6 +1,6 @@
 import React from "react";
 
-import { json, tooltip } from "./_util";
+import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { ItemTable } from "./ItemTable";
 
@@ -12,7 +12,7 @@ export class ViewReceive extends React.Component {
         this.state = {
             receiveWebcash: null,
             receiveMemo: '',
-            history: []
+            history: [], // TODO bubble up to App
         };
     }
 
@@ -28,9 +28,16 @@ export class ViewReceive extends React.Component {
         event.preventDefault();
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
-        // console.log("-----")
-        // let result = await this.props.wallet.insert(webcash, memo);
-        // console.log(json(result));
+
+        var result = '';
+        try {
+            result = await this.props.wallet.insert(webcash, memo);
+        } catch (e) {
+            result = `ERROR:${e.message} | amount=${amount}, memo=${memo}`;
+        } finally {
+            this.setState({history: [...this.state.history, result]}); // TODO bubble up to App
+            // TODO this.handleHistoryUpdate(history_entry);
+        }
     }
 
     render() {

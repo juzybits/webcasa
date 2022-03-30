@@ -20,6 +20,7 @@ export class App extends React.Component {
             view: 'Wallet',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
+            casa: { history: { send: [], receive: [], }, }, // TODO
         };
     }
 
@@ -33,10 +34,10 @@ export class App extends React.Component {
                     />;
         } else
         if ('Send' === this.state.view) {
-            view = <ViewSend wallet={this.state.wallet} />;
+            view = <ViewSend wallet={this.state.wallet} history={this.state.casa.history.send} />;
         } else
         if ('Receive' === this.state.view) {
-            view = <ViewReceive wallet={this.state.wallet} />;
+            view = <ViewReceive wallet={this.state.wallet} history={this.state.casa.history.receive} />;
         } else
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
