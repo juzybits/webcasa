@@ -16,9 +16,9 @@ export class ViewWallet extends React.Component {
                 <h1>Wallet</h1>
 
                 <WalletControls
+                    wallet={this.props.wallet}
                     handleWalletUpload={this.props.handleWalletUpload}
                     handleCreateWallet={this.props.handleCreateWallet}
-                    handleDownloadWallet={this.props.handleDownloadWallet}
                 />
 
                 <table className="pure-table wallet-table">
@@ -38,18 +38,41 @@ export class ViewWallet extends React.Component {
     }
 }
 
-function WalletControls(props) {
+export class WalletControls extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
+    }
+
+    render() {
         return (
             <div className="wallet-buttons">
                 <label className="pure-button wallet-button" htmlFor="wc-file-input">Load</label>
                 <input type="file" id="wc-file-input" name="connect-file-input" className="connect-file-input"
-                    onChange={props.handleWalletUpload}/>
+                    onChange={this.props.handleWalletUpload}/>
 
                 <button className="pure-button wallet-button"
-                    onClick={props.handleCreateWallet}>New</button>
+                    onClick={this.props.handleCreateWallet}>New</button>
 
                 <button className="pure-button wallet-button"
-                    onClick={props.handleDownloadWallet}>Download</button>
+                    onClick={this.handleDownloadWallet}>Download</button>
             </div>
-        )
+        );
+    }
+
+    handleDownloadWallet(event) {
+        const filename = 'default_wallet.webcash';
+        const contents = this.props.wallet.getContents();
+        const jsonContents = JSON.stringify(contents, null, 4);
+
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonContents));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
 }

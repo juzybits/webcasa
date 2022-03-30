@@ -16,7 +16,6 @@ export class App extends React.Component {
         this.handleMenuClick = this.handleMenuClick.bind(this);
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
-        this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
         this.state = {
             view: 'Wallet',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
@@ -30,7 +29,6 @@ export class App extends React.Component {
                         wallet={this.state.wallet}
                         handleWalletUpload={this.handleWalletUpload}
                         handleCreateWallet={this.handleCreateWallet}
-                        handleDownloadWallet={this.handleDownloadWallet}
                     />;
         } else
         if ('Send' === this.state.view) {
@@ -63,7 +61,7 @@ export class App extends React.Component {
         );
     }
 
-    // TODO: warn about replacing un-saved changes
+    // TODO: warn about replacing un-downloaded changes
     replaceWallet(wallet) {
         this.setState({ wallet: wallet });
         wallet.save();
@@ -71,6 +69,11 @@ export class App extends React.Component {
 
     handleMenuClick(itemName) {
         this.setState({view: itemName});
+    }
+
+    handleCreateWallet(event) {
+        const wallet = new WebcashWalletLocalStorage();
+        this.replaceWallet(wallet);
     }
 
     handleWalletUpload(event) {
@@ -87,26 +90,6 @@ export class App extends React.Component {
             alert(reader.error);
         };
         reader.readAsText(file);
-    }
-
-    handleCreateWallet(event) {
-        const wallet = new WebcashWalletLocalStorage();
-        this.replaceWallet(wallet);
-    }
-
-    handleDownloadWallet(event) {
-        const filename = 'default_wallet.webcash';
-        const contents = this.state.wallet.getContents();
-        const jsonContents = JSON.stringify(contents, null, 4);
-
-        const element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonContents));
-        element.setAttribute('download', filename);
-        element.style.display = 'none';
-
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
     }
 
 }
