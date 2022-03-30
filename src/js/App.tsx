@@ -1,5 +1,5 @@
 import React from "react";
-import { WebcashWallet } from "webcash";
+import { WebcashWalletLocalStorage } from "webcash";
 
 import { Navigation } from "./Navigation";
 import { ViewLog } from "./ViewLog";
@@ -17,7 +17,7 @@ export class App extends React.Component {
         this.handleWalletUpload = this.handleWalletUpload.bind(this);
         this.state = {
             view: 'Wallet',
-            wallet: new WebcashWallet(),
+            wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
         };
     }
 
@@ -61,6 +61,7 @@ export class App extends React.Component {
         this.setState({view: itemName});
     }
 
+    // TODO: warn about replacing un-saved changes
     handleWalletUpload(event) {
         var file = event.target.files[0];
         var reader = new FileReader();
@@ -68,16 +69,14 @@ export class App extends React.Component {
 
         reader.onload = function() {
             var walletMap = JSON.parse(reader.result);
-            var walletObj = new WebcashWallet(walletMap);
-
-            dis.setState({
-                wallet: walletObj,
-                page: 'Wallet'
-            });
+            var walletObj = new WebcashWalletLocalStorage(walletMap);
+            walletObj.save();
+            dis.setState({ wallet: walletObj });
         };
         reader.onerror = function() {
             alert(reader.error);
         };
         reader.readAsText(file);
     }
+
 }
