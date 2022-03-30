@@ -1,7 +1,5 @@
 import React from "react";
 
-import { randomId } from "./_util";
-
 export class ButtonConnect extends React.Component {
     render() {
         return (

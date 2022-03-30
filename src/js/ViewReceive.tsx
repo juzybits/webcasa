@@ -1,6 +1,7 @@
 import React from "react";
 
 import { formatMasterSecret, json } from "./_util";
+import { BalanceIndicator } from "./BalanceIndicator";
 
 export class ViewReceive extends React.Component {
     constructor(props) {
@@ -30,23 +31,24 @@ export class ViewReceive extends React.Component {
     }
 
     render() {
-        const balance = this.props.wallet.getBalance().toString();
-        const data = this.props.wallet.getContents();
         return (
             <div id="ViewReceive" className="pure-u card">
+
+                <BalanceIndicator wallet={this.props.wallet} />
+
                 <h1>Receive</h1>
 
-            <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
-                <fieldset>
-                    <label htmlFor="receiveWebcash">Webcash</label>
-                    <input type="number" id="receiveWebcash" min="0" step="0.00000001" onChange={this.handleChange} />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="receiveMemo">Memo</label>
-                    <input type="text" id="receiveMemo" onChange={this.handleChange} />
-                </fieldset>
-                <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
-            </form>
+                <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
+                    <fieldset>
+                        <label htmlFor="receiveWebcash">Webcash</label>
+                        <input type="number" id="receiveWebcash" min="0" step="0.00000001" onChange={this.handleChange} />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="receiveMemo">Memo</label>
+                        <input type="text" id="receiveMemo" onChange={this.handleChange} />
+                    </fieldset>
+                    <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
+                </form>
 
             </div>
         );

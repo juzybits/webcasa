@@ -2,6 +2,7 @@ import React from "react";
 
 import { ButtonConnect } from "./ButtonConnect";
 import { formatMasterSecret, json } from "./_util";
+import { BalanceIndicator } from "./BalanceIndicator";
 
 export class ViewWallet extends React.Component {
     render() {
@@ -9,6 +10,8 @@ export class ViewWallet extends React.Component {
         const data = this.props.wallet.getContents();
         return (
             <div id="ViewWallet" className="pure-u card">
+                <BalanceIndicator wallet={this.props.wallet} />
+
                 <h1>Wallet</h1>
 
                 <WalletControls handleWalletUpload={this.props.handleWalletUpload} />
@@ -16,7 +19,6 @@ export class ViewWallet extends React.Component {
                 <table className="pure-table wallet-table">
                 <tbody>
                     <tr><td>master secret:</td><td>{formatMasterSecret(this.props.wallet)}</td></tr>
-                    <tr><td>balance:</td><td>{balance}</td></tr>
                     <tr><td>version:</td><td>{json(data.version)}</td></tr>
                     <tr><td>terms accepted:</td><td>{data.legalese===true?'yes':'no'}</td></tr>
                     <tr><td>log:</td><td>{data.log.length}</td></tr>
