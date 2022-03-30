@@ -10,8 +10,8 @@
 ## COMMANDS
 status/info (done with additional info, but ugly UI)
 setup (done with refresh page)
-pay
-insert
+pay (ui)
+insert (ui)
 insertmany
 check
 recover

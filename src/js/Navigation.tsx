@@ -49,23 +49,25 @@ function MenuItem(props) {
         props.onClick(props.name);
     };
 
-    let extra = ''; // add counts like: "Log (72)"
+    let clazz = '';
+    let count = ''; // add counts like: "Log (72)"
     if ("Log" === props.name) {
-        extra = props.wallet.getContents().log.length;
+        count = props.wallet.getContents().log.length;
+        clazz = ' menu-divider';
     } else
     if ("Webcashes" === props.name) {
-        extra = props.wallet.getContents().webcash.length;
+        count = props.wallet.getContents().webcash.length;
     } else
     if ("Unconfirmed" === props.name) {
-        extra = props.wallet.getContents().unconfirmed.length;
+        count = props.wallet.getContents().unconfirmed.length;
     }
-    if (extra !== '') {
-        extra = <span className="email-count"> ({extra})</span>;
+    if (count !== '') {
+        count = <span className="email-count"> ({count})</span>;
     }
 
     return (
         <li className="pure-menu-item">
-            <a href="#" className="pure-menu-link" onClick={handleClick}>{props.name}{extra}</a>
+            <a href="#" className={"pure-menu-link"+clazz} onClick={handleClick}>{props.name}{count}</a>
         </li>
     );
 }
