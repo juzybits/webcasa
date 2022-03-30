@@ -14,7 +14,7 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         this.handleMenuClick = this.handleMenuClick.bind(this);
-        this.handleWalletUpload = this.handleWalletUpload.bind(this);
+        this.handleUploadWallet = this.handleUploadWallet.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.state = {
             view: 'Wallet',
@@ -27,7 +27,7 @@ export class App extends React.Component {
         if ('Wallet' === this.state.view) {
             view = <ViewWallet
                         wallet={this.state.wallet}
-                        handleWalletUpload={this.handleWalletUpload}
+                        handleUploadWallet={this.handleUploadWallet}
                         handleCreateWallet={this.handleCreateWallet}
                     />;
         } else
@@ -53,7 +53,7 @@ export class App extends React.Component {
                 <div id="tooltip">Copied to clipboard</div>
                 <Navigation
                     wallet={this.state.wallet}
-                    handleWalletUpload={this.handleWalletUpload}
+                    handleUploadWallet={this.handleUploadWallet}
                     handleMenuClick={this.handleMenuClick}
                 />
                 {view}
@@ -76,7 +76,7 @@ export class App extends React.Component {
         this.replaceWallet(wallet);
     }
 
-    handleWalletUpload(event) {
+    handleUploadWallet(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
         const dis = this;

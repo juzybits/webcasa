@@ -17,7 +17,7 @@ export class ViewWallet extends React.Component {
 
                 <WalletControls
                     wallet={this.props.wallet}
-                    handleWalletUpload={this.props.handleWalletUpload}
+                    handleUploadWallet={this.props.handleUploadWallet}
                     handleCreateWallet={this.props.handleCreateWallet}
                 />
 
@@ -49,7 +49,7 @@ export class WalletControls extends React.Component {
             <div className="wallet-buttons">
                 <label className="pure-button wallet-button" htmlFor="wc-file-input">Load</label>
                 <input type="file" id="wc-file-input" name="connect-file-input" className="connect-file-input"
-                    onChange={this.props.handleWalletUpload}/>
+                    onChange={this.props.handleUploadWallet}/>
 
                 <button className="pure-button wallet-button"
                     onClick={this.props.handleCreateWallet}>New</button>

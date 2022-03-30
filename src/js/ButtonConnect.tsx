@@ -5,7 +5,7 @@ export class ButtonConnect extends React.Component {
         return (
             <div className="ButtonConnect">
                 <label className="pure-button" htmlFor="bc-file-input">{this.props.buttonLabel}</label>
-                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input" onChange={this.props.handleWalletUpload}/>
+                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input" onChange={this.props.handleUploadWallet}/>
             </div>
         );
     }

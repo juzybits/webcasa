@@ -27,7 +27,7 @@ export class Navigation extends React.Component {
 
                 <div className="nav-inner">
                     <ButtonConnect
-                        handleWalletUpload={this.props.handleWalletUpload}
+                        handleUploadWallet={this.props.handleUploadWallet}
                         buttonLabel={formatMasterSecret(this.props.wallet)}
                     />
 
