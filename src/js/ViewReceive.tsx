@@ -33,11 +33,10 @@ export class ViewReceive extends React.Component {
         try {
             result = await this.props.wallet.insert(webcash, memo);
         } catch (e) {
-            result = `ERROR:${e.message} | amount=${webcash}, memo=${memo}`;
+            result = `ERROR: ${e.message} | amount=${webcash}, memo=${memo}`;
         } finally {
             this.setState({history: [...this.state.history, result]}); // TODO bubble up to App
-            this.props.wallet.save();
-            // TODO this.handleHistoryUpdate(history_entry);
+            this.props.handleModifyWallet();
         }
     }
 

@@ -16,11 +16,11 @@ export class App extends React.Component {
         this.handleMenuClick = this.handleMenuClick.bind(this);
         this.handleUploadWallet = this.handleUploadWallet.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
+        this.handleModifyWallet = this.handleModifyWallet.bind(this);
         this.state = {
             view: 'Wallet',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
-            casa: { history: { send: [], receive: [], }, }, // TODO
         };
     }
 
@@ -34,10 +34,10 @@ export class App extends React.Component {
                     />;
         } else
         if ('Send' === this.state.view) {
-            view = <ViewSend wallet={this.state.wallet} history={this.state.casa.history.send} />;
+            view = <ViewSend wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
         if ('Receive' === this.state.view) {
-            view = <ViewReceive wallet={this.state.wallet} history={this.state.casa.history.receive} />;
+            view = <ViewReceive wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
@@ -81,6 +81,11 @@ export class App extends React.Component {
     handleCreateWallet(event) {
         const wallet = new WebcashWalletLocalStorage();
         this.replaceWallet(wallet);
+    }
+
+    handleModifyWallet() {
+        this.state.wallet.save();
+        this.setState({ wallet: this.state.wallet });
     }
 
     handleUploadWallet(event) {
