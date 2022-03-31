@@ -2,17 +2,22 @@
 	- Prevent user from leaving page with unsaved changes
 	- New Upload/Create view for new users
 	- Improve ViewWallet (maybe panels)
+	- button:hover styles
 	- Pretty font
 	- Navbar icons
-	- "Copy" button next to various items
+	- "unsaved changes" UI indicator
+
+# Prod
+
+	- SEO
 	- T&C (ask for advice)
 
-# State management ideas
-	- store "_casa" property in default_wallet.webcash
-	- "unsaved changes" UI indicator
-	- preserve [encrypted] state across sessions in local storage / cookies
-	- server-side encrypted backups
-	- server-side 2FA
+# State
+	- store "casa" property in default_wallet.webcash
+	- encrypt storage
+
+# Server-side
+	- backups, 2FA, notifications, payments, ...
 
 # 1:1 UI for commands and wallet state
 
@@ -21,10 +26,10 @@ status/info (done)
 load/create/download wallet (done)
 pay (done, missing history)
 insert (done, missing history)
-terms
-insertmany
-check
-recover
+terms TODO
+insertmany TODO
+check TODO
+recover TODO
 
 ## STATE
 logs (done)
