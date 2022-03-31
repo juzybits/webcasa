@@ -36,6 +36,7 @@ export class ViewReceive extends React.Component {
             result = `ERROR:${e.message} | amount=${webcash}, memo=${memo}`;
         } finally {
             this.setState({history: [...this.state.history, result]}); // TODO bubble up to App
+            this.props.wallet.save();
             // TODO this.handleHistoryUpdate(history_entry);
         }
     }
