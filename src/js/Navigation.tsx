@@ -62,7 +62,7 @@ function MenuItem(props) {
         count = props.wallet.getContents().unconfirmed.length;
     }
     if (count !== '') {
-        count = <span className="email-count"> ({count})</span>;
+        count = <span className="nav-count"> ({count})</span>;
     }
 
     return (

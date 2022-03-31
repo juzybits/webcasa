@@ -14,44 +14,6 @@ a {
     color: #1b98f8;
 }
 
-/*
- * -- HELPER STYLES --
- * Over-riding some of the .pure-button styles to make my buttons look unique
- */
-.pure-button, .secondary-button {
-    box-shadow: none;
-    border-radius: 20px;
-}
-.pure-button {
-    color: @text-color;
-    border: 1px solid @text-color;
-    background: @card-background;
-    margin: 1em 0;
-}
-.secondary-button {
-    background: #eee;
-    border: @lightgrey-border;
-    color: #666;
-    padding: 0.5em 2em;
-    font-size: 80%;
-}
-
-#tooltip {
-    background: rgb(28 144 56);
-    border-radius: 18px;
-    border: 1px solid #0b3d17;
-    box-shadow: 1px 2px 1px #0b3d17;
-    color: @text-color;
-    display: none;
-    font-weight: bold;
-    letter-spacing: normal;
-    padding: 10px 15px;
-    position: fixed;
-    top: 12px;
-    left: 9px;
-    z-index: 1;
-}
-
 #app input {
     background: #505050;
     color: @text-color;
@@ -165,6 +127,44 @@ a {
             font-weight: bold;
         }
     }
+}
+
+/*
+ * -- HELPER STYLES --
+ * Over-riding some of the .pure-button styles to make my buttons look unique
+ */
+.pure-button, .secondary-button {
+    box-shadow: none;
+    border-radius: 20px;
+}
+.pure-button {
+    color: @text-color;
+    border: 1px solid @text-color;
+    background: @card-background;
+    margin: 1em 0;
+}
+.secondary-button {
+    background: #eee;
+    border: @lightgrey-border;
+    color: #666;
+    padding: 0.5em 2em;
+    font-size: 80%;
+}
+
+#tooltip {
+    background: rgb(28 144 56);
+    border-radius: 18px;
+    border: 1px solid #0b3d17;
+    box-shadow: 1px 2px 1px #0b3d17;
+    color: @text-color;
+    display: none;
+    font-weight: bold;
+    letter-spacing: normal;
+    padding: 10px 15px;
+    position: fixed;
+    top: 12px;
+    left: 9px;
+    z-index: 1;
 }
 
 /*
@@ -333,114 +333,6 @@ a {
     }
 }
 
-/*
- * -- EMAIL STYLES --
- * Styles relevant to the email messages, labels, counts, and more.
- */
-.email-count {
+.nav-count {
     color: rgb(75, 113, 151);
-}
-
-.email-label-personal,
-.email-label-work,
-.email-label-travel {
-    width: 15px;
-    height: 15px;
-    display: inline-block;
-    margin-right: 0.5em;
-    border-radius: 3px;
-}
-.email-label-personal {
-    background: #ffc94c;
-}
-.email-label-work {
-    background: #41ccb4;
-}
-.email-label-travel {
-    background: #40c365;
-}
-
-
-/* Email Item Styles */
-.email-item {
-    padding: 0.9em 1em;
-    border-bottom: @lightgrey-border;
-    border-left: 7px solid transparent;
-    &:hover {
-        background: #ebebeb;
-        cursor: pointer;
-    }
-}
-    .email-avatar {
-        border-radius: 3px;
-        margin-right: 0.5em;
-    }
-    .email-name,
-    .email-subject {
-        margin: 0;
-    }
-    .email-subject {
-        text-transform: capitalize;
-    }
-    .email-name {
-        color: #999;
-    }
-    .email-desc {
-        font-size: 80%;
-        margin: 0.4em 0;
-    }
-
-.email-item-selected {
-    background: #eee;
-}
-.email-item-unread {
-    border-left: 7px solid #1b98f8;
-}
-
-/* Email Content Styles */
-.email-content-header, .email-content-body, .email-content-footer {
-    padding: 1em 2em;
-}
-    .email-content-header {
-        border-bottom: @lightgrey-border;
-    }
-
-        .email-content-title {
-            margin: 0.5em 0 0;
-        }
-        .email-content-subtitle {
-            font-size: 1em;
-            margin: 0;
-            font-weight: normal;
-        }
-            .email-content-subtitle span {
-                color: #999;
-            }
-    .email-content-controls {
-        margin-top: 2em;
-        text-align: right;
-    }
-        .email-content-controls .secondary-button {
-            margin-bottom: 0.3em;
-        }
-
-    .email-avatar {
-        width: 40px;
-        height: 40px;
-    }
-
-.email-content-body {
-    textarea {
-        background: inherit;
-        border-radius: 10px;
-        border: @lightgrey-border;
-        font-family: monospace;
-        line-height: 1.5em;
-        height: 300px;
-        padding: 10px;
-        width: 97%;
-        &:hover {
-            cursor: default;
-        }
-    }
 }
