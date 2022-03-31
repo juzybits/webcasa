@@ -152,18 +152,15 @@ a {
 }
 
 #tooltip {
-    background: rgb(28 144 56);
-    border-radius: 18px;
-    border: 1px solid #0b3d17;
+    display: none;
+    background: #3c7a47;
+    border-radius: 0px;
     box-shadow: 1px 2px 1px #0b3d17;
     color: @text-color;
-    display: none;
     font-weight: bold;
     letter-spacing: normal;
-    padding: 10px 15px;
+    padding: 20px 25px;
     position: fixed;
-    top: 12px;
-    left: 9px;
     z-index: 1;
 }
 
@@ -305,6 +302,11 @@ a {
         margin: 30px 30px auto -320px;
         min-height: 500px;
         min-width: 500px;
+    }
+    #tooltip {
+        top: 8px;
+        left: 8px;
+        max-width: 350px;
     }
 
 }
