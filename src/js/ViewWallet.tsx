@@ -29,7 +29,7 @@ export class ViewWallet extends React.Component {
                     <tr><td>log:</td><td>{data.log.length}</td></tr>
                     <tr><td>webcashes:</td><td>{data.webcash.length}</td></tr>
                     <tr><td>unconfirmed:</td><td>{data.unconfirmed.length}</td></tr>
-                    <tr><td>depths:</td><td><tt>{json(data.walletdepths)}</tt></td></tr>
+                    <tr><td>depths:</td><td><pre>{json(data.walletdepths)}</pre></td></tr>
                 </tbody>
                 </table>
 

@@ -1,8 +1,11 @@
-@grey-border: 1px solid #ddd;
+@card-background: #262627;
+@text-color: #dbdbdb;
+@grey-border: #444;
+@lightgrey-border: 1px solid #ddd;
 
 body {
-    color: #333;
-    background: rgb(72 146 203 / 85%);
+    color: @text-color;
+    background: #1c1c1c;
 }
 
 a {
@@ -19,13 +22,14 @@ a {
     border-radius: 20px;
 }
 .pure-button {
-    color: #eee;
-    background: #1b98f8;
+    color: @text-color;
+    border: 1px solid @text-color;
+    background: @card-background;
     margin: 1em 0;
 }
 .secondary-button {
     background: #eee;
-    border: @grey-border;
+    border: @lightgrey-border;
     color: #666;
     padding: 0.5em 2em;
     font-size: 80%;
@@ -36,7 +40,7 @@ a {
     border-radius: 18px;
     border: 1px solid #0b3d17;
     box-shadow: 1px 2px 1px #0b3d17;
-    color: #eee;
+    color: @text-color;
     display: none;
     font-weight: bold;
     letter-spacing: normal;
@@ -51,18 +55,19 @@ a {
     margin: 20px 0 0 0;
 }
 .ItemTable table {
-    margin-top: 15px;
-    border: 0;
+    border: 1px solid @grey-border;
     font-family: monospace;
     font-size: 1.1em;
+    margin-top: 15px;
     table-layout:fixed;
     width: 100%;
     word-wrap: break-word;
     td {
-        border: 0;
-        border-radius: 8px;
+        padding: 14px 20px;
+        background: inherit;
+        border: 1px solid @grey-border;
         &:hover {
-            background: #cee1f5;
+            background: #333;
             cursor: pointer;
         }
     }
@@ -74,18 +79,19 @@ a {
 }
 
 .BalanceIndicator {
-    background: #eee;
-    color: #666;
-    font-size: 0.85em;
-    float: right;
-    border: 1px solid #bbb;
-    display: inline;
-    padding: 8px 10px;
+    background: #333;
     border-radius: 8px;
+    border: 1px solid @grey-border;
+    color: #bbb;
+    cursor: default;
+    display: inline;
+    float: right;
+    font-size: 0.85em;
+    padding: 8px 10px;
 }
 
 .menu-divider {
-    border-top: 1px solid #555;
+    border-top: 1px solid @grey-border;
     margin-top: 16px;
     padding-top: 23px;
 }
@@ -95,7 +101,7 @@ a {
 }
 
 #logo {
-    color: #eee;
+    color: @text-color;
     display: block;
     font-size: 1.1em;
     margin-left: 0.5em;
@@ -110,7 +116,7 @@ a {
     right: 0em;
     position: absolute;
     padding: 0 10px;
-    color: #eee;
+    color: @text-color;
 }
 
 .connect-file-input {
@@ -127,7 +133,8 @@ a {
 }
 
 .card {
-    background: #f5f5f5;
+    background: @card-background;
+    color: @text-color;
     padding: 2em;
     h1 {
         margin-top: 0;
@@ -158,7 +165,7 @@ a {
     width: 100%;
     height: 40px;
     position: relative;
-    background: rgb(37, 42, 58);
+    background: #212121;
     text-align: center;
 
     /* When "Menu" is clicked, the navbar should be 80% height */
@@ -197,7 +204,7 @@ a {
         // text-align: left;
     }
     .pure-menu-link {
-        color: #eee;
+        color: @text-color;
         margin-left: 0.5em;
         &:hover, &:focus {
             background: rgb(55, 60, 90);
@@ -237,6 +244,7 @@ a {
         margin-left:-550px; /* "left col (nav + list)" width */
         width: 200px;
         height: 100%;
+        border-right: 1px solid @grey-border;
     }
 
     /* Show the menu items on the larger screen */
@@ -254,7 +262,7 @@ a {
         margin-left: -350px;
         width: 100%;
         height: 33%;
-        border-bottom: @grey-border;
+        border-bottom: @lightgrey-border;
     }
 
     #main {
@@ -273,10 +281,10 @@ a {
     }
     .card {
         border-radius: 8px;
-        box-shadow: -1px -1px 8px #33668d;
+        border: 1px solid @grey-border;
         margin: 30px 30px auto -320px;
         min-height: 500px;
-        width: 500px;
+        min-width: 500px;
     }
 
 }
@@ -293,7 +301,7 @@ a {
         margin-left: -350px;
         width:350px;
         height: 100%;
-        border-right: @grey-border;
+        border-right: @lightgrey-border;
     }
 
     /* This will now take up it's own column, so don't need position: fixed; */
@@ -336,7 +344,7 @@ a {
 /* Email Item Styles */
 .email-item {
     padding: 0.9em 1em;
-    border-bottom: @grey-border;
+    border-bottom: @lightgrey-border;
     border-left: 7px solid transparent;
     &:hover {
         background: #ebebeb;
@@ -374,7 +382,7 @@ a {
     padding: 1em 2em;
 }
     .email-content-header {
-        border-bottom: @grey-border;
+        border-bottom: @lightgrey-border;
     }
 
         .email-content-title {
@@ -405,7 +413,7 @@ a {
     textarea {
         background: inherit;
         border-radius: 10px;
-        border: @grey-border;
+        border: @lightgrey-border;
         font-family: monospace;
         line-height: 1.5em;
         height: 300px;

@@ -33,7 +33,7 @@ export class ItemTable extends React.Component {
         return (
             <div className="ItemTable">
                 {title}
-                <table className="pure-table pure-table-striped">
+                <table className="pure-table">
                     <tbody>
                         {items}
                     </tbody>
