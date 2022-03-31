@@ -12,7 +12,6 @@ export class ViewSend extends React.Component {
         this.state = {
             sendAmount: null,
             sendMemo: '',
-            history: [], // TODO bubble up to App
         };
     }
 
@@ -35,12 +34,16 @@ export class ViewSend extends React.Component {
         } catch (e) {
             result = `ERROR: ${e.message} | amount=${amount}, memo=${memo}`;
         } finally {
-            this.setState({history: [...this.state.history, result]}); // TODO bubble up to App
             this.props.handleModifyWallet();
         }
     }
 
     render() {
+        var key = 0;
+        const history = this.props.wallet.log
+            .filter((x) => x.type === "payment" )
+            .slice(0).reverse()
+            .map((x) => <pre key={key++}>{json(x)}</pre> );
         return (
             <div id="ViewSend" className="pure-u card">
 
@@ -60,7 +63,7 @@ export class ViewSend extends React.Component {
                     <button type="submit" className="pure-button pure-button-primary">Create payment</button>
                 </form>
 
-                <ItemTable title="History" items={this.state.history} />
+                <ItemTable title="History" items={history} />
 
             </div>
         );

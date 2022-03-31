@@ -2,8 +2,8 @@
 	- Prevent user from leaving page with unsaved changes
 	- New Upload/Create view for new users
 	- Improve ViewWallet (maybe panels)
+	- Navbar: icons, left align
 	- button:hover styles
-	- Navbar icons
 	- "unsaved changes" UI indicator
 
 # Prod
@@ -23,8 +23,8 @@
 ## COMMANDS
 status/info (done)
 load/create/download wallet (done)
-pay (done, missing history)
-insert (done, missing history)
+pay (done)
+insert (done)
 terms TODO
 insertmany TODO
 check TODO
