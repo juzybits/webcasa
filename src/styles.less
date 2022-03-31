@@ -2,6 +2,7 @@
 @text-color: #dbdbdb;
 @grey-border: #444;
 @lightgrey-border: 1px solid #ddd;
+@grey-hover: #2e2e2f;
 
 body {
     color: @text-color;
@@ -51,6 +52,14 @@ a {
     z-index: 1;
 }
 
+#app input {
+    background: #505050;
+    color: @text-color;
+    border: 1px solid #bbb;
+    box-shadow: none;
+    margin-top: 5px;
+}
+
 .ItemTable h2 {
     margin: 20px 0 0 0;
 }
@@ -67,7 +76,7 @@ a {
         background: inherit;
         border: 1px solid @grey-border;
         &:hover {
-            background: #333;
+            background: @grey-hover;
             cursor: pointer;
         }
     }
@@ -214,7 +223,7 @@ a {
         color: @text-color;
         margin-left: 0.5em;
         &:hover, &:focus {
-            background: rgb(55, 60, 90);
+            background: @grey-hover;
         }
     }
     .pure-menu-heading {
@@ -252,6 +261,10 @@ a {
         width: 200px;
         height: 100%;
         border-right: 1px solid @grey-border;
+
+        .pure-menu-link {
+            margin-left: 0;
+        }
     }
 
     /* Show the menu items on the larger screen */
