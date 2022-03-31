@@ -1,4 +1,5 @@
 # UX ideas
+	- Prevent user from leaving page with unsaved changes
 	- "Copy" button next to various items
 
 # State management ideas

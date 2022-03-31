@@ -65,7 +65,7 @@ export class App extends React.Component {
 
     replaceWallet(wallet: WebcashWallet): bool {
         if (this.state.saved === false) {
-            alert("Please download your updated wallet first (so you don't lose the changes you made)");
+            alert("First download the wallet (to avoid losing your recent changes)");
             return false;
         } else {
             this.setState({ wallet: wallet });
