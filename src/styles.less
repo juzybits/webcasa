@@ -4,9 +4,18 @@
 @lightgrey-border: 1px solid #ddd;
 @grey-hover: #2e2e2f;
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat-VariableFont_wght.ttf") format("TrueType");
+}
+
 body {
     color: @text-color;
     background: #1c1c1c;
+}
+body, button, .pure-g, .pure-g [class*=pure-u] {
+    font-family: "Montserrat";
+    letter-spacing: normal;
 }
 
 a {
@@ -44,7 +53,7 @@ a {
     }
     pre {
         margin: 0;
-        font-family: monospace,monospace;
+        font-family: monospace;
         font-size: 0.8em;
         line-height: 1.5em;
         white-space: pre-wrap;

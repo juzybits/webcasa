@@ -3,7 +3,6 @@
 	- New Upload/Create view for new users
 	- Improve ViewWallet (maybe panels)
 	- button:hover styles
-	- Pretty font
 	- Navbar icons
 	- "unsaved changes" UI indicator
 
