@@ -85,7 +85,10 @@ export class App extends React.Component {
 
     handleModifyWallet() {
         this.state.wallet.save();
-        this.setState({ wallet: this.state.wallet });
+        this.setState({
+            saved: false,
+            wallet: this.state.wallet // force repaint of navbar etc
+        });
     }
 
     handleUploadWallet(event) {
