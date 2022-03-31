@@ -3,8 +3,10 @@
 	- New Upload/Create view for new users
 	- Improve ViewWallet (maybe panels)
 	- Navbar: icons, left align
-	- button:hover styles
-	- "unsaved changes" UI indicator
+	- Log pages:
+		- Format items
+		- Remove balance
+		- Search, pagination, sorting
 
 # Prod
 

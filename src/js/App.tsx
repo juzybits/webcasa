@@ -15,6 +15,7 @@ export class App extends React.Component {
         super(props);
         this.handleMenuClick = this.handleMenuClick.bind(this);
         this.handleUploadWallet = this.handleUploadWallet.bind(this);
+        this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.handleModifyWallet = this.handleModifyWallet.bind(this);
         this.state = {
@@ -29,7 +30,9 @@ export class App extends React.Component {
         if ('Wallet' === this.state.view) {
             view = <ViewWallet
                         wallet={this.state.wallet}
+                        saved={this.state.saved}
                         handleUploadWallet={this.handleUploadWallet}
+                        handleDownloadWallet={this.handleDownloadWallet}
                         handleCreateWallet={this.handleCreateWallet}
                     />;
         } else
@@ -55,7 +58,9 @@ export class App extends React.Component {
                 <div id="tooltip">Copied to clipboard</div>
                 <Navigation
                     wallet={this.state.wallet}
+                    saved={this.state.saved}
                     handleUploadWallet={this.handleUploadWallet}
+                    handleDownloadWallet={this.handleDownloadWallet}
                     handleMenuClick={this.handleMenuClick}
                 />
                 {view}
@@ -68,7 +73,7 @@ export class App extends React.Component {
             alert("First download the wallet (to avoid losing your recent changes)");
             return false;
         } else {
-            this.setState({ wallet: wallet });
+            this.setState({wallet: wallet});
             wallet.save();
             return true;
         }
@@ -105,6 +110,22 @@ export class App extends React.Component {
             alert(reader.error);
         };
         reader.readAsText(file);
+    }
+
+    handleDownloadWallet(event) {
+        const filename = 'default_wallet.webcash';
+        const contents = this.state.wallet.getContents();
+        const jsonContents = JSON.stringify(contents, null, 4);
+
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonContents));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        this.setState({saved: true});
     }
 
 }

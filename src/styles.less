@@ -62,9 +62,11 @@ a {
 
 .wallet-buttons {
     margin: -10px 0 15px 0;
-    text-align: center;
+    .pure-button {
+        float: left;
+        margin-right: 10px;
+    }
 }
-
 .BalanceIndicator {
     background: #333;
     border-radius: 8px;
@@ -81,10 +83,6 @@ a {
     border-top: 1px solid @grey-border;
     margin-top: 16px;
     padding-top: 23px;
-}
-
-.wallet-button {
-    margin-right: 5px;
 }
 
 #logo {
@@ -151,6 +149,14 @@ a {
     border: 1px solid @text-color;
     background: @card-background;
     margin: 1em 0;
+    &:hover {
+        background: #333;
+        border-color: white;
+    }
+}
+button.unsaved {
+    background: green;
+    border-color: green;
 }
 
 #tooltip {
