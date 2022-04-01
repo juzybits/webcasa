@@ -23,6 +23,13 @@ export class App extends React.Component {
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
         };
+        var dat = this;
+        window.addEventListener("beforeunload", function(e) {
+            if (!dat.state.saved) {
+                e.preventDefault();
+                return e.returnValue = "You didn't download your updated wallet. Are you sure you want to exit?";
+            }
+        });
     }
 
     render() {

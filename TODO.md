@@ -1,5 +1,4 @@
 # UX
-	- Prevent user from leaving page with unsaved changes
 	- New Upload/Create view for new users
 	- Improve ViewWallet (maybe panels)
 	- Navbar: icons, left align

@@ -60,9 +60,9 @@ export class WalletControls extends React.Component {
         const fragment = !this.props.saved ? buttonConnect :
             <React.Fragment>
 
-                <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
-
                 {buttonConnect}
+
+                <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 
                 <button className="pure-button"onClick={this.props.handleDownloadWallet}>Save</button>
 
