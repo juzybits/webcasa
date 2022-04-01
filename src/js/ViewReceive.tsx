@@ -43,7 +43,14 @@ export class ViewReceive extends React.Component {
         const history = this.props.wallet.log
             .filter((x) => x.type === "receive" || x.type === "insert" )
             .slice(0).reverse()
-            .map((x) => <pre key={key++}>{json(x)}</pre> );
+            .map((x) =>
+                <div key={key++}>
+                    time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!x.timestamp?'':''+new Date(x.timestamp)}<br/>
+                    amount:&nbsp;&nbsp;&nbsp;{x.amount}<br/>
+                    memo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.memo}<br/>
+                    webcash:&nbsp;&nbsp;{x.webcash}
+                </div>
+            );
         return (
             <div id="ViewReceive" className="pure-u card">
 
