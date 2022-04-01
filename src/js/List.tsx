@@ -5,41 +5,40 @@ import { tooltip } from "./_util"
 export class List extends React.Component {
     constructor(props) {
         super(props)
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(event) {
-        const text = event.target.getInnerHTML();
-
-        navigator.clipboard.writeText(text).then(function() {
-            tooltip("Copied to clipboard");
-        }, function(err) {
-        });
-
     }
 
     render() {
         if (this.props.items.length === 0) {
             return '';
         }
-
-        let key = 0;
-        const items = this.props.items.map( (item) =>
-            <tr key={key++}>
-                <td onClick={this.handleClick}>{item}</td>
-            </tr>
-        );
         const title = this.props.title ? <h2>{this.props.title}</h2> : '';
         return (
-            <div className="List">
+            <div className="list">
                 {title}
-                <table className="pure-table">
-                    <tbody>
-                        {items}
-                    </tbody>
-                </table>
+                <div className="list-body">
+                    {this.props.items}
+                </div>
             </div>
+        );
+    }
+}
 
+export class CopiableValue extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(event) {
+        navigator.clipboard
+            .writeText(this.props.contents)
+            .then( () => tooltip("Copied to clipboard") )
+            .catch( (err) => console.error(`ERROR when trying to copy to clipboard: ${err}`) );
+    }
+    render() {
+        return (
+            <div className="CopiableValue" onClick={this.handleClick}>
+                {this.props.contents}
+            </div>
         );
     }
 }

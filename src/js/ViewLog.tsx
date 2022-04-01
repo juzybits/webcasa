@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BalanceIndicator } from "./BalanceIndicator";
-import { List } from "./List";
+import { List, CopiableValue } from "./List";
 import { json } from "./_util";
 
 // TODO: search
@@ -11,15 +11,39 @@ export class ViewLog extends React.Component {
     render() {
         var key = 0;
         const logs = this.props.logs.slice(0).reverse().map((x) =>
-                <div key={key++}>
-                    type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.type}<br/>
-                    amount:&nbsp;&nbsp;&nbsp;{x.amount}<br/>
-                    memo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.memo}<br/>
-                    time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.timestamp}<br/>
-                    webcash:&nbsp;&nbsp;{x.webcash}<br/>
-                    outputs:&nbsp;&nbsp;{json(x.output_webcash)}<br/>
-                    new_webcash&nbsp;{json(x.input_webcash)}<br/>
-                    inputs:&nbsp;&nbsp;&nbsp;{json(x.input_webcash)}
+                <div className="list-item" key={key++}>
+                    <div className="list-item-row">
+                        <label className="item-label">type:</label>
+                        <CopiableValue contents={x.type} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">amount:</label>
+                        <CopiableValue contents={x.amount} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">memo:</label>
+                        <CopiableValue contents={x.memo} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">time:</label>
+                        <CopiableValue contents={x.timestamp} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">webcash:</label>
+                        <CopiableValue contents={x.webcash} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">outputs:</label>
+                        <CopiableValue contents={json(x.output_webcash)} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">new_webcash:</label>
+                        <CopiableValue contents={json(x.input_webcash)} />
+                    </div>
+                    <div className="list-item-row">
+                        <label className="item-label">inputs:</label>
+                        <CopiableValue contents={json(x.input_webcash)} />
+                    </div>
                 </div>
             );
         const wallet = this.props.wallet;
