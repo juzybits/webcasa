@@ -71,6 +71,7 @@ a {
     display: inline;
     float: right;
     font-size: 0.85em;
+    margin-top: 2px;
     padding: 8px 10px;
 }
 
@@ -133,6 +134,9 @@ a {
         .pure-button {
             margin-right: 10px;
         }
+        .last-button {
+            margin-right: 0;
+        }
     }
 
     .wallet-group {
@@ -170,13 +174,18 @@ a {
     background: @card-background;
     margin: 1em 0;
     &:hover {
-        background: #333;
+        background: #404040;
+        color: white;
         border-color: white;
     }
 }
 button.unsaved {
     background: green;
     border-color: green;
+    &:hover {
+        background: #27aa28;
+        border-color: #27aa28;
+    }
 }
 
 #tooltip {

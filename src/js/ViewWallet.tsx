@@ -82,7 +82,7 @@ class WalletControls extends React.Component {
 
                 <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 
-                <button className="pure-button"onClick={this.props.handleDownloadWallet}>Save</button>
+                <button className="pure-button last-button" onClick={this.props.handleDownloadWallet}>Save</button>
 
             </React.Fragment>;
 

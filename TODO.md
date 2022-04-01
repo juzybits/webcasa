@@ -1,11 +1,15 @@
 # UX
-	- New Upload/Create view for new users
-	- Improve ViewWallet (maybe panels)
+	- Divider between Send/Receive forms and history
+	- Remove balance from log pages
+
+	- Unify Webcashes and Unconfirmed into "Secrets" + "[]confirmed []unconfirmed"
+	- Format logs
+	- Log Search, pagination, sorting
+	- Disable some functions if terms are not accepted
+
+	- Add info to ViewWallet - or link to info page
+	- Try increasing card margin and padding
 	- Navbar: icons, left align
-	- Log pages:
-		- Format items
-		- Remove balance
-		- Search, pagination, sorting
 
 # Prod
 
