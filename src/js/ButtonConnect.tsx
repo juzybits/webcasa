@@ -1,7 +1,5 @@
 import React from "react";
 
-import { formatMasterSecret } from "./_util";
-
 export class ButtonConnect extends React.Component {
     render() {
         const fragment = this.props.saved ?

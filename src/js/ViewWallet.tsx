@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ButtonConnect } from "./ButtonConnect";
-import { formatMasterSecret, json } from "./_util";
+import { shorten, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 
 export class ViewWallet extends React.Component {
@@ -27,7 +27,7 @@ export class ViewWallet extends React.Component {
 
                 <div id="wallet-group-main" className="wallet-group">
                     <div className="wallet-item">
-                        <label>master secret</label>{formatMasterSecret(this.props.wallet)}
+                        <label>master secret</label>{shorten(this.props.wallet.getContents().master_secret)}
                     </div>
                     <div className="wallet-item">
                         <label>balance</label>{balance}

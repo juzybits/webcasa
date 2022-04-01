@@ -1,8 +1,7 @@
 // Given a WebcashWallet, format and return its master secret
-export function formatMasterSecret(wallet: WebcashWallet): string {
-	var secret = wallet.getContents().master_secret;
-    var start = secret.slice(0, 4);
-    var end = secret.slice(-4);
+export function shorten(text: string, slice: number = 4): string {
+    var start = text.slice(0, slice);
+    var end = text.slice(-1*slice);
     return `${start}...${end}`;
 }
 

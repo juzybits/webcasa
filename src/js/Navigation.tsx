@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ButtonConnect } from "./ButtonConnect";
-import { formatMasterSecret } from "./_util";
+import { shorten } from "./_util";
 
 export class Navigation extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export class Navigation extends React.Component {
                 <div className="nav-inner">
                     <ButtonConnect
                         saved={this.props.saved}
-                        label={formatMasterSecret(this.props.wallet)}
+                        label={shorten(this.props.wallet.getContents().master_secret)}
                         wallet={this.props.wallet}
                         handleUploadWallet={this.props.handleUploadWallet}
                         handleDownloadWallet={this.props.handleDownloadWallet}
