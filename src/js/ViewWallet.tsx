@@ -48,38 +48,27 @@ export class WalletControls extends React.Component {
     }
 
     render() {
-        if (this.props.saved) {
-        return (
-            <div className="wallet-buttons">
-                <button className="pure-button"
-                    onClick={this.props.handleCreateWallet}>New</button>
+        const buttonConnect =
+            <ButtonConnect
+                saved={this.props.saved}
+                label="Load"
+                wallet={this.props.wallet}
+                handleUploadWallet={this.props.handleUploadWallet}
+                handleDownloadWallet={this.props.handleDownloadWallet}
+            />;
 
-                <ButtonConnect
-                    saved={this.props.saved}
-                    label="Load"
-                    wallet={this.props.wallet}
-                    handleUploadWallet={this.props.handleUploadWallet}
-                    handleDownloadWallet={this.props.handleDownloadWallet}
-                />
+        const fragment = !this.props.saved ? buttonConnect :
+            <React.Fragment>
 
-                <button className="pure-button"
-                    onClick={this.props.handleDownloadWallet}>Save</button>
-            </div>
-        );
-        }
-        else {
-        return (
-            <div className="wallet-buttons">
-                <ButtonConnect
-                    saved={this.props.saved}
-                    label="Load"
-                    wallet={this.props.wallet}
-                    handleUploadWallet={this.props.handleUploadWallet}
-                    handleDownloadWallet={this.props.handleDownloadWallet}
-                />
-            </div>
-        );
-        }
+                <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
+
+                {buttonConnect}
+
+                <button className="pure-button"onClick={this.props.handleDownloadWallet}>Save</button>
+
+            </React.Fragment>;
+
+        return <div className="wallet-buttons">{fragment}</div>
     }
 
 }
