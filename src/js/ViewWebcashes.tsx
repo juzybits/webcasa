@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BalanceIndicator } from "./BalanceIndicator";
-import { ItemTable } from "./ItemTable";
+import { List } from "./List";
 
 export class ViewWebcashes extends React.Component {
     render() {
@@ -14,7 +14,7 @@ export class ViewWebcashes extends React.Component {
 
                 <h1>Webcashes</h1>
 
-                <ItemTable items={webcashes} />
+                <List items={webcashes} />
 
             </div>
         );

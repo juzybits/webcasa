@@ -2,7 +2,7 @@ import React from "react";
 
 import { tooltip } from "./_util"
 
-export class ItemTable extends React.Component {
+export class List extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this);
@@ -31,7 +31,7 @@ export class ItemTable extends React.Component {
         );
         const title = this.props.title ? <h2>{this.props.title}</h2> : '';
         return (
-            <div className="ItemTable">
+            <div className="List">
                 {title}
                 <table className="pure-table">
                     <tbody>

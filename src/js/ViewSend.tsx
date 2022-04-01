@@ -2,7 +2,7 @@ import React from "react";
 
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
-import { ItemTable } from "./ItemTable";
+import { List } from "./List";
 
 export class ViewSend extends React.Component {
     constructor(props) {
@@ -70,7 +70,7 @@ export class ViewSend extends React.Component {
                     <button type="submit" className="pure-button pure-button-primary">Create payment</button>
                 </form>
 
-                <ItemTable title="History" items={history} />
+                <List title="History" items={history} />
 
             </div>
         );

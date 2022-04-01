@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BalanceIndicator } from "./BalanceIndicator";
-import { ItemTable } from "./ItemTable";
+import { List } from "./List";
 import { json } from "./_util";
 
 // TODO: search
@@ -30,7 +30,7 @@ export class ViewLog extends React.Component {
 
                 <h1>Log</h1>
 
-                <ItemTable items={logs} />
+                <List items={logs} />
 
             </div>
         );

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BalanceIndicator } from "./BalanceIndicator";
-import { ItemTable } from "./ItemTable";
+import { List } from "./List";
 
 export class ViewUnconfirmed extends React.Component {
     render() {
@@ -14,7 +14,7 @@ export class ViewUnconfirmed extends React.Component {
 
                 <h1>Unconfirmed</h1>
 
-                <ItemTable items={unconfirmed} />
+                <List items={unconfirmed} />
 
             </div>
         );

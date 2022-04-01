@@ -2,7 +2,7 @@ import React from "react";
 
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
-import { ItemTable } from "./ItemTable";
+import { List } from "./List";
 
 export class ViewReceive extends React.Component {
     constructor(props) {
@@ -70,7 +70,7 @@ export class ViewReceive extends React.Component {
                     <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
                 </form>
 
-                <ItemTable title="History" items={history} />
+                <List title="History" items={history} />
 
             </div>
         );
