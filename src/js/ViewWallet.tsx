@@ -23,19 +23,37 @@ export class ViewWallet extends React.Component {
                     handleCreateWallet={this.props.handleCreateWallet}
                 />
 
-                <div style={{clear: 'both'}} />
+                <div style={{clear: 'both'}}></div>
 
-                <table className="pure-table wallet-table">
-                <tbody>
-                    <tr><td>master secret:</td><td>{formatMasterSecret(this.props.wallet)}</td></tr>
-                    <tr><td>version:</td><td>{json(data.version)}</td></tr>
-                    <tr><td>terms accepted:</td><td>{data.legalese===true?'yes':'no'}</td></tr>
-                    <tr><td>log:</td><td>{data.log.length}</td></tr>
-                    <tr><td>webcashes:</td><td>{data.webcash.length}</td></tr>
-                    <tr><td>unconfirmed:</td><td>{data.unconfirmed.length}</td></tr>
-                    <tr><td>depths:</td><td><pre>{json(data.walletdepths)}</pre></td></tr>
-                </tbody>
-                </table>
+                <div id="wallet-group-main" className="wallet-group">
+                    <div className="wallet-item">
+                        <label>balance:</label>{balance}
+                    </div>
+                    <div className="wallet-item">
+                        <label>master secret:</label>{formatMasterSecret(this.props.wallet)}
+                    </div>
+                    <div className="wallet-item">
+                        <label>version:</label>{json(data.version)}
+                    </div>
+                    <div className="wallet-item">
+                        <label>terms</label>{data.legalese.terms===true?'accepted':'not accepted'}
+                    </div>
+                </div>
+
+                <div id="wallet-group-depths" className="wallet-group">
+                    <div className="wallet-item depth">
+                        <label>RECEIVE depth</label>{data.walletdepths.RECEIVE}
+                    </div>
+                    <div className="wallet-item depth">
+                        <label>PAY depth</label>{data.walletdepths.PAY}
+                    </div>
+                    <div className="wallet-item depth">
+                        <label>CHANGE depth</label>{data.walletdepths.CHANGE}
+                    </div>
+                    <div className="wallet-item depth">
+                        <label>MINING depth</label>{data.walletdepths.MINING}
+                    </div>
+                </div>
 
             </div>
         );

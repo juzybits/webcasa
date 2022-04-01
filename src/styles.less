@@ -39,7 +39,7 @@ a {
     font-family: monospace;
     font-size: 1.1em;
     margin-top: 15px;
-    table-layout:fixed;
+    table-layout: fixed;
     width: 100%;
     word-wrap: break-word;
     td {
@@ -126,13 +126,26 @@ a {
     }
 }
 
-.wallet-table {
-    border: 0;
-    td {
-        border: 0;
-        &:first-child {
-            font-weight: bold;
+#ViewWallet {
+
+    .wallet-group {
+        border-radius: 8px;
+        border: 1px solid @grey-border;
+        float: left;
+        margin-top: 25px;
+        padding: 15px 30px;
+        width: 230px;
+    }
+
+    .wallet-item {
+        line-height: 35px;
+        label {
+            display: inline-block;
+            width: 140px;
         }
+    }
+    .wallet-item.depth {
+        font-size: 0.9em;
     }
 }
 
@@ -309,7 +322,14 @@ button.unsaved {
         border: 1px solid @grey-border;
         margin: 30px 30px auto -320px;
         min-height: 500px;
-        min-width: 500px;
+        min-width: 345px;
+        // width: 100%;
+    }
+    #wallet-group-main {
+        margin-right: 34px;
+    }
+    #wallet-group-depths {
+
     }
     #tooltip {
         top: 8px;
