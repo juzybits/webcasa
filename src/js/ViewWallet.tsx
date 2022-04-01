@@ -27,16 +27,16 @@ export class ViewWallet extends React.Component {
 
                 <div id="wallet-group-main" className="wallet-group">
                     <div className="wallet-item">
-                        <label>balance:</label>{balance}
+                        <label>master secret</label>{formatMasterSecret(this.props.wallet)}
                     </div>
                     <div className="wallet-item">
-                        <label>master secret:</label>{formatMasterSecret(this.props.wallet)}
+                        <label>balance</label>{balance}
                     </div>
                     <div className="wallet-item">
-                        <label>version:</label>{json(data.version)}
+                        <label>version</label>{data.version}
                     </div>
                     <div className="wallet-item">
-                        <label>terms</label>{data.legalese.terms===true?'accepted':'not accepted'}
+                        <label>accept terms</label><TermsCheckbox accepted={data.legalese.terms} />
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@ export class ViewWallet extends React.Component {
     }
 }
 
-export class WalletControls extends React.Component {
+class WalletControls extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -89,4 +89,9 @@ export class WalletControls extends React.Component {
         return <div className="wallet-buttons">{fragment}</div>
     }
 
+}
+
+function TermsCheckbox(props) {
+    const checked = props.accepted === true;
+    return <input type="checkbox" id="terms-checkbox" defaultChecked={checked}></input>
 }
