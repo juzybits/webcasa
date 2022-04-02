@@ -66,7 +66,7 @@ export class ViewSend extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
                         <label htmlFor="sendAmount">Amount</label>
-                        <input type="number" id="sendAmount" min="0" max="0.01" step="0.000001" onChange={this.handleChange} />
+                        <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001" onChange={this.handleChange} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="sendMemo">Memo</label>
