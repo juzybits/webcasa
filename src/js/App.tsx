@@ -4,10 +4,9 @@ import { WebcashWalletLocalStorage } from "webcash";
 import { Navigation } from "./Navigation";
 import { ViewLog } from "./ViewLog";
 import { ViewReceive } from "./ViewReceive";
+import { ViewSecrets } from "./ViewSecrets";
 import { ViewSend } from "./ViewSend";
-import { ViewUnconfirmed } from "./ViewUnconfirmed";
 import { ViewWallet } from "./ViewWallet";
-import { ViewWebcashes } from "./ViewWebcashes";
 
 export class App extends React.Component {
 
@@ -49,15 +48,12 @@ export class App extends React.Component {
         if ('Receive' === this.state.view) {
             view = <ViewReceive wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
+        if ('Secrets' === this.state.view) {
+            view = <ViewSecrets wallet={this.state.wallet} />;
+        } else
         if ('Log' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
             view = <ViewLog wallet={this.state.wallet} logs={logs}/>;
-        } else
-        if ('Webcashes' === this.state.view) {
-            view = <ViewWebcashes wallet={this.state.wallet} />;
-        } else
-        if ('Unconfirmed' === this.state.view) {
-            view = <ViewUnconfirmed wallet={this.state.wallet} />;
         }
 
         return (
