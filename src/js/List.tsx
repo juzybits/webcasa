@@ -37,7 +37,7 @@ export function makeItemRow(label: string, content: any, isWebcash=false) {
     );
 }
 
-class CopiableValue extends React.Component {
+export class CopiableValue extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this);

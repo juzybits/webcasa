@@ -4,6 +4,20 @@ import { formatDate, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
 
+function ActionResult(props) {
+    let contents = '';
+    let clazz = '';
+    if (props.success===true) {
+        contents = makeItemRow("Success! Here is the new secret", props.contents);
+        clazz = 'success';
+    } else
+    if (props.success===false) {
+        contents = props.contents;
+        clazz = 'failure';
+    }
+    return <div className={`action-result ${clazz}`}>{contents}</div>;
+}
+
 export class ViewSend extends React.Component {
     constructor(props) {
         super(props)
@@ -12,6 +26,7 @@ export class ViewSend extends React.Component {
         this.state = {
             sendAmount: null,
             sendMemo: '',
+            lastResult: <ActionResult success={null} contents={null} />,
         };
     }
 
@@ -29,13 +44,13 @@ export class ViewSend extends React.Component {
         const amount = this.state.sendAmount;
         const memo = this.state.sendMemo;
 
-        var result = '';
         try {
-            result = await this.props.wallet.pay(amount, memo);
-        } catch (e) {
-            result = `ERROR: ${e.message} | amount=${amount}, memo=${memo}`;
-        } finally {
+            const webcash = await this.props.wallet.pay(amount, memo);
+            this.setState({ lastResult: <ActionResult success={true} contents={webcash} /> });
             this.props.handleModifyWallet();
+        } catch (e) {
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo="${memo}")`}</div>;
+            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} /> });
         }
     }
 
@@ -70,6 +85,8 @@ export class ViewSend extends React.Component {
                     </fieldset>
                     <button type="submit" className="pure-button pure-button-primary">Create payment</button>
                 </form>
+
+                {this.state.lastResult}
 
                 <List title="History" items={history} />
 

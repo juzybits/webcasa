@@ -32,10 +32,9 @@ export class ViewReceive extends React.Component {
         var result = '';
         try {
             result = await this.props.wallet.insert(webcash, memo);
+            this.props.handleModifyWallet();
         } catch (e) {
             result = `ERROR: ${e.message} | amount=${webcash}, memo=${memo}`;
-        } finally {
-            this.props.handleModifyWallet();
         }
     }
 
