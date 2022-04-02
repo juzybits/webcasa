@@ -1,6 +1,5 @@
 import React from "react";
 
-import { ButtonDownload } from "./ButtonDownload";
 import { shorten, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 
@@ -66,27 +65,25 @@ class WalletControls extends React.Component {
     }
 
     render() {
-        const buttonDownload =
-            <ButtonDownload
-                saved={this.props.saved}
-                label="Load"
-                wallet={this.props.wallet}
-                handleUploadWallet={this.props.handleUploadWallet}
-                handleDownloadWallet={this.props.handleDownloadWallet}
-            />;
+        return !this.props.saved
+        ?
+            <div className="wallet-buttons">
+                <button className="pure-button last-button unsaved"
+                        onClick={this.props.handleDownloadWallet}>Save changes</button>
+            </div>
+        :
+            <div className="wallet-buttons">
 
-        const fragment = !this.props.saved ? buttonDownload :
-            <React.Fragment>
-
-                {buttonDownload}
+                <label className="pure-button" htmlFor="bc-file-input">Load</label>
+                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
+                       onChange={this.props.handleUploadWallet}/>
 
                 <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 
-                <button className="pure-button last-button" onClick={this.props.handleDownloadWallet}>Save</button>
+                <button className="pure-button last-button"
+                        onClick={this.props.handleDownloadWallet}>Save</button>
 
-            </React.Fragment>;
-
-        return <div className="wallet-buttons">{fragment}</div>
+            </div>;
     }
 
 }

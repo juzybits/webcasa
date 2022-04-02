@@ -1,6 +1,5 @@
 import React from "react";
 
-import { ButtonDownload } from "./ButtonDownload";
 import { shorten } from "./_util";
 
 export class Navigation extends React.Component {
@@ -14,10 +13,17 @@ export class Navigation extends React.Component {
         this.setState({ visible: !this.state.visible });
     }
 
+    makeButton() {
+        const clazz = !this.props.saved ? 'unsaved' : '';
+        const label = !this.props.saved ? 'Save changes' : shorten(this.props.wallet.getContents().master_secret);
+        return <button className={`pure-button ${clazz}`} onClick={this.props.handleDownloadWallet}>{label}</button>
+    }
+
     render() {
         const menuItems = ["Wallet", "Send", "Receive", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet} onClick={this.props.handleMenuClick}/>
         );
+
         return (
             <div id="nav" className={"pure-u " + (this.state.visible ? "active" : '')}>
 
@@ -26,12 +32,10 @@ export class Navigation extends React.Component {
                 <a href="#" id="menuToggle" onClick={this.toggleVisibility}>☰</a>
 
                 <div className="nav-inner">
-                    <ButtonDownload
-                        saved={this.props.saved}
-                        label={shorten(this.props.wallet.getContents().master_secret)}
-                        wallet={this.props.wallet}
-                        handleDownloadWallet={this.props.handleDownloadWallet}
-                    />
+
+                    <div id="nav-button">
+                        {this.makeButton()}
+                    </div>
 
                     <div className="pure-menu">
                         <ul className="pure-menu-list">

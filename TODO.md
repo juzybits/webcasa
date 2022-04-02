@@ -1,9 +1,6 @@
 # UX
 	- Add info to ViewWallet
-
 	- Copiable master secret
-	- Format large numbers
-
 	- Log Search, pagination, sorting
 	- Navbar: icons, left align
 # Prod
