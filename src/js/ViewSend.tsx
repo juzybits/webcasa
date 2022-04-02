@@ -3,22 +3,11 @@ import React from "react";
 import { formatDate, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
-
-function ActionResult(props) {
-    let contents = '';
-    let clazz = '';
-    if (props.success===true) {
-        contents = makeItemRow("Success! Here is the new secret", props.contents);
-        clazz = 'success';
-    } else
-    if (props.success===false) {
-        contents = props.contents;
-        clazz = 'failure';
-    }
-    return <div className={`action-result ${clazz}`}>{contents}</div>;
-}
+import { ActionResult } from "./Common";
 
 export class ViewSend extends React.Component {
+    private label = "Success! Here is the new secret";
+
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
@@ -26,7 +15,7 @@ export class ViewSend extends React.Component {
         this.state = {
             sendAmount: null,
             sendMemo: '',
-            lastResult: <ActionResult success={null} contents={null} />,
+            lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
     }
 
@@ -46,11 +35,11 @@ export class ViewSend extends React.Component {
 
         try {
             const webcash = await this.props.wallet.pay(amount, memo);
-            this.setState({ lastResult: <ActionResult success={true} contents={webcash} /> });
+            this.setState({ lastResult: <ActionResult success={true} contents={webcash} label={this.label} /> });
             this.props.handleModifyWallet();
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo="${memo}")`}</div>;
-            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} /> });
+            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
         }
     }
 
