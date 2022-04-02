@@ -1,7 +1,9 @@
+@border-lightgrey: 1px solid #ddd;
 @card-background: #262627;
 @grey-border: #444;
 @grey-hover: #2e2e2f;
-@border-lightgrey: 1px solid #ddd;
+@radius-big: 8px;
+@radius-lil: 6px;
 @text-color: #dbdbdb;
 
 @font-face {
@@ -63,6 +65,7 @@ a {
     .list-item {
         margin-top: 20px;
         border: 1px solid @grey-border;
+        border-radius: @radius-lil;
         padding: 10px 20px;
     }
     .list-item-row {
@@ -74,15 +77,28 @@ a {
         min-width: 120px;
     }
     .CopiableValue {
-        padding: 2px 4px;
-        border: 1px solid #555;
-        border-radius: 8px;
-        display: inline;
+        border-radius: @radius-big;
+        border: 1px solid #333;
+        line-height: 30px;
+        padding: 0px 6px;
+        display: inline-block;
             &:hover {
                 cursor: pointer;
                 background: #404040;
                 color: white;
+                border: 1px solid #555;
             }
+    }
+    .copiable-group {
+        display: inline-block;
+        font-family: monospace;
+        font-size: 1.1em;
+        .CopiableValue {
+            margin-right: 15px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
     }
 }
 .pure-button:hover, .CopiableValue:hover {
@@ -93,7 +109,7 @@ a {
 }
 .BalanceIndicator {
     background: #333;
-    border-radius: 8px;
+    border-radius: @radius-lil;
     border: 1px solid @grey-border;
     color: #bbb;
     cursor: default;
@@ -169,7 +185,7 @@ a {
     }
 
     .wallet-group {
-        border-radius: 8px;
+        border-radius: @radius-big;
         border: 1px solid @grey-border;
         float: left;
         margin-top: 25px;
@@ -358,7 +374,7 @@ button.unsaved {
         padding: 1em;
     }
     .card {
-        border-radius: 8px;
+        border-radius: @radius-big;
         border: 1px solid @grey-border;
         margin: 30px 30px auto -320px;
         min-height: 500px;

@@ -2,14 +2,39 @@ import React from "react";
 
 import { BalanceIndicator } from "./BalanceIndicator";
 import { List, CopiableValue } from "./List";
-import { json } from "./_util";
+import { json, shorten } from "./_util";
 
 // TODO: search
 // TODO: sorting
 // TODO: pagination
 export class ViewLog extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    webcashToCopiableValues(val) {
+        let values: array;
+        if (Array.isArray(val)) {
+            values = val;
+        } else
+        if (typeof val === 'string') {
+            values = [val];
+        } else {
+            return '';
+        }
+
+        let key = 0;
+        let copiableValues = values.map((x) => {
+            const parts = x.split(':');
+            const short = parts[0] + ':' + parts[1] + ':' + shorten(parts[2]);
+            return <CopiableValue key={key++} contents={x} short={short}/>;
+        });
+
+        return <div className="copiable-group">{copiableValues}</div>
+    }
     render() {
-        var key = 0;
+
+        let key = 0;
         const logs = this.props.logs.slice(0).reverse().map((x) =>
                 <div className="list-item" key={key++}>
                     <div className="list-item-row">
@@ -30,19 +55,19 @@ export class ViewLog extends React.Component {
                     </div>
                     <div className="list-item-row">
                         <label className="item-label">webcash:</label>
-                        <CopiableValue contents={x.webcash} />
+                        {this.webcashToCopiableValues(x.webcash)}
                     </div>
                     <div className="list-item-row">
                         <label className="item-label">outputs:</label>
-                        <CopiableValue contents={json(x.output_webcash)} />
+                        {this.webcashToCopiableValues(x.output_webcash)}
                     </div>
                     <div className="list-item-row">
                         <label className="item-label">new_webcash:</label>
-                        <CopiableValue contents={json(x.input_webcash)} />
+                        {this.webcashToCopiableValues(x.input_webcash)}
                     </div>
                     <div className="list-item-row">
                         <label className="item-label">inputs:</label>
-                        <CopiableValue contents={json(x.input_webcash)} />
+                        {this.webcashToCopiableValues(x.input_webcash)}
                     </div>
                 </div>
             );

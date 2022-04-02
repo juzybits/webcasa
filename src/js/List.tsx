@@ -37,7 +37,7 @@ export class CopiableValue extends React.Component {
     render() {
         return (
             <div className="CopiableValue" onClick={this.handleClick}>
-                {this.props.contents}
+                {this.props.short ?? this.props.contents}
             </div>
         );
     }
