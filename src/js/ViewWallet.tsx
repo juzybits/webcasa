@@ -39,9 +39,10 @@ export class ViewWallet extends React.Component {
                     <div className="wallet-item">
                         <label>version</label>{data.version}
                     </div>
-                    {/*<div className="wallet-item">
-                        <label>accept terms</label><TermsCheckbox accepted={data.legalese.terms} />
-                    </div>*/}
+                    <div className="wallet-item">
+                        <label>accept <a target="_blank" href="https://webcash.org/terms">terms</a></label>
+                        <TermsCheckbox accepted={data.legalese.terms} />
+                    </div>
                 </div>
 
                 <div id="wallet-group-depths" className="wallet-group">
@@ -95,5 +96,5 @@ class WalletControls extends React.Component {
 
 function TermsCheckbox(props) {
     const checked = props.accepted === true;
-    return <input type="checkbox" id="terms-checkbox" defaultChecked={checked}></input>
+    return <input type="checkbox" id="terms-checkbox" defaultChecked={checked} disabled></input>
 }

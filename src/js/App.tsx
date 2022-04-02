@@ -22,6 +22,8 @@ export class App extends React.Component {
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
         };
+        this.state.wallet.setLegalAgreementsToTrue(); // TODO ask for user input
+        this.state.wallet.save();
         var dat = this;
         window.addEventListener("beforeunload", function(e) {
             if (!dat.state.saved) {
@@ -87,6 +89,8 @@ export class App extends React.Component {
 
     handleCreateWallet(event) {
         const wallet = new WebcashWalletLocalStorage();
+        wallet.setLegalAgreementsToTrue(); // TODO ask for user input
+        wallet.save();
         this.replaceWallet(wallet);
     }
 
