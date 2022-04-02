@@ -3,8 +3,11 @@ import React from "react";
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
+import { ActionResult } from "./Common";
 
 export class ViewReceive extends React.Component {
+    private label = "Success! The new secret was saved";
+
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
@@ -12,6 +15,7 @@ export class ViewReceive extends React.Component {
         this.state = {
             receiveWebcash: null,
             receiveMemo: '',
+            lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
     }
 
@@ -29,12 +33,13 @@ export class ViewReceive extends React.Component {
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
 
-        var result = '';
         try {
-            result = await this.props.wallet.insert(webcash, memo);
+            const new_webcash = await this.props.wallet.insert(webcash, memo);
+            this.setState({ lastResult: <ActionResult success={true} contents={new_webcash} label={this.label} /> });
             this.props.handleModifyWallet();
         } catch (e) {
-            result = `ERROR: ${e.message} | amount=${webcash}, memo=${memo}`;
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo="${memo}")`}</div>;
+            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
         }
     }
 
@@ -49,6 +54,7 @@ export class ViewReceive extends React.Component {
                     {makeItemRow('amount', x.amount)}
                     {makeItemRow('memo', x.memo)}
                     {makeItemRow('webcash', x.webcash, true)}
+                    {makeItemRow('new_webcash', x.new_webcash, true)}
                 </div>;
             });
         return (
@@ -69,6 +75,8 @@ export class ViewReceive extends React.Component {
                     </fieldset>
                     <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
                 </form>
+
+                {this.state.lastResult}
 
                 <List title="History" items={history} />
 
