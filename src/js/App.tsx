@@ -58,7 +58,7 @@ export class App extends React.Component {
 
         return (
             <div id="layout" className="content pure-g">
-                <div id="tooltip"></div>
+                <div id="tooltip">Copied!</div>
                 <Navigation
                     wallet={this.state.wallet}
                     saved={this.state.saved}

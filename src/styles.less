@@ -270,14 +270,19 @@ button.unsaved {
 
 #tooltip {
     display: none;
-    background: #3c7a47;
-    border-radius: 0px;
-    box-shadow: 1px 2px 1px #0b3d17;
+    background: #0c6e0c;
+    border: 1px solid @text-color;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
     color: @text-color;
-    font-weight: bold;
+    font-size: 1.1em;
     letter-spacing: normal;
-    padding: 20px 25px;
+    line-height: 1.5em;
+    margin: 0 20px;
+    min-width: 150px;
+    padding: 12px;
     position: fixed;
+    text-align: center;
     z-index: 1;
 }
 
@@ -404,8 +409,7 @@ button.unsaved {
         // min-height: 500px;
     }
     #tooltip {
-        top: 8px;
-        left: 8px;
-        max-width: 350px;
+        margin-left: 12px;
+        max-width: 340px;
     }
 }

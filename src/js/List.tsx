@@ -45,7 +45,7 @@ export class CopiableValue extends React.Component {
     handleClick(event) {
         navigator.clipboard
             .writeText(this.props.contents)
-            .then( () => tooltip("Copied to clipboard") )
+            .then( () => tooltip("Copied!") )
             .catch( (err) => console.error(`ERROR when trying to copy to clipboard: ${err}`) );
     }
     render() {
