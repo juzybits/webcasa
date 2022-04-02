@@ -56,12 +56,13 @@ function MenuItem(props) {
     let count = '';
     if ("Secrets" === props.name) {
         clazz = ' menu-divider';
-        count = wData.unconfirmed.length + wData.webcash.length;
+        count = (wData.unconfirmed.length + wData.webcash.length) || '';
     } else
     if ("History" === props.name) {
-        count = wData.log.length;
+        count = wData.log.length || '';
     }
-    if (count != '') {
+
+    if (count !== '') {
         count = <span className="nav-count"> ({count})</span>;
     }
 
