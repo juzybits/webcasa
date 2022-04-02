@@ -15,7 +15,7 @@ export class Navigation extends React.Component {
     }
 
     render() {
-        const menuItems = ["Wallet", "Send", "Receive", "Secrets", "Log"].map((item) =>
+        const menuItems = ["Wallet", "Send", "Receive", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet} onClick={this.props.handleMenuClick}/>
         );
         return (
@@ -59,7 +59,7 @@ function MenuItem(props) {
         clazz = ' menu-divider';
         count = wData.unconfirmed.length + wData.webcash.length;
     } else
-    if ("Log" === props.name) {
+    if ("History" === props.name) {
         count = wData.log.length;
     }
     if (count != '') {

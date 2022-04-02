@@ -7,7 +7,7 @@ import { json } from "./_util";
 // TODO: search
 // TODO: sorting
 // TODO: pagination
-export class ViewLog extends React.Component {
+export class ViewHistory extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -27,9 +27,9 @@ export class ViewLog extends React.Component {
         });
         const wallet = this.props.wallet;
         return (
-            <div id="ViewLog" className="pure-u card">
+            <div id="ViewHistory" className="pure-u card">
 
-                <h1>Log</h1>
+                <h1>History</h1>
 
                 <List items={logs} />
 

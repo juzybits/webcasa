@@ -2,7 +2,7 @@ import React from "react";
 import { WebcashWalletLocalStorage } from "webcash";
 
 import { Navigation } from "./Navigation";
-import { ViewLog } from "./ViewLog";
+import { ViewHistory } from "./ViewHistory";
 import { ViewReceive } from "./ViewReceive";
 import { ViewSecrets } from "./ViewSecrets";
 import { ViewSend } from "./ViewSend";
@@ -51,9 +51,9 @@ export class App extends React.Component {
         if ('Secrets' === this.state.view) {
             view = <ViewSecrets wallet={this.state.wallet} />;
         } else
-        if ('Log' === this.state.view) {
+        if ('History' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
-            view = <ViewLog wallet={this.state.wallet} logs={logs}/>;
+            view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
         }
 
         return (

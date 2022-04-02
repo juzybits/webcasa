@@ -1,5 +1,4 @@
 # UX
-	- Divider between Send/Receive forms and history
 	- Log Search, pagination, sorting
 	- Disable some functions if terms are not accepted
 
