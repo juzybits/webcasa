@@ -1,11 +1,8 @@
 # UX
-	- Add output box under Send and Receive forms to show confirmation/errors
 	- Add info to ViewWallet
 
 	- Copiable master secret
-	- UI bug: clicking send/receive with empty form still submits
 	- Format large numbers
-	- Nav button should always save, for consistent UX
 
 	- Log Search, pagination, sorting
 	- Navbar: icons, left align

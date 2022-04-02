@@ -30,7 +30,6 @@ export class Navigation extends React.Component {
                         saved={this.props.saved}
                         label={shorten(this.props.wallet.getContents().master_secret)}
                         wallet={this.props.wallet}
-                        handleUploadWallet={this.props.handleUploadWallet}
                         handleDownloadWallet={this.props.handleDownloadWallet}
                     />
 

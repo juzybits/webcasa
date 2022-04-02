@@ -38,7 +38,7 @@ export class ViewReceive extends React.Component {
             this.setState({ lastResult: <ActionResult success={true} contents={new_webcash} label={this.label} /> });
             this.props.handleModifyWallet();
         } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo="${memo}")`}</div>;
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
             this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
         }
     }

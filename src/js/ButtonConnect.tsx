@@ -4,9 +4,7 @@ export class ButtonConnect extends React.Component {
     render() {
         const fragment = this.props.saved ?
             <React.Fragment>
-                <label className="pure-button" htmlFor="bc-file-input">{this.props.label}</label>
-                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={this.props.handleUploadWallet}/>
+                <button className="pure-button" onClick={this.props.handleDownloadWallet}>{this.props.label}</button>
             </React.Fragment>
         :
             <React.Fragment>

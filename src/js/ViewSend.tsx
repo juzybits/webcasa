@@ -38,7 +38,7 @@ export class ViewSend extends React.Component {
             this.setState({ lastResult: <ActionResult success={true} contents={webcash} label={this.label} /> });
             this.props.handleModifyWallet();
         } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo="${memo}")`}</div>;
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
             this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
         }
     }

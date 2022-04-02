@@ -62,7 +62,6 @@ export class App extends React.Component {
                 <Navigation
                     wallet={this.state.wallet}
                     saved={this.state.saved}
-                    handleUploadWallet={this.handleUploadWallet}
                     handleDownloadWallet={this.handleDownloadWallet}
                     handleMenuClick={this.handleMenuClick}
                 />
