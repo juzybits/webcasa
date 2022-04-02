@@ -35,6 +35,15 @@ export function formatDate(date: Date): string {
     return date.toLocaleString("en-IE", options);
 }
 
+export function isMobile() {
+    return isVisible(document.getElementById('this-is-mobile'))
+}
+
+// https://github.com/jquery/jquery/blob/main/src/css/hiddenVisibleSelectors.js
+function isVisible( elem ) {
+    return !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length );
+};
+
 /*export function randomId(prefix: string) {
     prefix = prefix ? prefix+"-" : '';
     return prefix + Math.random().toString(36).replace(/[^a-z]+/g, 'x').substring(6);

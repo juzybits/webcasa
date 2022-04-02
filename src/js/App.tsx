@@ -68,6 +68,7 @@ export class App extends React.Component {
                     handleMenuClick={this.handleMenuClick}
                 />
                 {view}
+                <div id="this-is-mobile"></div>
             </div>
         );
     }

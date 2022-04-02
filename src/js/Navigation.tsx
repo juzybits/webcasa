@@ -1,6 +1,6 @@
 import React from "react";
 
-import { shorten } from "./_util";
+import { shorten, isMobile } from "./_util";
 
 export class Navigation extends React.Component {
     constructor(props) {
@@ -21,7 +21,8 @@ export class Navigation extends React.Component {
 
     render() {
         const menuItems = ["Wallet", "Send", "Receive", "Secrets", "History"].map((item) =>
-            <MenuItem key={item} name={item} wallet={this.props.wallet} onClick={this.props.handleMenuClick}/>
+            <MenuItem key={item} name={item} wallet={this.props.wallet}
+                      onClick={this.props.handleMenuClick} toggleMenu={this.toggleVisibility}/>
         );
 
         return (
@@ -53,6 +54,9 @@ function MenuItem(props) {
     const handleClick = function(event) {
         event.preventDefault();
         props.onClick(props.name);
+        if (isMobile()) { // auto-close mobile menu
+            props.toggleMenu();
+        }
     };
 
     const wData = props.wallet.getContents();
