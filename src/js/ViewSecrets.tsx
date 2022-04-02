@@ -9,11 +9,11 @@ export class ViewSecrets extends React.Component {
 
         let key = 0;
         const webcashes = wData.webcash.slice(0).reverse().map((x) =>
-                <React.Fragment key={key++}>{makeItemRow('webcash', x, true)}</React.Fragment>);
+                <React.Fragment key={key++}>{makeItemRow('', x, true)}</React.Fragment>);
 
         key = 0;
         const unconfirmed = wData.unconfirmed.slice(0).reverse().map((x) =>
-                <React.Fragment key={key++}>{makeItemRow('unconfirmed', x, true)}</React.Fragment>);
+                <React.Fragment key={key++}>{makeItemRow('', x, true)}</React.Fragment>);
         return (
             <div id="ViewSecrets" className="pure-u card">
                 <h1>Secrets</h1>

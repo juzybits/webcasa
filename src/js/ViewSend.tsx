@@ -1,6 +1,6 @@
 import React from "react";
 
-import { json } from "./_util";
+import { formatDate, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
 
@@ -43,7 +43,7 @@ export class ViewSend extends React.Component {
         const history = this.props.wallet.log
             .filter((x) => x.type === "payment" )
             .slice(0).reverse().map((x) => {
-                const ts = !x.timestamp ? null : new Date(Number(x.timestamp)).toUTCString();
+                const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
                 return <div className="list-item" key={key++}>
                     {makeItemRow('timestamp', ts)}
                     {makeItemRow('amount', x.amount)}

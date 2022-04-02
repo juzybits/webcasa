@@ -37,8 +37,9 @@ a {
 }
 
 .list { // List.tsx
+    font-size: 0.9em;
     h2 {
-        margin: 20px 0 0 0;
+        margin: 50px 0 0 0;
     }
     .list-body {
         margin-top: 15px;
@@ -63,18 +64,21 @@ a {
         }
     }
     .list-item {
-        margin-top: 20px;
-        border: 1px solid @border-grey;
-        border-radius: @radius-lil;
-        padding: 10px 20px;
+        &:first-child {
+            border-top: 1px solid @border-grey;
+        }
+        border-bottom: 1px solid @border-grey;
+        padding: 10px 2px 10px 20px;
+        &:hover {
+            background: @hover-grey;
+        }
     }
     .list-item-row {
-        margin-bottom: 10px;
     }
     .item-label {
         display: inline-block;
         margin-right: 10px;
-        min-width: 100px;
+        min-width: 90px;
     }
     .CopiableValue {
         border-radius: @radius-big;
@@ -86,7 +90,7 @@ a {
         padding: 0px 6px;
             &:hover {
                 cursor: pointer;
-                background: #404040;
+                background: #555;
                 color: white;
                 border: 1px solid #555;
             }
@@ -94,13 +98,22 @@ a {
     .copiable-group {
         display: inline-block;
         .CopiableValue {
-            margin-right: 15px;
             padding-top: 0;
             padding-bottom: 0;
         }
 
     }
 }
+
+#ViewSecrets .list, #ViewLog .list {
+    font-size: 1em;
+    .CopiableValue {
+    }
+    .item-label {
+        min-width: 120px;
+    }
+}
+
 .pure-button:hover, .CopiableValue:hover {
     cursor: pointer;
     background: #404040;

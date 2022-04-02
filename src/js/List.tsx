@@ -71,7 +71,7 @@ function webcashToCopiableValues(val) {
     let key = 0;
     let copiableValues = values.map((x) => {
         const parts = x.split(':');
-        const short = parts[0] + ':' + parts[1] + ':' + shorten(parts[2]);
+        const short = parts[0] + ':' + parts[1] + ':' + shorten(parts[2], 3);
         return <CopiableValue key={key++} contents={x} short={short}/>;
     });
 
