@@ -23,7 +23,7 @@ export class ViewLog extends React.Component {
                 {makeItemRow('input_webcash', x.input_webcash, true)}
                 {makeItemRow('output_webcash', x.output_webcash, true)}
                 {makeItemRow('new_webcash', x.new_webcash, true)}
-            </div>
+            </div>;
         });
         const wallet = this.props.wallet;
         return (

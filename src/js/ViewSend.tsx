@@ -49,7 +49,7 @@ export class ViewSend extends React.Component {
                     {makeItemRow('amount', x.amount)}
                     {makeItemRow('memo', x.memo)}
                     {makeItemRow('webcash', x.webcash, true)}
-                </div>
+                </div>;
             });
         return (
             <div id="ViewSend" className="pure-u card">

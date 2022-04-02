@@ -2,7 +2,7 @@ import React from "react";
 
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
-import { List } from "./List";
+import { List, makeItemRow } from "./List";
 
 export class ViewReceive extends React.Component {
     constructor(props) {
@@ -42,15 +42,15 @@ export class ViewReceive extends React.Component {
         var key = 0;
         const history = this.props.wallet.log
             .filter((x) => x.type === "receive" || x.type === "insert" )
-            .slice(0).reverse()
-            .map((x) =>
-                <div key={key++}>
-                    time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!x.timestamp?'':''+new Date(x.timestamp)}<br/>
-                    amount:&nbsp;&nbsp;&nbsp;{x.amount}<br/>
-                    memo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.memo}<br/>
-                    webcash:&nbsp;&nbsp;{x.webcash}
-                </div>
-            );
+            .slice(0).reverse().map((x) => {
+                const ts = !x.timestamp ? null : new Date(x.timestamp).toUTCString();
+                return <div className="list-item" key={key++}>
+                    {makeItemRow('timestamp', ts)}
+                    {makeItemRow('amount', x.amount)}
+                    {makeItemRow('memo', x.memo)}
+                    {makeItemRow('webcash', x.webcash, true)}
+                </div>;
+            });
         return (
             <div id="ViewReceive" className="pure-u card">
 
