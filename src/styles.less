@@ -183,7 +183,7 @@ a {
 .card {
     background: @card-background;
     color: @text-color;
-    padding: 2em;
+    padding: 1.8em 2.4em 2.4em;
     width: 100%;
     h1 {
         margin-top: 0;
@@ -265,11 +265,11 @@ button.unsaved {
     z-index: 1;
 }
 
-/*
- * -- LAYOUT STYLES --
- * This layout consists of three main elements, `#nav` (navigation bar), `#list` (email list), and `#main` (email content). All 3 elements are within `#layout`
- */
-#layout, #nav, #list, #main {
+.nav-count {
+    color: rgb(75, 113, 151);
+}
+
+#layout, #nav {
     margin: 0;
     padding: 0;
 }
@@ -339,23 +339,23 @@ button.unsaved {
  * On tablets and other medium-sized devices, we want to customize some
  * of the mobile styles.
  */
-@media (min-width: 45em) {
+@media (min-width: 44em) {
 
     /* Move the layout over so we can fit the nav + list in on the left */
     #layout {
-        padding-left:550px; /* "left col (nav + list)" width */
+        // padding-left:550px; /* "left col (nav + list)" width */
         position: relative;
     }
 
     /* These are position:fixed; elements that will be in the left 500px of the screen */
-    #nav, #list {
+    #nav {
         position: fixed;
         top: 0;
         bottom: 0;
         overflow: auto;
     }
     #nav {
-        margin-left:-550px; /* "left col (nav + list)" width */
+        // margin-left:-550px; /* "left col (nav + list)" width */
         width: 200px;
         height: 100%;
         border-right: 1px solid @border-grey;
@@ -383,8 +383,7 @@ button.unsaved {
     .card {
         border-radius: @radius-big;
         border: 1px solid @border-grey;
-        margin: 30px 30px auto -320px;
-        min-width: 450px;
+        margin: 40px 40px auto 243px;
         max-width: 600px;
         // min-height: 500px;
     }
@@ -393,8 +392,4 @@ button.unsaved {
         left: 8px;
         max-width: 350px;
     }
-}
-
-.nav-count {
-    color: rgb(75, 113, 151);
 }
