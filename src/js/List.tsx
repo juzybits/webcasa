@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tooltip } from "./_util"
+import { tooltip, shorten } from "./_util";
 
 export class List extends React.Component {
     constructor(props) {
@@ -41,4 +41,25 @@ export class CopiableValue extends React.Component {
             </div>
         );
     }
+}
+
+export function webcashToCopiableValues(val) {
+    let values: array;
+    if (Array.isArray(val)) {
+        values = val;
+    } else
+    if (typeof val === 'string') {
+        values = [val];
+    } else {
+        return '';
+    }
+
+    let key = 0;
+    let copiableValues = values.map((x) => {
+        const parts = x.split(':');
+        const short = parts[0] + ':' + parts[1] + ':' + shorten(parts[2]);
+        return <CopiableValue key={key++} contents={x} short={short}/>;
+    });
+
+    return <div className="copiable-group">{copiableValues}</div>
 }

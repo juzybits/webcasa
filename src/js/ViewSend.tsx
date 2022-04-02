@@ -2,7 +2,7 @@ import React from "react";
 
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
-import { List } from "./List";
+import { List, CopiableValue, webcashToCopiableValues } from "./List";
 
 export class ViewSend extends React.Component {
     constructor(props) {
@@ -39,18 +39,42 @@ export class ViewSend extends React.Component {
     }
 
     render() {
-        var key = 0;
+        let key = 0;
         const history = this.props.wallet.log
             .filter((x) => x.type === "payment" )
-            .slice(0).reverse()
-            .map((x) =>
-                <div key={key++}>
-                    time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!x.timestamp?'':''+new Date(Number(x.timestamp))}<br/>
-                    amount:&nbsp;&nbsp;&nbsp;{x.amount}<br/>
-                    memo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.memo}<br/>
-                    webcash:&nbsp;&nbsp;{x.webcash}
+            .slice(0).reverse().map((x) => {
+
+                const row_timestamp = !x.timestamp ? '' :
+                <div className="list-item-row">
+                    <label className="item-label">time:</label>
+                    <CopiableValue contents={new Date(Number(x.timestamp)).toUTCString()} />
+                </div>;
+
+                const row_amount = !x.amount ? '' :
+                <div className="list-item-row">
+                    <label className="item-label">amount:</label>
+                    <CopiableValue contents={x.amount} />
+                </div>;
+
+                const row_memo = !x.memo ? '' :
+                <div className="list-item-row">
+                    <label className="item-label">memo:</label>
+                    <CopiableValue contents={x.memo} />
+                </div>;
+
+                const row_webcash = !x.webcash ? '' :
+                <div className="list-item-row">
+                    <label className="item-label">webcash:</label>
+                    {webcashToCopiableValues(x.webcash)}
+                </div>;
+
+                return <div className="list-item" key={key++}>
+                    {row_timestamp}
+                    {row_amount}
+                    {row_memo}
+                    {row_webcash}
                 </div>
-            );
+            });
         return (
             <div id="ViewSend" className="pure-u card">
 

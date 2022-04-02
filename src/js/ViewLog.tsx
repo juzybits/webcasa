@@ -1,8 +1,8 @@
 import React from "react";
 
 import { BalanceIndicator } from "./BalanceIndicator";
-import { List, CopiableValue } from "./List";
-import { json, shorten } from "./_util";
+import { List, CopiableValue, webcashToCopiableValues } from "./List";
+import { json } from "./_util";
 
 // TODO: search
 // TODO: sorting
@@ -10,27 +10,6 @@ import { json, shorten } from "./_util";
 export class ViewLog extends React.Component {
     constructor(props) {
         super(props)
-    }
-
-    webcashToCopiableValues(val) {
-        let values: array;
-        if (Array.isArray(val)) {
-            values = val;
-        } else
-        if (typeof val === 'string') {
-            values = [val];
-        } else {
-            return '';
-        }
-
-        let key = 0;
-        let copiableValues = values.map((x) => {
-            const parts = x.split(':');
-            const short = parts[0] + ':' + parts[1] + ':' + shorten(parts[2]);
-            return <CopiableValue key={key++} contents={x} short={short}/>;
-        });
-
-        return <div className="copiable-group">{copiableValues}</div>
     }
     render() {
         let key = 0;
@@ -63,25 +42,25 @@ export class ViewLog extends React.Component {
             const row_webcash = !x.webcash ? '' :
             <div className="list-item-row">
                 <label className="item-label">webcash:</label>
-                {this.webcashToCopiableValues(x.webcash)}
+                {webcashToCopiableValues(x.webcash)}
             </div>;
 
             const row_input_webcash = !x.input_webcash ? '' :
             <div className="list-item-row">
                 <label className="item-label">inputs:</label>
-                {this.webcashToCopiableValues(x.input_webcash)}
+                {webcashToCopiableValues(x.input_webcash)}
             </div>;
 
             const row_output_webcash = !x.output_webcash ? '' :
             <div className="list-item-row">
                 <label className="item-label">outputs:</label>
-                {this.webcashToCopiableValues(x.output_webcash)}
+                {webcashToCopiableValues(x.output_webcash)}
             </div>;
 
             const row_new_webcash = !x.new_webcash ? '' :
             <div className="list-item-row">
                 <label className="item-label">new_webcash:</label>
-                {this.webcashToCopiableValues(x.new_webcash)}
+                {webcashToCopiableValues(x.new_webcash)}
             </div>;
             return <div className="list-item" key={key++}>
                 {row_type}
