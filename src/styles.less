@@ -1,7 +1,7 @@
+@border-grey: #444;
 @border-lightgrey: 1px solid #ddd;
 @card-background: #262627;
-@grey-border: #444;
-@grey-hover: #2e2e2f;
+@hover-grey: #2e2e2f;
 @radius-big: 8px;
 @radius-lil: 6px;
 @text-color: #dbdbdb;
@@ -48,9 +48,9 @@ a {
         td {
             padding: 14px 20px;
             background: inherit;
-            border: 1px solid @grey-border;
+            border: 1px solid @border-grey;
             &:hover {
-                background: @grey-hover;
+                background: @hover-grey;
                 cursor: pointer;
             }
         }
@@ -64,7 +64,7 @@ a {
     }
     .list-item {
         margin-top: 20px;
-        border: 1px solid @grey-border;
+        border: 1px solid @border-grey;
         border-radius: @radius-lil;
         padding: 10px 20px;
     }
@@ -110,7 +110,7 @@ a {
 .BalanceIndicator {
     background: #333;
     border-radius: @radius-lil;
-    border: 1px solid @grey-border;
+    border: 1px solid @border-grey;
     color: #bbb;
     cursor: default;
     display: inline;
@@ -121,7 +121,7 @@ a {
 }
 
 .menu-divider {
-    border-top: 1px solid @grey-border;
+    border-top: 1px solid @border-grey;
     margin-top: 16px;
     padding-top: 23px;
 }
@@ -172,8 +172,8 @@ a {
         display: inline;
     }
     .wallet-buttons {
-        border-top: 1px solid @grey-border;
-        border-bottom: 1px solid @grey-border;
+        border-top: 1px solid @border-grey;
+        border-bottom: 1px solid @border-grey;
         padding: 5px 0;
         text-align: center;
         .pure-button {
@@ -186,7 +186,7 @@ a {
 
     .wallet-group {
         border-radius: @radius-big;
-        border: 1px solid @grey-border;
+        border: 1px solid @border-grey;
         float: left;
         margin-top: 25px;
         padding: 15px 30px;
@@ -297,7 +297,7 @@ button.unsaved {
         color: @text-color;
         margin-left: 0.5em;
         &:hover, &:focus {
-            background: @grey-hover;
+            background: @hover-grey;
         }
     }
     .pure-menu-heading {
@@ -334,7 +334,7 @@ button.unsaved {
         margin-left:-550px; /* "left col (nav + list)" width */
         width: 200px;
         height: 100%;
-        border-right: 1px solid @grey-border;
+        border-right: 1px solid @border-grey;
 
         .pure-menu-link {
             margin-left: 0;
@@ -375,7 +375,7 @@ button.unsaved {
     }
     .card {
         border-radius: @radius-big;
-        border: 1px solid @grey-border;
+        border: 1px solid @border-grey;
         margin: 30px 30px auto -320px;
         min-height: 500px;
         min-width: 345px;
