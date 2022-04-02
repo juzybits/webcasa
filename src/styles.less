@@ -189,6 +189,7 @@ a {
     background: @card-background;
     color: @text-color;
     padding: 2em;
+    width: 100%;
     h1 {
         margin-top: 0;
     }
@@ -214,10 +215,8 @@ a {
     .wallet-group {
         border-radius: @radius-big;
         border: 1px solid @border-grey;
-        float: left;
-        margin-top: 25px;
-        padding: 15px 30px;
-        width: 230px;
+        margin: 25px auto 0 auto;
+        padding: 23px 36px;
     }
 
     .wallet-item {
@@ -229,6 +228,9 @@ a {
     }
     .wallet-item.depth {
         font-size: 0.9em;
+    }
+    .wrapper {
+        width: 100%;
     }
 }
 
@@ -408,16 +410,14 @@ button.unsaved {
         min-width: 345px;
         // width: 100%;
     }
-    #wallet-group-main {
-        margin-right: 34px;
-    }
-    #wallet-group-depths {
-
-    }
     #tooltip {
         top: 8px;
         left: 8px;
         max-width: 350px;
+    }
+
+    .card {
+        min-width: 500px;
     }
 
 }
