@@ -2,11 +2,14 @@ import React from "react";
 
 import { shorten, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
+import { CopiableValue } from "./List";
 
 export class ViewWallet extends React.Component {
     render() {
         const balance = this.props.wallet.getBalance().toString();
         const data = this.props.wallet.getContents();
+        const fullMaster = this.props.wallet.getContents().master_secret;
+        const abbrMaster = shorten(fullMaster)
         return (
             <div id="ViewWallet" className="pure-u card">
 
@@ -25,11 +28,13 @@ export class ViewWallet extends React.Component {
                 <div style={{clear: 'both'}}></div>
 
                 <div id="wallet-group-main" className="wallet-group">
-                    <div className="wallet-item">
-                        <label>master secret</label>{shorten(this.props.wallet.getContents().master_secret)}
+                    <div id="wallet-master" className="wallet-item">
+                        <label>master secret</label>
+                        <CopiableValue contents={fullMaster} short={abbrMaster}/>
                     </div>
                     <div className="wallet-item">
-                        <label>balance</label>{balance}
+                        <label>balance</label>
+                        <CopiableValue contents={balance}/>
                     </div>
                     <div className="wallet-item">
                         <label>version</label>{data.version}
