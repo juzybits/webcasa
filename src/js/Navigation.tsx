@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ButtonConnect } from "./ButtonConnect";
+import { ButtonDownload } from "./ButtonDownload";
 import { shorten } from "./_util";
 
 export class Navigation extends React.Component {
@@ -26,7 +26,7 @@ export class Navigation extends React.Component {
                 <a href="#" id="menuToggle" onClick={this.toggleVisibility}>☰</a>
 
                 <div className="nav-inner">
-                    <ButtonConnect
+                    <ButtonDownload
                         saved={this.props.saved}
                         label={shorten(this.props.wallet.getContents().master_secret)}
                         wallet={this.props.wallet}

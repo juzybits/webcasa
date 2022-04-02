@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ButtonConnect } from "./ButtonConnect";
+import { ButtonDownload } from "./ButtonDownload";
 import { shorten, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 
@@ -66,8 +66,8 @@ class WalletControls extends React.Component {
     }
 
     render() {
-        const buttonConnect =
-            <ButtonConnect
+        const buttonDownload =
+            <ButtonDownload
                 saved={this.props.saved}
                 label="Load"
                 wallet={this.props.wallet}
@@ -75,10 +75,10 @@ class WalletControls extends React.Component {
                 handleDownloadWallet={this.props.handleDownloadWallet}
             />;
 
-        const fragment = !this.props.saved ? buttonConnect :
+        const fragment = !this.props.saved ? buttonDownload :
             <React.Fragment>
 
-                {buttonConnect}
+                {buttonDownload}
 
                 <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 

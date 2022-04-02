@@ -1,6 +1,6 @@
 import React from "react";
 
-export class ButtonConnect extends React.Component {
+export class ButtonDownload extends React.Component {
     render() {
         const fragment = this.props.saved ?
             <React.Fragment>
@@ -12,7 +12,7 @@ export class ButtonConnect extends React.Component {
             </React.Fragment>
         ;
         return (
-            <div className="ButtonConnect">
+            <div className="ButtonDownload">
             {fragment}
             </div>
         );
