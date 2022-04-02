@@ -2,7 +2,7 @@ import React from "react";
 
 import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
-import { List, CopiableValue, webcashToCopiableValues } from "./List";
+import { List, makeItemRow } from "./List";
 
 export class ViewSend extends React.Component {
     constructor(props) {
@@ -43,36 +43,12 @@ export class ViewSend extends React.Component {
         const history = this.props.wallet.log
             .filter((x) => x.type === "payment" )
             .slice(0).reverse().map((x) => {
-
-                const row_timestamp = !x.timestamp ? '' :
-                <div className="list-item-row">
-                    <label className="item-label">time:</label>
-                    <CopiableValue contents={new Date(Number(x.timestamp)).toUTCString()} />
-                </div>;
-
-                const row_amount = !x.amount ? '' :
-                <div className="list-item-row">
-                    <label className="item-label">amount:</label>
-                    <CopiableValue contents={x.amount} />
-                </div>;
-
-                const row_memo = !x.memo ? '' :
-                <div className="list-item-row">
-                    <label className="item-label">memo:</label>
-                    <CopiableValue contents={x.memo} />
-                </div>;
-
-                const row_webcash = !x.webcash ? '' :
-                <div className="list-item-row">
-                    <label className="item-label">webcash:</label>
-                    {webcashToCopiableValues(x.webcash)}
-                </div>;
-
+                const ts = !x.timestamp ? null : new Date(Number(x.timestamp)).toUTCString();
                 return <div className="list-item" key={key++}>
-                    {row_timestamp}
-                    {row_amount}
-                    {row_memo}
-                    {row_webcash}
+                    {makeItemRow('timestamp', ts)}
+                    {makeItemRow('amount', x.amount)}
+                    {makeItemRow('memo', x.memo)}
+                    {makeItemRow('webcash', x.webcash, true)}
                 </div>
             });
         return (

@@ -23,7 +23,20 @@ export class List extends React.Component {
     }
 }
 
-export class CopiableValue extends React.Component {
+export function makeItemRow(label: string, content: any, isWebcash=false) {
+    if (!content) {
+        return '';
+    }
+    content = isWebcash ? webcashToCopiableValues(content) : <CopiableValue contents={content}/>;
+    return (
+        <div className="list-item-row">
+            <label className="item-label">{label}:</label>
+            {content}
+        </div>
+    );
+}
+
+class CopiableValue extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this);
@@ -43,7 +56,7 @@ export class CopiableValue extends React.Component {
     }
 }
 
-export function webcashToCopiableValues(val) {
+function webcashToCopiableValues(val) {
     let values: array;
     if (Array.isArray(val)) {
         values = val;
