@@ -2,6 +2,7 @@
 	- Add info to ViewWallet
 	- Log Search, pagination, sorting
 	- Navbar: icons, left align
+	- Send max amount
 # Prod
     - Logo
 	- Links to webcash.org, twitter, discord
