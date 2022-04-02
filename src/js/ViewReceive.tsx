@@ -23,6 +23,7 @@ export class ViewReceive extends React.Component {
         });
     }
 
+    // TODO: move to App.tsx
     async handleSubmit() {
         event.preventDefault();
         const webcash = this.state.receiveWebcash;
