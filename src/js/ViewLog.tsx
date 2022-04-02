@@ -29,8 +29,6 @@ export class ViewLog extends React.Component {
         return (
             <div id="ViewLog" className="pure-u card">
 
-                <BalanceIndicator wallet={wallet} />
-
                 <h1>Log</h1>
 
                 <List items={logs} />

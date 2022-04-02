@@ -1,9 +1,6 @@
 # UX
 	- Divider between Send/Receive forms and history
-	- Remove balance from log pages
-
 	- Unify Webcashes and Unconfirmed into "Secrets" + "[]confirmed []unconfirmed"
-	- Format logs
 	- Log Search, pagination, sorting
 	- Disable some functions if terms are not accepted
 

@@ -27,10 +27,11 @@ export function makeItemRow(label: string, content: any, isWebcash=false) {
     if (!content) {
         return '';
     }
+    label = !label ? '' : <label className="item-label">{label}:</label>;
     content = isWebcash ? webcashToCopiableValues(content) : <CopiableValue contents={content}/>;
     return (
         <div className="list-item-row">
-            <label className="item-label">{label}:</label>
+            {label}
             {content}
         </div>
     );
