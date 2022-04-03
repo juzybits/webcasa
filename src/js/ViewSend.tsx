@@ -58,10 +58,6 @@ export class ViewSend extends React.Component {
         return (
             <div id="ViewSend" className="pure-u card">
 
-                <BalanceIndicator wallet={this.props.wallet} />
-
-                <h1>Send</h1>
-
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
                         <label htmlFor="sendAmount">Amount</label>

@@ -59,10 +59,6 @@ export class ViewReceive extends React.Component {
         return (
             <div id="ViewReceive" className="pure-u card">
 
-                <BalanceIndicator wallet={this.props.wallet} />
-
-                <h1>Receive</h1>
-
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
                         <label htmlFor="receiveWebcash">Webcash</label>

@@ -1,32 +1,33 @@
 import React from "react";
 
-import { json } from "./_util";
-import { BalanceIndicator } from "./BalanceIndicator";
-import { List, makeItemRow } from "./List";
 import { ActionResult } from "./Common";
+import { BalanceIndicator } from "./BalanceIndicator";
+import { formatDate, json } from "./_util";
+import { List, makeItemRow } from "./List";
+import { ViewReceive } from "./ViewReceive";
+import { ViewSend } from "./ViewSend";
 
 export class ViewTransfer extends React.Component {
     private label = "Success! The new secret was saved";
 
     constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {
-            lastResult: <ActionResult success={null} contents={null} label={this.label} />,
-        };
+        this.handleClickTab = this.handleClickTab.bind(this);
+        this.state = { action: 'Receive' };
     }
 
-    handleChange(event) {
-    }
-
-    // TODO: move to App.tsx
-    async handleSubmit() {
+    handleClickTab(event) {
+        this.setState({action: event.target.innerHTML});
     }
 
     render() {
+        const tabContent = this.state.action === 'Receive'
+            ? <ViewReceive wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />
+            : <ViewSend    wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />;
+        const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
+        const selectedSend = this.state.action === 'Send' ? 'selected' : '';
+
         const history = []; // TODO
-        const subtitle = 'Send/Receive'; // TODO
         return (
             <div id="ViewTransfer" className="pure-u card">
 
@@ -34,14 +35,18 @@ export class ViewTransfer extends React.Component {
 
                 <h1>Transfer</h1>
 
-                <h2>{subtitle}</h2>
+                <div className="tabbed">
 
-                <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
-                </form>
+                    <div className="tabs">
+                        <div className={`tab left ${selectedReceive}`} onClick={this.handleClickTab}>Receive</div>
+                        <div className={`tab right ${selectedSend}`} onClick={this.handleClickTab}>Send</div>
+                    </div>
 
-                {this.state.lastResult}
+                    <div className="clear"></div>
 
-                <List title="History" items={history} />
+                    <div className="tab-content">{tabContent}</div>
+
+                </div>
 
             </div>
         );

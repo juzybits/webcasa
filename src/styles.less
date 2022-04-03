@@ -393,6 +393,45 @@ button.unsaved {
     }
 }
 
+.clear {
+    clear: both;
+}
+.tabbed {
+    background: @hover-grey;
+    border-radius: @radius-big;
+    border: 1px solid @border-grey;
+    margin-top: 30px;
+    .tabs {
+        width: 100%;
+        display: flex;
+        .tab {
+            background: @card-background;
+            border-bottom: 1px solid @border-grey;
+            color: #666;
+            font-size: 1.4em;
+            line-height: 50px;
+            text-align: center;
+            width: 50%;
+            &:hover {
+                cursor: pointer;
+                color: white;
+            }
+            &.selected {
+                background: inherit;
+                border-bottom: 0;
+                color: white;
+            }
+            &.left {
+                border-radius: @radius-big 0 0 0;
+            }
+            &.right {
+                border-left: 1px solid @border-grey;
+                border-radius: 0 @radius-big 0 0;
+            }
+        }
+    }
+}
+
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some

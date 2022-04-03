@@ -25,7 +25,7 @@ export class ViewSettings extends React.Component {
                     handleCreateWallet={this.props.handleCreateWallet}
                 />
 
-                <div style={{clear: 'both'}}></div>
+                <div className="clear"></div>
 
                 <div className="settings-panel">
                     <div className="setting">
