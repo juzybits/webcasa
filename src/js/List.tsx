@@ -75,5 +75,5 @@ function webcashToCopiableValues(val) {
         return <CopiableValue key={key++} contents={x} short={short}/>;
     });
 
-    return <div className="copiable-group">{copiableValues}</div>
+    return <div className="copiable-panel">{copiableValues}</div>
 }

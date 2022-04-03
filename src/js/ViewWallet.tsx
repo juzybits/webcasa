@@ -27,7 +27,7 @@ export class ViewWallet extends React.Component {
 
                 <div style={{clear: 'both'}}></div>
 
-                <div id="wallet-group-main" className="wallet-group">
+                <div id="wallet-panel-info" className="wallet-panel">
                     <div id="wallet-master" className="wallet-item">
                         <label>master secret</label>
                         <CopiableValue contents={fullMaster} short={abbrMaster}/>
@@ -45,7 +45,7 @@ export class ViewWallet extends React.Component {
                     </div>
                 </div>
 
-                <div id="wallet-group-depths" className="wallet-group">
+                <div id="wallet-panel-depths" className="wallet-panel">
                     <div className="wallet-item depth">
                         <label>RECEIVE depth</label>{data.walletdepths.RECEIVE}
                     </div>
