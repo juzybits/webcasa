@@ -125,6 +125,29 @@ a {
         word-break: break-all;
     }
 }
+fieldset.checkboxes {
+    border: 0;
+    font-size: 1.15em;
+    margin-bottom: 2em;
+    padding: 0;
+    .cb-item {
+        line-height: 2em;
+        &:hover {
+            color: white;
+        }
+    }
+    label {
+        padding-left: 12px;
+    }
+    input {
+        transform: scale(1.4);
+    }
+    input, label {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
 
 #ViewHistory .list {
     font-size: 1em;
