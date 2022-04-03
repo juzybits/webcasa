@@ -4,18 +4,18 @@ import { shorten, json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { CopiableValue } from "./List";
 
-export class ViewWallet extends React.Component {
+export class ViewSettings extends React.Component {
     render() {
         const balance = this.props.wallet.getBalance().toString();
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster)
         return (
-            <div id="ViewWallet" className="pure-u card">
+            <div id="ViewSettings" className="pure-u card">
 
                 <BalanceIndicator wallet={this.props.wallet} />
 
-                <h1>Wallet</h1>
+                <h1>Settings</h1>
 
                 <WalletControls
                     wallet={this.props.wallet}
@@ -27,35 +27,35 @@ export class ViewWallet extends React.Component {
 
                 <div style={{clear: 'both'}}></div>
 
-                <div id="wallet-panel-info" className="wallet-panel">
-                    <div id="wallet-master" className="wallet-item">
+                <div className="settings-panel">
+                    <div className="setting">
                         <label>master secret</label>
                         <CopiableValue contents={fullMaster} short={abbrMaster}/>
                     </div>
-                    <div className="wallet-item">
+                    <div className="setting">
                         <label>balance</label>
                         <CopiableValue contents={balance}/>
                     </div>
-                    <div className="wallet-item">
+                    <div className="setting">
                         <label>version</label>{data.version}
                     </div>
-                    <div className="wallet-item">
+                    <div className="setting">
                         <label>accept <a target="_blank" href="https://webcash.org/terms">terms</a></label>
                         <TermsCheckbox accepted={data.legalese.terms} />
                     </div>
                 </div>
 
-                <div id="wallet-panel-depths" className="wallet-panel">
-                    <div className="wallet-item depth">
+                <div className="settings-panel">
+                    <div className="setting depth">
                         <label>RECEIVE depth</label>{data.walletdepths.RECEIVE}
                     </div>
-                    <div className="wallet-item depth">
+                    <div className="setting depth">
                         <label>PAY depth</label>{data.walletdepths.PAY}
                     </div>
-                    <div className="wallet-item depth">
+                    <div className="setting depth">
                         <label>CHANGE depth</label>{data.walletdepths.CHANGE}
                     </div>
-                    <div className="wallet-item depth">
+                    <div className="setting depth">
                         <label>MINING depth</label>{data.walletdepths.MINING}
                     </div>
                 </div>

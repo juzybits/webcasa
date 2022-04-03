@@ -27,7 +27,6 @@ export class ViewSend extends React.Component {
         });
     }
 
-    // TODO: move to App.tsx
     async handleSubmit() {
         event.preventDefault();
         const amount = this.state.sendAmount;

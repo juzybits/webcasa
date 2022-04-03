@@ -1,18 +1,21 @@
 # UX core
 	- ViewTransfer: Send + Receive tabs. Make it default view.
-	- ViewSecrets: use tabbed card
 
-	- ViewTerms: Splash screen with Webcash terms. Site-level accept from the user -> auto-accept in new wallets.
+	- ViewTerms:
+		Splash screen with Webcash terms.
+			Maybe with <dialog> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+		Site-level accept from the user -> auto-accept in new wallets.
 
 	- ViewSettings
 		- .wallet-buttons
 			+ "delete wallet" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
-		- ViewWallet (.panel-info, .panel-depths)
+		- ViewSettings (.panel-info, .panel-depths)
 		- ViewRecover (.panel-recover)
 		- ViewCheck (.panel-check)
 
 # UX extra
 	- Send max amount
+	- <hr> in nav
 	- Auto-copy PAY new secret
 	- Preserve Send/Receive .state.lastOuput
 	- ViewHistory filter, search, pagination, sorting
@@ -47,6 +50,7 @@
     - Logo
 	- Links to webcash.org, twitter, discord
 	- WebCasa Terms?
+	- <noscript> for SEO
 
 # 1:1 UI for commands and wallet state
 

@@ -4,9 +4,10 @@ import { WebcashWalletLocalStorage } from "webcash";
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
 import { ViewReceive } from "./ViewReceive";
+import { ViewTransfer } from "./ViewTransfer";
 import { ViewSecrets } from "./ViewSecrets";
 import { ViewSend } from "./ViewSend";
-import { ViewWallet } from "./ViewWallet";
+import { ViewSettings } from "./ViewSettings";
 
 export class App extends React.Component {
 
@@ -18,7 +19,7 @@ export class App extends React.Component {
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.handleModifyWallet = this.handleModifyWallet.bind(this);
         this.state = {
-            view: 'Wallet',
+            view: 'Transfer',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
         };
@@ -35,8 +36,8 @@ export class App extends React.Component {
 
     render() {
         var view = '';
-        if ('Wallet' === this.state.view) {
-            view = <ViewWallet
+        if ('Settings' === this.state.view) {
+            view = <ViewSettings
                         wallet={this.state.wallet}
                         saved={this.state.saved}
                         handleUploadWallet={this.handleUploadWallet}
@@ -46,6 +47,9 @@ export class App extends React.Component {
         } else
         if ('Send' === this.state.view) {
             view = <ViewSend wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
+        } else
+        if ('Transfer' === this.state.view) {
+            view = <ViewTransfer wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
         if ('Receive' === this.state.view) {
             view = <ViewReceive wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
