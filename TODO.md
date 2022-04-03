@@ -1,5 +1,7 @@
 # UX core
 	- ViewTransfer: Send + Receive tabs. Make it default view.
+	- ViewSecrets: use tabbed card
+
 	- ViewTerms: Splash screen with Webcash terms. Site-level accept from the user -> auto-accept in new wallets.
 
 	- ViewSettings
@@ -11,28 +13,40 @@
 
 # UX extra
 	- Send max amount
-	- Log Search, pagination, sorting
-	- Consistent logs:
-		- The timestamp is sometimes missing
-		- The JS wallet logs insert operations with type=insert, but the Python library logs them with type=receive
+	- Auto-copy PAY new secret
+	- Preserve Send/Receive .state.lastOuput
+	- ViewHistory filter, search, pagination, sorting
+		- [CORE] Consistent logs:
+			- The timestamp is sometimes missing
+			- The JS wallet logs insert operations with type=insert, but the Python library logs them with type=receive
 
 # UX cherry
 	- Navbar: icons, left align
 	- Clear history (all/selection)
 	- Consolidate secrets (PAY total balance, then INSERT)
 	- "Find in logs" next to secrets
+	- Mobile 4 buttons (display:fixed)
+
+# State
+	- encrypt local storage with pin/MS
+		- keep encrypted at all times - only decrypted in memory
+	- autolock
+	- wallet.casa + option to download underlying default_wallet.webcash
+		{version, wallets, config, payments, contacts, etc}
+	- (store "casa" property in default_wallet.webcash)
+
+# Skunkworks
+	- Multi-wallet
+	- Browser extension
+	- QR codes
+	- Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key)
+	- Address book
+	- server-side or crypto-based: backups, 2FA, notifications, ...
 
 # Prod
     - Logo
 	- Links to webcash.org, twitter, discord
 	- WebCasa Terms?
-
-# State
-	- store "casa" property in default_wallet.webcash
-	- encrypt storage
-
-# Server-side
-	- backups, 2FA, notifications, payments, ...
 
 # 1:1 UI for commands and wallet state
 
