@@ -22,8 +22,7 @@ export class App extends React.Component {
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.handleModifyWallet = this.handleModifyWallet.bind(this);
         this.state = {
-            // view: 'Transfers',
-            view: 'Recover', // dev-only
+            view: 'Transfers',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
         };
