@@ -409,24 +409,30 @@ button.unsaved {
 }
 
 #ViewSettings {
-    #wallet-buttons {
-        border-top: 1px solid @border-grey;
-        border-bottom: 1px solid @border-grey;
-        padding: 5px 0;
-        text-align: center;
-        .pure-button {
-            margin-right: 10px;
-        }
-        .last-button {
-            margin-right: 0;
-        }
-    }
-
-    .settings-panel {
+    fieldset {
         border-radius: @radius-big;
         border: 1px solid @border-grey;
-        margin: 30px auto 0 auto;
+        display: block;
+        margin: 0 auto 40px auto;
         padding: 18px 20px;
+        &:first-child {
+            margin-top: 10px;
+        }
+        &#wallet-buttons {
+            text-align: center;
+            .pure-button {
+                margin-right: 15px;
+            }
+            .last-button {
+                margin-right: 0;
+            }
+        }
+        legend {
+            padding: 0 10px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
     }
 
     .setting {
@@ -563,8 +569,11 @@ button.unsaved {
     }
 
     #ViewSettings {
-        .settings-panel {
+        fieldset {
             padding: 23px 36px;
+            &:first-child {
+                margin-top: 10px;
+            }
         }
     }
 

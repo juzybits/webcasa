@@ -9,20 +9,34 @@ export class ViewSettings extends React.Component {
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster)
+        const walletButtons = !this.props.saved
+        ?
+            <React.Fragment>
+                <button className="pure-button last-button unsaved"
+                        onClick={this.props.handleDownloadWallet}>Save changes</button>
+            </React.Fragment>
+        :
+            <React.Fragment>
+                <label className="pure-button" htmlFor="bc-file-input">Load</label>
+                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
+                       onChange={this.props.handleUploadWallet} style={{display: 'none'}}/>
+
+                <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
+
+                <button className="pure-button last-button"
+                        onClick={this.props.handleDownloadWallet}>Save</button>
+            </React.Fragment>;
         return (
             <div id="ViewSettings" className="pure-u card">
-
-                <WalletControls
-                    wallet={this.props.wallet}
-                    saved={this.props.saved}
-                    handleUploadWallet={this.props.handleUploadWallet}
-                    handleDownloadWallet={this.props.handleDownloadWallet}
-                    handleCreateWallet={this.props.handleCreateWallet}
-                />
+                <fieldset id="wallet-buttons">
+                    <legend>MANAGE WALLET</legend>
+                    {walletButtons}
+                </fieldset>
 
                 <div className="clear"></div>
 
-                <div className="settings-panel">
+                <fieldset>
+                    <legend>INFO</legend>
                     <div className="setting">
                         <label>master secret</label>
                         <CopiableValue contents={fullMaster} short={abbrMaster}/>
@@ -38,9 +52,10 @@ export class ViewSettings extends React.Component {
                         <label>accept <a target="_blank" href="https://webcash.org/terms">terms</a></label>
                         <TermsCheckbox accepted={data.legalese.terms} />
                     </div>
-                </div>
+                </fieldset>
 
-                <div className="settings-panel">
+                <fieldset>
+                    <legend>DEPTHS</legend>
                     <div className="setting depth">
                         <label>RECEIVE depth</label>{data.walletdepths.RECEIVE}
                     </div>
@@ -53,40 +68,11 @@ export class ViewSettings extends React.Component {
                     <div className="setting depth">
                         <label>MINING depth</label>{data.walletdepths.MINING}
                     </div>
-                </div>
+                </fieldset>
 
             </div>
         );
     }
-}
-
-class WalletControls extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return !this.props.saved
-        ?
-            <div id="wallet-buttons">
-                <button className="pure-button last-button unsaved"
-                        onClick={this.props.handleDownloadWallet}>Save changes</button>
-            </div>
-        :
-            <div id="wallet-buttons">
-
-                <label className="pure-button" htmlFor="bc-file-input">Load</label>
-                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={this.props.handleUploadWallet} style={{display: 'none'}}/>
-
-                <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
-
-                <button className="pure-button last-button"
-                        onClick={this.props.handleDownloadWallet}>Save</button>
-
-            </div>;
-    }
-
 }
 
 function TermsCheckbox(props) {
