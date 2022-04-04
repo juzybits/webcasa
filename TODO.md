@@ -1,8 +1,8 @@
 # UX core
 	- ViewSettings
-		- Add "Delete" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
 		- CHECK
 		- RECOVER
+		- "Delete" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
 	- ViewTerms:
 		Splash screen with Webcash terms.
 		Site-level accept from the user -> auto-accept in new wallets.
@@ -10,19 +10,23 @@
 # UX extra
 	- Send max amount
 	- <hr> in nav
-	- Auto-copy PAY new secret
-	- Preserve Send/Receive .state.lastOuput
-	- ViewHistory filter, search, pagination, sorting
-		- [CORE] Consistent logs:
-			- The timestamp is sometimes missing
-			- The JS wallet logs insert operations with type=insert, but the Python library logs them with type=receive
+	- Preserve Send/Receive last output within session
+	- Render Transfers history in separate .card
+	- Keep active menu item highlighted
+	- ViewHistory pagination
+
+# CORE: Consistent logs:
+		- The timestamp is sometimes missing
+		- The JS wallet logs insert operations with type=insert, but the Python library logs them with type=receive
 
 # UX cherry
+	- Auto-copy PAY new secret (with checkbox maybe)
 	- Navbar: icons, left align
 	- Clear history (all/selection)
 	- Consolidate secrets (PAY total balance, then INSERT)
 	- "Find in logs" next to secrets
 	- Mobile 4 buttons (display:fixed)
+	- ViewHistory filter, search, sorting
 
 # State
 	- encrypt local storage with pin/MS

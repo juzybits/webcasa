@@ -27,7 +27,7 @@ export class ViewHistory extends React.Component {
         const wallet = this.props.wallet;
         return (
             <div id="ViewHistory" className="pure-u card">
-                <label style={{fontSize: '0.9em'}}>* only the last 100 logs entries are shown</label>
+                <label style={{fontSize: '0.9em'}}>* only the last 100 log entries are shown</label>
                 <List items={logs} />
 
             </div>
