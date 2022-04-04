@@ -1,15 +1,11 @@
 # UX core
+	- ViewSettings
+		- Add "Delete" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
+		- CHECK
+		- RECOVER
 	- ViewTerms:
 		Splash screen with Webcash terms.
-			Maybe with <dialog> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 		Site-level accept from the user -> auto-accept in new wallets.
-
-	- ViewSettings
-		- .wallet-buttons
-			+ "delete wallet" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
-		- ViewSettings (.panel-info, .panel-depths)
-		- ViewRecover (.panel-recover)
-		- ViewCheck (.panel-check)
 
 # UX extra
 	- Send max amount
