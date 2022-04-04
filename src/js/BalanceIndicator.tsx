@@ -5,7 +5,7 @@ export class BalanceIndicator extends React.Component {
         const balance = this.props.wallet.getBalance().toString();
         return (
             <div id="BalanceIndicator">
-                Balance: {balance}
+                <label id="balance">Balance: {balance}</label>
             </div>
         );
     }

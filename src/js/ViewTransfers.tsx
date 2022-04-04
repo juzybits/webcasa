@@ -25,6 +25,7 @@ export class ViewTransfers extends React.Component {
             : <FormSend    wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />;
         const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
         const selectedSend = this.state.action === 'Send' ? 'selected' : '';
+        const balance = this.props.wallet.getBalance().toString();
 
         return (
             <div id="ViewTransfers" className="pure-u card">
@@ -34,7 +35,9 @@ export class ViewTransfers extends React.Component {
                     <div className={`tab right ${selectedSend}`} onClick={this.handleClickTab}>Send</div>
                 </div>
 
-                <div className="clear"></div>
+                <div id="BalanceIndicator">
+                    <label id="balance">₩{balance}</label>
+                </div>
 
                 <div className="tab-content">{tabContent}</div>
 

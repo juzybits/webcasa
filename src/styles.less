@@ -201,7 +201,6 @@ button.unsaved {
 
 .tabs {
     background: @body-background;
-    border-radius: @radius-card @radius-card 0 0;
     display: flex;
     width: 100%;
     .tab {
@@ -212,7 +211,6 @@ button.unsaved {
         font-size: 1.2em;
         line-height: 50px;
         text-align: center;
-        border-radius: @radius-card @radius-card 0 0;
         width: 50%;
         &:hover {
             cursor: pointer;
@@ -223,7 +221,6 @@ button.unsaved {
             background: @card-background;
             border-bottom: 0;
             color: white;
-            border-radius: @radius-card @radius-card 0 0;
             &.left {
                 border-right: 1px solid @border-grey;
             }
@@ -304,16 +301,18 @@ button.unsaved {
 }
 
 #BalanceIndicator {
-    background: #333;
-    border-radius: @radius-lil;
-    border: 1px solid @border-grey;
-    color: #bbb;
     cursor: default;
-    display: inline;
-    float: right;
-    font-size: 0.85em;
-    margin-top: 2px;
-    padding: 8px 10px;
+    display: block;
+    font-size: 1.5em;
+    margin: 1.5em 8px auto auto;
+    // padding: 4px 8px;
+    text-align: center;
+    #balance {
+        color: #aaa;
+        border-radius: 18px;
+        border: 2px solid #888;
+        padding: 11px 20px;
+    }
 }
 
 #tooltip {
@@ -368,7 +367,6 @@ button.unsaved {
 
 #ViewTransfers {
     &.card {
-        background: @body-background;
         padding: 0;
     }
     #FormReceive, #FormSend {
@@ -378,6 +376,9 @@ button.unsaved {
         .item-label {
             min-width: 110px;
         }
+    }
+    form {
+        padding: 20px 5% 0;
     }
 }
 
@@ -502,6 +503,15 @@ button.unsaved {
         max-width: 600px;
         padding: 36px;
     }
+    .tabs {
+        border-radius: @radius-card @radius-card 0 0;
+        .tab {
+            border-radius: @radius-card @radius-card 0 0;
+            &:selected {
+                border-radius: @radius-card @radius-card 0 0;
+            }
+        }
+    }
     .tab-content {
         border-radius: 0 0 @radius-card @radius-card;
         padding: 1em 36px 28px;
@@ -528,7 +538,13 @@ button.unsaved {
         }
     }
 
-    #ViewTransfers.card {
-        border-top: 0;
+    #ViewTransfers {
+        &.card {
+            border-top: 0;
+            max-width: 672px;
+        }
+        form {
+            padding: 20px 10% 0;
+        }
     }
 }
