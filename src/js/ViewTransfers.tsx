@@ -7,7 +7,7 @@ import { List, makeItemRow } from "./List";
 import { FormReceive } from "./FormReceive";
 import { FormSend } from "./FormSend";
 
-export class ViewTransfer extends React.Component {
+export class ViewTransfers extends React.Component {
     private label = "Success! The new secret was saved";
 
     constructor(props) {
@@ -28,11 +28,11 @@ export class ViewTransfer extends React.Component {
         const selectedSend = this.state.action === 'Send' ? 'selected' : '';
 
         return (
-            <div id="ViewTransfer" className="pure-u card">
+            <div id="ViewTransfers" className="pure-u card">
 
                 <BalanceIndicator wallet={this.props.wallet} />
 
-                <h1>Transfer</h1>
+                <h1>Transfers</h1>
 
                 <div className="tabbed">
 

@@ -1,5 +1,5 @@
 # UX core
-	- ViewTransfer: Send + Receive tabs. Make it default view.
+	- ViewTransfers: Send + Receive tabs. Make it default view.
 
 	- ViewTerms:
 		Splash screen with Webcash terms.
