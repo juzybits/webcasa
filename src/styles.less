@@ -130,14 +130,19 @@ fieldset.checkboxes {
     font-size: 1.15em;
     margin-bottom: 2em;
     padding: 0;
-    .cb-item {
+    text-align: center;
+    .check-item {
+        display: inline-block;
         line-height: 2em;
         &:hover {
             color: white;
         }
+        &:first-child {
+            margin-right: 30px;
+        }
     }
     label {
-        padding-left: 12px;
+        padding-left: 10px;
     }
     input {
         transform: scale(1.4);

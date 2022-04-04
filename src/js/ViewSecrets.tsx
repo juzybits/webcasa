@@ -44,14 +44,14 @@ export class ViewSecrets extends React.Component {
 
                 <fieldset className="checkboxes">
 
-                    <div className="cb-item">
+                    <div className="check-item">
                         <input type="checkbox" id="webcashes" value="showWebcashes"
                                defaultChecked={this.state.showWebcashes}
                                onChange={this.handleCheckboxChange}/>
                         <label htmlFor="webcashes">Webcashes</label>
                     </div>
 
-                    <div className="cb-item">
+                    <div className="check-item">
                         <input type="checkbox" id="unconfirmed" value="showUnconfirmed"
                                defaultChecked={this.state.showUnconfirmed}
                                onChange={this.handleCheckboxChange}/>
