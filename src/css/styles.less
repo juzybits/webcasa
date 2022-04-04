@@ -12,6 +12,8 @@
 @text-color: #dbdbdb;
 
 @lightgreen: #9ddb9e;
+@lightgreenbg: rgb(158 219 159 / 3%);
+@lightbluebg: #9ddb9e1c;
 @lightblue: #92c0d5;
 
 @font-face {
@@ -39,8 +41,11 @@ a {
     text-decoration: none;
     color: @lightblue;
     &:hover {
-        color: @lightgreen;
     }
+}
+
+input[type="checkbox"] {
+  filter: invert() hue-rotate(175deg) brightness(1.1);
 }
 
 #app input {
@@ -64,21 +69,19 @@ a {
 
 /** Pure.css **/
 
-.pure-button:hover, .CopiableValue:hover {
-    background: #9ddb9e1c;
-    border-color: @lightgreen;
-    color: @lightgreen;
-    cursor: pointer;
-}
 .pure-button {
-    box-shadow: none;
+    background: inherit;
     border-radius: 20px;
-}
-.pure-button {
-    color: @lightblue;
-    border: 1px solid @lightblue;
-    background: @card-background;
+    border: 1px solid @text-color;
+    box-shadow: none;
+    color: @text-color;
     margin: 1em 0;
+    &:hover {
+        background: @lightgreenbg;
+        border-color: @lightgreen;
+        color: @lightgreen;
+        cursor: pointer;
+    }
 }
 
 /** Reusable components **/
@@ -143,6 +146,12 @@ a {
     font-size: 1.1em;
     line-height: 30px;
     padding: 0px 6px;
+    &:hover {
+        background: @lightgreenbg;
+        border-color: @lightgreen;
+        color: @lightgreen;
+        cursor: pointer;
+    }
 }
 .copiable-panel {
     display: inline-block;
