@@ -14,6 +14,7 @@
 		- ViewCheck (.panel-check)
 
 # UX extra
+	- shorten secrets with CSS, or paginate list items (History slowing down)
 	- Send max amount
 	- <hr> in nav
 	- Auto-copy PAY new secret
