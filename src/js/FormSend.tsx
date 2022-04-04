@@ -66,7 +66,9 @@ export class FormSend extends React.Component {
                         <label htmlFor="sendMemo">Memo</label>
                         <input type="text" id="sendMemo" onChange={this.handleChange} />
                     </fieldset>
-                    <button type="submit" className="pure-button pure-button-primary">Create payment</button>
+                    <div class="centered">
+                        <button type="submit" className="pure-button pure-button-primary">Create payment</button>
+                    </div>
                 </form>
 
                 {this.state.lastResult}

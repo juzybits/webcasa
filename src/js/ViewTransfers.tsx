@@ -36,7 +36,7 @@ export class ViewTransfers extends React.Component {
                 </div>
 
                 <div id="BalanceIndicator">
-                    <label id="balance">₩{balance}</label>
+                    <label id="balance">₩ {balance}</label>
                 </div>
 
                 <div className="tab-content">{tabContent}</div>

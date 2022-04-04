@@ -67,7 +67,9 @@ export class FormReceive extends React.Component {
                         <label htmlFor="receiveMemo">Memo</label>
                         <input type="text" id="receiveMemo" onChange={this.handleChange} />
                     </fieldset>
-                    <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
+                    <div class="centered">
+                        <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
+                    </div>
                 </form>
 
                 {this.state.lastResult}
