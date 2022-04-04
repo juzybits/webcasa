@@ -11,6 +11,9 @@
 @radius-card: 12px;
 @text-color: #dbdbdb;
 
+@lightgreen: #9ddb9e;
+@lightblue: #92c0d5;
+
 @font-face {
   font-family: "Montserrat";
   src: url("./fonts/Montserrat-VariableFont_wght.ttf") format("TrueType");
@@ -34,7 +37,10 @@ body, button, .pure-g, .pure-g [class*=pure-u] {
 
 a {
     text-decoration: none;
-    color: #1b98f8;
+    color: @lightblue;
+    &:hover {
+        color: @lightgreen;
+    }
 }
 
 #app input {
@@ -59,18 +65,18 @@ a {
 /** Pure.css **/
 
 .pure-button:hover, .CopiableValue:hover {
+    background: #9ddb9e1c;
+    border-color: @lightgreen;
+    color: @lightgreen;
     cursor: pointer;
-    background: #404040;
-    color: white;
-    border-color: white;
 }
 .pure-button {
     box-shadow: none;
     border-radius: 20px;
 }
 .pure-button {
-    color: @text-color;
-    border: 1px solid @text-color;
+    color: @lightblue;
+    border: 1px solid @lightblue;
     background: @card-background;
     margin: 1em 0;
 }
@@ -187,7 +193,7 @@ fieldset.checkboxes {
         word-break: break-all;
     }
     &.success .item-label {
-        color: lightgreen;
+        color: @lightgreen;
     }
     &.failure {
         color: red;
@@ -218,7 +224,7 @@ button.unsaved {
         width: 50%;
         &:hover {
             cursor: pointer;
-            color: @text-color;
+            color: white;
         }
         &.selected {
             border-top: 1px solid @border-grey;
@@ -268,10 +274,11 @@ button.unsaved {
     }
 
     .nav-count {
-        color: rgb(75, 113, 151);
+        color: #7f7f7f;
     }
     #nav-button {
-        margin: 30px 0 0 0;
+        font-size: 1.1em;
+        margin: 30px 0 0 10px;
     }
     .pure-menu {
         background: transparent;
@@ -392,9 +399,6 @@ button.unsaved {
 }
 
 #ViewSettings {
-    a {
-        color: #83bce8;
-    }
     #wallet-buttons {
         border-top: 1px solid @border-grey;
         border-bottom: 1px solid @border-grey;
@@ -498,8 +502,13 @@ button.unsaved {
     }
 
     /* Hide the "Menu" button on larger screens */
-    #nav #menuToggle {
-        display: none;
+    #nav {
+        #menuToggle {
+            display: none;
+        }
+        #nav-button {
+            margin-left: 0px;
+        }
     }
 
     #logo {
