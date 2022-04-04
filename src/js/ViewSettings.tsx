@@ -1,7 +1,6 @@
 import React from "react";
 
-import { shorten, json } from "./_util";
-import { BalanceIndicator } from "./BalanceIndicator";
+import { shorten } from "./_util";
 import { CopiableValue } from "./List";
 
 export class ViewSettings extends React.Component {
@@ -12,10 +11,6 @@ export class ViewSettings extends React.Component {
         const abbrMaster = shorten(fullMaster)
         return (
             <div id="ViewSettings" className="pure-u card">
-
-                <BalanceIndicator wallet={this.props.wallet} />
-
-                <h1>Settings</h1>
 
                 <WalletControls
                     wallet={this.props.wallet}

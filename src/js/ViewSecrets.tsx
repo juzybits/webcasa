@@ -1,6 +1,5 @@
 import React from "react";
 
-import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
 
 export class ViewSecrets extends React.Component {
@@ -39,8 +38,6 @@ export class ViewSecrets extends React.Component {
         const unconfirmedSection = this.state.showUnconfirmed ? this.makeSection('Unconfirmed') : '';
         return (
             <div id="ViewSecrets" className="pure-u card">
-
-                <h1>Secrets</h1>
 
                 <fieldset className="checkboxes">
 

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { formatDate, json } from "./_util";
-import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
 import { ActionResult } from "./Common";
 

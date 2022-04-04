@@ -1,6 +1,5 @@
 import React from "react";
 
-import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
 import { json } from "./_util";
 
@@ -28,8 +27,6 @@ export class ViewHistory extends React.Component {
         const wallet = this.props.wallet;
         return (
             <div id="ViewHistory" className="pure-u card">
-
-                <h1>History</h1>
 
                 <List items={logs} />
 

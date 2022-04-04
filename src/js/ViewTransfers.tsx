@@ -1,7 +1,6 @@
 import React from "react";
 
 import { ActionResult } from "./Common";
-import { BalanceIndicator } from "./BalanceIndicator";
 import { formatDate, json } from "./_util";
 import { List, makeItemRow } from "./List";
 import { FormReceive } from "./FormReceive";
@@ -29,10 +28,6 @@ export class ViewTransfers extends React.Component {
 
         return (
             <div id="ViewTransfers" className="pure-u card">
-
-                <BalanceIndicator wallet={this.props.wallet} />
-
-                <h1>Transfers</h1>
 
                 <div className="tabbed">
 

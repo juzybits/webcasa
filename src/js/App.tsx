@@ -4,6 +4,7 @@ import { WebcashWalletLocalStorage } from "webcash";
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
 import { FormReceive } from "./FormReceive";
+import { Header } from "./Header";
 import { ViewTransfers } from "./ViewTransfers";
 import { ViewSecrets } from "./ViewSecrets";
 import { FormSend } from "./FormSend";
@@ -58,14 +59,19 @@ export class App extends React.Component {
 
         return (
             <div id="layout" className="content pure-g">
-                <div id="tooltip">Copied!</div>
+
                 <Navigation
                     wallet={this.state.wallet}
                     saved={this.state.saved}
                     handleDownloadWallet={this.handleDownloadWallet}
                     handleMenuClick={this.handleMenuClick}
                 />
+
+                <Header title={this.state.view} wallet={this.state.wallet} />
+
                 {view}
+
+                <div id="tooltip">Copied!</div>
                 <div id="this-is-mobile"></div>
             </div>
         );
