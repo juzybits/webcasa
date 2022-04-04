@@ -45,7 +45,7 @@ export class FormReceive extends React.Component {
         var key = 0;
         const history = this.props.wallet.log
             .filter((x) => x.type === "receive" || x.type === "insert" )
-            .slice(0).reverse().map((x) => {
+            .slice(-100).reverse().map((x) => {
                 const ts = !x.timestamp ? null : new Date(x.timestamp).toUTCString();
                 return <div className="list-item" key={key++}>
                     {makeItemRow('timestamp', ts)}

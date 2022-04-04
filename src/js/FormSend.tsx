@@ -45,7 +45,7 @@ export class FormSend extends React.Component {
         let key = 0;
         const history = this.props.wallet.log
             .filter((x) => x.type === "payment" )
-            .slice(0).reverse().map((x) => {
+            .slice(-100).reverse().map((x) => {
                 const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
                 return <div className="list-item" key={key++}>
                     {makeItemRow('timestamp', ts)}
