@@ -17,7 +17,7 @@ export class App extends React.Component {
         super(props);
         this.handleMenuClick = this.handleMenuClick.bind(this);
         this.handleUploadWallet = this.handleUploadWallet.bind(this);
-        this.showRecoverView = this.showRecoverView.bind(this);
+        this.showView = this.showView.bind(this);
         this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.handleModifyWallet = this.handleModifyWallet.bind(this);
@@ -45,7 +45,7 @@ export class App extends React.Component {
                         wallet={this.state.wallet}
                         saved={this.state.saved}
                         handleUploadWallet={this.handleUploadWallet}
-                        showRecoverView={this.showRecoverView}
+                        showView={this.showView}
                         handleDownloadWallet={this.handleDownloadWallet}
                         handleCreateWallet={this.handleCreateWallet}
                     />;
@@ -130,8 +130,8 @@ export class App extends React.Component {
         reader.readAsText(file);
     }
 
-    showRecoverView(event) {
-        this.setState({view: 'Recover'});
+    showView(view) {
+        this.setState({view: view});
     }
 
     handleDownloadWallet(event) {

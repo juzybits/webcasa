@@ -24,7 +24,7 @@ export class ViewSettings extends React.Component {
 
                 <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 
-                <button className="pure-button last-button" onClick={this.props.showRecoverView}>Recover</button>
+                <button className="pure-button last-button" onClick={()=>this.props.showView('Recover')}>Recover</button>
 
             </React.Fragment>;
         return (
