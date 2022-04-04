@@ -6,6 +6,7 @@ import { ViewHistory } from "./ViewHistory";
 import { FormReceive } from "./FormReceive";
 import { Header } from "./Header";
 import { ViewTransfers } from "./ViewTransfers";
+import { ViewRecover } from "./ViewRecover";
 import { ViewSecrets } from "./ViewSecrets";
 import { FormSend } from "./FormSend";
 import { ViewSettings } from "./ViewSettings";
@@ -16,11 +17,13 @@ export class App extends React.Component {
         super(props);
         this.handleMenuClick = this.handleMenuClick.bind(this);
         this.handleUploadWallet = this.handleUploadWallet.bind(this);
+        this.showRecoverView = this.showRecoverView.bind(this);
         this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.handleModifyWallet = this.handleModifyWallet.bind(this);
         this.state = {
-            view: 'Transfers',
+            // view: 'Transfers',
+            view: 'Recover', // dev-only
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
             saved: true, // did the user download the latest wallet file
         };
@@ -42,6 +45,7 @@ export class App extends React.Component {
                         wallet={this.state.wallet}
                         saved={this.state.saved}
                         handleUploadWallet={this.handleUploadWallet}
+                        showRecoverView={this.showRecoverView}
                         handleDownloadWallet={this.handleDownloadWallet}
                         handleCreateWallet={this.handleCreateWallet}
                     />;
@@ -55,6 +59,9 @@ export class App extends React.Component {
         if ('History' === this.state.view) {
             const logs = this.state.wallet.getContents().log;
             view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
+        } else
+        if ('Recover' === this.state.view) {
+            view = <ViewRecover wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         }
 
         return (
@@ -121,6 +128,10 @@ export class App extends React.Component {
             alert(reader.error);
         };
         reader.readAsText(file);
+    }
+
+    showRecoverView(event) {
+        this.setState({view: 'Recover'});
     }
 
     handleDownloadWallet(event) {
