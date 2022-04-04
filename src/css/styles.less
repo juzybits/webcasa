@@ -94,6 +94,16 @@ input[type="checkbox"] {
     width: 100%;
 }
 
+.close-x {
+    float: right;
+    font-size: 1.3em;
+    margin-right: -15px;
+    margin-top: -17px;
+    &:hover {
+        color: white;
+        cursor: pointer;
+    }
+}
 .card-description {
     line-height: 1.3em;
 }
@@ -475,11 +485,16 @@ button.unsaved {
         word-break: break-all;
     }
 }
+
 #ViewHistory .list {
     font-size: 1em;
     .item-label {
         min-width: 120px;
     }
+}
+
+#ViewRecover.card {
+    padding: 25px;
 }
 
 /** Tablet (and up) styles **/
@@ -543,6 +558,10 @@ button.unsaved {
         max-width: 600px;
         padding: 36px;
     }
+
+    #ViewRecover.card {
+        padding: 36px;
+    }
     .tabs {
         border-radius: @radius-card @radius-card 0 0;
         .tab {
@@ -555,6 +574,10 @@ button.unsaved {
     .tab-content {
         border-radius: 0 0 @radius-card @radius-card;
         padding: 1em 36px 28px;
+    }
+    .close-x {
+        margin-right: -20px;
+        margin-top: -24px;
     }
     #Header {
         background: inherit;

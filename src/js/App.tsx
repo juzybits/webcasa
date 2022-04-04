@@ -44,8 +44,8 @@ export class App extends React.Component {
             view = <ViewSettings
                         wallet={this.state.wallet}
                         saved={this.state.saved}
-                        handleUploadWallet={this.handleUploadWallet}
                         showView={this.showView}
+                        handleUploadWallet={this.handleUploadWallet}
                         handleDownloadWallet={this.handleDownloadWallet}
                         handleCreateWallet={this.handleCreateWallet}
                     />;
@@ -62,6 +62,11 @@ export class App extends React.Component {
         } else
         if ('Recover' === this.state.view) {
             view = <ViewRecover wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
+            view = <ViewRecover
+                        wallet={this.state.wallet}
+                        showView={this.showView}
+                        handleModifyWallet={this.handleModifyWallet}
+                    />;
         }
 
         return (

@@ -5,6 +5,7 @@ export class ViewRecover extends React.Component {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.exitOnEscape = this.exitOnEscape.bind(this);
         this.state = {
             masterSecret: this.props.wallet.getContents().master_secret,
             gapLimit: 20,
@@ -29,9 +30,23 @@ export class ViewRecover extends React.Component {
         }
     }
 
+    exitOnEscape(event){
+        if (event.key === "Escape") {
+            this.props.showView('Settings');
+        }
+    }
+    componentDidMount(){
+        document.addEventListener("keydown", this.exitOnEscape);
+    }
+    componentWillUnmount(){
+        document.removeEventListener("keydown", this.exitOnEscape);
+    }
+
     render() {
         return(
         <div id="ViewRecover" className="pure-u card">
+
+            <a href="#" className="close-x" onClick={()=>this.props.showView('Settings')}>✕</a>
 
             <div className="card-description">
                 You can enter your "master secret" below to recover your wallet.
