@@ -1,8 +1,11 @@
+/* Variables */
+
 @body-background: #1c1c1c;
 @border-grey: #444;
 @border-lightgrey: 1px solid #ddd;
 @card-background: #262627;
 @hover-grey: #2e2e2f;
+@padding: 1.2em;
 @radius-big: 8px;
 @radius-lil: 6px;
 @radius-card: 15px;
@@ -13,6 +16,8 @@
   src: url("./fonts/Montserrat-VariableFont_wght.ttf") format("TrueType");
 }
 
+/** Global styles **/
+
 body {
     color: @text-color;
     background: @body-background;
@@ -20,6 +25,11 @@ body {
 body, button, .pure-g, .pure-g [class*=pure-u] {
     font-family: "Montserrat";
     letter-spacing: normal;
+}
+
+#layout {
+    margin: 0;
+    padding: 0;
 }
 
 a {
@@ -36,6 +46,38 @@ a {
     &[type="text"], &[type="number"] {
         width: 100%;
     }
+}
+
+.clear {
+    clear: both;
+}
+
+/** Pure.css **/
+
+.pure-button:hover, .CopiableValue:hover {
+    cursor: pointer;
+    background: #404040;
+    color: white;
+    border-color: white;
+}
+.pure-button {
+    box-shadow: none;
+    border-radius: 20px;
+}
+.pure-button {
+    color: @text-color;
+    border: 1px solid @text-color;
+    background: @card-background;
+    margin: 1em 0;
+}
+
+/** Reusable components **/
+
+.card {
+    background: @card-background;
+    color: @text-color;
+    padding: @padding;
+    width: 100%;
 }
 
 .list { // List.tsx
@@ -83,14 +125,6 @@ a {
         min-width: 90px;
     }
 }
-#FormReceive, #FormSend {
-    width: 100%;
-}
-#FormReceive {
-    .item-label {
-        min-width: 110px;
-    }
-}
 .CopiableValue {
     border-radius: @radius-big;
     border: 1px solid #333;
@@ -99,12 +133,6 @@ a {
     font-size: 1.1em;
     line-height: 30px;
     padding: 0px 6px;
-        &:hover {
-            cursor: pointer;
-            background: #555;
-            color: white;
-            border: 1px solid #555;
-        }
 }
 .copiable-panel {
     display: inline-block;
@@ -113,22 +141,6 @@ a {
         padding-bottom: 0;
     }
 
-}
-
-#ViewSecrets .list {
-    font-size: 1em;
-    .list-item {
-        word-break: break-all;
-        padding: 0;
-    }
-    .CopiableValue {
-        border-radius: 0;
-        border: 0;
-        display: block;
-        line-height: inherit;
-        padding: 15px 2px;
-        word-break: break-all;
-    }
 }
 fieldset.checkboxes {
     border: 0;
@@ -159,89 +171,6 @@ fieldset.checkboxes {
     }
 }
 
-#ViewHistory .list {
-    font-size: 1em;
-    .item-label {
-        min-width: 120px;
-    }
-}
-
-.pure-button:hover, .CopiableValue:hover {
-    cursor: pointer;
-    background: #404040;
-    color: white;
-    border-color: white;
-}
-
-.menu-divider {
-    border-top: 1px solid @border-grey;
-    margin-top: 16px;
-    padding-top: 23px;
-}
-
-#logo {
-    color: @text-color;
-    display: block;
-    font-size: 1.1em;
-    padding: .6em 1em;
-    position: absolute;
-}
-
-#menuToggle {
-    font-size: 2em;
-    display: block;
-    top: 0em;
-    right: 0em;
-    position: absolute;
-    padding: 0 10px;
-    color: @text-color;
-}
-
-.connect-file-input {
-    display: none;
-}
-
-#nav-button {
-    margin: 30px 0 0 0;
-}
-#Header {
-    background: inherit;
-    border: 0;
-    margin: 0;
-    padding: 1.2em;
-    h1 {
-        margin: 0;
-        float: left;
-        font-size: 1.8em;
-    }
-}
-.tab-content {
-    background: @card-background;
-    padding: 1.2em;
-}
-.card {
-    background: @card-background;
-    color: @text-color;
-    padding: 1.2em;
-    width: 100%;
-}
-#ViewTransfers.card {
-    background: @body-background;
-    padding: 0;
-}
-.BalanceIndicator {
-    background: #333;
-    border-radius: @radius-lil;
-    border: 1px solid @border-grey;
-    color: #bbb;
-    cursor: default;
-    display: inline;
-    float: right;
-    font-size: 0.85em;
-    margin-top: 2px;
-    padding: 8px 10px;
-}
-
 .action-result {
     height: 55px;
     margin-top: 20px;
@@ -261,59 +190,6 @@ fieldset.checkboxes {
     }
 }
 
-#ViewSettings {
-    a {
-        color: #83bce8;
-    }
-    .wallet-buttons {
-        border-top: 1px solid @border-grey;
-        border-bottom: 1px solid @border-grey;
-        padding: 5px 0;
-        text-align: center;
-        .pure-button {
-            margin-right: 10px;
-        }
-        .last-button {
-            margin-right: 0;
-        }
-    }
-
-    .settings-panel {
-        border-radius: @radius-big;
-        border: 1px solid @border-grey;
-        margin: 30px auto 0 auto;
-        padding: 18px 20px;
-    }
-
-    .setting {
-        line-height: 35px;
-        label {
-            display: inline-block;
-            width: 140px;
-        }
-    }
-    .setting.depth {
-        font-size: 0.9em;
-    }
-    .wrapper {
-        width: 100%;
-    }
-}
-
-/*
- * -- HELPER STYLES --
- * Over-riding some of the .pure-button styles to make my buttons look unique
- */
-.pure-button {
-    box-shadow: none;
-    border-radius: 20px;
-}
-.pure-button {
-    color: @text-color;
-    border: 1px solid @text-color;
-    background: @card-background;
-    margin: 1em 0;
-}
 button.unsaved {
     background: green;
     border-color: green;
@@ -323,102 +199,6 @@ button.unsaved {
     }
 }
 
-#ViewSettings {
-    .CopiableValue {
-        font-size: 1.2em;
-        margin-left: -10px;
-        padding: 0 10px;
-    }
-}
-#tooltip {
-    display: none;
-    background: #006484;
-    border: 1px solid @text-color;
-    border-top: 0;
-    border-radius: 0 0 3px 3px;
-    color: @text-color;
-    font-size: 1.1em;
-    letter-spacing: normal;
-    line-height: 1.5em;
-    margin: 0 20px;
-    min-width: 150px;
-    padding: 12px;
-    position: fixed;
-    text-align: center;
-    z-index: 1;
-}
-
-.nav-count {
-    color: rgb(75, 113, 151);
-}
-
-#layout, #nav {
-    margin: 0;
-    padding: 0;
-}
-
-/* Make the navigation 100% width on phones */
-#nav {
-    width: 100%;
-    height: 40px;
-    position: relative;
-    background: #212121;
-    text-align: center;
-
-    /* When "Menu" is clicked, the navbar should be 80% height */
-    &.active {
-        height: 80%;
-    }
-
-    /* Show the "Menu" button on phones */
-    .nav-menu-button {
-        display: block;
-        top: 0.5em;
-        right: 0.5em;
-        position: absolute;
-    }
-}
-/* Don't show the navigation items... */
-.nav-inner {
-    display: none;
-}
-
-/* ...until the "Menu" button is clicked */
-#nav.active .nav-inner {
-    display: block;
-    padding: 2em 0;
-}
-
-/*
- * -- NAV BAR STYLES --
- * Styling the default .pure-menu to look a little more unique.
- */
-#nav {
-    .pure-menu {
-        background: transparent;
-        border: none;
-        // text-align: left;
-    }
-    .pure-menu-link {
-        color: @text-color;
-        margin-left: 0.5em;
-        &:hover, &:focus {
-            background: @hover-grey;
-        }
-    }
-    .pure-menu-heading {
-        border-bottom: none;
-        font-size:110%;
-        color: rgb(75, 113, 151);
-    }
-    .pure-menu-list {
-        margin-top: 5px;
-    }
-}
-
-.clear {
-    clear: both;
-}
 .tabs {
     background: @body-background;
     border-radius: @radius-card @radius-card 0 0;
@@ -453,12 +233,222 @@ button.unsaved {
         }
     }
 }
+.tab-content {
+    background: @card-background;
+    padding: @padding;
+}
 
-/*
- * -- TABLET (AND UP) MEDIA QUERIES --
- * On tablets and other medium-sized devices, we want to customize some
- * of the mobile styles.
- */
+/** Singleton components **/
+
+#nav {
+    background: #212121;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+
+    &.active {
+        height: 80%;
+    }
+
+    /* Show the "Menu" button on phones */
+    .nav-menu-button {
+        display: block;
+        top: 0.5em;
+        right: 0.5em;
+        position: absolute;
+    }
+    .menu-divider {
+        border-top: 1px solid @border-grey;
+        margin-top: 16px;
+        padding-top: 23px;
+    }
+
+    .nav-count {
+        color: rgb(75, 113, 151);
+    }
+    #nav-button {
+        margin: 30px 0 0 0;
+    }
+    .pure-menu {
+        background: transparent;
+        border: none;
+        // text-align: left;
+    }
+    .pure-menu-link {
+        color: @text-color;
+        margin-left: 0.5em;
+        &:hover, &:focus {
+            background: @hover-grey;
+        }
+    }
+    .pure-menu-heading {
+        border-bottom: none;
+        font-size:110%;
+        color: rgb(75, 113, 151);
+    }
+    .pure-menu-list {
+        margin-top: 5px;
+    }
+}
+/* Don't show the navigation items... */
+.nav-inner {
+    display: none;
+}
+/* ...until the "Menu" button is clicked */
+#nav.active .nav-inner {
+    display: block;
+    padding: 2em 0;
+}
+
+#BalanceIndicator {
+    background: #333;
+    border-radius: @radius-lil;
+    border: 1px solid @border-grey;
+    color: #bbb;
+    cursor: default;
+    display: inline;
+    float: right;
+    font-size: 0.85em;
+    margin-top: 2px;
+    padding: 8px 10px;
+}
+
+#tooltip {
+    display: none;
+    background: #006484;
+    border: 1px solid @text-color;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+    color: @text-color;
+    font-size: 1.1em;
+    letter-spacing: normal;
+    line-height: 1.5em;
+    margin: 0 20px;
+    min-width: 150px;
+    padding: 12px;
+    position: fixed;
+    text-align: center;
+    z-index: 1;
+}
+
+#logo {
+    color: @text-color;
+    display: block;
+    font-size: 1.1em;
+    padding: .6em 1em;
+    position: absolute;
+}
+
+#menuToggle {
+    color: @text-color;
+    display: block;
+    font-size: 2em;
+    padding: 0 10px;
+    position: absolute;
+    right: 0em;
+    top: 0em;
+}
+
+#Header {
+    background: inherit;
+    border: 0;
+    margin: 0;
+    padding: @padding;
+    h1 {
+        margin: 0;
+        float: left;
+        font-size: 1.8em;
+    }
+}
+
+/** View styles **/
+
+#ViewTransfers {
+    &.card {
+        background: @body-background;
+        padding: 0;
+    }
+    #FormReceive, #FormSend {
+        width: 100%;
+    }
+    #FormReceive {
+        .item-label {
+            min-width: 110px;
+        }
+    }
+}
+
+#ViewSettings {
+    a {
+        color: #83bce8;
+    }
+    #wallet-buttons {
+        border-top: 1px solid @border-grey;
+        border-bottom: 1px solid @border-grey;
+        padding: 5px 0;
+        text-align: center;
+        .pure-button {
+            margin-right: 10px;
+        }
+        .last-button {
+            margin-right: 0;
+        }
+    }
+
+    .settings-panel {
+        border-radius: @radius-big;
+        border: 1px solid @border-grey;
+        margin: 30px auto 0 auto;
+        padding: 18px 20px;
+    }
+
+    .setting {
+        line-height: 35px;
+        label {
+            display: inline-block;
+            width: 140px;
+        }
+    }
+    .setting.depth {
+        font-size: 0.9em;
+    }
+    .wrapper {
+        width: 100%;
+    }
+
+    .CopiableValue {
+        font-size: 1.2em;
+        margin-left: -10px;
+        padding: 0 10px;
+    }
+}
+
+#ViewSecrets .list {
+    font-size: 1em;
+    .list-item {
+        word-break: break-all;
+        padding: 0;
+    }
+    .CopiableValue {
+        border-radius: 0;
+        border: 0;
+        display: block;
+        line-height: inherit;
+        padding: 15px 2px;
+        word-break: break-all;
+    }
+}
+#ViewHistory .list {
+    font-size: 1em;
+    .item-label {
+        min-width: 120px;
+    }
+}
+
+/** Tablet (and up) styles **/
 @media (min-width: 44em) {
 
     #this-is-mobile {

@@ -68,16 +68,16 @@ class WalletControls extends React.Component {
     render() {
         return !this.props.saved
         ?
-            <div className="wallet-buttons">
+            <div id="wallet-buttons">
                 <button className="pure-button last-button unsaved"
                         onClick={this.props.handleDownloadWallet}>Save changes</button>
             </div>
         :
-            <div className="wallet-buttons">
+            <div id="wallet-buttons">
 
                 <label className="pure-button" htmlFor="bc-file-input">Load</label>
                 <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={this.props.handleUploadWallet}/>
+                       onChange={this.props.handleUploadWallet} style={{display: 'none'}}/>
 
                 <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 
