@@ -1,9 +1,11 @@
+@body-background: #1c1c1c;
 @border-grey: #444;
 @border-lightgrey: 1px solid #ddd;
 @card-background: #262627;
 @hover-grey: #2e2e2f;
 @radius-big: 8px;
 @radius-lil: 6px;
+@radius-card: 15px;
 @text-color: #dbdbdb;
 
 @font-face {
@@ -13,7 +15,7 @@
 
 body {
     color: @text-color;
-    background: #1c1c1c;
+    background: @body-background;
 }
 body, button, .pure-g, .pure-g [class*=pure-u] {
     font-family: "Montserrat";
@@ -80,6 +82,9 @@ a {
         margin-right: 10px;
         min-width: 90px;
     }
+}
+#FormReceive, #FormSend {
+    width: 100%;
 }
 #FormReceive {
     .item-label {
@@ -199,23 +204,30 @@ fieldset.checkboxes {
 #nav-button {
     margin: 30px 0 0 0;
 }
-
-.card {
-    background: @card-background;
-    color: @text-color;
-    padding: 1em;
-    width: 100%;
-}
 #Header {
     background: inherit;
     border: 0;
     margin: 0;
-    padding: 1em;
+    padding: 1.2em;
     h1 {
         margin: 0;
         float: left;
         font-size: 1.8em;
     }
+}
+.tab-content {
+    background: @card-background;
+    padding: 1.2em;
+}
+.card {
+    background: @card-background;
+    color: @text-color;
+    padding: 1.2em;
+    width: 100%;
+}
+#ViewTransfers.card {
+    background: @body-background;
+    padding: 0;
 }
 .BalanceIndicator {
     background: #333;
@@ -377,7 +389,6 @@ button.unsaved {
     padding: 2em 0;
 }
 
-
 /*
  * -- NAV BAR STYLES --
  * Styling the default .pure-menu to look a little more unique.
@@ -408,37 +419,36 @@ button.unsaved {
 .clear {
     clear: both;
 }
-.tabbed {
-    background: @hover-grey;
-    border-radius: @radius-big;
-    border: 1px solid @border-grey;
-    margin-top: 30px;
-    .tabs {
-        display: flex;
-        width: 100%;
-        .tab {
+.tabs {
+    background: @body-background;
+    border-radius: @radius-card @radius-card 0 0;
+    display: flex;
+    width: 100%;
+    .tab {
+        background: @body-background;
+        border-top: 1px solid @border-grey;
+        border-bottom: 1px solid @border-grey;
+        color: #555;
+        font-size: 1.2em;
+        line-height: 50px;
+        text-align: center;
+        border-radius: @radius-card @radius-card 0 0;
+        width: 50%;
+        &:hover {
+            cursor: pointer;
+            color: @text-color;
+        }
+        &.selected {
+            border-top: 1px solid @border-grey;
             background: @card-background;
-            border-bottom: 1px solid @border-grey;
-            color: #666;
-            font-size: 1.30em;
-            line-height: 50px;
-            text-align: center;
-            width: 50%;
-            &:hover {
-                cursor: pointer;
-                color: white;
-            }
-            &.selected {
-                background: inherit;
-                border-bottom: 0;
-                color: white;
-            }
+            border-bottom: 0;
+            color: white;
+            border-radius: 15px 15px 0 0;
             &.left {
-                border-radius: @radius-big 0 0 0;
+                border-right: 1px solid @border-grey;
             }
             &.right {
                 border-left: 1px solid @border-grey;
-                border-radius: 0 @radius-big 0 0;
             }
         }
     }
@@ -496,11 +506,14 @@ button.unsaved {
         padding: 1em;
     }
     .card {
-        border-radius: @radius-big;
+        border-radius: @radius-card;
         border: 1px solid @border-grey;
         margin: 0 40px auto 243px;
         max-width: 600px;
-        padding: 24px 36px 0;
+        padding: 28px 36px;
+    }
+    .tab-content {
+        padding: 1em 36px 28px;
     }
     #Header {
         background: inherit;
@@ -524,4 +537,7 @@ button.unsaved {
         }
     }
 
+    #ViewTransfers.card {
+        border-top: 0;
+    }
 }

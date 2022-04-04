@@ -56,7 +56,7 @@ export class FormReceive extends React.Component {
                 </div>;
             });
         return (
-            <div id="FormReceive" className="pure-u card">
+            <div id="FormReceive" className="pure-u">
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>

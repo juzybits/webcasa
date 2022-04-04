@@ -55,7 +55,7 @@ export class FormSend extends React.Component {
                 </div>;
             });
         return (
-            <div id="FormSend" className="pure-u card">
+            <div id="FormSend" className="pure-u">
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>

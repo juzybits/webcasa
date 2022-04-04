@@ -29,18 +29,14 @@ export class ViewTransfers extends React.Component {
         return (
             <div id="ViewTransfers" className="pure-u card">
 
-                <div className="tabbed">
-
-                    <div className="tabs">
-                        <div className={`tab left ${selectedReceive}`} onClick={this.handleClickTab}>Receive</div>
-                        <div className={`tab right ${selectedSend}`} onClick={this.handleClickTab}>Send</div>
-                    </div>
-
-                    <div className="clear"></div>
-
-                    <div className="tab-content">{tabContent}</div>
-
+                <div className="tabs">
+                    <div className={`tab left ${selectedReceive}`} onClick={this.handleClickTab}>Receive</div>
+                    <div className={`tab right ${selectedSend}`} onClick={this.handleClickTab}>Send</div>
                 </div>
+
+                <div className="clear"></div>
+
+                <div className="tab-content">{tabContent}</div>
 
             </div>
         );
