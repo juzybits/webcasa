@@ -4,8 +4,8 @@ import { ActionResult } from "./Common";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { formatDate, json } from "./_util";
 import { List, makeItemRow } from "./List";
-import { ViewReceive } from "./ViewReceive";
-import { ViewSend } from "./ViewSend";
+import { FormReceive } from "./FormReceive";
+import { FormSend } from "./FormSend";
 
 export class ViewTransfer extends React.Component {
     private label = "Success! The new secret was saved";
@@ -22,12 +22,11 @@ export class ViewTransfer extends React.Component {
 
     render() {
         const tabContent = this.state.action === 'Receive'
-            ? <ViewReceive wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />
-            : <ViewSend    wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />;
+            ? <FormReceive wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />
+            : <FormSend    wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />;
         const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
         const selectedSend = this.state.action === 'Send' ? 'selected' : '';
 
-        const history = []; // TODO
         return (
             <div id="ViewTransfer" className="pure-u card">
 

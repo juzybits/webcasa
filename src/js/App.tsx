@@ -3,10 +3,10 @@ import { WebcashWalletLocalStorage } from "webcash";
 
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
-import { ViewReceive } from "./ViewReceive";
+import { FormReceive } from "./FormReceive";
 import { ViewTransfer } from "./ViewTransfer";
 import { ViewSecrets } from "./ViewSecrets";
-import { ViewSend } from "./ViewSend";
+import { FormSend } from "./FormSend";
 import { ViewSettings } from "./ViewSettings";
 
 export class App extends React.Component {
@@ -46,13 +46,13 @@ export class App extends React.Component {
                     />;
         } else
         if ('Send' === this.state.view) {
-            view = <ViewSend wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
+            view = <FormSend wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
         if ('Transfer' === this.state.view) {
             view = <ViewTransfer wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
         if ('Receive' === this.state.view) {
-            view = <ViewReceive wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
+            view = <FormReceive wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
         } else
         if ('Secrets' === this.state.view) {
             view = <ViewSecrets wallet={this.state.wallet} />;

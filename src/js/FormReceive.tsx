@@ -1,20 +1,20 @@
 import React from "react";
 
-import { formatDate, json } from "./_util";
+import { json } from "./_util";
 import { BalanceIndicator } from "./BalanceIndicator";
 import { List, makeItemRow } from "./List";
 import { ActionResult } from "./Common";
 
-export class ViewSend extends React.Component {
-    private label = "Success! Here is the new secret";
+export class FormReceive extends React.Component {
+    private label = "Success! The new secret was saved";
 
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            sendAmount: null,
-            sendMemo: '',
+            receiveWebcash: null,
+            receiveMemo: '',
             lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
     }
@@ -29,45 +29,46 @@ export class ViewSend extends React.Component {
 
     async handleSubmit() {
         event.preventDefault();
-        const amount = this.state.sendAmount;
-        const memo = this.state.sendMemo;
+        const webcash = this.state.receiveWebcash;
+        const memo = this.state.receiveMemo;
 
         try {
-            const webcash = await this.props.wallet.pay(amount, memo);
-            this.setState({ lastResult: <ActionResult success={true} contents={webcash} label={this.label} /> });
+            const new_webcash = await this.props.wallet.insert(webcash, memo);
+            this.setState({ lastResult: <ActionResult success={true} contents={new_webcash} label={this.label} /> });
             this.props.handleModifyWallet();
         } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
             this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
         }
     }
 
     render() {
-        let key = 0;
+        var key = 0;
         const history = this.props.wallet.log
-            .filter((x) => x.type === "payment" )
+            .filter((x) => x.type === "receive" || x.type === "insert" )
             .slice(0).reverse().map((x) => {
-                const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
+                const ts = !x.timestamp ? null : new Date(x.timestamp).toUTCString();
                 return <div className="list-item" key={key++}>
                     {makeItemRow('timestamp', ts)}
                     {makeItemRow('amount', x.amount)}
                     {makeItemRow('memo', x.memo)}
                     {makeItemRow('webcash', x.webcash, true)}
+                    {makeItemRow('new_webcash', x.new_webcash, true)}
                 </div>;
             });
         return (
-            <div id="ViewSend" className="pure-u card">
+            <div id="FormReceive" className="pure-u card">
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
-                        <label htmlFor="sendAmount">Amount</label>
-                        <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001" onChange={this.handleChange} />
+                        <label htmlFor="receiveWebcash">Webcash</label>
+                        <input type="text" id="receiveWebcash" onChange={this.handleChange} />
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="sendMemo">Memo</label>
-                        <input type="text" id="sendMemo" onChange={this.handleChange} />
+                        <label htmlFor="receiveMemo">Memo</label>
+                        <input type="text" id="receiveMemo" onChange={this.handleChange} />
                     </fieldset>
-                    <button type="submit" className="pure-button pure-button-primary">Create payment</button>
+                    <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
                 </form>
 
                 {this.state.lastResult}
