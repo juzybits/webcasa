@@ -71,3 +71,25 @@ recover TODO
 logs (done)
 webcash (done)
 unconfirmed (done)
+
+# CORE: Decimal bugs
+
+Both examples fail when paying with Python and receiving with JavaScript.
+
+## Python
+print(decimal.Decimal("0.00000001"))
+'1E-8'
+print(decimal.Decimal("0.100"))
+'0.100'
+
+## JS
+(new Decimal("0.00000001")).toString()
+'1e-8'
+(new Decimal("0.100")).toString()
+'0.1'
+
+## Kanzure's suggestions
+
+server- fix 0.1 != 0.100
+client - fix js library, use better decimal library
+client- python, better normalization of decimals
