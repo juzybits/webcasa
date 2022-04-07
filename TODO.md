@@ -8,7 +8,6 @@
 		Site-level accept from the user -> auto-accept in new wallets.
 
 # UX extra
-	- Send max amount
 	- Preserve Send/Receive last output within session
 	- Render Transfers history in separate .card
 	- Keep active menu item highlighted

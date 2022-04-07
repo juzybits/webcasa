@@ -12,7 +12,7 @@ export class FormReceive extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            receiveWebcash: null,
+            receiveWebcash: '',
             receiveMemo: '',
             lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
@@ -61,11 +61,12 @@ export class FormReceive extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
                         <label htmlFor="receiveWebcash">Webcash</label>
-                        <input type="text" id="receiveWebcash" onChange={this.handleChange} />
+                        <input type="text" id="receiveWebcash" onChange={this.handleChange}
+                               required value={this.state.receiveWebcash} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="receiveMemo">Memo</label>
-                        <input type="text" id="receiveMemo" onChange={this.handleChange} />
+                        <input type="text" id="receiveMemo" onChange={this.handleChange} value={this.state.receiveMemo} />
                     </fieldset>
                     <div className="centered">
                         <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>

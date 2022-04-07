@@ -11,8 +11,9 @@ export class FormSend extends React.Component {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSendMax = this.handleSendMax.bind(this);
         this.state = {
-            sendAmount: null,
+            sendAmount: '',
             sendMemo: '',
             lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
@@ -41,6 +42,11 @@ export class FormSend extends React.Component {
         }
     }
 
+    handleSendMax() {
+        event.preventDefault();
+        this.setState({sendAmount: this.props.wallet.getBalance()});
+    }
+
     render() {
         let key = 0;
         const history = this.props.wallet.log
@@ -54,17 +60,19 @@ export class FormSend extends React.Component {
                     {makeItemRow('webcash', x.webcash, true)}
                 </div>;
             });
+        const btnSendMax = <a href="#" id="btn-send-max" onClick={this.handleSendMax}>max</a>;
         return (
             <div id="FormSend" className="pure-u">
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
                     <fieldset>
-                        <label htmlFor="sendAmount">Amount</label>
-                        <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001" onChange={this.handleChange} />
+                        <label htmlFor="sendAmount">Amount ({btnSendMax})</label>
+                        <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001"
+                               required onChange={this.handleChange} value={this.state.sendAmount}/>
                     </fieldset>
                     <fieldset>
                         <label htmlFor="sendMemo">Memo</label>
-                        <input type="text" id="sendMemo" onChange={this.handleChange} />
+                        <input type="text" id="sendMemo" onChange={this.handleChange} value={this.state.sendMemo}/>
                     </fieldset>
                     <div className="centered">
                         <button type="submit" className="pure-button pure-button-primary">Create payment</button>
