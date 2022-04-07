@@ -1,4 +1,4 @@
-# UX core
+# Navigation
 	- ViewSettings
 		- CHECK
 		- RECOVER
@@ -7,15 +7,15 @@
 		Splash screen with Webcash terms.
 		Site-level accept from the user -> auto-accept in new wallets.
 
-# UX extra
+# UX
+	- Navbar: icons, left align
 	- Preserve Send/Receive last output within session
-	- Render Transfers history in separate .card
 	- Keep active menu item highlighted
 	- ViewHistory pagination
 
-# UX cherry
-	- Navbar: icons, left align
+# UX extra
 	- Clear history (all/selection)
+	- Render Transfers history in separate .card
 	- Consolidate secrets (PAY total balance, then INSERT)
 	- "Find in logs" next to secrets
 	- Mobile 4 buttons (display:fixed)
@@ -67,25 +67,3 @@ recover TODO
 logs (done)
 webcash (done)
 unconfirmed (done)
-
-# CORE: Decimal bugs
-
-Both examples fail when paying with Python and receiving with JavaScript.
-
-## Python
-print(decimal.Decimal("0.00000001"))
-'1E-8'
-print(decimal.Decimal("0.100"))
-'0.100'
-
-## JS
-(new Decimal("0.00000001")).toString()
-'1e-8'
-(new Decimal("0.100")).toString()
-'0.1'
-
-## Kanzure's suggestions
-
-server- fix 0.1 != 0.100
-client - fix js library, use better decimal library
-client- python, better normalization of decimals

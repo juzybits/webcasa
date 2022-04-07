@@ -62,10 +62,19 @@ function MenuItem(props) {
     const wData = props.wallet.getContents();
     let clazz = '';
     let count = '';
+    let icon = '';
+    if ("Transfers" === props.name) {
+        icon = 'icon-right-left';
+    } else
+    if ("Settings" === props.name) {
+        icon = 'icon-gear';
+    } else
     if ("Secrets" === props.name) {
+        icon = 'icon-key';
         count = (wData.unconfirmed.length + wData.webcash.length) || '';
     } else
     if ("History" === props.name) {
+        icon = 'icon-file-lines';
         count = wData.log.length || '';
     }
 
@@ -75,7 +84,9 @@ function MenuItem(props) {
 
     return (
         <li className="pure-menu-item">
-            <a href="#" className="pure-menu-link" onClick={handleClick}>{props.name}{count}</a>
+            <a href="#" className="pure-menu-link" onClick={handleClick}>
+                <i className={`nav-icon ${icon}`}></i>{props.name}{count}
+            </a>
         </li>
     );
 }

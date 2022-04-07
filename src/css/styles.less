@@ -306,7 +306,7 @@ button.unsaved {
         color: @text-color;
         font-size: 1.2em;
         margin-left: 0.5em;
-        padding: 14px 0;
+        padding: 16px 0;
         &:hover, &:focus {
             background: @hover-grey;
         }
@@ -318,6 +318,9 @@ button.unsaved {
     }
     .pure-menu-list {
         margin-top: 5px;
+    }
+    .nav-icon {
+        margin-right: 5px;
     }
 }
 /* Don't show the navigation items... */
@@ -507,16 +510,13 @@ button.unsaved {
 
     /* These are position:fixed; elements that will be in the left 500px of the screen */
     #nav {
+        border-right: 1px solid @border-grey;
+        bottom: 0;
+        height: 100%;
+        overflow: auto;
         position: fixed;
         top: 0;
-        bottom: 0;
-        overflow: auto;
-    }
-    #nav {
-        // margin-left:-550px; /* "left col (nav + list)" width */
         width: 200px;
-        height: 100%;
-        border-right: 1px solid @border-grey;
 
         .pure-menu-link {
             font-size: 1.05em;
@@ -543,7 +543,7 @@ button.unsaved {
 
     #logo {
         font-size: 1.4em;
-        margin-left: 0.5em;
+        margin-left: 8px;
         padding: 1em;
     }
     .card {
