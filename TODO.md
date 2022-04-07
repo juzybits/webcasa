@@ -6,50 +6,48 @@
 	- ViewTerms
 		Splash screen with Webcash terms.
 		Site-level accept from the user -> auto-accept in new wallets.
+	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
+
+# Code quality
+	- handleModifyWallet() - bubble up logic to App via this.props.command('wallet.insert', {webcash: ..., memo: ...}), etc
+	- review wallet saving. test.
 
 # UX
-	- Navbar: icons, left align
-	- Preserve Send/Receive last output within session
 	- Keep active menu item highlighted
-	- ViewHistory pagination
-
-# UX extra
-	- Clear history (all/selection)
-	- Render Transfers history in separate .card
-	- Consolidate secrets (PAY total balance, then INSERT)
-	- "Find in logs" next to secrets
-	- Mobile 4 buttons (display:fixed)
-	- ViewHistory filter, search, sorting
-	- ViewStart
-		"Get Started"
-			- Create new wallet
-			- Load wallet from file
-			- Recover wallet from master secret
+	- Preserve Send/Receive last output within session
 
 # CORE: Consistent logs (PR sent)
 # CORE: Decimal bug (PR sent)
 
-# State
+# Prod
+	- Domain with TLS
+	- Links to webcash.org, twitter, discord
+    - Logo
+	- <noscript> for SEO
+	- WebCasa Terms?
+
+# UX cherry
+	- URL paths, history (React Router)
+	- ViewHistory pagination, filter, search, sorting
+	- Mobile 4 buttons (display:fixed)
+	- Multiple cards (e.g. for History)
+
+# Security
 	- encrypt local storage with pin/MS
 		- keep encrypted at all times - only decrypted in memory
 	- autolock
 	- wallet.casa + option to download underlying default_wallet.webcash
 		{version, wallets, config, payments, contacts, etc}
-	- (store "casa" property in default_wallet.webcash)
+	- (or: store "casa" property in default_wallet.webcash)
 
 # Skunkworks
-	- Multi-wallet
 	- Browser extension
+	- Merchant plugin
+	- "Send with" email/crypto[Solana/Ethereum/etc]
+	- Multi-wallet
 	- QR code-based payments
-	- Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key)
-	- Address book
+	- Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key). Address book.
 	- server-side or crypto-based: backups, 2FA, notifications, ...
-
-# Prod
-    - Logo
-	- Links to webcash.org, twitter, discord
-	- WebCasa Terms?
-	- <noscript> for SEO
 
 # 1:1 UI for commands and wallet state
 
