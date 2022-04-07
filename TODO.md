@@ -6,32 +6,29 @@
 	- ViewTerms
 		Splash screen with Webcash terms.
 		Site-level accept from the user -> auto-accept in new wallets.
-	- ViewStart
-		"Get Started"
-			- Create new wallet
-			- Load wallet from file
-			- Recover wallet from master secret
 
 # UX extra
 	- Send max amount
-	- <hr> in nav
 	- Preserve Send/Receive last output within session
 	- Render Transfers history in separate .card
 	- Keep active menu item highlighted
 	- ViewHistory pagination
 
-# CORE: Consistent logs:
-		- The timestamp is sometimes missing
-		- The JS wallet logs insert operations with type=insert, but the Python library logs them with type=receive
-
 # UX cherry
-	- Auto-copy PAY new secret (with checkbox maybe)
 	- Navbar: icons, left align
 	- Clear history (all/selection)
 	- Consolidate secrets (PAY total balance, then INSERT)
 	- "Find in logs" next to secrets
 	- Mobile 4 buttons (display:fixed)
 	- ViewHistory filter, search, sorting
+	- ViewStart
+		"Get Started"
+			- Create new wallet
+			- Load wallet from file
+			- Recover wallet from master secret
+
+# CORE: Consistent logs (PR sent)
+# CORE: Decimal bug (PR sent)
 
 # State
 	- encrypt local storage with pin/MS

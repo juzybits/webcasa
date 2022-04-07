@@ -63,7 +63,6 @@ function MenuItem(props) {
     let clazz = '';
     let count = '';
     if ("Secrets" === props.name) {
-        clazz = ' menu-divider';
         count = (wData.unconfirmed.length + wData.webcash.length) || '';
     } else
     if ("History" === props.name) {
@@ -76,7 +75,7 @@ function MenuItem(props) {
 
     return (
         <li className="pure-menu-item">
-            <a href="#" className={"pure-menu-link"+clazz} onClick={handleClick}>{props.name}{count}</a>
+            <a href="#" className="pure-menu-link" onClick={handleClick}>{props.name}{count}</a>
         </li>
     );
 }
