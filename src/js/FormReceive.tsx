@@ -2,10 +2,8 @@ import React from "react";
 
 import { json } from "./_util";
 import { List, makeItemRow } from "./List";
-import { ActionResult } from "./Common";
 
 export class FormReceive extends React.Component {
-    private label = "Success! The new secret was saved";
 
     constructor(props) {
         super(props)
@@ -14,7 +12,6 @@ export class FormReceive extends React.Component {
         this.state = {
             receiveWebcash: '',
             receiveMemo: '',
-            lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
     }
 
@@ -30,15 +27,7 @@ export class FormReceive extends React.Component {
         event.preventDefault();
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
-
-        try {
-            const new_webcash = await this.props.wallet.insert(webcash, memo);
-            this.setState({ lastResult: <ActionResult success={true} contents={new_webcash} label={this.label} /> });
-            this.props.handleModifyWallet();
-        } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
-            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
-        }
+        await this.props.handleReceive(webcash, memo);
     }
 
     render() {
@@ -55,6 +44,10 @@ export class FormReceive extends React.Component {
                     {makeItemRow('new_webcash', x.new_webcash, true)}
                 </div>;
             });
+        const lastResult = this.props.lastReceive==='' ? '' : <div className="last-result">
+            <h3>Last result:</h3>
+            {this.props.lastReceive}
+        </div>;
         return (
             <div id="FormReceive" className="pure-u">
 
@@ -73,7 +66,7 @@ export class FormReceive extends React.Component {
                     </div>
                 </form>
 
-                {this.state.lastResult}
+                {lastResult}
 
                 <List title="History" items={history} />
 

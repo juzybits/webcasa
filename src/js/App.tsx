@@ -1,121 +1,75 @@
 import React from "react";
 import { WebcashWalletLocalStorage } from "webcash";
 
+import { ActionResult } from "./Common";
+import { FormReceive } from "./FormReceive";
+import { FormSend } from "./FormSend";
+import { Header } from "./Header";
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
-import { FormReceive } from "./FormReceive";
-import { Header } from "./Header";
-import { ViewTransfers } from "./ViewTransfers";
 import { ViewRecover } from "./ViewRecover";
 import { ViewSecrets } from "./ViewSecrets";
-import { FormSend } from "./FormSend";
 import { ViewSettings } from "./ViewSettings";
+import { ViewTransfers } from "./ViewTransfers";
 
 export class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleMenuClick = this.handleMenuClick.bind(this);
-        this.handleUploadWallet = this.handleUploadWallet.bind(this);
-        this.showView = this.showView.bind(this);
-        this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
+
+        this.handleViewChange = this.handleViewChange.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
-        this.handleModifyWallet = this.handleModifyWallet.bind(this);
+        this.handleUploadWallet = this.handleUploadWallet.bind(this);
+        this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
+        this.handleReceive = this.handleReceive.bind(this);
+        this.handleSend = this.handleSend.bind(this);
+
         this.state = {
             view: 'Transfers',
             wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
-            saved: true, // did the user download the latest wallet file
+            downloaded: true,
+            lastReceive: '',
+            lastSend: '',
         };
+
         this.state.wallet.setLegalAgreementsToTrue(); // TODO ask for user input
-        this.state.wallet.save();
+        this.state.wallet.save(); // TODO clean up this process
+
         var dat = this;
         window.addEventListener("beforeunload", function(e) {
-            if (!dat.state.saved) {
+            if (!dat.state.downloaded) {
                 e.preventDefault();
                 return e.returnValue = "You didn't download your updated wallet. Are you sure you want to exit?";
             }
         });
     }
 
-    render() {
-        var view = '';
-        if ('Settings' === this.state.view) {
-            view = <ViewSettings
-                        wallet={this.state.wallet}
-                        saved={this.state.saved}
-                        showView={this.showView}
-                        handleUploadWallet={this.handleUploadWallet}
-                        handleDownloadWallet={this.handleDownloadWallet}
-                        handleCreateWallet={this.handleCreateWallet}
-                    />;
-        } else
-        if ('Transfers' === this.state.view) {
-            view = <ViewTransfers wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
-        } else
-        if ('Secrets' === this.state.view) {
-            view = <ViewSecrets wallet={this.state.wallet} />;
-        } else
-        if ('History' === this.state.view) {
-            const logs = this.state.wallet.getContents().log;
-            view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
-        } else
-        if ('Recover' === this.state.view) {
-            view = <ViewRecover wallet={this.state.wallet} handleModifyWallet={this.handleModifyWallet} />;
-            view = <ViewRecover
-                        wallet={this.state.wallet}
-                        showView={this.showView}
-                        handleModifyWallet={this.handleModifyWallet}
-                    />;
-        }
-
-        return (
-            <div id="layout" className="content pure-g">
-
-                <Navigation
-                    wallet={this.state.wallet}
-                    saved={this.state.saved}
-                    handleDownloadWallet={this.handleDownloadWallet}
-                    handleMenuClick={this.handleMenuClick}
-                />
-
-                <Header title={this.state.view} wallet={this.state.wallet} />
-
-                {view}
-
-                <div id="tooltip">Copied!</div>
-                <div id="this-is-mobile"></div>
-            </div>
-        );
+    handleViewChange(view) {
+        this.setState({view: view});
     }
 
-    replaceWallet(wallet: WebcashWallet): bool {
-        if (this.state.saved === false) {
+    /* Settings (wallet operations) */
+
+    private replaceWallet(wallet: WebcashWallet): bool {
+        if (this.state.downloaded === false) {
             alert("First download the wallet (to avoid losing your recent changes)");
             return false;
         } else {
-            this.setState({wallet: wallet});
+            this.setState({
+                wallet: wallet,
+                downloaded: true,
+                lastReceive: '',
+                lastSend: '',
+            });
             wallet.save();
             return true;
         }
     }
 
-    handleMenuClick(itemName) {
-        this.setState({view: itemName});
-    }
-
     handleCreateWallet(event) {
         const wallet = new WebcashWalletLocalStorage();
-        wallet.setLegalAgreementsToTrue(); // TODO ask for user input
-        wallet.save();
+        wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         this.replaceWallet(wallet);
-    }
-
-    handleModifyWallet() {
-        this.state.wallet.save();
-        this.setState({
-            saved: false,
-            wallet: this.state.wallet // force repaint of navbar etc
-        });
     }
 
     handleUploadWallet(event) {
@@ -134,10 +88,6 @@ export class App extends React.Component {
         reader.readAsText(file);
     }
 
-    showView(view) {
-        this.setState({view: view});
-    }
-
     handleDownloadWallet(event) {
         const filename = 'default_wallet.webcash';
         const contents = this.state.wallet.getContents();
@@ -151,7 +101,89 @@ export class App extends React.Component {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
-        this.setState({saved: true});
+        this.setState({downloaded: true});
+    }
+
+    /* Transfers (webcash operations) */
+
+    private saveWallet() {
+        this.state.wallet.save();
+        this.setState({
+            downloaded: false,
+            wallet: this.state.wallet // force repaint of navbar etc
+        });
+    }
+
+    async handleReceive(webcash, memo) {
+        try {
+            const new_webcash = await this.state.wallet.insert(webcash, memo);
+            this.setState({ lastReceive: <ActionResult success={true} contents={new_webcash} label="Success! The new secret was saved" /> });
+            this.saveWallet();
+        } catch (e) {
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
+            this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} label='' /> });
+        }
+    }
+
+    async handleSend(amount, memo) {
+        try {
+            const webcash = await this.state.wallet.pay(amount, memo);
+            this.setState({ lastSend: <ActionResult success={true} contents={webcash} label="Success! Here is the new secret" /> });
+            this.saveWallet();
+        } catch (e) {
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
+            this.setState({ lastSend: <ActionResult success={false} contents={errMsg} label='' /> });
+        }
+    }
+
+    render() {
+        var view = '';
+        if ('Settings' === this.state.view) {
+            view = <ViewSettings
+                        wallet={this.state.wallet}
+                        downloaded={this.state.downloaded}
+                        handleViewChange={this.handleViewChange}
+                        handleUploadWallet={this.handleUploadWallet}
+                        handleDownloadWallet={this.handleDownloadWallet}
+                        handleCreateWallet={this.handleCreateWallet}
+                    />;
+        } else
+        if ('Transfers' === this.state.view) {
+            view = <ViewTransfers
+                wallet={this.state.wallet}
+                handleReceive={this.handleReceive} lastReceive={this.state.lastReceive}
+                handleSend={this.handleSend} lastSend={this.state.lastSend}
+            />;
+        } else
+        if ('Secrets' === this.state.view) {
+            view = <ViewSecrets wallet={this.state.wallet} />;
+        } else
+        if ('History' === this.state.view) {
+            const logs = this.state.wallet.getContents().log;
+            view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
+        } else
+        if ('Recover' === this.state.view) {
+            view = <ViewRecover wallet={this.state.wallet} handleViewChange={this.handleViewChange} />;
+        }
+
+        return (
+            <div id="layout" className="content pure-g">
+
+                <Navigation
+                    wallet={this.state.wallet}
+                    downloaded={this.state.downloaded}
+                    handleDownloadWallet={this.handleDownloadWallet}
+                    handleViewChange={this.handleViewChange}
+                />
+
+                <Header title={this.state.view} wallet={this.state.wallet} />
+
+                {view}
+
+                <div id="tooltip">Copied!</div>
+                <div id="this-is-mobile"></div>
+            </div>
+        );
     }
 
 }

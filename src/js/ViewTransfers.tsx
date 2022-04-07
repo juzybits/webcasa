@@ -1,6 +1,5 @@
 import React from "react";
 
-import { ActionResult } from "./Common";
 import { formatDate, json } from "./_util";
 import { List, makeItemRow } from "./List";
 import { FormReceive } from "./FormReceive";
@@ -21,8 +20,14 @@ export class ViewTransfers extends React.Component {
 
     render() {
         const tabContent = this.state.action === 'Receive'
-            ? <FormReceive wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />
-            : <FormSend    wallet={this.props.wallet} handleModifyWallet={this.props.handleModifyWallet} />;
+            ? <FormReceive
+                    wallet={this.props.wallet}
+                    handleReceive={this.props.handleReceive}
+                    lastReceive={this.props.lastReceive} />
+            : <FormSend
+                    wallet={this.props.wallet}
+                    handleSend={this.props.handleSend}
+                    lastSend={this.props.lastSend} />;
         const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
         const selectedSend = this.state.action === 'Send' ? 'selected' : '';
         const balance = this.props.wallet.getBalance().toString();

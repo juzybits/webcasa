@@ -1,4 +1,4 @@
-import React from "react";
+        import React from "react";
 
 import { shorten, isMobile } from "./_util";
 
@@ -14,15 +14,15 @@ export class Navigation extends React.Component {
     }
 
     makeButton() {
-        const clazz = !this.props.saved ? 'unsaved' : '';
-        const label = !this.props.saved ? 'Save changes' : shorten(this.props.wallet.getContents().master_secret);
+        const clazz = !this.props.downloaded ? 'unsaved' : '';
+        const label = !this.props.downloaded ? 'Save changes' : shorten(this.props.wallet.getContents().master_secret);
         return <button className={`pure-button ${clazz}`} onClick={this.props.handleDownloadWallet}>{label}</button>
     }
 
     render() {
         const menuItems = ["Transfers", "Settings", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
-                      onClick={this.props.handleMenuClick} toggleMenu={this.toggleVisibility}/>
+                      onClick={this.props.handleViewChange} toggleMenu={this.toggleVisibility}/>
         );
 
         return (

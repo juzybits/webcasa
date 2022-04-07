@@ -9,12 +9,10 @@
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 
 # Code quality
-	- handleModifyWallet() - bubble up logic to App via this.props.command('wallet.insert', {webcash: ..., memo: ...}), etc
 	- review wallet saving. test.
 
 # UX
 	- Keep active menu item highlighted
-	- Preserve Send/Receive last output within session
 
 # CORE: Consistent logs (PR sent)
 # CORE: Decimal bug (PR sent)

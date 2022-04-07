@@ -49,7 +49,7 @@ export class ViewRecover extends React.Component {
 
             // const webcash = await this.props.wallet.pay(amount, memo);
             // this.setState({ lastResult: <ActionResult success={true} contents={webcash} label={this.label} /> });
-            this.props.handleModifyWallet();
+            // this.props.handleModifyWallet(); // TODO deprecated
 
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;

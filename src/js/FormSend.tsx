@@ -2,10 +2,8 @@ import React from "react";
 
 import { formatDate, json } from "./_util";
 import { List, makeItemRow } from "./List";
-import { ActionResult } from "./Common";
 
 export class FormSend extends React.Component {
-    private label = "Success! Here is the new secret";
 
     constructor(props) {
         super(props)
@@ -15,7 +13,6 @@ export class FormSend extends React.Component {
         this.state = {
             sendAmount: '',
             sendMemo: '',
-            lastResult: <ActionResult success={null} contents={null} label={this.label} />,
         };
     }
 
@@ -31,15 +28,7 @@ export class FormSend extends React.Component {
         event.preventDefault();
         const amount = this.state.sendAmount;
         const memo = this.state.sendMemo;
-
-        try {
-            const webcash = await this.props.wallet.pay(amount, memo);
-            this.setState({ lastResult: <ActionResult success={true} contents={webcash} label={this.label} /> });
-            this.props.handleModifyWallet();
-        } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
-            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
-        }
+        await this.props.handleSend(amount, memo);
     }
 
     handleSendMax() {
@@ -61,6 +50,10 @@ export class FormSend extends React.Component {
                 </div>;
             });
         const btnSendMax = <a href="#" id="btn-send-max" onClick={this.handleSendMax}>max</a>;
+        const lastResult = this.props.lastSend==='' ? '' : <div className="last-result">
+            <h3>Last result:</h3>
+            {this.props.lastSend}
+        </div>;
         return (
             <div id="FormSend" className="pure-u">
 
@@ -79,7 +72,7 @@ export class FormSend extends React.Component {
                     </div>
                 </form>
 
-                {this.state.lastResult}
+                {lastResult}
 
                 <List title="History" items={history} />
 

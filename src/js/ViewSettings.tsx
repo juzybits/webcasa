@@ -9,7 +9,7 @@ export class ViewSettings extends React.Component {
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster)
-        const walletButtons = !this.props.saved
+        const walletButtons = !this.props.downloaded
         ?
             <button className="pure-button last-button unsaved"
                     onClick={this.props.handleDownloadWallet}>Save changes</button>
@@ -24,7 +24,7 @@ export class ViewSettings extends React.Component {
 
                 <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
 
-                {/*<button className="pure-button last-button" onClick={()=>this.props.showView('Recover')}>Recover</button>*/}
+                {/*<button className="pure-button last-button" onClick={()=>this.props.handleViewChange('Recover')}>Recover</button>*/}
 
             </React.Fragment>;
         return (
