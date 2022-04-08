@@ -17,12 +17,12 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleChangeView = this.handleChangeView.bind(this);
-        this.handleCreateWallet = this.handleCreateWallet.bind(this);
-        this.handleUploadWallet = this.handleUploadWallet.bind(this);
-        this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
-        this.handleReceive = this.handleReceive.bind(this);
-        this.handleSend = this.handleSend.bind(this);
+        this.onChangeView = this.onChangeView.bind(this);
+        this.onCreateWallet = this.onCreateWallet.bind(this);
+        this.onUploadWallet = this.onUploadWallet.bind(this);
+        this.onDownloadWallet = this.onDownloadWallet.bind(this);
+        this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
+        this.onSendAmount = this.onSendAmount.bind(this);
 
         this.state = {
             view: 'Transfers',
@@ -44,7 +44,7 @@ export class App extends React.Component {
         });
     }
 
-    handleChangeView(view) {
+    onChangeView(view) {
         this.setState({view: view});
     }
 
@@ -66,13 +66,13 @@ export class App extends React.Component {
         }
     }
 
-    handleCreateWallet(event) {
+    onCreateWallet(event) {
         const wallet = new WebcashWalletLocalStorage();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         this.replaceWallet(wallet);
     }
 
-    handleUploadWallet(event) {
+    onUploadWallet(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
         const dis = this;
@@ -88,7 +88,7 @@ export class App extends React.Component {
         reader.readAsText(file);
     }
 
-    handleDownloadWallet(event) {
+    onDownloadWallet(event) {
         const filename = 'default_wallet.webcash';
         const contents = this.state.wallet.getContents();
         const jsonContents = JSON.stringify(contents, null, 4);
@@ -114,7 +114,7 @@ export class App extends React.Component {
         });
     }
 
-    async handleReceive(webcash, memo) {
+    async onReceiveWebcash(webcash, memo) {
         try {
             const new_webcash = await this.state.wallet.insert(webcash, memo);
             this.setState({ lastReceive: <ActionResult success={true} contents={new_webcash} label="Success! The new secret was saved" /> });
@@ -125,7 +125,7 @@ export class App extends React.Component {
         }
     }
 
-    async handleSend(amount, memo) {
+    async onSendAmount(amount, memo) {
         try {
             const webcash = await this.state.wallet.pay(amount, memo);
             this.setState({ lastSend: <ActionResult success={true} contents={webcash} label="Success! Here is the new secret" /> });
@@ -142,17 +142,17 @@ export class App extends React.Component {
             view = <ViewSettings
                         wallet={this.state.wallet}
                         downloaded={this.state.downloaded}
-                        handleChangeView={this.handleChangeView}
-                        handleUploadWallet={this.handleUploadWallet}
-                        handleDownloadWallet={this.handleDownloadWallet}
-                        handleCreateWallet={this.handleCreateWallet}
+                        onChangeView={this.onChangeView}
+                        onUploadWallet={this.onUploadWallet}
+                        onDownloadWallet={this.onDownloadWallet}
+                        onCreateWallet={this.onCreateWallet}
                     />;
         } else
         if ('Transfers' === this.state.view) {
             view = <ViewTransfers
                 wallet={this.state.wallet}
-                handleReceive={this.handleReceive} lastReceive={this.state.lastReceive}
-                handleSend={this.handleSend} lastSend={this.state.lastSend}
+                onReceiveWebcash={this.onReceiveWebcash} lastReceive={this.state.lastReceive}
+                onSendAmount={this.onSendAmount} lastSend={this.state.lastSend}
             />;
         } else
         if ('Secrets' === this.state.view) {
@@ -163,7 +163,7 @@ export class App extends React.Component {
             view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
         } else
         if ('Recover' === this.state.view) {
-            view = <ViewRecover wallet={this.state.wallet} handleChangeView={this.handleChangeView} />;
+            view = <ViewRecover wallet={this.state.wallet} onChangeView={this.onChangeView} />;
         }
 
         return (
@@ -172,8 +172,8 @@ export class App extends React.Component {
                 <Navigation
                     wallet={this.state.wallet}
                     downloaded={this.state.downloaded}
-                    handleDownloadWallet={this.handleDownloadWallet}
-                    handleChangeView={this.handleChangeView}
+                    onDownloadWallet={this.onDownloadWallet}
+                    onChangeView={this.onChangeView}
                 />
 
                 <Header title={this.state.view} wallet={this.state.wallet} />

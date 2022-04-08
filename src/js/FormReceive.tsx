@@ -27,7 +27,7 @@ export class FormReceive extends React.Component {
         event.preventDefault();
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
-        await this.props.handleReceive(webcash, memo);
+        await this.props.onReceiveWebcash(webcash, memo);
     }
 
     render() {

@@ -9,7 +9,7 @@ export class FormSend extends React.Component {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleSendMax = this.handleSendMax.bind(this);
+        this.onSendAmountMax = this.onSendAmountMax.bind(this);
         this.state = {
             sendAmount: '',
             sendMemo: '',
@@ -28,10 +28,10 @@ export class FormSend extends React.Component {
         event.preventDefault();
         const amount = this.state.sendAmount;
         const memo = this.state.sendMemo;
-        await this.props.handleSend(amount, memo);
+        await this.props.onSendAmount(amount, memo);
     }
 
-    handleSendMax() {
+    onSendAmountMax() {
         event.preventDefault();
         this.setState({sendAmount: this.props.wallet.getBalance()});
     }
@@ -49,7 +49,7 @@ export class FormSend extends React.Component {
                     {makeItemRow('webcash', x.webcash, true)}
                 </div>;
             });
-        const btnSendMax = <a href="#" id="btn-send-max" onClick={this.handleSendMax}>max</a>;
+        const btnSendMax = <a href="#" id="btn-send-max" onClick={this.onSendAmountMax}>max</a>;
         const lastResult = this.props.lastSend==='' ? '' : <div className="last-result">
             <h3>Last result:</h3>
             {this.props.lastSend}

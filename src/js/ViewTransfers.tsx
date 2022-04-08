@@ -22,11 +22,11 @@ export class ViewTransfers extends React.Component {
         const tabContent = this.state.action === 'Receive'
             ? <FormReceive
                     wallet={this.props.wallet}
-                    handleReceive={this.props.handleReceive}
+                    onReceiveWebcash={this.props.onReceiveWebcash}
                     lastReceive={this.props.lastReceive} />
             : <FormSend
                     wallet={this.props.wallet}
-                    handleSend={this.props.handleSend}
+                    onSendAmount={this.props.onSendAmount}
                     lastSend={this.props.lastSend} />;
         const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
         const selectedSend = this.state.action === 'Send' ? 'selected' : '';

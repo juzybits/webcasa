@@ -16,13 +16,13 @@ export class Navigation extends React.Component {
     makeButton() {
         const clazz = !this.props.downloaded ? 'unsaved' : '';
         const label = !this.props.downloaded ? 'Save changes' : shorten(this.props.wallet.getContents().master_secret);
-        return <button className={`pure-button ${clazz}`} onClick={this.props.handleDownloadWallet}>{label}</button>
+        return <button className={`pure-button ${clazz}`} onClick={this.props.onDownloadWallet}>{label}</button>
     }
 
     render() {
         const menuItems = ["Transfers", "Settings", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
-                      onClick={this.props.handleChangeView} toggleMenu={this.toggleVisibility}/>
+                      onClick={this.props.onChangeView} toggleMenu={this.toggleVisibility}/>
         );
 
         return (

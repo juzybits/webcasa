@@ -12,19 +12,19 @@ export class ViewSettings extends React.Component {
         const walletButtons = !this.props.downloaded
         ?
             <button className="pure-button last-button unsaved"
-                    onClick={this.props.handleDownloadWallet}>Save changes</button>
+                    onClick={this.props.onDownloadWallet}>Save changes</button>
         :
             <React.Fragment>
                 <button className="pure-button"
-                        onClick={this.props.handleDownloadWallet}>Save</button>
+                        onClick={this.props.onDownloadWallet}>Save</button>
 
                 <label className="pure-button" htmlFor="bc-file-input">Load</label>
                 <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={this.props.handleUploadWallet} style={{display: 'none'}}/>
+                       onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
-                <button className="pure-button" onClick={this.props.handleCreateWallet}>New</button>
+                <button className="pure-button" onClick={this.props.onCreateWallet}>New</button>
 
-                {/*<button className="pure-button last-button" onClick={()=>this.props.handleChangeView('Recover')}>Recover</button>*/}
+                {/*<button className="pure-button last-button" onClick={()=>this.props.onChangeView('Recover')}>Recover</button>*/}
 
             </React.Fragment>;
         return (
