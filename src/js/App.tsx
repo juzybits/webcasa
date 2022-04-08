@@ -36,9 +36,9 @@ export class App extends React.Component {
         this.state.wallet.setLegalAgreementsToTrue(); // TODO ask for user input
         this.state.wallet.save(); // TODO clean up this process
 
-        var dat = this;
+        const dis = this;
         window.addEventListener("beforeunload", function(e) {
-            if (!dat.state.downloaded) {
+            if (!dis.state.downloaded) {
                 e.preventDefault();
                 return e.returnValue = "You didn't download your updated wallet. Are you sure you want to exit?";
             }
@@ -77,7 +77,6 @@ export class App extends React.Component {
         const file = event.target.files[0];
         const reader = new FileReader();
         const dis = this;
-
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
             const wallet = new WebcashWalletLocalStorage(walletData);

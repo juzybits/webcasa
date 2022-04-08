@@ -6,6 +6,7 @@ export class ViewRecover extends React.Component {
     constructor(props) {
         super(props)
         this.onChange = this.onChange.bind(this);
+        this.onFocus = this.onFocus.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.exitOnEscape = this.exitOnEscape.bind(this);
         this.state = {
@@ -21,6 +22,10 @@ export class ViewRecover extends React.Component {
         this.setState({
             [target.id]: target.value
         });
+    }
+
+    onFocus(event) {
+        event.currentTarget.select();
     }
 
     async onSubmit() {
@@ -58,7 +63,9 @@ export class ViewRecover extends React.Component {
             <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                 <fieldset>
                     <label htmlFor="masterSecret">master secret</label>
-                    <input type="text" id="masterSecret" defaultValue={this.state.masterSecret} onChange={this.onChange} />
+                    <input type="text" id="masterSecret" defaultValue={this.state.masterSecret}
+                           autoFocus onFocus={this.onFocus} onChange={this.onChange}
+                           spellCheck='false' autoCorrect='off' />
                 </fieldset>
 
                 <fieldset>
