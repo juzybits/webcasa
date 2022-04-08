@@ -21,6 +21,7 @@ export class App extends React.Component {
         this.onCreateWallet = this.onCreateWallet.bind(this);
         this.onUploadWallet = this.onUploadWallet.bind(this);
         this.onDownloadWallet = this.onDownloadWallet.bind(this);
+        this.onRecoverWallet = this.onRecoverWallet.bind(this);
         this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
         this.onSendAmount = this.onSendAmount.bind(this);
 
@@ -104,6 +105,28 @@ export class App extends React.Component {
         this.setState({downloaded: true});
     }
 
+    async onRecoverWallet(masterSecret, gapLimit) {
+        // TODO: render console output in box
+        // var oldLog = window.console.log;
+        // window.console.log = function(msg) {
+        //     alert(msg);
+        //     oldLog.apply(console, arguments);
+        // };
+        try {
+            let wallet = new WebcashWalletLocalStorage({"master_secret": masterSecret});
+            wallet.setLegalAgreementsToTrue();
+            await wallet.recover(gapLimit);
+            await Promise.resolve(); // is this needed?
+            console.log("Found balance", wallet.getBalance().toFixed(8));
+            this.replaceWallet(wallet);
+        } catch (e) {
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
+            // this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
+        } finally {
+            // window.log = oldLog;
+        }
+    }
+
     /* Transfers (webcash operations) */
 
     private saveWallet() {
@@ -163,7 +186,9 @@ export class App extends React.Component {
             view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
         } else
         if ('Recover' === this.state.view) {
-            view = <ViewRecover wallet={this.state.wallet} onChangeView={this.onChangeView} />;
+            view = <ViewRecover wallet={this.state.wallet}
+                        onRecoverWallet={this.onRecoverWallet}
+                        onChangeView={this.onChangeView} />;
         }
 
         return (

@@ -1,13 +1,7 @@
 import React from "react";
 
 import { ActionResult } from "./Common";
-/*
-ON HOLD
-Found issues with inconsisten decimal parsing in py vs js
-"e1998.99999800" (py) vs "e1998.999998" (js)
-and "e1E" (py) vs "e1e" (js)
 
-*/
 export class ViewRecover extends React.Component {
     constructor(props) {
         super(props)
@@ -33,33 +27,12 @@ export class ViewRecover extends React.Component {
         event.preventDefault();
         const masterSecret = this.state.masterSecret;
         const gapLimit = this.state.gapLimit;
-        console.log(masterSecret, gapLimit);
-        try {
-            // dev-only Recover local wallet, just to test
-            let wallet = this.props.wallet;
-            console.log("0: Starting")
-            let r1 = await wallet.recover();
-            console.log("1:", r1)
-            let r2 = await Promise.resolve();
-            console.log("2:", r2)
-            // let wallet = new WebcashWallet({"master_secret": masterSecret});
-            // wallet.setLegalAgreementsToTrue();
-            // await wallet.recover();
-            // await Promise.resolve();
-
-            // const webcash = await this.props.wallet.pay(amount, memo);
-            // this.setState({ lastResult: <ActionResult success={true} contents={webcash} label={this.label} /> });
-            // this.props.handleModifyWallet(); // TODO deprecated
-
-        } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
-            this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
-        }
+        await this.props.onRecoverWallet(masterSecret, gapLimit);
     }
 
     exitOnEscape(event){
         if (event.key === "Escape") {
-            this.props.showView('Settings');
+            this.props.onChangeView('Settings');
         }
     }
     componentDidMount(){
@@ -73,7 +46,7 @@ export class ViewRecover extends React.Component {
         return(
         <div id="ViewRecover" className="pure-u card">
 
-            <a href="#" className="close-x" onClick={()=>this.props.showView('Settings')}>✕</a>
+            <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 
             <div className="card-description">
                 You can enter your "master secret" below to recover your wallet.

@@ -1,7 +1,7 @@
 # Navigation
 	- ViewSettings
-		- CHECK
 		- RECOVER
+		- CHECK
 		- "Delete" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
 	- ViewTerms
 		Splash screen with Webcash terms.
