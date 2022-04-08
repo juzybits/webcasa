@@ -17,7 +17,7 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleViewChange = this.handleViewChange.bind(this);
+        this.handleChangeView = this.handleChangeView.bind(this);
         this.handleCreateWallet = this.handleCreateWallet.bind(this);
         this.handleUploadWallet = this.handleUploadWallet.bind(this);
         this.handleDownloadWallet = this.handleDownloadWallet.bind(this);
@@ -44,7 +44,7 @@ export class App extends React.Component {
         });
     }
 
-    handleViewChange(view) {
+    handleChangeView(view) {
         this.setState({view: view});
     }
 
@@ -142,7 +142,7 @@ export class App extends React.Component {
             view = <ViewSettings
                         wallet={this.state.wallet}
                         downloaded={this.state.downloaded}
-                        handleViewChange={this.handleViewChange}
+                        handleChangeView={this.handleChangeView}
                         handleUploadWallet={this.handleUploadWallet}
                         handleDownloadWallet={this.handleDownloadWallet}
                         handleCreateWallet={this.handleCreateWallet}
@@ -163,7 +163,7 @@ export class App extends React.Component {
             view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
         } else
         if ('Recover' === this.state.view) {
-            view = <ViewRecover wallet={this.state.wallet} handleViewChange={this.handleViewChange} />;
+            view = <ViewRecover wallet={this.state.wallet} handleChangeView={this.handleChangeView} />;
         }
 
         return (
@@ -173,7 +173,7 @@ export class App extends React.Component {
                     wallet={this.state.wallet}
                     downloaded={this.state.downloaded}
                     handleDownloadWallet={this.handleDownloadWallet}
-                    handleViewChange={this.handleViewChange}
+                    handleChangeView={this.handleChangeView}
                 />
 
                 <Header title={this.state.view} wallet={this.state.wallet} />

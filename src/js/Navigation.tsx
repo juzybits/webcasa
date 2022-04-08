@@ -22,7 +22,7 @@ export class Navigation extends React.Component {
     render() {
         const menuItems = ["Transfers", "Settings", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
-                      onClick={this.props.handleViewChange} toggleMenu={this.toggleVisibility}/>
+                      onClick={this.props.handleChangeView} toggleMenu={this.toggleVisibility}/>
         );
 
         return (
