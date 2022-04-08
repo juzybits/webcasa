@@ -5,14 +5,14 @@ import { List, makeItemRow } from "./List";
 export class ViewSecrets extends React.Component {
     constructor(props) {
         super(props)
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.state = {
             showWebcashes: true,
             showUnconfirmed: true,
         };
     }
 
-    handleCheckboxChange(event) {
+    onCheckboxChange(event) {
         const target = event.target;
         this.setState({
             [target.value]: target.checked
@@ -44,14 +44,14 @@ export class ViewSecrets extends React.Component {
                     <div className="check-item">
                         <input type="checkbox" id="webcashes" value="showWebcashes"
                                defaultChecked={this.state.showWebcashes}
-                               onChange={this.handleCheckboxChange}/>
+                               onChange={this.onCheckboxChange}/>
                         <label htmlFor="webcashes">Webcashes</label>
                     </div>
 
                     <div className="check-item">
                         <input type="checkbox" id="unconfirmed" value="showUnconfirmed"
                                defaultChecked={this.state.showUnconfirmed}
-                               onChange={this.handleCheckboxChange}/>
+                               onChange={this.onCheckboxChange}/>
                         <label htmlFor="unconfirmed">Unconfirmed</label>
                     </div>
 

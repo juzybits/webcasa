@@ -51,7 +51,7 @@ export class Navigation extends React.Component {
 }
 
 function MenuItem(props) {
-    const handleClick = function(event) {
+    const onClick = function(event) {
         event.preventDefault();
         props.onClick(props.name);
         if (isMobile()) { // auto-close mobile menu
@@ -84,7 +84,7 @@ function MenuItem(props) {
 
     return (
         <li className="pure-menu-item">
-            <a href="#" className="pure-menu-link" onClick={handleClick}>
+            <a href="#" className="pure-menu-link" onClick={onClick}>
                 <i className={`nav-icon ${icon}`}></i>{props.name}{count}
             </a>
         </li>

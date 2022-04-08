@@ -7,8 +7,8 @@ export class FormSend extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.onSendAmountMax = this.onSendAmountMax.bind(this);
         this.state = {
             sendAmount: '',
@@ -16,7 +16,7 @@ export class FormSend extends React.Component {
         };
     }
 
-    handleChange(event) {
+    onChange(event) {
         event.preventDefault();
         const target = event.target;
         this.setState({
@@ -24,7 +24,7 @@ export class FormSend extends React.Component {
         });
     }
 
-    async handleSubmit() {
+    async onSubmit() {
         event.preventDefault();
         const amount = this.state.sendAmount;
         const memo = this.state.sendMemo;
@@ -57,15 +57,15 @@ export class FormSend extends React.Component {
         return (
             <div id="FormSend" className="pure-u">
 
-                <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
+                <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>
                         <label htmlFor="sendAmount">Amount ({btnSendMax})</label>
                         <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001"
-                               required onChange={this.handleChange} value={this.state.sendAmount}/>
+                               required onChange={this.onChange} value={this.state.sendAmount}/>
                     </fieldset>
                     <fieldset>
                         <label htmlFor="sendMemo">Memo</label>
-                        <input type="text" id="sendMemo" onChange={this.handleChange} value={this.state.sendMemo}/>
+                        <input type="text" id="sendMemo" onChange={this.onChange} value={this.state.sendMemo}/>
                     </fieldset>
                     <div className="centered">
                         <button type="submit" className="pure-button pure-button-primary">Create payment</button>

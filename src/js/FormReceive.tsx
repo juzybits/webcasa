@@ -7,15 +7,15 @@ export class FormReceive extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             receiveWebcash: '',
             receiveMemo: '',
         };
     }
 
-    handleChange(event) {
+    onChange(event) {
         event.preventDefault();
         const target = event.target;
         this.setState({
@@ -23,7 +23,7 @@ export class FormReceive extends React.Component {
         });
     }
 
-    async handleSubmit() {
+    async onSubmit() {
         event.preventDefault();
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
@@ -51,15 +51,15 @@ export class FormReceive extends React.Component {
         return (
             <div id="FormReceive" className="pure-u">
 
-                <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
+                <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>
                         <label htmlFor="receiveWebcash">Webcash</label>
-                        <input type="text" id="receiveWebcash" onChange={this.handleChange}
+                        <input type="text" id="receiveWebcash" onChange={this.onChange}
                                required value={this.state.receiveWebcash} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="receiveMemo">Memo</label>
-                        <input type="text" id="receiveMemo" onChange={this.handleChange} value={this.state.receiveMemo} />
+                        <input type="text" id="receiveMemo" onChange={this.onChange} value={this.state.receiveMemo} />
                     </fieldset>
                     <div className="centered">
                         <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>

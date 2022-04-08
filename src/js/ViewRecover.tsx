@@ -5,8 +5,8 @@ import { ActionResult } from "./Common";
 export class ViewRecover extends React.Component {
     constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.exitOnEscape = this.exitOnEscape.bind(this);
         this.state = {
             masterSecret: this.props.wallet.getContents().master_secret,
@@ -15,7 +15,7 @@ export class ViewRecover extends React.Component {
         };
     }
 
-    handleChange(event) {
+    onChange(event) {
         event.preventDefault();
         const target = event.target;
         this.setState({
@@ -23,7 +23,7 @@ export class ViewRecover extends React.Component {
         });
     }
 
-    async handleSubmit() {
+    async onSubmit() {
         event.preventDefault();
         const masterSecret = this.state.masterSecret;
         const gapLimit = this.state.gapLimit;
@@ -55,15 +55,15 @@ export class ViewRecover extends React.Component {
                 </p>
             </div>
 
-            <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
+            <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                 <fieldset>
                     <label htmlFor="masterSecret">master secret</label>
-                    <input type="text" id="masterSecret" defaultValue={this.state.masterSecret} onChange={this.handleChange} />
+                    <input type="text" id="masterSecret" defaultValue={this.state.masterSecret} onChange={this.onChange} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="gapLimit">gap limit</label>
-                    <input type="number" id="gapLimit" min="1" defaultValue={this.state.gapLimit} max="1000" step="1" onChange={this.handleChange} />
+                    <input type="number" id="gapLimit" min="1" defaultValue={this.state.gapLimit} max="1000" step="1" onChange={this.onChange} />
                 </fieldset>
 
                 <button type="submit" className="pure-button pure-button-primary">Recover</button>

@@ -40,9 +40,9 @@ export function makeItemRow(label: string, content: any, isWebcash=false) {
 export class CopiableValue extends React.Component {
     constructor(props) {
         super(props)
-        this.handleClick = this.handleClick.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
-    handleClick(event) {
+    onClick(event) {
         navigator.clipboard
             .writeText(this.props.contents)
             .then( () => tooltip("Copied!") )
@@ -50,7 +50,7 @@ export class CopiableValue extends React.Component {
     }
     render() {
         return (
-            <div className="CopiableValue" onClick={this.handleClick}>
+            <div className="CopiableValue" onClick={this.onClick}>
                 {this.props.short ?? this.props.contents}
             </div>
         );

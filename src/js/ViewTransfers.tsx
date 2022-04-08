@@ -10,11 +10,11 @@ export class ViewTransfers extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleClickTab = this.handleClickTab.bind(this);
+        this.onClickTab = this.onClickTab.bind(this);
         this.state = { action: 'Receive' };
     }
 
-    handleClickTab(event) {
+    onClickTab(event) {
         this.setState({action: event.target.innerHTML});
     }
 
@@ -36,8 +36,8 @@ export class ViewTransfers extends React.Component {
             <div id="ViewTransfers" className="pure-u card">
 
                 <div className="tabs">
-                    <div className={`tab left ${selectedReceive}`} onClick={this.handleClickTab}>Receive</div>
-                    <div className={`tab right ${selectedSend}`} onClick={this.handleClickTab}>Send</div>
+                    <div className={`tab left ${selectedReceive}`} onClick={this.onClickTab}>Receive</div>
+                    <div className={`tab right ${selectedSend}`} onClick={this.onClickTab}>Send</div>
                 </div>
 
                 <div id="BalanceIndicator">
