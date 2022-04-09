@@ -1,6 +1,7 @@
 import React from "react";
 import { WebcashWalletLocalStorage } from "webcash";
 
+import { shorten } from "./_util";
 import { ActionResult } from "./Common";
 import { FormReceive } from "./FormReceive";
 import { FormSend } from "./FormSend";
@@ -31,6 +32,7 @@ export class App extends React.Component {
             downloaded: true,
             lastReceive: '',
             lastSend: '',
+            lastRecover: [],
         };
 
         this.state.wallet.setLegalAgreementsToTrue(); // TODO ask for user input
@@ -62,7 +64,7 @@ export class App extends React.Component {
                 lastReceive: '',
                 lastSend: '',
             });
-            wallet.save();
+            wallet.save(); // overwrites local storage 'wallet'
             return true;
         }
     }
@@ -105,24 +107,39 @@ export class App extends React.Component {
     }
 
     async onRecoverWallet(masterSecret, gapLimit) {
-        // TODO: render console output in box
-        // var oldLog = window.console.log;
-        // window.console.log = function(msg) {
-        //     alert(msg);
-        //     oldLog.apply(console, arguments);
-        // };
+        const lastRecover = [];
+        this.setState({lastRecover: lastRecover});
+
+        // TODO encapsulate
+        const oldLog = window.console.log;
+        const dis = this;
+        let key = 0;
+        window.console.log = function() {
+            let args = [...arguments].reduce((prev, curr) => {
+                let curr_str = typeof curr === 'string' ? curr : JSON.stringify(curr, null, 4);
+                return prev + ' ' + curr_str;
+            });
+            lastRecover.push(<p key={key++}>{args}</p>);
+            dis.setState({lastRecover: lastRecover});
+            oldLog.apply(console, arguments);
+        };
+
         try {
+            // TODO: use current wallet if oldMaster=newMaster
             let wallet = new WebcashWalletLocalStorage({"master_secret": masterSecret});
             wallet.setLegalAgreementsToTrue();
             await wallet.recover(gapLimit);
-            await Promise.resolve(); // is this needed?
-            console.log("Found balance", wallet.getBalance().toFixed(8));
+            await Promise.resolve();
+            console.log("(casa) Found balance:", wallet.getBalance().toFixed(8));
+            const oldMaster = shorten(this.state.wallet.master_secret);
+            const newMaster = shorten(wallet.master_secret);
+            console.log(`(casa) Replacing current wallet ${oldMaster} with new wallet ${newMaster}`)
             this.replaceWallet(wallet);
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
-            // this.setState({ lastResult: <ActionResult success={false} contents={errMsg} label={this.label} /> });
+            this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
         } finally {
-            // window.log = oldLog;
+            window.console.log = oldLog;
         }
     }
 
@@ -185,9 +202,8 @@ export class App extends React.Component {
             view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
         } else
         if ('Recover' === this.state.view) {
-            view = <ViewRecover wallet={this.state.wallet}
-                        onRecoverWallet={this.onRecoverWallet}
-                        onChangeView={this.onChangeView} />;
+            view = <ViewRecover wallet={this.state.wallet} onChangeView={this.onChangeView}
+                        onRecoverWallet={this.onRecoverWallet} lastRecover={this.state.lastRecover}/>;
         }
 
         return (
