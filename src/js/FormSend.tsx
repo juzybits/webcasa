@@ -50,10 +50,6 @@ export class FormSend extends React.Component {
                 </div>;
             });
         const btnSendMax = <a href="#" id="btn-send-max" onClick={this.onSendAmountMax}>max</a>;
-        const lastResult = this.props.lastSend==='' ? '' : <div className="last-result">
-            <h3>Last result:</h3>
-            {this.props.lastSend}
-        </div>;
         return (
             <div id="FormSend" className="pure-u">
 
@@ -72,7 +68,7 @@ export class FormSend extends React.Component {
                     </div>
                 </form>
 
-                {lastResult}
+                {this.props.lastSend}
 
                 <List title="History" items={history} />
 

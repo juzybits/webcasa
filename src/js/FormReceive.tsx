@@ -44,10 +44,6 @@ export class FormReceive extends React.Component {
                     <Row title='new_webcash' contents={x.new_webcash} isWebcash={true} />
                 </div>;
             });
-        const lastResult = this.props.lastReceive==='' ? '' : <div className="last-result">
-            <h3>Last result:</h3>
-            {this.props.lastReceive}
-        </div>;
         return (
             <div id="FormReceive" className="pure-u">
 
@@ -66,7 +62,7 @@ export class FormReceive extends React.Component {
                     </div>
                 </form>
 
-                {lastResult}
+                {this.props.lastReceive}
 
                 <List title="History" items={history} />
 
