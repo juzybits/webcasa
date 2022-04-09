@@ -6,7 +6,6 @@ import { FormReceive } from "./FormReceive";
 import { FormSend } from "./FormSend";
 
 export class ViewTransfers extends React.Component {
-    private label = "Success! The new secret was saved";
 
     constructor(props) {
         super(props)

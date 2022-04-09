@@ -23,15 +23,15 @@ export class List extends React.Component {
     }
 }
 
-export function makeItemRow(label: string, content: any, isWebcash=false) {
+export function makeItemRow(title: string, content: any, isWebcash=false) {
     if (!content) {
         return '';
     }
-    label = !label ? '' : <label className="item-label">{label}:</label>;
+    title = !title ? '' : <label className="item-row-title">{title}:</label>;
     content = isWebcash ? webcashToCopiableValues(content) : <CopiableValue contents={content}/>;
     return (
         <div className="list-item-row">
-            {label}
+            {title}
             {content}
         </div>
     );

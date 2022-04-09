@@ -157,22 +157,22 @@ export class App extends React.Component {
     async onReceiveWebcash(webcash, memo) {
         try {
             const new_webcash = await this.state.wallet.insert(webcash, memo);
-            this.setState({ lastReceive: <ActionResult success={true} contents={new_webcash} label="Success! The new secret was saved" /> });
+            this.setState({ lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" /> });
             this.saveWallet();
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
-            this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} label='' /> });
+            this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} title='' /> });
         }
     }
 
     async onSendAmount(amount, memo) {
         try {
             const webcash = await this.state.wallet.pay(amount, memo);
-            this.setState({ lastSend: <ActionResult success={true} contents={webcash} label="Success! Here is the new secret" /> });
+            this.setState({ lastSend: <ActionResult success={true} contents={webcash} title="Success! Here is the new secret" /> });
             this.saveWallet();
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
-            this.setState({ lastSend: <ActionResult success={false} contents={errMsg} label='' /> });
+            this.setState({ lastSend: <ActionResult success={false} contents={errMsg} title='' /> });
         }
     }
 

@@ -6,8 +6,8 @@ export class ActionResult extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: '',
             contents: '',
-            label: '',
             logs: [],
             // clazz: '',
         };
@@ -16,7 +16,7 @@ export class ActionResult extends React.Component {
         let contents = '';
         let clazz = '';
         if (this.props.success===true) {
-            contents = makeItemRow(this.props.label, this.props.contents);
+            contents = makeItemRow(this.props.title, this.props.contents);
             clazz = 'success';
         } else
         if (this.props.success===false) {
