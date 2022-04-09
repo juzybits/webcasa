@@ -12,6 +12,7 @@ export class ViewRecover extends React.Component {
         this.state = {
             masterSecret: this.props.wallet.getContents().master_secret,
             gapLimit: 20,
+            inProgress: false,
         };
     }
 
@@ -29,9 +30,11 @@ export class ViewRecover extends React.Component {
 
     async onSubmit() {
         event.preventDefault();
+        this.setState({inProgress: true});
         const masterSecret = this.state.masterSecret;
         const gapLimit = this.state.gapLimit;
         await this.props.onRecoverWallet(masterSecret, gapLimit);
+        this.setState({inProgress: false});
     }
 
     exitOnEscape(event){
@@ -47,11 +50,14 @@ export class ViewRecover extends React.Component {
     }
 
     render() {
-        const consoleLogs = 0===this.props.lastRecover.length ? ''
-            : <div className="console-logs">{this.props.lastRecover}</div>;
+        const consoleLogs = 0===this.props.lastRecover.length ? '' :
+            <div className="console-logs">{this.props.lastRecover}</div>;
+        const submit = this.state.inProgress ? '' :
+            <button type="submit" className="pure-button pure-button-primary">Recover</button>;
+        const processing = !this.state.inProgress ? '' :
+            <label className="label-processing">In progress...</label>;
 
-        return(
-        <div id="ViewRecover" className="pure-u card">
+        return <div id="ViewRecover" className="pure-u card">
 
             <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 
@@ -75,12 +81,12 @@ export class ViewRecover extends React.Component {
                     <input type="number" id="gapLimit" min="1" defaultValue={this.state.gapLimit} max="1000" step="1" onChange={this.onChange} />
                 </fieldset>
 
-                <button type="submit" className="pure-button pure-button-primary">Recover</button>
+                {submit}
             </form>
 
+            {processing}
             {consoleLogs}
 
-        </div>
-        );
+        </div>;
     }
 }

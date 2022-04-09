@@ -8,7 +8,7 @@
 @padding: 1.2em;
 @radius-big: 8px;
 @radius-lil: 6px;
-@radius-card: 12px;
+@radius-card: 18px;
 @text-color: #dbdbdb;
 
 @lightgreen: #9ddb9e;
@@ -95,6 +95,7 @@ input[type="checkbox"] {
 }
 
 .close-x {
+    color: @text-color;
     float: right;
     font-size: 1.3em;
     margin-right: -15px;
@@ -102,6 +103,7 @@ input[type="checkbox"] {
     &:hover {
         color: white;
         cursor: pointer;
+        font-size: 1.35em;
     }
 }
 .card-description {
@@ -226,11 +228,16 @@ fieldset.checkboxes {
     padding: 0px 15px;
     font-family: monospace;
     font-size: 1.1em;
-    color: @lightgreen;
     background: black;
     word-break: break-all;
+    margin-top: 1em;
 }
-
+.label-processing {
+    display: block;
+    color: @lightgreen;
+    margin: 1em 0;
+    font-size: 1.1em;
+}
 button.unsaved {
     background: green;
     border-color: green;
@@ -556,7 +563,7 @@ button.unsaved {
     .card {
         border-radius: @radius-card;
         border: 1px solid @border-grey;
-        margin: 4px 40px auto 243px;
+        margin: 4px 40px 40px 243px;
         max-width: 600px;
         padding: 36px;
     }

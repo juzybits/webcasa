@@ -1,8 +1,7 @@
 # Navigation
 	- ViewSettings
-		- RECOVER
 		- CHECK
-		- "Delete" button (with safety guard if balance>0; e.g. prevent/warn/auto-download)
+		- "Delete" button
 	- ViewTerms
 		Splash screen with Webcash terms.
 		Site-level accept from the user -> auto-accept in new wallets.
