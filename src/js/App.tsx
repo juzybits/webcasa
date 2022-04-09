@@ -109,6 +109,7 @@ export class App extends React.Component {
         this.setState({downloaded: true});
     }
 
+    // TODO: prevent user from navigating away
     async onRecoverWallet(masterSecret, gapLimit) {
         const lastRecover = [];
         this.setState({lastRecover: lastRecover});
@@ -128,7 +129,7 @@ export class App extends React.Component {
         };
 
         try {
-            // TODO: use current wallet if oldMaster=newMaster
+            // TODO: keep current wallet if oldMaster=newMaster
             let wallet = new WebcashWalletLocalStorage({"master_secret": masterSecret});
             wallet.setLegalAgreementsToTrue();
             await wallet.recover(gapLimit);

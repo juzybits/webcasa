@@ -4,49 +4,47 @@ import React from "react";
 
 import { tooltip, shorten } from "./_util";
 
-export class ActionResult extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            title: '',
-            contents: '',
-            logs: [],
-            // clazz: '',
-        };
+export function ActionResult(props) {
+    let contents = '';
+    let clazz = '';
+    if (props.success===true) {
+        contents = <Row title={props.title} contents={props.contents} />;
+        clazz = 'success';
+    } else
+    if (props.success===false) {
+        contents = props.contents;
+        clazz = 'failure';
     }
-    render() {
-        let contents = '';
-        let clazz = '';
-        if (this.props.success===true) {
-            contents = makeItemRow(this.props.title, this.props.contents);
-            clazz = 'success';
-        } else
-        if (this.props.success===false) {
-            contents = this.props.contents;
-            clazz = 'failure';
-        }
-        return <div className={`action-result ${clazz}`}>{contents}</div>;
-    }
+    return <div className={`ActionResult ${clazz}`}>{contents}</div>;
 }
-export class List extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
-    render() {
-        if (this.props.items.length === 0) {
-            return '';
-        }
-        const title = this.props.title ? <h2>{this.props.title}</h2> : '';
-        return (
-            <div className="list">
-                {title}
-                <div className="list-body">
-                    {this.props.items}
-                </div>
-            </div>
-        );
+export function List(props) {
+    if (props.items.length === 0) {
+        return '';
     }
+    const title = props.title ? <h2>{props.title}</h2> : '';
+    return (
+        <div className="List">
+            {title}
+            <div className="list-body">
+                {props.items}
+            </div>
+        </div>
+    );
+}
+
+export function Row(props) {
+    if (!props.contents) {
+        return '';
+    }
+    let title = !props.title ? '' : <label className="item-row-title">{props.title}:</label>;
+    let contents = props.isWebcash ? webcashToCopiableValues(props.contents) : <CopiableValue contents={props.contents}/>;
+    return (
+        <div className="Row">
+            {title}
+            {contents}
+        </div>
+    );
 }
 
 export class CopiableValue extends React.Component {
@@ -67,20 +65,6 @@ export class CopiableValue extends React.Component {
             </div>
         );
     }
-}
-
-export function makeItemRow(title: string, content: any, isWebcash=false) {
-    if (!content) {
-        return '';
-    }
-    title = !title ? '' : <label className="item-row-title">{title}:</label>;
-    content = isWebcash ? webcashToCopiableValues(content) : <CopiableValue contents={content}/>;
-    return (
-        <div className="list-item-row">
-            {title}
-            {content}
-        </div>
-    );
 }
 
 function webcashToCopiableValues(val) {

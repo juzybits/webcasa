@@ -1,7 +1,7 @@
 import React from "react";
 
 import { json } from "./_util";
-import { List, makeItemRow } from "./Common";
+import { List, Row } from "./Common";
 
 export class FormReceive extends React.Component {
 
@@ -37,11 +37,11 @@ export class FormReceive extends React.Component {
             .slice(-100).reverse().map((x) => {
                 const ts = !x.timestamp ? null : new Date(x.timestamp).toUTCString();
                 return <div className="list-item" key={key++}>
-                    {makeItemRow('timestamp', ts)}
-                    {makeItemRow('amount', x.amount)}
-                    {makeItemRow('memo', x.memo)}
-                    {makeItemRow('webcash', x.webcash, true)}
-                    {makeItemRow('new_webcash', x.new_webcash, true)}
+                    <Row title='timestamp' contents={ts} />
+                    <Row title='amount' contents={x.amount} />
+                    <Row title='memo' contents={x.memo} />
+                    <Row title='webcash' contents={x.webcash} isWebcash={true} />
+                    <Row title='new_webcash' contents={x.new_webcash} isWebcash={true} />
                 </div>;
             });
         const lastResult = this.props.lastReceive==='' ? '' : <div className="last-result">

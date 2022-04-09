@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, makeItemRow } from "./Common";
+import { List, Row } from "./Common";
 
 export class ViewSecrets extends React.Component {
     constructor(props) {
@@ -24,7 +24,9 @@ export class ViewSecrets extends React.Component {
         const rawItems = type==='Webcashes' ? wData.webcash : wData.unconfirmed;
         let key = 0;
         const items = rawItems.slice(0).reverse().map((x) =>
-            <div className="list-item" key={key++}>{makeItemRow('', x)}</div>
+            <div className="list-item" key={key++}>
+                <Row contents={x} />
+            </div>
         );
 
         return <React.Fragment>

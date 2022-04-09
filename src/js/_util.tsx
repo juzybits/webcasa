@@ -1,5 +1,13 @@
 /** Helper functions (non-React) **/
 
+// TODO: turn into a React component
+export function tooltip(text: string): void {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.innerHTML = text;
+    tooltip.style.display = "block";
+    setTimeout(() => tooltip.style.display = "none", 1500);
+}
+
 export function shorten(text: string, slice: number = 4): string {
     var start = text.slice(0, slice);
     var end = text.slice(-1*slice);
@@ -15,13 +23,6 @@ export function formatTimestamp(ts: string): string {
 
 export function json(value: any): string {
     return JSON.stringify(value, null, 4);
-}
-
-export function tooltip(text: string): void {
-    const tooltip = document.getElementById("tooltip");
-    tooltip.innerHTML = text;
-    tooltip.style.display = "block";
-    setTimeout(() => tooltip.style.display = "none", 1500);
 }
 
 export function formatDate(date: Date): string {

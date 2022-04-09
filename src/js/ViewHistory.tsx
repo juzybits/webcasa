@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, makeItemRow } from "./Common";
+import { List, Row } from "./Common";
 import { json } from "./_util";
 
 // TODO: search
@@ -14,14 +14,14 @@ export class ViewHistory extends React.Component {
         let key = 0;
         const logs = this.props.logs.slice(-100).reverse().map((x) => {
             return <div className="list-item" key={key++}>
-                {makeItemRow('type', x.type)}
-                {makeItemRow('amount', x.amount)}
-                {makeItemRow('memo', x.memo)}
-                {makeItemRow('timestamp', x.timestamp)}
-                {makeItemRow('webcash', x.webcash, true)}
-                {makeItemRow('input_webcash', x.input_webcash, true)}
-                {makeItemRow('output_webcash', x.output_webcash, true)}
-                {makeItemRow('new_webcash', x.new_webcash, true)}
+                <Row title='type' contents={x.type} />
+                <Row title='amount' contents={x.amount} />
+                <Row title='memo' contents={x.memo} />
+                <Row title='timestamp' contents={x.timestamp} />
+                <Row title='webcash' contents={x.webcash} isWebcash={true} />
+                <Row title='input_webcash' contents={x.input_webcash} isWebcash={true} />
+                <Row title='output_webcash' contents={x.output_webcash} isWebcash={true} />
+                <Row title='new_webcash' contents={x.new_webcash} isWebcash={true} />
             </div>;
         });
         const wallet = this.props.wallet;

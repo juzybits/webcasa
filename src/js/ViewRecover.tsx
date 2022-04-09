@@ -12,7 +12,6 @@ export class ViewRecover extends React.Component {
         this.state = {
             masterSecret: this.props.wallet.getContents().master_secret,
             gapLimit: 20,
-            lastResult: <ActionResult success={null} contents={null} />,
         };
     }
 
@@ -32,7 +31,6 @@ export class ViewRecover extends React.Component {
         event.preventDefault();
         const masterSecret = this.state.masterSecret;
         const gapLimit = this.state.gapLimit;
-        // TODO: prevent user from navigating away
         await this.props.onRecoverWallet(masterSecret, gapLimit);
     }
 

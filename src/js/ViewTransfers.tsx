@@ -1,7 +1,6 @@
 import React from "react";
 
 import { formatDate, json } from "./_util";
-import { List, makeItemRow } from "./Common";
 import { FormReceive } from "./FormReceive";
 import { FormSend } from "./FormSend";
 
