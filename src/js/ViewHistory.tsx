@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, makeItemRow } from "./List";
+import { List, makeItemRow } from "./Common";
 import { json } from "./_util";
 
 // TODO: search

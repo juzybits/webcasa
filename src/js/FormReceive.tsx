@@ -1,7 +1,7 @@
 import React from "react";
 
 import { json } from "./_util";
-import { List, makeItemRow } from "./List";
+import { List, makeItemRow } from "./Common";
 
 export class FormReceive extends React.Component {
 

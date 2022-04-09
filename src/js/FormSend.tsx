@@ -1,7 +1,7 @@
 import React from "react";
 
 import { formatDate, json } from "./_util";
-import { List, makeItemRow } from "./List";
+import { List, makeItemRow } from "./Common";
 
 export class FormSend extends React.Component {
 

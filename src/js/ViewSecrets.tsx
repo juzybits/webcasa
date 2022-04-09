@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, makeItemRow } from "./List";
+import { List, makeItemRow } from "./Common";
 
 export class ViewSecrets extends React.Component {
     constructor(props) {

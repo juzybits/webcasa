@@ -1,7 +1,7 @@
 import React from "react";
 
 import { shorten } from "./_util";
-import { CopiableValue } from "./List";
+import { CopiableValue } from "./Common";
 
 export class ViewSettings extends React.Component {
     render() {
