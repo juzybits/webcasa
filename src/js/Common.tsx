@@ -1,3 +1,5 @@
+/** Reusable React components **/
+
 import React from "react";
 
 import { tooltip, shorten } from "./_util";

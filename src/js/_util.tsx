@@ -1,3 +1,5 @@
+/** Helper functions (non-React) **/
+
 export function shorten(text: string, slice: number = 4): string {
     var start = text.slice(0, slice);
     var end = text.slice(-1*slice);

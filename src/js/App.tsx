@@ -1,3 +1,5 @@
+/** App logic and state **/
+
 import React from "react";
 import { WebcashWalletLocalStorage } from "webcash";
 
