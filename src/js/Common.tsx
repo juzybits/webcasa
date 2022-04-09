@@ -1,15 +1,28 @@
+import React from "react";
+
 import { makeItemRow } from "./List";
 
-export function ActionResult(props) {
-    let contents = '';
-    let clazz = '';
-    if (props.success===true) {
-        contents = makeItemRow(props.label, props.contents);
-        clazz = 'success';
-    } else
-    if (props.success===false) {
-        contents = props.contents;
-        clazz = 'failure';
+export class ActionResult extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            contents: '',
+            label: '',
+            logs: [],
+            // clazz: '',
+        };
     }
-    return <div className={`action-result ${clazz}`}>{contents}</div>;
+    render() {
+        let contents = '';
+        let clazz = '';
+        if (this.props.success===true) {
+            contents = makeItemRow(this.props.label, this.props.contents);
+            clazz = 'success';
+        } else
+        if (this.props.success===false) {
+            contents = this.props.contents;
+            clazz = 'failure';
+        }
+        return <div className={`action-result ${clazz}`}>{contents}</div>;
+    }
 }

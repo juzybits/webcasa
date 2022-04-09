@@ -63,6 +63,7 @@ export class App extends React.Component {
                 downloaded: true,
                 lastReceive: '',
                 lastSend: '',
+                // lastRecover: [],
             });
             wallet.save(); // overwrites local storage 'wallet'
             return true;
