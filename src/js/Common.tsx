@@ -5,6 +5,9 @@ import React from "react";
 import { tooltip, shorten } from "./_util";
 
 export function ActionResult(props) {
+    if (!props.contents) {
+        return '';
+    }
     let contents = '';
     let clazz = '';
     if (props.success===true) {

@@ -56,25 +56,19 @@ export class App extends React.Component {
     /* Settings (wallet operations) */
 
     private replaceWallet(wallet: WebcashWallet): bool {
-        if (this.state.downloaded === false) {
-            alert("First download the wallet (to avoid losing your recent changes)");
-            return false;
-        } else {
-            this.setState({
-                wallet: wallet,
-                downloaded: true,
-                lastReceive: '',
-                lastSend: '',
-                // lastRecover: [],
-            });
-            wallet.save(); // overwrites local storage 'wallet'
-            return true;
-        }
+        this.setState({
+            wallet: wallet,
+            downloaded: true,
+            lastReceive: '',
+            lastSend: '',
+            // lastRecover: [],
+        });
     }
 
     onCreateWallet(event) {
         const wallet = new WebcashWalletLocalStorage();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
+        wallet.save();
         this.replaceWallet(wallet);
     }
 
@@ -85,6 +79,7 @@ export class App extends React.Component {
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
             const wallet = new WebcashWalletLocalStorage(walletData);
+            wallet.save();
             dis.replaceWallet(wallet);
         };
         reader.onerror = function() {
@@ -111,39 +106,49 @@ export class App extends React.Component {
 
     // TODO: prevent user from navigating away
     async onRecoverWallet(masterSecret, gapLimit) {
-        const lastRecover = [];
-        this.setState({lastRecover: lastRecover});
+        this.setState({lastRecover: []});
 
-        // TODO encapsulate
-        const oldLog = window.console.log;
+        // Capture console output from underlying wallet
+        const realLog = window.console.log;
         const dis = this;
+        const lastRecover = [];
         let key = 0;
         window.console.log = function() {
-            let args = [...arguments].reduce((prev, curr) => {
+            realLog.apply(console, arguments);
+            if (arguments[0].startsWith('results =')) {
+                return;
+            }
+            let logMessage = [...arguments].reduce((prev, curr) => {
                 let curr_str = typeof curr === 'string' ? curr : JSON.stringify(curr, null, 4);
                 return prev + ' ' + curr_str;
             });
-            lastRecover.push(<p key={key++}>{args}</p>);
+            lastRecover.push(<p key={key++}>{logMessage}</p>);
             dis.setState({lastRecover: lastRecover});
-            oldLog.apply(console, arguments);
         };
 
         try {
-            // TODO: keep current wallet if oldMaster=newMaster
-            let wallet = new WebcashWalletLocalStorage({"master_secret": masterSecret});
+            const sameSecret = masterSecret === this.state.wallet.master_secret;
+            const wallet = sameSecret
+                ? this.state.wallet
+                : new WebcashWalletLocalStorage({"master_secret": masterSecret});
+
+            const msg = sameSecret
+                ? "(webcasa) Updating current wallet (same master secret)"
+                : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
+            console.log(msg)
+
             wallet.setLegalAgreementsToTrue();
             await wallet.recover(gapLimit);
             await Promise.resolve();
-            console.log("(casa) Found balance:", wallet.getBalance().toFixed(8));
-            const oldMaster = shorten(this.state.wallet.master_secret);
-            const newMaster = shorten(wallet.master_secret);
-            console.log(`(casa) Replacing current wallet ${oldMaster} with new wallet ${newMaster}`)
+            console.log("(webcasa) Found balance:", wallet.getBalance().toString());
+            console.log("(webcasa) Done!");
+
             this.replaceWallet(wallet);
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
             this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
         } finally {
-            window.console.log = oldLog;
+            window.console.log = realLog;
         }
     }
 

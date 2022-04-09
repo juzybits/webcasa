@@ -47,6 +47,9 @@ export class ViewRecover extends React.Component {
     }
 
     render() {
+        const consoleLogs = 0===this.props.lastRecover.length ? ''
+            : <div className="console-logs">{this.props.lastRecover}</div>;
+
         return(
         <div id="ViewRecover" className="pure-u card">
 
@@ -75,9 +78,7 @@ export class ViewRecover extends React.Component {
                 <button type="submit" className="pure-button pure-button-primary">Recover</button>
             </form>
 
-            <pre>
-                {this.props.lastRecover}
-            </pre>
+            {consoleLogs}
 
         </div>
         );
