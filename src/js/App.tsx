@@ -30,9 +30,16 @@ export class App extends React.Component {
         this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
         this.onSendAmount = this.onSendAmount.bind(this);
 
+        let wallet = WebcashWalletLocalStorage.load();
+        if (!wallet) {
+            wallet = new WebcashWalletLocalStorage();
+            wallet.setLegalAgreementsToTrue();
+            wallet.save();
+        }
+
         this.state = {
             view: 'Transfers',
-            wallet: WebcashWalletLocalStorage.load() ?? new WebcashWalletLocalStorage(),
+            wallet: wallet,
             downloaded: true,
             lastReceive: '',
             lastSend: '',
@@ -40,32 +47,47 @@ export class App extends React.Component {
             lastRecover: [],
         };
 
-        this.state.wallet.setLegalAgreementsToTrue(); // TODO ask for user input
-        this.state.wallet.save(); // TODO clean up this process
-
         const dis = this;
         window.addEventListener("beforeunload", function(e) {
-            if (!dis.state.downloaded) {
+            if (dis.state.locked || !dis.state.downloaded) {
                 e.preventDefault();
-                return e.returnValue = "You didn't download your updated wallet. Are you sure you want to exit?";
+                // TODO: this doesn't work (default message is shown)
+                return e.returnValue = dis.state.locked
+                    ? "Please wait for the process to complete"
+                    : "You didn't download your updated wallet. Are you sure you want to exit?";
             }
         });
     }
 
     onChangeView(view) {
-        this.setState({view: view});
+        if (this.state.locked) {
+            alert("Please wait for the process to complete");
+        } else {
+            this.setState({view: view});
+        }
     }
-
-    /* Settings (wallet operations) */
 
     private replaceWallet(wallet: WebcashWallet): bool {
         this.setState({
             wallet: wallet,
             downloaded: true,
+            locked: false,
             lastReceive: '',
             lastSend: '',
         });
     }
+
+    private saveModifiedWallet(alreadySaved=false) {
+        if (!alreadySaved) {
+            this.state.wallet.save();
+        }
+        this.setState({
+            wallet: this.state.wallet, // force repaint
+            downloaded: false,
+        });
+    }
+
+    /* Settings (wallet operations) */
 
     onCreateWallet(event) {
         const wallet = new WebcashWalletLocalStorage();
@@ -106,9 +128,8 @@ export class App extends React.Component {
         this.setState({downloaded: true});
     }
 
-    // TODO: prevent user from navigating away
     async onCheckWallet() {
-        this.setState({lastCheck: []});
+        this.setState({lastCheck: [], locked: true});
 
         // Capture console output from underlying wallet
         const realLog = window.console.log;
@@ -124,9 +145,9 @@ export class App extends React.Component {
 
         try {
             console.log("(webcasa) Checking wallet");
-            await this.state.wallet.check();
+            await this.state.wallet.check(); // changes wallet contents but doesn't call save()
             await Promise.resolve(); // needed?
-            this.state.wallet.save(); // because check() doesn't save the wallet
+            this.saveModifiedWallet(); // TODO: do this only if wallet changed
             console.log("(webcasa) New balance:", this.state.wallet.getBalance().toString());
             console.log("(webcasa) Done!");
         } catch (e) {
@@ -134,12 +155,12 @@ export class App extends React.Component {
             this.setState({ lastCheck: <ActionResult success={false} contents={errMsg} /> });
         } finally {
             window.console.log = realLog;
+            this.setState({locked: false});
         }
     }
 
-    // TODO: prevent user from navigating away
     async onRecoverWallet(masterSecret, gapLimit) {
-        this.setState({lastRecover: []});
+        this.setState({lastRecover: [], locked: true});
 
         // Capture console output from underlying wallet
         const realLog = window.console.log;
@@ -161,42 +182,37 @@ export class App extends React.Component {
             const wallet = sameSecret
                 ? this.state.wallet
                 : new WebcashWalletLocalStorage({"master_secret": masterSecret});
-
-            const msg = sameSecret
+            const introMsg = sameSecret
                 ? "(webcasa) Updating current wallet (same master secret)"
                 : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
-            console.log(msg)
+            console.log(introMsg)
 
             wallet.setLegalAgreementsToTrue();
-            await wallet.recover(gapLimit);
+            await wallet.recover(gapLimit); // changes wallet and calls save() (writes local storage)
             await Promise.resolve();
             console.log("(webcasa) Found balance:", wallet.getBalance().toString());
+
+            if (!sameSecret) {
+                this.replaceWallet(wallet);
+            }
+            this.saveModifiedWallet(true); // TODO: do this only if wallet changed
             console.log("(webcasa) Done!");
-            // not calling wallet.save() because recover() already did it
-            this.replaceWallet(wallet);
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
             this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
         } finally {
             window.console.log = realLog;
+            this.setState({locked: false});
         }
     }
 
     /* Transfers (webcash operations) */
 
-    private saveWallet() {
-        this.state.wallet.save();
-        this.setState({
-            downloaded: false,
-            wallet: this.state.wallet // force repaint of navbar etc
-        });
-    }
-
     async onReceiveWebcash(webcash, memo) {
         try {
             const new_webcash = await this.state.wallet.insert(webcash, memo);
             this.setState({ lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" /> });
-            this.saveWallet();
+            this.saveModifiedWallet();
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
             this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} title='' /> });
@@ -207,7 +223,7 @@ export class App extends React.Component {
         try {
             const webcash = await this.state.wallet.pay(amount, memo);
             this.setState({ lastSend: <ActionResult success={true} contents={webcash} title="Success! Here is the new secret" /> });
-            this.saveWallet();
+            this.saveModifiedWallet();
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
             this.setState({ lastSend: <ActionResult success={false} contents={errMsg} title='' /> });

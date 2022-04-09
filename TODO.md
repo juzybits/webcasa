@@ -1,11 +1,10 @@
 # Navigation
-	- ViewSettings
-		- CHECK
-		- "Delete" button
 	- ViewTerms
 		Splash screen with Webcash terms.
 		Site-level accept from the user -> auto-accept in new wallets.
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
+	- ViewSettings
+		- "Delete" button
 
 # Code quality
 	- review wallet saving. test.
