@@ -10,6 +10,7 @@ import { FormSend } from "./FormSend";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
 import { ViewHistory } from "./ViewHistory";
+import { ViewCheck } from "./ViewCheck";
 import { ViewRecover } from "./ViewRecover";
 import { ViewSecrets } from "./ViewSecrets";
 import { ViewSettings } from "./ViewSettings";
@@ -24,6 +25,7 @@ export class App extends React.Component {
         this.onCreateWallet = this.onCreateWallet.bind(this);
         this.onUploadWallet = this.onUploadWallet.bind(this);
         this.onDownloadWallet = this.onDownloadWallet.bind(this);
+        this.onCheckWallet = this.onCheckWallet.bind(this);
         this.onRecoverWallet = this.onRecoverWallet.bind(this);
         this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
         this.onSendAmount = this.onSendAmount.bind(this);
@@ -34,6 +36,7 @@ export class App extends React.Component {
             downloaded: true,
             lastReceive: '',
             lastSend: '',
+            lastCheck: [],
             lastRecover: [],
         };
 
@@ -61,7 +64,6 @@ export class App extends React.Component {
             downloaded: true,
             lastReceive: '',
             lastSend: '',
-            // lastRecover: [],
         });
     }
 
@@ -105,6 +107,37 @@ export class App extends React.Component {
     }
 
     // TODO: prevent user from navigating away
+    async onCheckWallet() {
+        this.setState({lastCheck: []});
+
+        // Capture console output from underlying wallet
+        const realLog = window.console.log;
+        const dis = this;
+        const lastCheck = [];
+        let key = 0;
+        window.console.log = function() {
+            realLog.apply(console, arguments);
+            const logMessage = [...arguments].join(' ');
+            lastCheck.push(<p key={key++}>{logMessage}</p>);
+            dis.setState({lastCheck: lastCheck});
+        };
+
+        try {
+            console.log("(webcasa) Checking wallet");
+            await this.state.wallet.check();
+            await Promise.resolve(); // needed?
+            this.state.wallet.save(); // because check() doesn't save the wallet
+            console.log("(webcasa) New balance:", this.state.wallet.getBalance().toString());
+            console.log("(webcasa) Done!");
+        } catch (e) {
+            const errMsg = <div className="action-error">{`ERROR: ${e.message}`}</div>;
+            this.setState({ lastCheck: <ActionResult success={false} contents={errMsg} /> });
+        } finally {
+            window.console.log = realLog;
+        }
+    }
+
+    // TODO: prevent user from navigating away
     async onRecoverWallet(masterSecret, gapLimit) {
         this.setState({lastRecover: []});
 
@@ -118,10 +151,7 @@ export class App extends React.Component {
             if (arguments[0].startsWith('results =')) {
                 return;
             }
-            let logMessage = [...arguments].reduce((prev, curr) => {
-                let curr_str = typeof curr === 'string' ? curr : JSON.stringify(curr, null, 4);
-                return prev + ' ' + curr_str;
-            });
+            const logMessage = [...arguments].join(' ');
             lastRecover.push(<p key={key++}>{logMessage}</p>);
             dis.setState({lastRecover: lastRecover});
         };
@@ -142,7 +172,7 @@ export class App extends React.Component {
             await Promise.resolve();
             console.log("(webcasa) Found balance:", wallet.getBalance().toString());
             console.log("(webcasa) Done!");
-
+            // not calling wallet.save() because recover() already did it
             this.replaceWallet(wallet);
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
@@ -213,6 +243,10 @@ export class App extends React.Component {
         if ('Recover' === this.state.view) {
             view = <ViewRecover wallet={this.state.wallet} onChangeView={this.onChangeView}
                         onRecoverWallet={this.onRecoverWallet} lastRecover={this.state.lastRecover}/>;
+        } else
+        if ('Check' === this.state.view) {
+            view = <ViewCheck wallet={this.state.wallet} onChangeView={this.onChangeView}
+                        onCheckWallet={this.onCheckWallet} lastCheck={this.state.lastCheck}/>;
         }
 
         return (
