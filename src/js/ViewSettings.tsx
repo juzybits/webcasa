@@ -13,28 +13,27 @@ export class ViewSettings extends React.Component {
         ?
         <fieldset id="wallet-buttons">
             <legend>MANAGE WALLET</legend>
-            <button className="pure-button last-button unsaved"
+            <button className="pure-button unsaved"
                     onClick={this.props.onDownloadWallet}>Download</button>
         </fieldset>
         :
         <React.Fragment>
             <fieldset id="wallet-buttons">
                 <legend>MANAGE WALLET</legend>
-            <button className="pure-button"
-                    onClick={this.props.onDownloadWallet}>Download</button>
+                <button className="pure-button"
+                        onClick={this.props.onDownloadWallet}>Download</button>
 
-            <label className="pure-button" htmlFor="bc-file-input">Upload</label>
-            <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                   onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
+                <label className="pure-button" htmlFor="bc-file-input">Upload</label>
+                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
+                       onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
-            <button className="pure-button last-button" onClick={this.props.onCreateWallet}>Create new</button>
+                <button className="pure-button" onClick={this.props.onCreateWallet}>Create new</button>
             </fieldset>
-
 
             <fieldset id="wallet-buttons">
                 <legend>ADVANCED TOOLS</legend>
-            <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
-            <button className="pure-button last-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
+                <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
+                <button className="pure-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
             </fieldset>
         </React.Fragment>;
 

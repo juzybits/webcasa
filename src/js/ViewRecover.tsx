@@ -53,7 +53,7 @@ export class ViewRecover extends React.Component {
         const consoleLogs = 0===this.props.lastRecover.length ? '' :
             <div className="console-logs">{this.props.lastRecover}</div>;
         const submit = this.state.inProgress ? '' :
-            <button type="submit" className="pure-button pure-button-primary">Recover</button>;
+            <button type="submit" className="pure-button pure-button-primary">Recover wallet</button>;
         const processing = !this.state.inProgress ? '' :
             <label className="label-processing">In progress...</label>;
 

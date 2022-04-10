@@ -19,15 +19,15 @@ export class ViewCheck extends React.Component {
         this.setState({inProgress: false});
     }
 
-    exitOnEscape(event){
+    exitOnEscape(event) {
         if (event.key === "Escape") {
             this.props.onChangeView('Settings');
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         document.addEventListener("keydown", this.exitOnEscape);
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         document.removeEventListener("keydown", this.exitOnEscape);
     }
 
@@ -35,7 +35,7 @@ export class ViewCheck extends React.Component {
         const consoleLogs = 0===this.props.lastCheck.length ? '' :
             <div className="console-logs">{this.props.lastCheck}</div>;
         const submit = this.state.inProgress ? '' :
-            <button type="submit" className="pure-button pure-button-primary">Check</button>;
+            <button type="submit" className="pure-button pure-button-primary">Check webcash</button>;
         const processing = !this.state.inProgress ? '' :
             <label className="label-processing">In progress...</label>;
 

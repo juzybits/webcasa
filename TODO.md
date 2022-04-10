@@ -5,7 +5,6 @@
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 	- ViewSettings
 		- "Delete" button
-	- Warn on "Create new" and "Upload"
 
 # Prod
 	- Links to webcash.org, twitter, discord

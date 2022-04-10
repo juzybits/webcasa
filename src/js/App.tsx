@@ -89,7 +89,20 @@ export class App extends React.Component {
 
     /* Settings (wallet operations) */
 
+    private confirmOverwriteWallet(): bool {
+        const balance = this.state.wallet.getBalance();
+        if (balance.isZero()) {
+            return true;
+        }
+        const master = shorten(this.state.wallet.master_secret);
+        return confirm(`This will DELETE your current wallet '${master}' (₩ ${balance})`+
+            "\n\nDo you wish to continue?");
+    }
+
     onCreateWallet(event) {
+        if (!this.confirmOverwriteWallet()) {
+            return;
+        }
         const wallet = new WebcashWalletLocalStorage();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         wallet.save();
@@ -97,6 +110,9 @@ export class App extends React.Component {
     }
 
     onUploadWallet(event) {
+        if (!this.confirmOverwriteWallet()) {
+            return;
+        }
         const file = event.target.files[0];
         const reader = new FileReader();
         const dis = this;
@@ -160,6 +176,11 @@ export class App extends React.Component {
     }
 
     async onRecoverWallet(masterSecret, gapLimit) {
+        const sameSecret = masterSecret === this.state.wallet.master_secret;
+        if (!sameSecret && !this.confirmOverwriteWallet()) {
+            return;
+        }
+
         this.setState({lastRecover: [], locked: true});
 
         // Capture console output from underlying wallet
@@ -178,7 +199,6 @@ export class App extends React.Component {
         };
 
         try {
-            const sameSecret = masterSecret === this.state.wallet.master_secret;
             const wallet = sameSecret
                 ? this.state.wallet
                 : new WebcashWalletLocalStorage({"master_secret": masterSecret});
