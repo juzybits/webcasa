@@ -57,39 +57,47 @@ export class ViewRecover extends React.Component {
         const processing = !this.state.inProgress ? '' :
             <label className="label-processing">In progress...</label>;
 
-        return <div id="ViewRecover" className="pure-u card">
 
-            <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
+        return (
+        <div className="view-wrapper">
+            <header className="header">
+                <h1>Recover</h1>
+            </header>
 
-            <div className="card-description">
-                You can enter your "master secret" below to recover your wallet.
-                <p>
-                The "gap limit" is the maximum window span that will be used, on the assumption that any valid webcash will be found within the last item + gap limit number of secrets.
-                </p>
+            <div id="ViewRecover" className="pure-u card">
+
+                <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
+
+                <div className="card-description">
+                    You can enter your "master secret" below to recover your wallet.
+                    <p>
+                    The "gap limit" is the maximum window span that will be used, on the assumption that any valid webcash will be found within the last item + gap limit number of secrets.
+                    </p>
+                </div>
+
+                <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
+                    <fieldset>
+                        <label htmlFor="masterSecret">master secret</label>
+                        <input type="text" id="masterSecret" defaultValue={this.state.masterSecret}
+                               autoFocus onFocus={this.onFocus} onChange={this.onChange}
+                               spellCheck='false' autoCorrect='off'
+                               disabled={this.state.inProgress} />
+                    </fieldset>
+
+                    <fieldset>
+                        <label htmlFor="gapLimit">gap limit</label>
+                        <input type="number" id="gapLimit" min="1" defaultValue={this.state.gapLimit}
+                               max="1000" step="1" onChange={this.onChange}
+                               disabled={this.state.inProgress} />
+                    </fieldset>
+
+                    {submit}
+                </form>
+
+                {processing}
+                {consoleLogs}
             </div>
-
-            <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
-                <fieldset>
-                    <label htmlFor="masterSecret">master secret</label>
-                    <input type="text" id="masterSecret" defaultValue={this.state.masterSecret}
-                           autoFocus onFocus={this.onFocus} onChange={this.onChange}
-                           spellCheck='false' autoCorrect='off'
-                           disabled={this.state.inProgress} />
-                </fieldset>
-
-                <fieldset>
-                    <label htmlFor="gapLimit">gap limit</label>
-                    <input type="number" id="gapLimit" min="1" defaultValue={this.state.gapLimit}
-                           max="1000" step="1" onChange={this.onChange}
-                           disabled={this.state.inProgress} />
-                </fieldset>
-
-                {submit}
-            </form>
-
-            {processing}
-            {consoleLogs}
-
-        </div>;
+        </div>
+        );
     }
 }

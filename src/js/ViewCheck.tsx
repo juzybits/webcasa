@@ -39,21 +39,27 @@ export class ViewCheck extends React.Component {
         const processing = !this.state.inProgress ? '' :
             <label className="label-processing">In progress...</label>;
 
-        return <div id="ViewCheck" className="pure-u card">
+        return (
+        <div className="view-wrapper">
+            <header className="header">
+                <h1>Check</h1>
+            </header>
+            <div id="ViewCheck" className="pure-u card">
 
-            <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
+                <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 
-            <div className="card-description">
-                Check every webcash in the wallet and remove any invalid already-spent webcash.
+                <div className="card-description">
+                    Check every webcash in the wallet and remove any invalid already-spent webcash.
+                </div>
+
+                <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
+                    {submit}
+                </form>
+
+                {processing}
+                {consoleLogs}
             </div>
-
-            <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
-                {submit}
-            </form>
-
-            {processing}
-            {consoleLogs}
-
-        </div>;
+        </div>
+        );
     }
 }

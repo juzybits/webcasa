@@ -5,13 +5,18 @@ import { shorten, isMobile } from "./_util";
 export class Navigation extends React.Component {
     constructor(props) {
         super(props);
+        this.onClickToggleBtn = this.onClickToggleBtn.bind(this); // mobile-only
         this.toggleVisibility = this.toggleVisibility.bind(this); // mobile-only
         this.state = { visible: false }
     }
 
-    toggleVisibility(event) {
-        event.preventDefault();
+    toggleVisibility() {
         this.setState({ visible: !this.state.visible });
+    }
+
+    onClickToggleBtn(event) {
+        event.preventDefault();
+        this.toggleVisibility();
     }
 
     makeButton() {
@@ -31,7 +36,7 @@ export class Navigation extends React.Component {
 
                 <label id="logo">🏠 WebCasa</label>
 
-                <a href="#" id="menuToggle" onClick={this.toggleVisibility}>☰</a>
+                <a href="#" id="menuToggle" onClick={this.onClickToggleBtn}>☰</a>
 
                 <div className="nav-inner">
 

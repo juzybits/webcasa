@@ -275,8 +275,6 @@ export class App extends React.Component {
                     onChangeView={this.onChangeView}
                 />
 
-                <Header title={this.state.view} wallet={this.state.wallet} />
-
                 {view}
 
                 <div id="tooltip">Copied!</div>

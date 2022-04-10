@@ -29,7 +29,13 @@ export class ViewSettings extends React.Component {
                 <button className="pure-button last-button" onClick={()=>this.props.onChangeView('Recover')}>Recover</button>
 
             </React.Fragment>;
+
         return (
+        <div className="view-wrapper">
+            <header className="header">
+                <h1>Settings</h1>
+            </header>
+
             <div id="ViewSettings" className="pure-u card">
                 <fieldset id="wallet-buttons">
                     <legend>MANAGE WALLET</legend>
@@ -72,8 +78,8 @@ export class ViewSettings extends React.Component {
                         <label>MINING depth</label>{data.walletdepths.MINING}
                     </div>
                 </fieldset>
-
             </div>
+        </div>
         );
     }
 }

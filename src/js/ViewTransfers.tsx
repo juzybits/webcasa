@@ -31,8 +31,12 @@ export class ViewTransfers extends React.Component {
         const balance = this.props.wallet.getBalance().toString();
 
         return (
-            <div id="ViewTransfers" className="pure-u card">
+        <div className="view-wrapper">
+            <header className="header">
+                <h1>Transfers</h1>
+            </header>
 
+            <div id="ViewTransfers" className="pure-u card">
                 <div className="tabs">
                     <div className={`tab left ${selectedReceive}`} onClick={this.onClickTab}>Receive</div>
                     <div className={`tab right ${selectedSend}`} onClick={this.onClickTab}>Send</div>
@@ -43,8 +47,8 @@ export class ViewTransfers extends React.Component {
                 </div>
 
                 <div className="tab-content">{tabContent}</div>
-
             </div>
+        </div>
         );
     }
 }

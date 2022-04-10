@@ -25,12 +25,18 @@ export class ViewHistory extends React.Component {
             </div>;
         });
         const wallet = this.props.wallet;
+
         return (
+        <div className="view-wrapper">
+            <header className="header">
+                <h1>History</h1>
+            </header>
             <div id="ViewHistory" className="pure-u card">
                 <label style={{fontSize: '0.9em'}}>* only the last 100 log entries are shown</label>
                 <List items={logs} />
 
             </div>
+        </div>
         );
     }
 }

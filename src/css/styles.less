@@ -87,9 +87,13 @@ input[type="checkbox"] {
 
 /** Reusable components **/
 
+.view-wrapper {
+    width: 100%;
+}
 .card {
     background: @card-background;
     color: @text-color;
+    box-sizing: border-box;
     padding: @padding;
     width: 100%;
 }
@@ -407,14 +411,13 @@ button.unsaved {
     top: 0em;
 }
 
-#Header {
+.header {
     background: inherit;
     border: 0;
     margin: 0;
     padding: @padding;
     h1 {
         margin: 0;
-        float: left;
         font-size: 1.8em;
     }
 }
@@ -575,6 +578,7 @@ button.unsaved {
     .card {
         border-radius: @radius-card;
         border: 1px solid @border-grey;
+        box-sizing: content-box;
         margin: 4px 40px 40px 243px;
         max-width: 600px;
         padding: 36px;
@@ -600,14 +604,13 @@ button.unsaved {
         margin-right: -20px;
         margin-top: -24px;
     }
-    #Header {
+    .header {
         background: inherit;
         border: 0;
         margin: 0 0 auto 243px;
         padding: 1em 0 0.6em;
         margin-top: 8px;
         h1 {
-            float: left;
             font-size: 1.8em;
         }
     }

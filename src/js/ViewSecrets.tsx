@@ -38,7 +38,13 @@ export class ViewSecrets extends React.Component {
     render() {
         const webcashesSection = this.state.showWebcashes ? this.makeSection('Webcashes') : '';
         const unconfirmedSection = this.state.showUnconfirmed ? this.makeSection('Unconfirmed') : '';
+
         return (
+        <div className="view-wrapper">
+            <header className="header">
+                <h1>Secrets</h1>
+            </header>
+
             <div id="ViewSecrets" className="pure-u card">
 
                 <fieldset className="checkboxes">
@@ -61,8 +67,8 @@ export class ViewSecrets extends React.Component {
 
                 {webcashesSection}
                 {unconfirmedSection}
-
             </div>
+        </div>
         );
     }
 }
