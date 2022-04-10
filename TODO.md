@@ -4,8 +4,8 @@
 		Site-level accept from the user -> auto-accept in new wallets.
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 	- ViewSettings
-		- Download wallet / Upload wallet / Create new wallet / Check wallet / Recover wallet
 		- "Delete" button
+	- Warn on "Create new" and "Upload"
 
 # Prod
 	- Links to webcash.org, twitter, discord

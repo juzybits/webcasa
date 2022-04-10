@@ -42,7 +42,7 @@ export class ViewCheck extends React.Component {
         return (
         <div className="view-wrapper">
             <header className="header">
-                <h1>Check</h1>
+                <h1>Check webcash</h1>
             </header>
             <div id="ViewCheck" className="card closable">
 

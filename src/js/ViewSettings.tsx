@@ -11,24 +11,32 @@ export class ViewSettings extends React.Component {
         const abbrMaster = shorten(fullMaster)
         const walletButtons = !this.props.downloaded
         ?
+        <fieldset id="wallet-buttons">
+            <legend>MANAGE WALLET</legend>
             <button className="pure-button last-button unsaved"
                     onClick={this.props.onDownloadWallet}>Download</button>
+        </fieldset>
         :
-            <React.Fragment>
-                <button className="pure-button"
-                        onClick={this.props.onDownloadWallet}>Save</button>
+        <React.Fragment>
+            <fieldset id="wallet-buttons">
+                <legend>MANAGE WALLET</legend>
+            <button className="pure-button"
+                    onClick={this.props.onDownloadWallet}>Download</button>
 
-                <label className="pure-button" htmlFor="bc-file-input">Load</label>
-                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
+            <label className="pure-button" htmlFor="bc-file-input">Upload</label>
+            <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
+                   onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
-                <button className="pure-button" onClick={this.props.onCreateWallet}>New</button>
+            <button className="pure-button last-button" onClick={this.props.onCreateWallet}>Create new</button>
+            </fieldset>
 
-                <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check</button>
 
-                <button className="pure-button last-button" onClick={()=>this.props.onChangeView('Recover')}>Recover</button>
-
-            </React.Fragment>;
+            <fieldset id="wallet-buttons">
+                <legend>ADVANCED TOOLS</legend>
+            <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
+            <button className="pure-button last-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
+            </fieldset>
+        </React.Fragment>;
 
         return (
         <div className="view-wrapper">
@@ -37,15 +45,12 @@ export class ViewSettings extends React.Component {
             </header>
 
             <div id="ViewSettings" className="card">
-                <fieldset id="wallet-buttons">
-                    <legend>MANAGE WALLET</legend>
                     {walletButtons}
-                </fieldset>
 
                 <div className="clear"></div>
 
                 <fieldset>
-                    <legend>INFO</legend>
+                    <legend>WALLET INFO</legend>
                     <div className="setting">
                         <label>master secret</label>
                         <CopiableValue contents={fullMaster} short={abbrMaster}/>
@@ -64,7 +69,7 @@ export class ViewSettings extends React.Component {
                 </fieldset>
 
                 <fieldset>
-                    <legend>DEPTHS</legend>
+                    <legend>WALLET DEPTHS</legend>
                     <div className="setting depth">
                         <label>RECEIVE depth</label>{data.walletdepths.RECEIVE}
                     </div>
