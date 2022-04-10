@@ -7,20 +7,17 @@
 		- Download wallet / Upload wallet / Create new wallet / Check wallet / Recover wallet
 		- "Delete" button
 
-# Code quality
-	- review wallet saving. test.
-
-# UX
-	- Keep active menu item highlighted
-
-# CORE: Consistent logs (PR sent)
-# CORE: Decimal bug (PR sent)
-
 # Prod
 	- Links to webcash.org, twitter, discord
 	- WebCasa Terms?
 	- <noscript> for SEO
     - Logo
+
+# Code quality
+	- review wallet saving. test.
+
+# CORE: Consistent logs (PR sent)
+# CORE: Decimal bug (PR sent)
 
 # UX cherry
 	- URL paths, history (React Router)
