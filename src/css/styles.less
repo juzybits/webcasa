@@ -432,7 +432,7 @@ button.unsaved {
 
 #ViewTransfers {
     &.card {
-        padding: 0;
+        padding: 0 0 @padding 0;
     }
     #FormReceive, #FormSend {
         width: 100%;
@@ -487,9 +487,6 @@ button.unsaved {
     .setting.depth {
         font-size: 0.9em;
     }
-    .wrapper {
-        width: 100%;
-    }
 
     .CopiableValue {
         font-size: 1.2em;
@@ -526,7 +523,7 @@ button.unsaved {
 }
 
 /** Tablet (and up) styles **/
-@media (min-width: 55em) {
+@media (min-width: 47em) {
 
     #this-is-mobile {
         display: none;
@@ -538,6 +535,11 @@ button.unsaved {
         position: relative;
     }
 
+    .view-wrapper {
+        margin-left: 220px;
+        margin-right: 30px;
+    }
+
     /* These are position:fixed; elements that will be in the left 500px of the screen */
     #nav {
         border-right: 1px solid @border-grey;
@@ -546,7 +548,7 @@ button.unsaved {
         overflow: auto;
         position: fixed;
         top: 0;
-        width: 180px;
+        width: 190px;
 
         .pure-menu-list {
             text-align: left;
@@ -584,7 +586,6 @@ button.unsaved {
         border-radius: @radius-card;
         border: 1px solid @border-grey;
         box-sizing: content-box;
-        margin: 4px 40px 40px 223px;
         max-width: 600px;
         padding: 36px;
     }
@@ -612,7 +613,6 @@ button.unsaved {
     .header {
         background: inherit;
         border: 0;
-        margin: 0 0 auto 223px;
         padding: 1em 0 0.6em;
         margin-top: 8px;
         h1 {
