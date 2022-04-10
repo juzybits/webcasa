@@ -317,7 +317,9 @@ button.unsaved {
         color: #7f7f7f;
     }
     #nav-button {
-        margin: 30px 0 0 10px;
+        .pure-button {
+            margin: 2.3em 0 0.8em;
+        }
     }
     .pure-menu {
         background: transparent;
@@ -524,7 +526,7 @@ button.unsaved {
 }
 
 /** Tablet (and up) styles **/
-@media (min-width: 57em) {
+@media (min-width: 55em) {
 
     #this-is-mobile {
         display: none;
@@ -544,17 +546,17 @@ button.unsaved {
         overflow: auto;
         position: fixed;
         top: 0;
-        width: 200px;
+        width: 180px;
 
         .pure-menu-list {
             text-align: left;
         }
 
         .pure-menu-link {
-            font-size: 1.1em;
+            font-size: 1.05em;
             line-height: 1.4em;
             margin-left: 0;
-            padding: 1em 0 1em 1.8em;
+            padding: 1em 0 1em 1.3em;
         }
     }
 
@@ -576,14 +578,13 @@ button.unsaved {
 
     #logo {
         font-size: 1.4em;
-        margin-left: 8px;
-        padding: 1em;
+        margin-top: 10px;
     }
     .card {
         border-radius: @radius-card;
         border: 1px solid @border-grey;
         box-sizing: content-box;
-        margin: 4px 40px 40px 243px;
+        margin: 4px 40px 40px 223px;
         max-width: 600px;
         padding: 36px;
     }
@@ -611,7 +612,7 @@ button.unsaved {
     .header {
         background: inherit;
         border: 0;
-        margin: 0 0 auto 243px;
+        margin: 0 0 auto 223px;
         padding: 1em 0 0.6em;
         margin-top: 8px;
         h1 {

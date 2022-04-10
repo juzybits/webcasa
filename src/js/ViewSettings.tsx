@@ -12,7 +12,7 @@ export class ViewSettings extends React.Component {
         const walletButtons = !this.props.downloaded
         ?
             <button className="pure-button last-button unsaved"
-                    onClick={this.props.onDownloadWallet}>Save changes</button>
+                    onClick={this.props.onDownloadWallet}>Download</button>
         :
             <React.Fragment>
                 <button className="pure-button"
