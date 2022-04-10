@@ -36,7 +36,7 @@ export class ViewTransfers extends React.Component {
                 <h1>Transfers</h1>
             </header>
 
-            <div id="ViewTransfers" className="pure-u card">
+            <div id="ViewTransfers" className="card">
                 <div className="tabs">
                     <div className={`tab left ${selectedReceive}`} onClick={this.onClickTab}>Receive</div>
                     <div className={`tab right ${selectedSend}`} onClick={this.onClickTab}>Send</div>

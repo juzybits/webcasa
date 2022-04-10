@@ -44,7 +44,7 @@ export class ViewCheck extends React.Component {
             <header className="header">
                 <h1>Check</h1>
             </header>
-            <div id="ViewCheck" className="pure-u card closable">
+            <div id="ViewCheck" className="card closable">
 
                 <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 

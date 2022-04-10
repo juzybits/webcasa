@@ -36,7 +36,7 @@ export class ViewSettings extends React.Component {
                 <h1>Settings</h1>
             </header>
 
-            <div id="ViewSettings" className="pure-u card">
+            <div id="ViewSettings" className="card">
                 <fieldset id="wallet-buttons">
                     <legend>MANAGE WALLET</legend>
                     {walletButtons}

@@ -45,7 +45,7 @@ export class ViewSecrets extends React.Component {
                 <h1>Secrets</h1>
             </header>
 
-            <div id="ViewSecrets" className="pure-u card">
+            <div id="ViewSecrets" className="card">
 
                 <fieldset className="checkboxes">
 

@@ -51,7 +51,7 @@ export class FormSend extends React.Component {
             });
         const btnSendMax = <a href="#" id="btn-send-max" onClick={this.onSendAmountMax}>max</a>;
         return (
-            <div id="FormSend" className="pure-u">
+            <div id="FormSend">
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>

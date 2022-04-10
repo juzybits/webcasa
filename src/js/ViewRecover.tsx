@@ -64,7 +64,7 @@ export class ViewRecover extends React.Component {
                 <h1>Recover</h1>
             </header>
 
-            <div id="ViewRecover" className="pure-u card closable">
+            <div id="ViewRecover" className="card closable">
 
                 <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 

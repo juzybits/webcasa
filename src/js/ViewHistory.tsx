@@ -31,7 +31,7 @@ export class ViewHistory extends React.Component {
             <header className="header">
                 <h1>History</h1>
             </header>
-            <div id="ViewHistory" className="pure-u card">
+            <div id="ViewHistory" className="card">
                 <label style={{fontSize: '0.9em'}}>* only the last 100 log entries are shown</label>
                 <List items={logs} />
 
