@@ -17,11 +17,10 @@
 # CORE: Decimal bug (PR sent)
 
 # Prod
-	- Domain with TLS
 	- Links to webcash.org, twitter, discord
-    - Logo
-	- <noscript> for SEO
 	- WebCasa Terms?
+	- <noscript> for SEO
+    - Logo
 
 # UX cherry
 	- URL paths, history (React Router)

@@ -9,7 +9,8 @@ export class Navigation extends React.Component {
         this.state = { visible: false }
     }
 
-    toggleVisibility() {
+    toggleVisibility(event) {
+        event.preventDefault();
         this.setState({ visible: !this.state.visible });
     }
 

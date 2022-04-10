@@ -316,15 +316,6 @@ button.unsaved {
         border: none;
         // text-align: left;
     }
-    .pure-menu-link {
-        color: @text-color;
-        font-size: 1.2em;
-        margin-left: 0.5em;
-        padding: 16px 0;
-        &:hover, &:focus {
-            background: @hover-grey;
-        }
-    }
     .pure-menu-heading {
         border-bottom: none;
         font-size:110%;
@@ -332,6 +323,22 @@ button.unsaved {
     }
     .pure-menu-list {
         margin-top: 5px;
+    }
+
+    .pure-menu-item:first-child {
+        margin-top: 1em;
+        border-top: 1px solid @border-grey;
+        padding-top: 0.6em;
+    }
+
+    .pure-menu-link {
+        color: @text-color;
+        font-size: 1.2em;
+        margin-left: 0.5em;
+        padding: 1.2em 0;
+        &:hover, &:focus {
+            background: @hover-grey;
+        }
     }
     .nav-icon {
         margin-right: 5px;
@@ -344,7 +351,7 @@ button.unsaved {
 /* ...until the "Menu" button is clicked */
 #nav.active .nav-inner {
     display: block;
-    padding: 2em 0;
+    padding: 2em 0 1em;
 }
 
 #BalanceIndicator {
@@ -532,10 +539,15 @@ button.unsaved {
         top: 0;
         width: 200px;
 
+        .pure-menu-list {
+            text-align: left;
+        }
+
         .pure-menu-link {
-            font-size: 1.05em;
+            font-size: 1.1em;
             line-height: 1.4em;
             margin-left: 0;
+            padding: 1em 0 1em 1.8em;
         }
     }
 
@@ -592,7 +604,7 @@ button.unsaved {
         background: inherit;
         border: 0;
         margin: 0 0 auto 243px;
-        padding: 1em 0;
+        padding: 1em 0 0.6em;
         margin-top: 8px;
         h1 {
             float: left;
