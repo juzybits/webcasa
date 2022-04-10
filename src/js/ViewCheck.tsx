@@ -44,12 +44,14 @@ export class ViewCheck extends React.Component {
             <header className="header">
                 <h1>Check</h1>
             </header>
-            <div id="ViewCheck" className="pure-u card">
+            <div id="ViewCheck" className="pure-u card closable">
 
                 <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 
                 <div className="card-description">
+                <p>
                     Check every webcash in the wallet and remove any invalid already-spent webcash.
+                </p>
                 </div>
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>

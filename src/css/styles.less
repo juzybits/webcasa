@@ -102,8 +102,8 @@ input[type="checkbox"] {
     color: @text-color;
     float: right;
     font-size: 1.3em;
-    margin-right: -15px;
-    margin-top: -17px;
+    margin-right: -13px;
+    margin-top: -15px;
     &:hover {
         color: white;
         cursor: pointer;
@@ -111,6 +111,10 @@ input[type="checkbox"] {
     }
 }
 .card-description {
+    p {
+        margin-block-start: 0.5em;
+        margin-block-end: 1.5em;
+    }
     line-height: 1.3em;
 }
 
@@ -515,12 +519,12 @@ button.unsaved {
     }
 }
 
-#ViewRecover.card {
+.card.closable {
     padding: 25px;
 }
 
 /** Tablet (and up) styles **/
-@media (min-width: 44em) {
+@media (min-width: 57em) {
 
     #this-is-mobile {
         display: none;
@@ -584,7 +588,7 @@ button.unsaved {
         padding: 36px;
     }
 
-    #ViewRecover.card {
+    .card.closable {
         padding: 36px;
     }
     .tabs {
@@ -601,8 +605,8 @@ button.unsaved {
         padding: 1em 36px 28px;
     }
     .close-x {
-        margin-right: -20px;
-        margin-top: -24px;
+        margin-right: -19px;
+        margin-top: -20px;
     }
     .header {
         background: inherit;

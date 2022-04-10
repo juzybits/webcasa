@@ -64,15 +64,13 @@ export class ViewRecover extends React.Component {
                 <h1>Recover</h1>
             </header>
 
-            <div id="ViewRecover" className="pure-u card">
+            <div id="ViewRecover" className="pure-u card closable">
 
                 <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
 
                 <div className="card-description">
-                    You can enter your "master secret" below to recover your wallet.
-                    <p>
-                    The "gap limit" is the maximum window span that will be used, on the assumption that any valid webcash will be found within the last item + gap limit number of secrets.
-                    </p>
+                    <p>You can enter your "master secret" below to recover your wallet.</p>
+                    <p>The "gap limit" is the maximum window span that will be used, on the assumption that any valid webcash will be found within the last item + gap limit number of secrets.</p>
                 </div>
 
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
