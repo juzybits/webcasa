@@ -45,6 +45,7 @@ a {
 }
 h1 sup {
     font-size: 0.5em;
+    color: #ffb835;
 }
 
 input[type="checkbox"] {
@@ -432,7 +433,7 @@ button.unsaved {
 }
 
 .modal {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: @body-background;
     bottom: 0;
     left: 0;
     right: 0;
@@ -472,6 +473,11 @@ button.unsaved {
         margin-bottom: 1em;
         padding: 0.9em 0.8em;
         width: 100%;
+    }
+}
+.blur {
+    #nav, .view-wrapper {
+        filter: blur(7);
     }
 }
 
@@ -679,6 +685,7 @@ button.unsaved {
         }
     }
     .modal {
+        background: rgb(0 0 0 / 33%);
         .modal-card {
             border-radius: @radius-card;
             min-width: 500px;

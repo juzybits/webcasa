@@ -293,8 +293,9 @@ export class App extends React.Component {
                         onCheckWallet={this.onCheckWallet} lastCheck={this.state.lastCheck}/>;
         }
 
+        const blur = this.state.termsAccepted ? '' : 'blur';
         return (
-            <div id="layout" className="content pure-g">
+            <div id="layout" className={`content pure-g ${blur}`}>
                 <Navigation
                     wallet={this.state.wallet}
                     downloaded={this.state.downloaded}
