@@ -34,7 +34,7 @@ export class Navigation extends React.Component {
         return (
             <div id="nav" className={"pure-u " + (this.state.visible ? "active" : '')}>
 
-                <label id="logo">🏠 WebCasa</label>
+                <label id="logo">🏠 WebCasa<sup>(beta)</sup></label>
 
                 <a href="#" id="menuToggle" onClick={this.onClickToggleBtn}>☰</a>
 
