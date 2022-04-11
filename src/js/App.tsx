@@ -39,6 +39,7 @@ export class App extends React.Component {
             wallet.save();
         }
 
+        // TODO save in local storage
         this.state = {
             view: 'Transfers',
             wallet: wallet,
@@ -304,7 +305,7 @@ export class App extends React.Component {
 
                 {view}
 
-                {this.state.termsAccepted ? '' : <ViewTerms />}
+                <ViewTerms onAcceptTerms={this.onAcceptTerms} accepted={this.state.termsAccepted} />
                 <div id="tooltip">Copied!</div>
                 <div id="this-is-mobile"></div>
             </div>

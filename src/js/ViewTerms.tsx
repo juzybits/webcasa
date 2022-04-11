@@ -1,7 +1,6 @@
 import React from "react";
 
 export class ViewTerms extends React.Component {
-
     constructor(props) {
         super(props)
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
@@ -15,8 +14,10 @@ export class ViewTerms extends React.Component {
 
     onCheckboxChange(event) {
         const target = event.target;
-        this.setState({
-            [target.value]: target.checked
+        this.setState({[target.value]: target.checked}, () => {
+            if (this.state.casaTerms && this.state.cashTerms) {
+                this.props.onAcceptTerms();
+            }
         });
     }
 
@@ -34,7 +35,7 @@ export class ViewTerms extends React.Component {
                 WebCasa is experimental software. It is offered for free and without any guarantees. There could be bugs so please use with care.
             </p>
             <div className="check-item">
-                <input type="checkbox" id="casaTerms-chk" value="casaTerms" onChange={this.onCheckboxChange}/>
+                <input type="checkbox" id="casaTerms-chk" value="casaTerms" onChange={this.onCheckboxChange} defaultChecked={this.state.casaTerms}/>
                 <label htmlFor="casaTerms-chk">I understand.</label>
             </div>
         </React.Fragment>
@@ -48,9 +49,9 @@ export class ViewTerms extends React.Component {
             <p>
                 Even though WebCasa is not affiliated with Webcash, you must read and accept the Webcash.org <a href="https://webcash.org/terms" target="_blank">terms of service</a> before using the software.
             </p>
-            <textarea class="modal-textarea" defaultValue={this.state.webcashTermsText} />
+            <textarea className="modal-textarea" defaultValue={this.state.webcashTermsText} />
             <div className="check-item">
-                <input type="checkbox" id="cashTerms-chk" value="cashTerms" onChange={this.onCheckboxChange}/>
+                <input type="checkbox" id="cashTerms-chk" value="cashTerms" onChange={this.onCheckboxChange} defaultChecked={this.state.cashTerms}/>
                 <label htmlFor="cashTerms-chk">I agree to the Webcash.org <a href="https://webcash.org/terms" target="_blank">terms of service</a>.</label>
             </div>
         </React.Fragment>
@@ -58,6 +59,9 @@ export class ViewTerms extends React.Component {
     }
 
     render() {
+        if (this.props.accepted) {
+            return '';
+        }
         const terms = !this.state.casaTerms ? this.makeCasaTerms() : this.makeCashTerms();
         return (
         <div id="ViewTerms" className="modal">
