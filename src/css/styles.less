@@ -43,6 +43,9 @@ a {
     &:hover {
     }
 }
+h1 sup {
+    font-size: 0.5em;
+}
 
 input[type="checkbox"] {
   filter: invert() hue-rotate(175deg) brightness(1.1);
@@ -184,21 +187,21 @@ input[type="checkbox"] {
     }
 
 }
-fieldset.checkboxes {
+.checkboxes {
     border: 0;
     font-size: 1.15em;
     margin-bottom: 2em;
     padding: 0;
     text-align: center;
-    .check-item {
-        display: inline-block;
-        line-height: 2em;
-        &:hover {
-            color: white;
-        }
-        &:first-child {
-            margin-right: 30px;
-        }
+}
+.check-item {
+    display: inline-block;
+    line-height: 2em;
+    &:hover {
+        color: white;
+    }
+    &:first-child {
+        margin-right: 30px;
     }
     label {
         padding-left: 10px;
@@ -428,6 +431,42 @@ button.unsaved {
     }
 }
 
+.modal {
+    background-color: rgba(255, 255, 255, 0.25);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+    z-index: 999;
+    .modal-card {
+        background: @card-background;
+        color: @text-color;
+        padding: 2em 1.4em;
+        h1 {
+            margin: 0 0 0.8em 0;
+        }
+        p {
+            font-size: 1.05em;
+            line-height: 1.2em;
+            margin-bottom: 1.5em;
+        }
+        .check-item {
+            font-size: 1.2em;
+            input {
+                margin-left: 3px;
+                transform: scale(1.7);
+            }
+            label {
+                padding-left: 12px;
+            }
+        }
+    }
+    .modal-textarea {
+        display: block;
+    }
+}
+
 /** View styles **/
 
 #ViewTransfers {
@@ -629,6 +668,18 @@ button.unsaved {
     #ViewTransfers {
         &.card {
             border-top: 0;
+        }
+    }
+    .modal {
+        .modal-card {
+            border-radius: @radius-card;
+            min-width: 500px;
+            padding: 2.3em 2em;
+
+            left: 50%;
+            top: 40%;
+            position: absolute;
+            transform: translate(-50%, -50%);
         }
     }
 }

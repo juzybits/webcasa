@@ -9,11 +9,12 @@ import { FormReceive } from "./FormReceive";
 import { FormSend } from "./FormSend";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
-import { ViewHistory } from "./ViewHistory";
 import { ViewCheck } from "./ViewCheck";
+import { ViewHistory } from "./ViewHistory";
 import { ViewRecover } from "./ViewRecover";
 import { ViewSecrets } from "./ViewSecrets";
 import { ViewSettings } from "./ViewSettings";
+import { ViewTerms } from "./ViewTerms";
 import { ViewTransfers } from "./ViewTransfers";
 
 export class App extends React.Component {
@@ -21,6 +22,7 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this.onAcceptTerms = this.onAcceptTerms.bind(this);
         this.onChangeView = this.onChangeView.bind(this);
         this.onCreateWallet = this.onCreateWallet.bind(this);
         this.onUploadWallet = this.onUploadWallet.bind(this);
@@ -45,6 +47,7 @@ export class App extends React.Component {
             lastSend: '',
             lastCheck: [],
             lastRecover: [],
+            termsAccepted: false,
         };
 
         const dis = this;
@@ -57,6 +60,10 @@ export class App extends React.Component {
                     : "You didn't download your updated wallet. Are you sure you want to exit?";
             }
         });
+    }
+
+    onAcceptTerms() {
+        this.setState({termsAccepted: true});
     }
 
     onChangeView(view) {
@@ -287,7 +294,6 @@ export class App extends React.Component {
 
         return (
             <div id="layout" className="content pure-g">
-
                 <Navigation
                     wallet={this.state.wallet}
                     downloaded={this.state.downloaded}
@@ -295,8 +301,10 @@ export class App extends React.Component {
                     onChangeView={this.onChangeView}
                 />
 
+
                 {view}
 
+                {this.state.termsAccepted ? '' : <ViewTerms />}
                 <div id="tooltip">Copied!</div>
                 <div id="this-is-mobile"></div>
             </div>
