@@ -39,16 +39,17 @@ export class App extends React.Component {
             wallet.save();
         }
 
-        // TODO save in local storage
+
+        const saved = this.loadConfig();
         this.state = {
             view: 'Transfers',
             wallet: wallet,
-            downloaded: true,
+            downloaded: saved.downloaded ?? true,
             lastReceive: '',
             lastSend: '',
             lastCheck: [],
             lastRecover: [],
-            termsAccepted: false,
+            termsAccepted: saved.termsAccepted ?? false,
         };
 
         const dis = this;
@@ -63,8 +64,27 @@ export class App extends React.Component {
         });
     }
 
+    private loadConfig() {
+        const data = window.localStorage.getItem('casa');
+        if (data) {
+            return JSON.parse(data);
+        } else {
+            return {};
+        }
+    }
+
+    private saveConfig() {
+        console.debug("(webcasa) saving config")
+        const state = {
+            downloaded: this.state.downloaded,
+            termsAccepted: this.state.termsAccepted,
+        };
+        window.localStorage.setItem('casa', JSON.stringify(state, null, 4));
+
+    }
+
     onAcceptTerms() {
-        this.setState({termsAccepted: true});
+        this.setState({termsAccepted: true}, this.saveConfig);
     }
 
     onChangeView(view) {
@@ -82,7 +102,7 @@ export class App extends React.Component {
             locked: false,
             lastReceive: '',
             lastSend: '',
-        });
+        }, this.saveConfig);
     }
 
     private saveModifiedWallet(alreadySaved=false) {
@@ -92,7 +112,7 @@ export class App extends React.Component {
         this.setState({
             wallet: this.state.wallet, // force repaint
             downloaded: false,
-        });
+        }, this.saveConfig);
     }
 
     /* Settings (wallet operations) */
@@ -149,7 +169,7 @@ export class App extends React.Component {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
-        this.setState({downloaded: true});
+        this.setState({downloaded: true}, this.saveConfig);
     }
 
     async onCheckWallet() {

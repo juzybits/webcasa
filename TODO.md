@@ -1,6 +1,3 @@
-# State
-	- Save & load App.state into local storage "casa" (except [wallet])
-
 # Prod
 	- Links to webcash.org, twitter, discord
 	- <noscript> for SEO
