@@ -1,5 +1,7 @@
 import React from "react";
 
+import { WEBCASH_TERMS } from './webcash_terms';
+
 export class ViewTerms extends React.Component {
     constructor(props) {
         super(props)
@@ -7,9 +9,8 @@ export class ViewTerms extends React.Component {
         this.state = {
             casaTerms: false,
             cashTerms: false,
-            webcashTermsText: 'Fetching from webcash.org (please wait)',
+            webcashTermsText: WEBCASH_TERMS,
         };
-        // TODO: pull webcash terms text
     }
 
     onCheckboxChange(event) {
