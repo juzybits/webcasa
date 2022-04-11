@@ -23,7 +23,7 @@ export class ViewSettings extends React.Component {
                 <button className="pure-button"
                         onClick={this.props.onDownloadWallet}>Download</button>
 
-                <label className="pure-button" htmlFor="bc-file-input">Upload</label>
+                <label className="pure-button" htmlFor="bc-file-input">Import</label>
                 <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
                        onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
