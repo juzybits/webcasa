@@ -21,7 +21,7 @@ export class Navigation extends React.Component {
 
     makeButton() {
         const clazz = !this.props.downloaded ? 'unsaved' : '';
-        const label = !this.props.downloaded ? 'Download' : shorten(this.props.wallet.getContents().master_secret);
+        const label = !this.props.downloaded ? 'Export' : shorten(this.props.wallet.getContents().master_secret);
         return <button className={`pure-button ${clazz}`} onClick={this.props.onDownloadWallet}>{label}</button>
     }
 

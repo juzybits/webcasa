@@ -14,14 +14,14 @@ export class ViewSettings extends React.Component {
         <fieldset id="wallet-buttons">
             <legend>MANAGE WALLET</legend>
             <button className="pure-button unsaved"
-                    onClick={this.props.onDownloadWallet}>Download</button>
+                    onClick={this.props.onDownloadWallet}>Export</button>
         </fieldset>
         :
         <React.Fragment>
             <fieldset id="wallet-buttons">
                 <legend>MANAGE WALLET</legend>
                 <button className="pure-button"
-                        onClick={this.props.onDownloadWallet}>Download</button>
+                        onClick={this.props.onDownloadWallet}>Export</button>
 
                 <label className="pure-button" htmlFor="bc-file-input">Import</label>
                 <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"

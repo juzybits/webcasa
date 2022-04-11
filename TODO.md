@@ -5,7 +5,8 @@
 
 # Navigation
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
-	- ViewSettings: Delete
+	- ViewSettings: "Delete" button
+	- ViewAbout
 
 # Code quality
 	- Review wallet saving.
