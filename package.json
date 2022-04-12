@@ -11,5 +11,24 @@
     "parcel": "^2.4.0",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0"
+  },
+  "scripts": {
+    "serve": "parcel src/index.html",
+    "build-github":   "rm -rf dist/github   && parcel build src/index.html --target github",
+    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase",
+    "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle"
+  },
+  "targets": {
+    "github": {
+      "publicUrl": "./",
+      "sourceMap": false
+    },
+    "firebase": {
+      "sourceMap": false
+    },
+    "bundle": {
+      "publicUrl": "./",
+      "sourceMap": false
+    }
   }
 }

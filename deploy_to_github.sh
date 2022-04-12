@@ -1,8 +1,5 @@
-rm -Rf dist/
-rm -Rf .parcel-cache/
-
-npm exec parcel build src/index.html -- --no-source-maps --public-url https://wayfzbee.github.io/webcasa-dist/
-cd dist/
+npm run build-github
+cd dist/github
 
 git init .
 git remote add origin git@github.com:wayfzbee/webcasa-dist.git
