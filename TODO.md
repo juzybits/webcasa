@@ -10,6 +10,7 @@
 	- ViewSettings: "Delete" button
 
 # Build up
+    - .zip download
 	- QR payments
 	- P2P payments via email and SMS (prefill)
 	- Browser extension
@@ -25,7 +26,6 @@
 
 # Server-side
 	- Payment server: JS/Python/PHP plugin to receive and replace payments
-	- "WebStache: a generic temporary text storage". Abuse prevented with webcash fee. User A creates bucket. User B sends webcash to bucket. User A claims.
 	- Backups, 2FA, notifications, ...
 
 # Payments
@@ -44,3 +44,9 @@
 # Code quality
 	- Review wallet saving.
 	- Unit tests.
+
+# "PinBoard: temporary text storage".
+	- Abuse prevented with webcash fee
+	- How long to keep the pin around? Auto destroy after open/later?
+	- "Who can see this pin" everyone/private
+	- Private: User A creates bucket. User B sends webcash to bucket. User A claims.

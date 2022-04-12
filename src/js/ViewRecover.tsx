@@ -78,15 +78,16 @@ export class ViewRecover extends React.Component {
                         <label htmlFor="masterSecret">master secret</label>
                         <input type="text" id="masterSecret" defaultValue={this.state.masterSecret}
                                onFocus={this.onFocus} onChange={this.onChange}
-                               spellCheck='false' autoCorrect='off'
-                               disabled={this.state.inProgress} />
+                               disabled={this.state.inProgress}
+                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
 
                     <fieldset>
                         <label htmlFor="gapLimit">gap limit</label>
                         <input type="number" id="gapLimit" min="1" defaultValue={this.state.gapLimit}
                                max="1000" step="1" onChange={this.onChange}
-                               disabled={this.state.inProgress} />
+                               disabled={this.state.inProgress}
+                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
 
                     {submit}

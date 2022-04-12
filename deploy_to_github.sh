@@ -1,7 +1,7 @@
 rm -Rf dist/
 rm -Rf .parcel-cache/
 
-npx parcel build src/index.html --no-source-maps --public-url https://wayfzbee.github.io/webcasa-dist/
+npm exec parcel build src/index.html -- --no-source-maps --public-url https://wayfzbee.github.io/webcasa-dist/
 cd dist/
 
 git init .

@@ -51,11 +51,13 @@ export class FormReceive extends React.Component {
                     <fieldset>
                         <label htmlFor="receiveWebcash">Webcash</label>
                         <input type="text" id="receiveWebcash" onChange={this.onChange}
-                               required value={this.state.receiveWebcash} />
+                               required value={this.state.receiveWebcash}
+                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <fieldset>
                         <label htmlFor="receiveMemo">Memo</label>
-                        <input type="text" id="receiveMemo" onChange={this.onChange} value={this.state.receiveMemo} />
+                        <input type="text" id="receiveMemo" onChange={this.onChange} value={this.state.receiveMemo}
+                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <div className="centered">
                         <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>

@@ -57,11 +57,13 @@ export class FormSend extends React.Component {
                     <fieldset>
                         <label htmlFor="sendAmount">Amount ({btnSendMax})</label>
                         <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001"
-                               required onChange={this.onChange} value={this.state.sendAmount}/>
+                               required onChange={this.onChange} value={this.state.sendAmount}
+                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <fieldset>
                         <label htmlFor="sendMemo">Memo</label>
-                        <input type="text" id="sendMemo" onChange={this.onChange} value={this.state.sendMemo}/>
+                        <input type="text" id="sendMemo" onChange={this.onChange} value={this.state.sendMemo}
+                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <div className="centered">
                         <button type="submit" className="pure-button pure-button-primary">Create payment</button>
