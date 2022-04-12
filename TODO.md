@@ -1,19 +1,18 @@
 # Prod
-	- Links to webcash.org, twitter, discord
-	- <noscript> for SEO
     - Logo
+	- Links to twitter, discord
+	- Server-side logging (needs billing account)
 
 # UX
 	- Add info throughout the site
-
-# Navigation
 	- ViewAbout
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 	- ViewSettings: "Delete" button
 
-# Code quality
-	- Review wallet saving.
-	- Unit tests.
+# Build up
+	- QR payments
+	- P2P payments via email and SMS (prefill)
+	- Browser extension
 
 # CORE: Consistent logs (PR sent)
 # CORE: Decimal bug (PR sent)
@@ -24,17 +23,24 @@
 	- Mobile 4 buttons (display:fixed)
 	- Multiple cards (e.g. for History)
 
-# Security
-	- encrypt local storage with pin/MS
-		- keep encrypted at all times - only decrypted in memory
-	- autolock
+# Server-side
+	- Payment server: JS/Python/PHP plugin to receive and replace payments
+	- "WebStache: a generic temporary text storage". Abuse prevented with webcash fee. User A creates bucket. User B sends webcash to bucket. User A claims.
+	- Backups, 2FA, notifications, ...
 
-# Skunkworks
-	- QR payments
-	- Browser extension
-	- Send to [John/Jane/Mike] via [QR/email/SMS/Twitter/Discord/API request]
-	- Payment server: PHP/Python/JS plugin to receive and replace payments
-	- "Send with" email/crypto[Solana/Ethereum/etc]
-	- Multi-wallet
+# Payments
+	- Send (to [John|Jane|Mike]) via [QR|email|SMS|Twitter|Discord|API request]
 	- Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key). Address book.
-	- server-side or crypto-based: backups, 2FA, notifications, ...
+
+# Security
+	- Encrypt local storage with password
+	- Keep encrypted at all times. Only decrypted in memory.
+	- Autolock
+
+# Integrations
+	- Discord
+	- Twitter
+
+# Code quality
+	- Review wallet saving.
+	- Unit tests.
