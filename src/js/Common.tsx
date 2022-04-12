@@ -70,6 +70,13 @@ export class CopiableValue extends React.Component {
     }
 }
 
+export function NothingYet(props) {
+    if (!props.cond) {
+        return '';
+    }
+    return <div className="nothing-yet">{props.msg}</div>;
+}
+
 function webcashToCopiableValues(val) {
     let values: array;
     if (Array.isArray(val)) {

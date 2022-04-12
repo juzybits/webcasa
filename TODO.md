@@ -3,10 +3,13 @@
 	- <noscript> for SEO
     - Logo
 
+# UX
+	- Add info throughout the site
+
 # Navigation
+	- ViewAbout
 	- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 	- ViewSettings: "Delete" button
-	- ViewAbout
 
 # Code quality
 	- Review wallet saving.
@@ -16,6 +19,7 @@
 # CORE: Decimal bug (PR sent)
 
 # UX cherry
+	- Prettier pop-ups instead of native
 	- ViewHistory pagination, filter, search, sorting
 	- Mobile 4 buttons (display:fixed)
 	- Multiple cards (e.g. for History)
