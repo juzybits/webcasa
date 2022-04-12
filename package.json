@@ -8,22 +8,23 @@
     "@parcel/transformer-less": "^2.4.0",
     "buffer": "^6.0.3",
     "events": "^3.3.0",
+    "node-html-parser": "^5.3.3",
     "parcel": "^2.4.0",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0"
   },
   "scripts": {
     "serve": "parcel src/index.html",
-    "build-github":   "rm -rf dist/github   && parcel build src/index.html --target github",
-    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase",
+    "build-github":   "rm -rf dist/github   && parcel build src/index.html --target github   && bash bundle.sh github",
+    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && bash bundle.sh firebase",
     "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle"
   },
   "targets": {
-    "github": {
-      "publicUrl": "./",
+    "firebase": {
       "sourceMap": false
     },
-    "firebase": {
+    "github": {
+      "publicUrl": "./",
       "sourceMap": false
     },
     "bundle": {
