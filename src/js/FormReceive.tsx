@@ -51,7 +51,7 @@ export class FormReceive extends React.Component {
                     <fieldset>
                         <label htmlFor="receiveWebcash">Webcash</label>
                         <input type="text" id="receiveWebcash" onChange={this.onChange}
-                               required autoFocus value={this.state.receiveWebcash} />
+                               required value={this.state.receiveWebcash} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="receiveMemo">Memo</label>

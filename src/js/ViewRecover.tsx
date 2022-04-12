@@ -77,7 +77,7 @@ export class ViewRecover extends React.Component {
                     <fieldset>
                         <label htmlFor="masterSecret">master secret</label>
                         <input type="text" id="masterSecret" defaultValue={this.state.masterSecret}
-                               autoFocus onFocus={this.onFocus} onChange={this.onChange}
+                               onFocus={this.onFocus} onChange={this.onChange}
                                spellCheck='false' autoCorrect='off'
                                disabled={this.state.inProgress} />
                     </fieldset>
