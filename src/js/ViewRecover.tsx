@@ -68,7 +68,10 @@ export class ViewRecover extends React.Component {
 
             <div id="ViewRecover" className="card closable">
 
-                <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
+                <a href="#" className="close-x" onClick={(event) => {
+                    event.preventDefault();
+                    this.props.onChangeView('Settings');
+                }}>✕</a>
 
                 <div className="card-description">
                     <p>You can enter your "master secret" below to recover your wallet.</p>

@@ -11,7 +11,6 @@
     - ViewSettings: "Delete" button
 
 # Build up
-    - .zip download
     - QR payments
     - P2P payments via email and SMS (prefill)
     - Browser extension

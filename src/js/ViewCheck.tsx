@@ -46,7 +46,10 @@ export class ViewCheck extends React.Component {
             </header>
             <div id="ViewCheck" className="card closable">
 
-                <a href="#" className="close-x" onClick={()=>this.props.onChangeView('Settings')}>✕</a>
+                <a href="#" className="close-x" onClick={(event) => {
+                    event.preventDefault();
+                    this.props.onChangeView('Settings');
+                }}>✕</a>
 
                 <div className="card-description">
                 <p>
