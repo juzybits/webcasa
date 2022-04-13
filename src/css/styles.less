@@ -1,14 +1,14 @@
 /* Variables */
-
 @body-background: #1c1c1c;
 @border-grey: #444;
 @border-lightgrey: 1px solid #ddd;
 @card-background: #262627;
 @hover-grey: #2e2e2f;
+@line-height: 1.3em;
 @padding: 1.2em;
 @radius-big: 8px;
-@radius-lil: 6px;
 @radius-card: 18px;
+@radius-lil: 6px;
 @text-color: #dbdbdb;
 
 @lightgreen: #9ddb9e;
@@ -119,7 +119,7 @@ input[type="checkbox"] {
         margin-block-start: 0.5em;
         margin-block-end: 1.5em;
     }
-    line-height: 1.3em;
+    line-height: @line-height;
 }
 
 .List {
@@ -514,11 +514,22 @@ button.unsaved {
         &:first-child {
             margin-top: 10px;
         }
+        &:last-child {
+            margin-bottom: 1em;
+        }
         &#wallet-buttons {
             text-align: center;
             .pure-button {
                 margin-right: 8px;
                 margin-left: 8px;
+            }
+        }
+        &#local-webcasa {
+            p {
+                line-height: @line-height;
+            }
+            tt {
+                font-size: 1.2em;
             }
         }
         legend {
@@ -645,6 +656,7 @@ button.unsaved {
         border: 1px solid @border-grey;
         max-width: 660px;
         padding: 36px;
+        margin-bottom: 2em;
     }
 
     .card.closable {

@@ -82,6 +82,14 @@ export class ViewSettings extends React.Component {
                         <label>MINING depth</label>{data.walletdepths.MINING}
                     </div>
                 </fieldset>
+
+                <fieldset id="local-webcasa">
+                    <legend>SELF-HOSTING</legend>
+                    <p>You can run WebCasa.app on our own laptop.</p>
+                    <p>Simply download the .zip file below and open <tt>index.html</tt> on a browser to get started.</p>
+                    <a className="pure-button" download href="/webcasa.zip">Download app</a>
+                </fieldset>
+
             </div>
         </div>
         );
