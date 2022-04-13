@@ -8,7 +8,7 @@ export class ViewSettings extends React.Component {
         const balance = this.props.wallet.getBalance().toString();
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
-        const abbrMaster = shorten(fullMaster)
+        const abbrMaster = shorten(fullMaster);
         const walletButtons = !this.props.downloaded
         ?
         <fieldset id="wallet-buttons">
@@ -23,11 +23,11 @@ export class ViewSettings extends React.Component {
                 <button className="pure-button"
                         onClick={this.props.onDownloadWallet}>Export</button>
 
-                <label className="pure-button" htmlFor="bc-file-input">Import</label>
+                <label className="pure-button btn-orange" htmlFor="bc-file-input">Import</label>
                 <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
                        onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
-                <button className="pure-button" onClick={this.props.onCreateWallet}>Create new</button>
+                <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Reset</button>
             </fieldset>
 
             <fieldset id="wallet-buttons">

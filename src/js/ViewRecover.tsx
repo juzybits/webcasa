@@ -9,8 +9,9 @@ export class ViewRecover extends React.Component {
         this.onFocus = this.onFocus.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.exitOnEscape = this.exitOnEscape.bind(this);
+        this.initialMaster = this.props.wallet.getContents().master_secret;
         this.state = {
-            masterSecret: this.props.wallet.getContents().master_secret,
+            masterSecret: this.initialMaster,
             gapLimit: 20,
             inProgress: false,
         };
@@ -50,10 +51,11 @@ export class ViewRecover extends React.Component {
     }
 
     render() {
+        const clazz = this.state.masterSecret === this.initialMaster ? '' : 'btn-orange';
         const consoleLogs = 0===this.props.lastRecover.length ? '' :
             <div className="console-logs">{this.props.lastRecover}</div>;
         const submit = this.state.inProgress ? '' :
-            <button type="submit" className="pure-button pure-button-primary">Recover wallet</button>;
+            <button type="submit" className={`pure-button pure-button-primary ${clazz}`}>Recover wallet</button>;
         const processing = !this.state.inProgress ? '' :
             <label className="label-processing">In progress...</label>;
 

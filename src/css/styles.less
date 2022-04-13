@@ -11,10 +11,15 @@
 @radius-lil: 6px;
 @text-color: #dbdbdb;
 
-@lightgreen: #9ddb9e;
-@lightgreenbg: rgb(158 219 159 / 3%);
-@lightbluebg: #9ddb9e1c;
 @lightblue: #92c0d5;
+@lightbluebg: #9ddb9e1c;
+@lightgreen: #a5e4a6;
+@lightgreenbg: #a5e4a614;
+@lightgreenbg_copiable: #a5e4a609;
+@lightorange: #f3e0ac;
+@lightorangebg: #f3e0ac14;
+@lightred: #f0aeae;
+@lightredbg: #f0aeae14;
 
 @font-face {
   font-family: "Montserrat";
@@ -91,6 +96,20 @@ input[type="checkbox"] {
 
 /** Reusable components **/
 
+.btn-red {
+    &:hover {
+        color: @lightred;
+        border-color: @lightred;
+        background: @lightredbg;
+    }
+}
+.btn-orange {
+    &:hover {
+        color: @lightorange;
+        border-color: @lightorange;
+        background: @lightorangebg;
+    }
+}
 .view-wrapper {
     width: 100%;
 }
@@ -174,7 +193,7 @@ input[type="checkbox"] {
     line-height: 30px;
     padding: 0px 6px;
     &:hover {
-        background: @lightgreenbg;
+        background: @lightgreenbg_copiable;
         border-color: @lightgreen;
         color: @lightgreen;
         cursor: pointer;
