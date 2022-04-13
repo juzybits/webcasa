@@ -1,10 +1,6 @@
-# Prod
-    - Links to twitter, discord
-    - Logo
-    - Server-side logging (needs billing account)
-
 # UX
     - Add info throughout the site
+    - Prevet logo area elements from collapsing
     - ViewAbout
     - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 
@@ -12,6 +8,10 @@
     - QR payments
     - P2P payments via email and SMS (prefill)
     - Browser extension
+
+# Prod
+    - Logo
+    - Server-side logging (needs billing account)
 
 # CORE: Consistent logs (PR sent)
 # CORE: Decimal bug (PR sent)

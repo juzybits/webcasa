@@ -49,7 +49,17 @@ export class Navigation extends React.Component {
                             {menuItems}
                         </ul>
                         <ul id="social">
-                            Twitter, Discord
+                            <a className="social-icon" href="https://twitter.com/WebCasaApp" target="_blank">
+                                <i className={`nav-icon icon-twitter`}></i>
+                            </a>
+
+                            <a className="social-icon" href="https://discord.com/invite/qf95KMqkPW" target="_blank">
+                                <i className={`nav-icon icon-discord`}></i>
+                            </a>
+
+                            <a className="social-icon" href="https://webcash.org" target="_blank">
+                                <i className={`nav-icon icon-webcash`}></i>
+                            </a>
                         </ul>
                     </div>
                 </div>
