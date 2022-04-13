@@ -1,14 +1,12 @@
 # Prod
-    - Version indicator
-    - Logo
     - Links to twitter, discord
+    - Logo
     - Server-side logging (needs billing account)
 
 # UX
     - Add info throughout the site
     - ViewAbout
     - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
-    - ViewSettings: "Delete" button
 
 # Build up
     - QR payments
@@ -19,6 +17,7 @@
 # CORE: Decimal bug (PR sent)
 
 # UX cherry
+    - Favicon align vertically
     - Prettier pop-ups instead of native
     - ViewHistory pagination, filter, search, sorting
     - Mobile 4 buttons (display:fixed)

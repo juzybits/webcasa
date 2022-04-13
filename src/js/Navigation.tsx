@@ -48,6 +48,9 @@ export class Navigation extends React.Component {
                         <ul className="pure-menu-list">
                             {menuItems}
                         </ul>
+                        <ul id="social">
+                            Twitter, Discord
+                        </ul>
                     </div>
                 </div>
 
@@ -70,7 +73,7 @@ function MenuItem(props) {
     let count = '';
     let icon = '';
     if ("Transfers" === props.name) {
-        icon = 'icon-right-left';
+        icon = 'icon-send';
     } else
     if ("Settings" === props.name) {
         icon = 'icon-gear';
