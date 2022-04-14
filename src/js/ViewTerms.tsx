@@ -60,9 +60,6 @@ export class ViewTerms extends React.Component {
     }
 
     render() {
-        if (this.props.accepted) {
-            return '';
-        }
         const terms = !this.state.casaTerms ? this.makeCasaTerms() : this.makeCashTerms();
         return (
         <div id="ViewTerms" className="modal">

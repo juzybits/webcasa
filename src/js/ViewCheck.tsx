@@ -1,7 +1,5 @@
 import React from "react";
 
-import { ActionResult } from "./Common";
-
 export class ViewCheck extends React.Component {
     constructor(props) {
         super(props)

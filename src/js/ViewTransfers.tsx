@@ -42,9 +42,8 @@ export class ViewTransfers extends React.Component {
                     <div className={`tab right ${selectedSend}`} onClick={this.onClickTab}>Send</div>
                 </div>
 
-                <div id="BalanceIndicator">
-                    <label id="balance"><i className={`nav-icon icon-webcash`}></i> {balance}</label>
-                    {/*<label id="balance">₩ {balance}</label>*/}
+                <div className="balance-indicator">
+                    <label className="balance-amount"><i className="nav-icon icon-webcash"></i> {balance}</label>
                 </div>
 
                 <div className="tab-content">{tabContent}</div>

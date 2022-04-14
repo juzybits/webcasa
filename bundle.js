@@ -33,7 +33,7 @@ body.innerHTML += `<script>${script_txt}</script>`;
 // Overwrite index.html
 
 try {
-    fs.writeFileSync('dist/bundle/index.html', root.toString()); // TODO
+    fs.writeFileSync('dist/bundle/index.html', root.toString());
 } catch (err) {
     console.error(err);
     process.exit(1);

@@ -1,11 +1,34 @@
 /** Helper functions (non-React) **/
 
+import QRCode from 'qrcode';
+
 // TODO: turn into a React component
 export function tooltip(text: string): void {
     const tooltip = document.getElementById("tooltip");
     tooltip.innerHTML = text;
     tooltip.style.display = "block";
     setTimeout(() => tooltip.style.display = "none", 1500);
+}
+
+export function makeURL(params): string {
+    const query = '?' + new URLSearchParams(params).toString();
+    const url = new URL(window.location.origin + window.location.pathname + query);
+    return url.href;
+}
+
+export function renderQR(elementId: string, contents: string): bool {
+    const canvas = document.getElementById(elementId)
+    if (!canvas) {
+        console.error(`(renderQR) Element #${elementId} not found!`);
+        return false;
+    }
+    QRCode.toCanvas(canvas, contents, (err) => {
+        if (err) {
+            console.error("(renderQR)", err);
+        }
+        console.debug("(renderQR) Rendered with contents:", contents);
+    });
+    return true;
 }
 
 export function shorten(text: string, slice: number = 4): string {

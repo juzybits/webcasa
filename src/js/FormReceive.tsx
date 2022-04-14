@@ -57,6 +57,7 @@ export class FormReceive extends React.Component {
                     <fieldset>
                         <label htmlFor="receiveMemo">Memo</label>
                         <input type="text" id="receiveMemo" onChange={this.onChange} value={this.state.receiveMemo}
+                               maxLength="64"
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <div className="centered">

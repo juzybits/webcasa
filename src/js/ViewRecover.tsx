@@ -1,7 +1,5 @@
 import React from "react";
 
-import { ActionResult } from "./Common";
-
 export class ViewRecover extends React.Component {
     constructor(props) {
         super(props)
