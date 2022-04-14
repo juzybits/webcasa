@@ -264,7 +264,7 @@ button.unsaved {
 
 .blur {
     #nav, .view-wrapper {
-        filter: blur(7);
+        display: none;
     }
 }
 
@@ -656,10 +656,10 @@ button.unsaved {
 
     .card, .modal-card {
         border-radius: @radius-card;
+        border: 1px solid @border-grey;
 
     }
     .card {
-        border: 1px solid @border-grey;
         max-width: 660px;
         padding: 36px;
         margin-bottom: 2em;
