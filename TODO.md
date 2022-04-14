@@ -1,23 +1,31 @@
-# UX
-    - Add info throughout the site
-    - Prevet logo area elements from collapsing
-    - ViewAbout
-    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
-
 # Build up
-    - QR payments
+    - QR codes:
+        PAY
+            - ViewSend: "Copy to clipboard", "Generate QR code"
+            - links to https://webcasa.app#insert=e....
+        INSERT
+            - App.render()  if(this.state.is1stRender) ...
+            - if no wallet: "You received X webcash. Copy to clipboard / Insert in [new] wallet [+ accept terms])"
+                - Normalize styles with .card .modal .closable
+            - then: render "Receive"
+
     - P2P payments via email and SMS (prefill)
     - Browser extension
 
 # Prod
     - Logo
+    - Add info throughout the site / ViewAbout
+    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
     - Server-side logging (needs billing account)
 
 # CORE: Consistent logs (PR sent)
 # CORE: Decimal bug (PR sent)
 
-# UX cherry
+# UX
+    - "X" better icon
+    - Prevent logo area elements from collapsing
     - Favicon align vertically
+
     - Prettier pop-ups instead of native
     - ViewHistory pagination, filter, search, sorting
     - Mobile 4 buttons (display:fixed)

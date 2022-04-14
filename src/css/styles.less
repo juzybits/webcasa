@@ -1,7 +1,6 @@
 /* Variables */
 @body-background: #1c1c1c;
 @border-grey: #444;
-@border-lightgrey: 1px solid #ddd;
 @card-background: #262627;
 @hover-grey: #2e2e2f;
 @line-height: 1.3em;
@@ -110,6 +109,14 @@ input[type="checkbox"] {
         background: @lightorangebg;
     }
 }
+button.unsaved {
+    background: green;
+    border-color: green;
+    &:hover {
+        background: #27aa28;
+        border-color: #27aa28;
+    }
+}
 .view-wrapper {
     width: 100%;
 }
@@ -120,7 +127,16 @@ input[type="checkbox"] {
     padding: @padding;
     width: 100%;
 }
-
+.card-description {
+    p {
+        margin-block-start: 0.5em;
+        margin-block-end: 1.5em;
+    }
+    line-height: @line-height;
+}
+.card.closable {
+    padding: 25px;
+}
 .close-x {
     color: @text-color;
     float: right;
@@ -132,13 +148,6 @@ input[type="checkbox"] {
         cursor: pointer;
         font-size: 1.35em;
     }
-}
-.card-description {
-    p {
-        margin-block-start: 0.5em;
-        margin-block-end: 1.5em;
-    }
-    line-height: @line-height;
 }
 
 .List {
@@ -270,12 +279,65 @@ input[type="checkbox"] {
     margin: 1em 0;
     font-size: 1.1em;
 }
-button.unsaved {
-    background: green;
-    border-color: green;
-    &:hover {
-        background: #27aa28;
-        border-color: #27aa28;
+
+.header {
+    background: inherit;
+    border: 0;
+    margin: 0;
+    padding: 1em;
+    h1 {
+        margin: 0;
+        font-size: 1.65em;
+    }
+}
+
+.blur {
+    #nav, .view-wrapper {
+        filter: blur(7);
+    }
+}
+
+.modal {
+    background-color: @body-background;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+    z-index: 999;
+    .modal-card {
+        background: @card-background;
+        color: @text-color;
+        padding: 2em 1.4em;
+        h1 {
+            margin: 0 0 0.8em 0;
+        }
+        p {
+            font-size: 1.05em;
+            line-height: 1.2em;
+            margin-bottom: 1.5em;
+        }
+        .check-item {
+            font-size: 1.2em;
+            input {
+                margin-left: 3px;
+                transform: scale(1.7);
+            }
+            label {
+                padding-left: 12px;
+            }
+        }
+    }
+    .modal-textarea {
+        background: @body-background;
+        border-radius: @radius-lil;
+        box-sizing: border-box;
+        color: @text-color;
+        display: block;
+        height: 200px;
+        margin-bottom: 1em;
+        padding: 0.9em 0.8em;
+        width: 100%;
     }
 }
 
@@ -459,68 +521,6 @@ button.unsaved {
     top: -3px;
 }
 
-.header {
-    background: inherit;
-    border: 0;
-    margin: 0;
-    padding: 1em;
-    h1 {
-        margin: 0;
-        font-size: 1.65em;
-    }
-}
-
-.modal {
-    background-color: @body-background;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    position: fixed;
-    z-index: 999;
-    .modal-card {
-        background: @card-background;
-        color: @text-color;
-        padding: 2em 1.4em;
-        h1 {
-            margin: 0 0 0.8em 0;
-        }
-        p {
-            font-size: 1.05em;
-            line-height: 1.2em;
-            margin-bottom: 1.5em;
-        }
-        .check-item {
-            font-size: 1.2em;
-            input {
-                margin-left: 3px;
-                transform: scale(1.7);
-            }
-            label {
-                padding-left: 12px;
-            }
-        }
-    }
-    .modal-textarea {
-        background: @body-background;
-        border-radius: @radius-lil;
-        box-sizing: border-box;
-        color: @text-color;
-        display: block;
-        height: 200px;
-        margin-bottom: 1em;
-        padding: 0.9em 0.8em;
-        width: 100%;
-    }
-}
-.blur {
-    #nav, .view-wrapper {
-        filter: blur(7);
-    }
-}
-
-/** View styles **/
-
 #ViewTransfers {
     &.card {
         padding: 0 0 @padding 0;
@@ -618,29 +618,87 @@ button.unsaved {
     }
 }
 
-.card.closable {
-    padding: 25px;
-}
-
 /** Tablet (and up) styles **/
 @media (min-width: 47em) {
-
-    #this-is-mobile {
-        display: none;
-    }
-
-    /* Move the layout over so we can fit the nav + list in on the left */
-    #layout {
-        // padding-left:550px; /* "left col (nav + list)" width */
-        position: relative;
-    }
 
     .view-wrapper {
         margin-left: 238px;
         margin-right: 30px;
     }
 
-    /* These are position:fixed; elements that will be in the left 500px of the screen */
+    .header {
+        background: inherit;
+        border: 0;
+        padding: 1em 0;
+    }
+
+    .tabs {
+        border-radius: @radius-card @radius-card 0 0;
+        .tab {
+            border-radius: @radius-card @radius-card 0 0;
+            &:selected {
+                border-radius: @radius-card @radius-card 0 0;
+            }
+        }
+    }
+    .tab-content {
+        border-radius: 0 0 @radius-card @radius-card;
+        padding: 1em 36px 28px;
+    }
+
+    .card {
+        border-radius: @radius-card;
+        border: 1px solid @border-grey;
+        max-width: 660px;
+        padding: 36px;
+        margin-bottom: 2em;
+    }
+    .card.closable {
+        padding: 36px;
+    }
+    .close-x {
+        margin-right: -19px;
+        margin-top: -20px;
+    }
+
+    .modal {
+        background: rgb(0 0 0 / 33%);
+        .modal-card {
+            border-radius: @radius-card;
+            min-width: 500px;
+            max-width: 600px;
+            padding: 2.3em 2em;
+
+            left: 50%;
+            top: 40%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    #tooltip {
+        margin-left: 12px;
+        max-width: 340px;
+    }
+
+    #this-is-mobile {
+        display: none;
+    }
+
+    #layout {
+        position: relative;
+    }
+
+    #logo {
+        font-size: 1.5em;
+        margin-top: 10px;
+
+        sup {
+            float: right;
+            margin-top: -22px;
+        }
+    }
+
     #nav {
         border-right: 1px solid @border-grey;
         bottom: 0;
@@ -678,53 +736,6 @@ button.unsaved {
         }
     }
 
-    #logo {
-        font-size: 1.5em;
-        margin-top: 10px;
-
-        sup {
-            float: right;
-            margin-top: -22px;
-        }
-    }
-    .card {
-        border-radius: @radius-card;
-        border: 1px solid @border-grey;
-        max-width: 660px;
-        padding: 36px;
-        margin-bottom: 2em;
-    }
-
-    .card.closable {
-        padding: 36px;
-    }
-    .tabs {
-        border-radius: @radius-card @radius-card 0 0;
-        .tab {
-            border-radius: @radius-card @radius-card 0 0;
-            &:selected {
-                border-radius: @radius-card @radius-card 0 0;
-            }
-        }
-    }
-    .tab-content {
-        border-radius: 0 0 @radius-card @radius-card;
-        padding: 1em 36px 28px;
-    }
-    .close-x {
-        margin-right: -19px;
-        margin-top: -20px;
-    }
-    .header {
-        background: inherit;
-        border: 0;
-        padding: 1em 0;
-    }
-    #tooltip {
-        margin-left: 12px;
-        max-width: 340px;
-    }
-
     #ViewSettings {
         fieldset {
             padding: 23px 36px;
@@ -737,20 +748,6 @@ button.unsaved {
     #ViewTransfers {
         &.card {
             border-top: 0;
-        }
-    }
-    .modal {
-        background: rgb(0 0 0 / 33%);
-        .modal-card {
-            border-radius: @radius-card;
-            min-width: 500px;
-            max-width: 600px;
-            padding: 2.3em 2em;
-
-            left: 50%;
-            top: 40%;
-            position: absolute;
-            transform: translate(-50%, -50%);
         }
     }
 }
