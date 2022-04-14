@@ -50,7 +50,7 @@ export class ViewTerms extends React.Component {
             <p>
                 Even though WebCasa is not affiliated with Webcash, you must read and accept the Webcash.org <a href="https://webcash.org/terms" target="_blank">terms of service</a> before using the software.
             </p>
-            <textarea className="modal-textarea" defaultValue={this.state.webcashTermsText} />
+            <textarea id="terms-textarea" defaultValue={this.state.webcashTermsText} />
             <div className="check-item">
                 <input type="checkbox" id="cashTerms-chk" value="cashTerms" onChange={this.onCheckboxChange} defaultChecked={this.state.cashTerms}/>
                 <label htmlFor="cashTerms-chk">I agree to the Webcash.org <a href="https://webcash.org/terms" target="_blank">terms of service</a>.</label>
