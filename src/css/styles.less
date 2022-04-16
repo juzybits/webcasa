@@ -127,6 +127,9 @@ button.unsaved {
 .qr-wrapper {
     margin-top: 1.5em;
     text-align: center;
+    #qr-send {
+        border-radius: 10px;
+    }
 }
 
 .List {
@@ -200,16 +203,11 @@ button.unsaved {
     font-size: 1.15em;
     margin-bottom: 2em;
     padding: 0;
-    text-align: center;
 }
 .check-item {
-    display: inline-block;
     line-height: 2em;
     &:hover {
         color: white;
-    }
-    &:first-child {
-        margin-right: 30px;
     }
     label {
         padding-left: 10px;
@@ -225,13 +223,15 @@ button.unsaved {
 }
 
 .ActionResult {
-    margin-top: 20px;
+    margin-top: 25px;
     .item-row-title {
         display: block;
         margin-bottom: 10px;
     }
     .CopiableValue {
         line-height: 1.2em;
+        padding: 6px;
+        margin-left: -6px;
     }
     &.success .item-row-title {
         color: @lightgreen;
@@ -294,6 +294,7 @@ button.unsaved {
 
 .card {
     width: 100%;
+    box-sizing: border-box;
     &.closable {
         padding: 25px;
     }
@@ -430,7 +431,6 @@ button.unsaved {
     .pure-menu-link {
         color: @text-color;
         font-size: 1.2em;
-        margin-left: 0.5em;
         padding: 1.2em 0;
         &:hover, &:focus {
             background: @hover-grey;
