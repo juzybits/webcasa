@@ -37,21 +37,26 @@ export class App extends React.Component {
 
         let wallet = WebcashWalletLocalStorage.load();
         if (!wallet) {
+            // Create and save a new wallet
             wallet = new WebcashWalletLocalStorage();
-            wallet.setLegalAgreementsToTrue();
+            wallet.setLegalAgreementsToTrue(); // wallet-level accept
+            wallet.save();
+        } else if (!wallet.checkLegalAgreements()) {
+            // Handle corner cases like old/corrupted wallets
+            wallet.setLegalAgreementsToTrue(); // wallet-level accept
             wallet.save();
         }
-        const saved = this.loadConfig();
+        const conf = this.loadConfig();
         this.state = {
             view: 'Transfers',
             wallet: wallet,
-            downloaded: saved.downloaded ?? true,
+            downloaded: conf.downloaded ?? true,
             locked: false,
             lastReceive: '',
             lastSend: null,
             lastCheck: [],
             lastRecover: [],
-            termsAccepted: saved.termsAccepted ?? false,
+            termsAccepted: conf.termsAccepted ?? false, // site-level accept
             externalAction: null,
         };
 
@@ -170,6 +175,7 @@ export class App extends React.Component {
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
             const wallet = new WebcashWalletLocalStorage(walletData);
+            wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
             dis.replaceWallet(wallet);
         };
