@@ -1,18 +1,18 @@
 {
   "dependencies": {
-    "qrcode": "^1.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "webcash": "^1.0.3"
+    "qrcode": "1.x",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "webcash": "1.x"
   },
   "devDependencies": {
-    "@parcel/transformer-less": "^2.4.0",
-    "buffer": "^6.0.3",
-    "events": "^3.3.0",
-    "node-html-parser": "^5.3.3",
-    "parcel": "^2.4.0",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0"
+    "@parcel/transformer-less": "2.x",
+    "buffer": "6.x",
+    "events": "3.x",
+    "node-html-parser": "5.x",
+    "parcel": "2.x",
+    "process": "0.x",
+    "stream-browserify": "3.x"
   },
   "scripts": {
     "serve": "parcel src/index.html",
