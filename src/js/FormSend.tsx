@@ -42,7 +42,7 @@ export class FormSend extends React.Component {
     }
 
     showQR() {
-        if (!this.props.lastSend) {
+        if (!this.props.lastSend || this.props.lastSend.error) {
             return;
         }
         const url = makeURL({receive: this.props.lastSend.webcash, memo: this.props.lastSend.memo});

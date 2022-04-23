@@ -217,7 +217,6 @@ button.unsaved {
     padding: 0;
 }
 .check-item {
-    line-height: 2em;
     &:hover {
         color: white;
     }
@@ -297,6 +296,12 @@ button.unsaved {
     }
 }
 
+.modal {
+    background-color: @body-background;
+    word-break: break-word;
+    z-index: 1;
+}
+
 .card, .modal-card {
     background: @card-background;
     color: @text-color;
@@ -325,6 +330,7 @@ button.unsaved {
     }
     .check-item {
         font-size: 1.2em;
+        line-height: 1.3em;
         input {
             margin-left: 3px;
             transform: scale(1.7);
@@ -341,17 +347,6 @@ button.unsaved {
         margin-block-end: 1.5em;
     }
     line-height: @line-height;
-}
-
-.modal {
-    background-color: @body-background;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    position: fixed;
-    word-break: break-word;
-    z-index: 1;
 }
 
 .tabs {
@@ -611,17 +606,22 @@ button.unsaved {
     }
 }
 
-#ViewSecrets .List {
-    font-size: 1em;
-    .list-item {
-        padding: 0;
+#ViewSecrets {
+    .List {
+        font-size: 1em;
+        .list-item {
+            padding: 0;
+        }
+        .CopiableValue {
+            border-radius: 0;
+            border: 0;
+            display: block;
+            line-height: inherit;
+            padding: 15px 2px;
+        }
     }
-    .CopiableValue {
-        border-radius: 0;
-        border: 0;
-        display: block;
-        line-height: inherit;
-        padding: 15px 2px;
+    .check-item {
+        line-height: 2em;
     }
 }
 
@@ -703,6 +703,11 @@ button.unsaved {
 
     .modal {
         background: rgb(0 0 0 / 33%);
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        position: fixed;
     }
 
     .card, .modal-card {
