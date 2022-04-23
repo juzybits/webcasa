@@ -56,7 +56,7 @@ export class FormSend extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>
                         <label htmlFor="sendAmount">Amount ({btnSendMax})</label>
-                        <input type="number" id="sendAmount" min="0.000001" max="210000000000" step="0.000001"
+                        <input type="number" id="sendAmount" min="0.00000001" max="210000000000" step="0.00000001"
                                required onChange={this.onChange} value={this.state.sendAmount}
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>

@@ -2,9 +2,6 @@
     - Show "copy URL" under QR
     - Replace send form with "Success!" card
 
-# CORE: Decimal bug (PRs sent)
-    - Remove trailing 0s, update PR
-# CORE: Review https://github.com/kanzure/webcash/pull/18/files
 # CORE: Review https://github.com/kanzure/webcash/pull/13/files
 
 # UX easy
