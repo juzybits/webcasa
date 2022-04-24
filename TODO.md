@@ -6,9 +6,9 @@
 
 # UX easy
     - "X" better icon
+    - BUG: Balance indicator repaint
+    - BUG: Receive 'Invalid Date'
     - Prevent logo area elements from collapsing
-    - Balance indicator repaint bug
-    - Favicon align vertically
 
 # Security
     - Encrypt local storage with password
@@ -23,6 +23,7 @@
 
 # UX hard
     - Prettier pop-ups instead of native
+    - Multi-wallet
     - ViewHistory pagination, filter, search, sorting
     - Mobile 4 buttons (display:fixed)
     - Multiple cards (e.g. for History)
