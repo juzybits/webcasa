@@ -93,7 +93,6 @@ function LastResult(props) {
         <React.Fragment>
             <Row contents={props.last.webcash} title="Success! Here is the new secret" />
             <div className="qr-wrapper"><canvas id="qr-send"></canvas></div>
-            <br/>
             <Row contents={props.qrURL} title="Shareable URL"/>
         </React.Fragment>;
         clazz = 'success';
