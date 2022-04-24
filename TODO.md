@@ -1,6 +1,5 @@
 # UX easy
     - "X" better icon
-    - BUG: Receive 'Invalid Date'
     - BUG: Balance indicator repaint
     - Prevent logo area elements from collapsing
 

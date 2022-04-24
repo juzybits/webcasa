@@ -1,6 +1,6 @@
 import React from "react";
 
-import { json } from "./_util";
+import { formatDate } from "./_util";
 import { List, Row } from "./Common";
 
 export class FormReceive extends React.Component {
@@ -35,7 +35,7 @@ export class FormReceive extends React.Component {
         const history = this.props.wallet.log
             .filter((x) => x.type === "receive" || x.type === "insert" )
             .slice(-100).reverse().map((x) => {
-                const ts = !x.timestamp ? null : new Date(x.timestamp).toUTCString();
+                const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
                 return <div className="list-item" key={key++}>
                     <Row title='timestamp' contents={ts} />
                     <Row title='amount' contents={x.amount} />
