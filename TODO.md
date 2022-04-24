@@ -1,5 +1,4 @@
 # UX easy
-    - "X" better icon
     - BUG: Balance indicator repaint
     - Prevent logo area elements from collapsing
 

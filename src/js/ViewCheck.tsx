@@ -47,7 +47,7 @@ export class ViewCheck extends React.Component {
                 <a href="#" className="close-x" onClick={(event) => {
                     event.preventDefault();
                     this.props.onChangeView('Settings');
-                }}>✕</a>
+                }}><i className="icon-circle-xmark"></i></a>
 
                 <div className="card-description">
                 <p>
