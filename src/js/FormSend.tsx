@@ -13,6 +13,7 @@ export class FormSend extends React.Component {
         this.state = {
             sendAmount: '',
             sendMemo: '',
+            qrURL: null,
         };
     }
 
@@ -46,6 +47,7 @@ export class FormSend extends React.Component {
             return;
         }
         const url = makeURL({receive: this.props.lastSend.webcash, memo: this.props.lastSend.memo});
+        this.setState({qrURL: url});
         renderQR("qr-send", url);
     }
 
@@ -71,7 +73,7 @@ export class FormSend extends React.Component {
                     </div>
                 </form>
 
-                <LastResult last={this.props.lastSend} />
+                <LastResult last={this.props.lastSend} qrURL={this.state.qrURL} />
 
                 <History logs={this.props.wallet.log} />
 
@@ -91,6 +93,8 @@ function LastResult(props) {
         <React.Fragment>
             <Row contents={props.last.webcash} title="Success! Here is the new secret" />
             <div className="qr-wrapper"><canvas id="qr-send"></canvas></div>
+            <br/>
+            <Row contents={props.qrURL} title="Shareable URL"/>
         </React.Fragment>;
         clazz = 'success';
     } else {

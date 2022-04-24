@@ -1,13 +1,7 @@
-# QR codes
-    - Show "copy URL" under QR
-    - Replace send form with "Success!" card
-
-# CORE: Review https://github.com/kanzure/webcash/pull/13/files
-
 # UX easy
     - "X" better icon
-    - BUG: Balance indicator repaint
     - BUG: Receive 'Invalid Date'
+    - BUG: Balance indicator repaint
     - Prevent logo area elements from collapsing
 
 # Security
@@ -15,18 +9,19 @@
     - Keep encrypted at all times. Only decrypted in memory.
     - Autolock
 
-# Prod
-    - Logo
+# UX medium
     - Add info throughout the site / ViewAbout
+    - Prettier pop-ups instead of native
+    - Replace send form with "Success!" card
     - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
-    - Server-side logging (needs billing account)
 
 # UX hard
-    - Prettier pop-ups instead of native
     - Multi-wallet
     - ViewHistory pagination, filter, search, sorting
     - Mobile 4 buttons (display:fixed)
     - Multiple cards (e.g. for History)
+
+# CORE: Review https://github.com/kanzure/webcash/pull/13/files
 
 # Browser extension
 
