@@ -374,7 +374,6 @@ export class App extends React.Component {
             <div id="layout" className={`content pure-g ${blur}`}>
                 <Navigation
                     wallet={this.state.wallet}
-                    downloaded={this.state.downloaded}
                     onDownloadWallet={this.onDownloadWallet}
                     onChangeView={this.onChangeView}
                 />

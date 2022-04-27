@@ -19,12 +19,6 @@ export class Navigation extends React.Component {
         this.toggleVisibility();
     }
 
-    makeButton() {
-        const clazz = !this.props.downloaded ? 'unsaved' : '';
-        const label = !this.props.downloaded ? 'Export' : shorten(this.props.wallet.getContents().master_secret);
-        return <button className={`pure-button ${clazz}`} onClick={this.props.onDownloadWallet}>{label}</button>
-    }
-
     render() {
         const menuItems = ["Transfers", "Settings", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
@@ -41,7 +35,9 @@ export class Navigation extends React.Component {
                 <div className="nav-inner">
 
                     <div id="nav-button">
-                        {this.makeButton()}
+                        <button className="pure-button" onClick={this.props.onDownloadWallet}>
+                            {shorten(this.props.wallet.getContents().master_secret)}
+                        </button>
                     </div>
 
                     <div className="pure-menu">
