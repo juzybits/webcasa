@@ -9,14 +9,9 @@ export class ViewSettings extends React.Component {
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster);
-        const walletButtons = !this.props.downloaded
+        const manageWallet_OR_mandatoryExport = this.props.downloaded
         ?
-        <fieldset id="wallet-buttons">
-            <legend>MANAGE WALLET</legend>
-            <button className="pure-button unsaved"
-                    onClick={this.props.onDownloadWallet}>Export</button>
-        </fieldset>
-        :
+        // Manage wallet buttons
         <React.Fragment>
             <fieldset id="wallet-buttons">
                 <legend>MANAGE WALLET</legend>
@@ -29,13 +24,14 @@ export class ViewSettings extends React.Component {
 
                 <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Reset</button>
             </fieldset>
-
-            <fieldset id="wallet-buttons">
-                <legend>ADVANCED TOOLS</legend>
-                <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
-                <button className="pure-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
-            </fieldset>
-        </React.Fragment>;
+        </React.Fragment>
+        :
+        // Mandatory export button
+        <fieldset id="wallet-buttons">
+            <legend>MANAGE WALLET</legend>
+            <button className="pure-button unsaved"
+                    onClick={this.props.onDownloadWallet}>Export</button>
+        </fieldset>;
 
         return (
         <div className="view-wrapper">
@@ -44,7 +40,14 @@ export class ViewSettings extends React.Component {
             </header>
 
             <div id="ViewSettings" className="card">
-                    {walletButtons}
+
+                    {manageWallet_OR_mandatoryExport}
+
+                    <fieldset id="wallet-buttons">
+                        <legend>ADVANCED TOOLS</legend>
+                        <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
+                        <button className="pure-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
+                    </fieldset>
 
                 <div className="clear"></div>
 
