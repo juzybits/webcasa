@@ -9,17 +9,20 @@ import { ActionResult } from "./Common";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
 import { ViewCheck } from "./ViewCheck";
+import { ViewExternalReceive } from "./ViewExternalReceive";
 import { ViewHistory } from "./ViewHistory";
+import { ViewPassword } from "./ViewPassword";
 import { ViewRecover } from "./ViewRecover";
 import { ViewSecrets } from "./ViewSecrets";
 import { ViewSettings } from "./ViewSettings";
 import { ViewTerms } from "./ViewTerms";
 import { ViewTransfers } from "./ViewTransfers";
-import { ViewExternalReceive } from "./ViewExternalReceive";
 
 /**
  * Optionally encrypted with a password.
  * When no password is provided, this class works like WebcashWalletLocalStorage.
+ *
+ * TODO: sha256 password
  */
 export class CasaWallet extends WebcashWallet {
     private static locStoKey = 'wallet';
@@ -79,6 +82,7 @@ export class App extends React.Component {
 
         /* State initialization */
 
+        // TODO: ask for password if wallet is encrypted
         let wallet = CasaWallet.load();
         if (!wallet) {
             // Create and save a new wallet
@@ -102,8 +106,9 @@ export class App extends React.Component {
             lastRecover: [],
             externalAction: null,
             // Persistent app config
-            termsAccepted: conf.termsAccepted ?? false, // site-level accept
             downloaded: conf.downloaded ?? true,
+            encrypted: conf.encrypted ?? false,
+            termsAccepted: conf.termsAccepted ?? false, // site-level accept
         };
 
         /* On 1st visit - process URL parameters */
@@ -132,6 +137,9 @@ export class App extends React.Component {
                     : "You didn't download your updated wallet. Are you sure you want to exit?";
             }
         });
+
+        // TODO: Undo this (Apr 29 2022)
+        // TODO: if 'casa' in localStorage, move to 'config'
     }
 
     /* Helper methods */
@@ -149,6 +157,7 @@ export class App extends React.Component {
         console.debug("(webcasa) saving config")
         const state = {
             downloaded: this.state.downloaded,
+            encrypted: this.state.encrypted,
             termsAccepted: this.state.termsAccepted,
         };
         window.localStorage.setItem('config', JSON.stringify(state, null, 4));
@@ -159,6 +168,7 @@ export class App extends React.Component {
         this.setState({
             wallet: wallet,
             downloaded: true,
+            encrypted: false,
             locked: false,
             lastReceive: '',
             lastSend: null,
@@ -329,6 +339,10 @@ export class App extends React.Component {
         }
     }
 
+    onSetPassword(password: string = ''/*, autolock: number = 15*/) { // TODO
+        console.log("webcasa TODO: setting password to:", password);
+    }
+
     /* Handle Transfers (webcash operations) */
 
     async onReceiveWebcash(webcash, memo) {
@@ -414,6 +428,13 @@ export class App extends React.Component {
         if ('Check' === this.state.view) {
             view = <ViewCheck wallet={this.state.wallet} onChangeView={this.onChangeView}
                         onCheckWallet={this.onCheckWallet} lastCheck={this.state.lastCheck}/>;
+        } else
+        if ('Password' === this.state.view) {
+            view = <ViewPassword
+                        wallet={this.state.wallet}
+                        onSetPassword={this.onSetPassword}
+                        onChangeView={this.onChangeView}
+                    />;
         }
 
         return (

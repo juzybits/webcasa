@@ -45,6 +45,7 @@ export class ViewSettings extends React.Component {
 
                     <fieldset id="wallet-buttons">
                         <legend>ADVANCED TOOLS</legend>
+                        <button className="pure-button" onClick={()=>this.props.onChangeView('Password')}>Set password</button>
                         <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
                         <button className="pure-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
                     </fieldset>
