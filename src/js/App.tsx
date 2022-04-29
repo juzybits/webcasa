@@ -1,7 +1,8 @@
 /** App logic and state **/
 
 import React from "react";
-import { WebcashWalletLocalStorage, SecretWebcash } from "webcash";
+import CryptoJS from 'crypto-js'
+import { WebcashWallet, SecretWebcash } from "webcash";
 
 import { shorten } from "./_util";
 import { ActionResult } from "./Common";
@@ -15,6 +16,49 @@ import { ViewSettings } from "./ViewSettings";
 import { ViewTerms } from "./ViewTerms";
 import { ViewTransfers } from "./ViewTransfers";
 import { ViewExternalReceive } from "./ViewExternalReceive";
+
+/**
+ * Optionally encrypted with a password.
+ * When no password is provided, this class works like WebcashWalletLocalStorage.
+ */
+export class CasaWallet extends WebcashWallet {
+    private static locStoKey = 'wallet';
+    private password;
+
+    constructor(walletData: Partial<WebcashWalletData> = {}, password?: string) {
+        super(walletData);
+        this.password = password;
+    }
+
+    public static create(walletdata: Partial<WebcashWalletData> = {}, password?: string): WebcashWallet {
+        const wallet = new CasaWallet(walletdata, password);
+        wallet.save();
+        return wallet;
+    }
+
+    public save(): boolean {
+        const contents = this.getContents();
+        const json = JSON.stringify(contents, null, 4);
+        const encrypted = this.password ? CryptoJS.AES.encrypt(json, this.password) : json;
+        window.localStorage.setItem(CasaWallet.locStoKey, encrypted.toString());
+        console.log("(webcasa) Saved wallet to localStorage");
+        return true;
+    }
+
+    public static load(password?: string): WebcashWallet | undefined {
+        const encrypted = window.localStorage.getItem(CasaWallet.locStoKey);
+        if (encrypted) {
+            const decrypted = password ? CryptoJS.AES.decrypt(encrypted, password) : encrypted;
+            const parsed = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+            let wallet = new CasaWallet(parsed, password);
+            console.log("(webcasa) Loaded wallet from localStorage");
+            return wallet;
+        } else {
+            console.warn("(webcasa) Couldn't load wallet from localStorage");
+            return;
+        }
+    }
+}
 
 export class App extends React.Component {
 
@@ -35,10 +79,10 @@ export class App extends React.Component {
 
         /* State initialization */
 
-        let wallet = WebcashWalletLocalStorage.load();
+        let wallet = CasaWallet.load();
         if (!wallet) {
             // Create and save a new wallet
-            wallet = new WebcashWalletLocalStorage();
+            wallet = new CasaWallet();
             wallet.setLegalAgreementsToTrue(); // wallet-level accept
             wallet.save();
         } else if (!wallet.checkLegalAgreements()) {
@@ -49,7 +93,7 @@ export class App extends React.Component {
         const conf = this.loadConfig();
         this.state = {
             wallet: wallet,
-            // Session state
+            // Ephemeral app state
             view: 'Transfers',
             locked: false,
             lastReceive: '',
@@ -57,7 +101,7 @@ export class App extends React.Component {
             lastCheck: [],
             lastRecover: [],
             externalAction: null,
-            // Persistent state
+            // Persistent app config
             termsAccepted: conf.termsAccepted ?? false, // site-level accept
             downloaded: conf.downloaded ?? true,
         };
@@ -93,7 +137,7 @@ export class App extends React.Component {
     /* Helper methods */
 
     private loadConfig() {
-        const data = window.localStorage.getItem('casa');
+        const data = window.localStorage.getItem('config');
         if (data) {
             return JSON.parse(data);
         } else {
@@ -107,7 +151,7 @@ export class App extends React.Component {
             downloaded: this.state.downloaded,
             termsAccepted: this.state.termsAccepted,
         };
-        window.localStorage.setItem('casa', JSON.stringify(state, null, 4));
+        window.localStorage.setItem('config', JSON.stringify(state, null, 4));
 
     }
 
@@ -161,7 +205,7 @@ export class App extends React.Component {
         if (!this.confirmOverwriteWallet()) {
             return;
         }
-        const wallet = new WebcashWalletLocalStorage();
+        const wallet = new CasaWallet();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         wallet.save();
         this.replaceWallet(wallet);
@@ -176,7 +220,7 @@ export class App extends React.Component {
         const dis = this;
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
-            const wallet = new WebcashWalletLocalStorage(walletData);
+            const wallet = new CasaWallet(walletData);
             wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
             dis.replaceWallet(wallet);
@@ -260,7 +304,7 @@ export class App extends React.Component {
         try {
             const wallet = sameSecret
                 ? this.state.wallet
-                : new WebcashWalletLocalStorage({"master_secret": masterSecret});
+                : new CasaWallet({"master_secret": masterSecret});
             const introMsg = sameSecret
                 ? "(webcasa) Updating current wallet (same master secret)"
                 : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
