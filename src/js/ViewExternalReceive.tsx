@@ -28,7 +28,7 @@ export class ViewExternalReceive extends React.Component {
         const memo = this.props.memo;
         return (
         <div id="ViewExternalReceive" className="modal external-action">
-            <label className="modal-logo">🏠 WebCasa<sup>(beta)</sup></label>
+            <label className="modal-logo"><a href="/">🏠 WebCasa<sup>(beta)</sup></a></label>
             <div className="modal-card">
                 <h1>Found webcash 🤑</h1>
                 <div className="balance-indicator">

@@ -37,7 +37,7 @@ export class ViewTerms extends React.Component {
             </p>
             <div className="check-item">
                 <input type="checkbox" id="casaTerms-chk" value="casaTerms" onChange={this.onCheckboxChange} defaultChecked={this.state.casaTerms}/>
-                <label htmlFor="casaTerms-chk">I understand.</label>
+                <label htmlFor="casaTerms-chk">I understand</label>
             </div>
         </React.Fragment>
         );
@@ -46,14 +46,14 @@ export class ViewTerms extends React.Component {
     makeCashTerms() {
         return (
         <React.Fragment>
-            <h1>Webcash terms of service</h1>
+            <h2>Webcash terms of service</h2>
             <p>
                 Even though WebCasa is not affiliated with Webcash, you must read and accept the Webcash.org <a href="https://webcash.org/terms" target="_blank">terms of service</a> before using the software.
             </p>
             <textarea id="terms-textarea" defaultValue={this.state.webcashTermsText} />
             <div className="check-item">
                 <input type="checkbox" id="cashTerms-chk" value="cashTerms" onChange={this.onCheckboxChange} defaultChecked={this.state.cashTerms}/>
-                <label htmlFor="cashTerms-chk">I agree to the Webcash.org <a href="https://webcash.org/terms" target="_blank">terms of service</a>.</label>
+                <label htmlFor="cashTerms-chk">I agree to the Webcash <a href="https://webcash.org/terms" target="_blank">terms</a></label>
             </div>
         </React.Fragment>
         );
@@ -61,8 +61,11 @@ export class ViewTerms extends React.Component {
 
     render() {
         const terms = !this.state.casaTerms ? this.makeCasaTerms() : this.makeCashTerms();
+        const logo = !this.state.casaTerms ? ''
+            : <label className="modal-logo"><a href="/">🏠 WebCasa<sup>(beta)</sup></a></label>;
         return (
         <div id="ViewTerms" className="modal">
+            {logo}
             <div className="modal-card">
                 {terms}
             </div>

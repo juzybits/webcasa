@@ -48,16 +48,18 @@ export class App extends React.Component {
         }
         const conf = this.loadConfig();
         this.state = {
-            view: 'Transfers',
             wallet: wallet,
-            downloaded: conf.downloaded ?? true,
+            // Session state
+            view: 'Transfers',
             locked: false,
             lastReceive: '',
             lastSend: null,
             lastCheck: [],
             lastRecover: [],
-            termsAccepted: conf.termsAccepted ?? false, // site-level accept
             externalAction: null,
+            // Persistent state
+            termsAccepted: conf.termsAccepted ?? false, // site-level accept
+            downloaded: conf.downloaded ?? true,
         };
 
         /* On 1st visit - process URL parameters */
@@ -152,7 +154,7 @@ export class App extends React.Component {
         }
         const master = shorten(this.state.wallet.master_secret);
         return confirm(`This will DELETE your current wallet '${master}' (₩ ${balance})`+
-            "\n\nDo you wish to continue?");
+            "\n\nDo you want to continue?");
     }
 
     onCreateWallet(event) {
@@ -321,11 +323,6 @@ export class App extends React.Component {
         let view = '';
         let blur = '';
 
-        // Preempt with modal if terms are not accepted
-        if (!this.state.termsAccepted) {
-            blur = 'blur';
-            view = <ViewTerms onAcceptTerms={this.onAcceptTerms} />;
-        } else
         // Preempt with modal if there's an external action (e.g. '?receive=...')
         if (this.state.externalAction) {
             blur = 'blur';
@@ -335,6 +332,11 @@ export class App extends React.Component {
                 view = <ViewExternalReceive webcash={params.webcash} memo={params.memo}
                             onReceiveWebcash={this.onReceiveWebcash} />;
             }
+        } else
+        // Preempt with modal if terms are not accepted
+        if (!this.state.termsAccepted) {
+            blur = 'blur';
+            view = <ViewTerms onAcceptTerms={this.onAcceptTerms} />;
         } else
         // Regular view rendering
         if ('Settings' === this.state.view) {
