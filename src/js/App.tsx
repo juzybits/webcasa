@@ -21,20 +21,24 @@ import { ViewTransfers } from "./ViewTransfers";
 /**
  * Optionally encrypted with a password.
  * When no password is provided, this class works like WebcashWalletLocalStorage.
- *
- * TODO: sha256 password
  */
 export class CasaWallet extends WebcashWallet {
     private static locStoKey = 'wallet';
     private password;
 
-    constructor(walletData: Partial<WebcashWalletData> = {}, password?: string) {
+    private constructor(walletData: Partial<WebcashWalletData> = {}, password?: string) {
         super(walletData);
         this.password = password;
     }
 
+    private static makePassword(password: string): string {
+        const salted_pass = password + '_webcasa_salt_rdJpbXdL2YrPHymp';
+        return CryptoJS.SHA256(salted_pass).toString();
+    }
+
     public static create(walletdata: Partial<WebcashWalletData> = {}, password?: string): WebcashWallet {
-        const wallet = new CasaWallet(walletdata, password);
+        const passHash = password ? CasaWallet.makePassword(password) : null;
+        const wallet = new CasaWallet(walletdata, passHash);
         wallet.save();
         return wallet;
     }
@@ -44,22 +48,32 @@ export class CasaWallet extends WebcashWallet {
         const json = JSON.stringify(contents, null, 4);
         const encrypted = this.password ? CryptoJS.AES.encrypt(json, this.password) : json;
         window.localStorage.setItem(CasaWallet.locStoKey, encrypted.toString());
-        console.log("(webcasa) Saved wallet to localStorage");
+        console.log("(webcasa) Wallet saved to localStorage");
         return true;
     }
 
     public static load(password?: string): WebcashWallet | undefined {
-        const encrypted = window.localStorage.getItem(CasaWallet.locStoKey);
-        if (encrypted) {
-            const decrypted = password ? CryptoJS.AES.decrypt(encrypted, password) : encrypted;
-            const parsed = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-            let wallet = new CasaWallet(parsed, password);
-            console.log("(webcasa) Loaded wallet from localStorage");
-            return wallet;
-        } else {
-            console.warn("(webcasa) Couldn't load wallet from localStorage");
+        const rawWallet = window.localStorage.getItem(CasaWallet.locStoKey);
+        if (!rawWallet) {
+            console.warn("(webcasa) Wallet not found in localStorage");
             return;
         }
+
+        let wallet;
+        if (!password) {
+            wallet = new CasaWallet(JSON.parse(rawWallet));
+        } else {
+            try {
+                const passHash = CasaWallet.makePassword(password);
+                const strWallet = CryptoJS.AES.decrypt(rawWallet, passHash).toString(CryptoJS.enc.Utf8);
+                wallet = new CasaWallet(JSON.parse(strWallet), password);
+            } catch(err) {
+                alert("Wrong password"); // TODO nice error
+                return;
+            }
+        }
+        console.log("(webcasa) Wallet loaded from localStorage");
+        return wallet;
     }
 }
 
