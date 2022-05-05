@@ -17,6 +17,7 @@ import { ViewSecrets } from "./ViewSecrets";
 import { ViewSettings } from "./ViewSettings";
 import { ViewTerms } from "./ViewTerms";
 import { ViewTransfers } from "./ViewTransfers";
+import { ViewUnlock } from "./ViewUnlock";
 
 /**
  * Optionally encrypted with a password.
@@ -31,16 +32,23 @@ export class CasaWallet extends WebcashWallet {
         this.password = password;
     }
 
+    public static create(walletdata: Partial<WebcashWalletData> = {}, password?: string): WebcashWallet {
+        const passHash = password ? CasaWallet.makePassword(password) : null;
+        const wallet = new CasaWallet(walletdata, passHash);
+        return wallet;
+    }
+
+    public static exists(): bool {
+        return null !== window.localStorage.getItem(CasaWallet.locStoKey);
+    }
+
     private static makePassword(password: string): string {
         const salted_pass = password + '_webcasa_salt_rdJpbXdL2YrPHymp';
         return CryptoJS.SHA256(salted_pass).toString();
     }
 
-    public static create(walletdata: Partial<WebcashWalletData> = {}, password?: string): WebcashWallet {
-        const passHash = password ? CasaWallet.makePassword(password) : null;
-        const wallet = new CasaWallet(walletdata, passHash);
-        wallet.save();
-        return wallet;
+    public setPassword(password: string) {
+        this.password = CasaWallet.makePassword(password);
     }
 
     public save(): boolean {
@@ -48,7 +56,7 @@ export class CasaWallet extends WebcashWallet {
         const json = JSON.stringify(contents, null, 4);
         const encrypted = this.password ? CryptoJS.AES.encrypt(json, this.password) : json;
         window.localStorage.setItem(CasaWallet.locStoKey, encrypted.toString());
-        console.log("(webcasa) Wallet saved to localStorage");
+        console.debug("(webcasa) Wallet saved to localStorage");
         return true;
     }
 
@@ -66,15 +74,16 @@ export class CasaWallet extends WebcashWallet {
             try {
                 const passHash = CasaWallet.makePassword(password);
                 const strWallet = CryptoJS.AES.decrypt(rawWallet, passHash).toString(CryptoJS.enc.Utf8);
-                wallet = new CasaWallet(JSON.parse(strWallet), password);
+                wallet = new CasaWallet(JSON.parse(strWallet), passHash);
             } catch(err) {
-                alert("Wrong password"); // TODO nice error
+                console.warn("(webcasa) Incorrect password when loading wallet");
                 return;
             }
         }
         console.log("(webcasa) Wallet loaded from localStorage");
         return wallet;
     }
+
 }
 
 export class App extends React.Component {
@@ -93,22 +102,26 @@ export class App extends React.Component {
         this.onRecoverWallet = this.onRecoverWallet.bind(this);
         this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
         this.onSendAmount = this.onSendAmount.bind(this);
+        this.onSetPassword = this.onSetPassword.bind(this);
+        this.onUnlockWallet = this.onUnlockWallet.bind(this);
 
         /* State initialization */
 
-        // TODO: ask for password if wallet is encrypted
-        let wallet = CasaWallet.load();
-        if (!wallet) {
+        let wallet;
+        const conf = this.loadConfig();
+        if (!CasaWallet.exists()) {
             // Create and save a new wallet
-            wallet = new CasaWallet();
+            wallet = CasaWallet.create();
             wallet.setLegalAgreementsToTrue(); // wallet-level accept
             wallet.save();
-        } else if (!wallet.checkLegalAgreements()) {
+        } else {
+            wallet = conf.encrypted ? null : CasaWallet.load();
+        }
+        if (wallet && !wallet.checkLegalAgreements()) {
             // Handle corner cases like old/corrupted wallets
             wallet.setLegalAgreementsToTrue(); // wallet-level accept
             wallet.save();
         }
-        const conf = this.loadConfig();
         this.state = {
             wallet: wallet,
             // Ephemeral app state
@@ -143,6 +156,9 @@ export class App extends React.Component {
 
         const dis = this;
         window.addEventListener("beforeunload", function(e) {
+            if (this.state.encrypted && !this.state.wallet) {
+                return true;
+            }
             if (dis.state.locked || !dis.state.downloaded) {
                 e.preventDefault();
                 // TODO: this doesn't work (default message is shown)
@@ -229,7 +245,7 @@ export class App extends React.Component {
         if (!this.confirmOverwriteWallet()) {
             return;
         }
-        const wallet = new CasaWallet();
+        const wallet = CasaWallet.create();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         wallet.save();
         this.replaceWallet(wallet);
@@ -244,7 +260,7 @@ export class App extends React.Component {
         const dis = this;
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
-            const wallet = new CasaWallet(walletData);
+            const wallet = CasaWallet.create(walletData);
             wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
             dis.replaceWallet(wallet);
@@ -328,7 +344,7 @@ export class App extends React.Component {
         try {
             const wallet = sameSecret
                 ? this.state.wallet
-                : new CasaWallet({"master_secret": masterSecret});
+                : CasaWallet.create({"master_secret": masterSecret});
             const introMsg = sameSecret
                 ? "(webcasa) Updating current wallet (same master secret)"
                 : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
@@ -354,7 +370,20 @@ export class App extends React.Component {
     }
 
     onSetPassword(password: string = ''/*, autolock: number = 15*/) { // TODO
-        console.log("webcasa TODO: setting password to:", password);
+        this.state.wallet.setPassword(password);
+        this.state.wallet.save();
+        if (!this.state.encrypted) {
+            this.setState({encrypted: true}, this.saveConfig);
+        }
+    }
+
+    onUnlockWallet(password) {
+        const wallet = CasaWallet.load(password);
+        if (!wallet) {
+            alert("Incorrect password"); // TODO: pretty error
+        } else {
+            this.setState({wallet: wallet});
+        }
     }
 
     /* Handle Transfers (webcash operations) */
@@ -404,6 +433,11 @@ export class App extends React.Component {
                 view = <ViewExternalReceive webcash={params.webcash} memo={params.memo}
                             onReceiveWebcash={this.onReceiveWebcash} />;
             }
+        } else
+        // Show password modal if wallet is encrypted
+        if (this.state.encrypted && !this.state.wallet) {
+            blur = 'blur';
+            view = <ViewUnlock onUnlockWallet={this.onUnlockWallet} />;
         } else
         // Preempt with modal if terms are not accepted
         if (!this.state.termsAccepted) {

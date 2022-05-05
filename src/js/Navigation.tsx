@@ -20,6 +20,9 @@ export class Navigation extends React.Component {
     }
 
     render() {
+        if (!this.props.wallet) {
+            return '';
+        }
         const menuItems = ["Transfers", "Settings", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
                       onClick={this.props.onChangeView} toggleMenu={this.toggleVisibility}/>
