@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formatDate, json } from "./_util";
+import { formatBalance, formatDate, json } from "./_util";
 import { FormReceive } from "./FormReceive";
 import { FormSend } from "./FormSend";
 
@@ -28,7 +28,7 @@ export class ViewTransfers extends React.Component {
                     lastSend={this.props.lastSend} />;
         const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
         const selectedSend = this.state.action === 'Send' ? 'selected' : '';
-        const balance = this.props.wallet.getBalance().toString();
+        const balance = formatBalance(this.props.wallet.getBalance());
 
         return (
         <div className="view-wrapper">

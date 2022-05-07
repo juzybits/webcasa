@@ -37,11 +37,8 @@ export function shorten(text: string, slice: number = 4): string {
     return `${start}...${end}`;
 }
 
-export function formatTimestamp(ts: string): string {
-    if (!ts) {
-        return '';
-    }
-    return ts.slice(0, -10);
+export function formatBalance(balance: Decimal): string {
+    return balance.toNumber().toLocaleString(undefined, {maximumFractionDigits: 10});
 }
 
 export function json(value: any): string {

@@ -4,7 +4,7 @@ import React from "react";
 import CryptoJS from 'crypto-js'
 import { WebcashWallet, SecretWebcash } from "webcash";
 
-import { shorten } from "./_util";
+import { formatBalance, shorten } from "./_util";
 import { ActionResult } from "./Common";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
@@ -231,9 +231,10 @@ export class App extends React.Component {
     /* Handle Settings (wallet operations) */
 
     private confirmOverwriteWallet(): bool {
-        const balance = this.state.wallet.getBalance();
+        const balance = formatBalance(this.state.wallet.getBalance());
         const master = shorten(this.state.wallet.master_secret);
-        return confirm(`This will DELETE your current wallet '${master}' (₩ ${balance})`+
+        return confirm(`This will DELETE your wallet '${master}'` +
+            `\nBalance: ₩ ${balance}` +
             "\n\nDo you want to continue?");
     }
 
@@ -303,7 +304,7 @@ export class App extends React.Component {
             await this.state.wallet.check(); // changes wallet contents but doesn't call save()
             await Promise.resolve(); // needed?
             this.saveModifiedWallet(); // TODO: do this only if wallet changed
-            console.log("(webcasa) New balance:", this.state.wallet.getBalance().toString());
+            console.log("(webcasa) New balance:", formatBalance(this.state.wallet.getBalance()));
             console.log("(webcasa) Done!");
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message}`}</div>;
@@ -349,7 +350,7 @@ export class App extends React.Component {
             wallet.setLegalAgreementsToTrue();
             await wallet.recover(gapLimit); // changes wallet and calls save() (writes local storage)
             await Promise.resolve();
-            console.log("(webcasa) Found balance:", wallet.getBalance().toString());
+            console.log("(webcasa) Found balance:", formatBalance(wallet.getBalance()));
 
             if (!sameSecret) {
                 this.replaceWallet(wallet);

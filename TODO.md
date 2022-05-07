@@ -7,11 +7,8 @@
     - Webcash via lambda
 
 # miranda's feedback
-- some more feedback on wallet, right now if you import a file, it doesn't rescan automatically.. might be good to make this auto
+- if you import a file, it doesn't rescan automatically.. might be good to make this auto
 - when re-import and scanning, secrets don't update unless you click around
-
-# saunter's feedback
-- would be nice to add commas to amounts in the wallet (119,417,000 instead of 119417000)
 
 # Bugs
     - Bug: Balance indicator repaint on Safari
@@ -31,9 +28,6 @@
     - Replace send form with "Success!" inline card
     - Multiple cards (e.g. for History)
     - Mobile 4 buttons (display:fixed)
-
-# Tools
-Kanzure: "In this context, there is an sqlite wallet database left over from webminer. The user wants a script to export each secret from the wallet, and then directly insert all values (without using the insert function) into a default_wallet.webcash for the python wallet. Then, make a payment to yourself in the full balance to merge all secrets together, and/or run the recover or check functions.... I think."
 
 # CORE: Review https://github.com/kanzure/webcash/pull/13/files
 

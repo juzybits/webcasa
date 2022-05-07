@@ -1,11 +1,11 @@
 import React from "react";
 
-import { shorten } from "./_util";
+import { formatBalance, shorten } from "./_util";
 import { CopiableValue } from "./Common";
 
 export class ViewSettings extends React.Component {
     render() {
-        const balance = this.props.wallet.getBalance().toString();
+        const balance = formatBalance(this.props.wallet.getBalance());
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster);
@@ -46,8 +46,7 @@ export class ViewSettings extends React.Component {
                         <CopiableValue contents={fullMaster} short={abbrMaster}/>
                     </div>
                     <div className="setting">
-                        <label>balance</label>
-                        <CopiableValue contents={balance}/>
+                        <label>balance</label>{balance}
                     </div>
                     <div className="setting">
                         <label>version</label>{data.version}
