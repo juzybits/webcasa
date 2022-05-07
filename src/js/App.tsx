@@ -162,14 +162,18 @@ export class App extends React.Component {
                 return "Are you sure?";
             }
         });
-
-        // TODO: Undo this (Apr 29 2022)
-        // TODO: if 'casa' in localStorage, move to 'config'
     }
 
     /* Helper methods */
 
     private loadConfig() {
+        // If 'casa' in localStorage, rename to 'config' // TODO: delete this (May 7)
+        const dataLegacy = window.localStorage.getItem('casa');
+        if (dataLegacy) {
+            window.localStorage.setItem('config', dataLegacy);
+            window.localStorage.removeItem('casa');
+        }
+
         const data = window.localStorage.getItem('config');
         if (data) {
             return JSON.parse(data);
