@@ -37,8 +37,12 @@ export class ViewExternalReceive extends React.Component {
                 <div className="memo">
                     {memo}
                 </div>
-                <button className="pure-button" onClick={this.onClickInsert}>Insert in wallet</button>
-                <button className="pure-button" onClick={this.onClickCopy}>Copy to clipboard</button>
+                <button className="pure-button" onClick={this.onClickInsert}>
+                    <i className='button-icon icon-cloud-arrow-down-solid'></i>&nbsp;Insert in wallet
+                </button>
+                <button className="pure-button" onClick={this.onClickCopy}>
+                    <i className='button-icon icon-copy'></i>Copy to clipboard
+                </button>
             </div>
         </div>
         );

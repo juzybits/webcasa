@@ -8,16 +8,16 @@ export class ViewTransfers extends React.Component {
 
     constructor(props) {
         super(props)
-        this.onClickTab = this.onClickTab.bind(this);
-        this.state = { action: 'Receive' };
+        this.setTab = this.setTab.bind(this);
+        this.state = { tab: 'Receive' };
     }
 
-    onClickTab(event) {
-        this.setState({action: event.target.innerHTML});
+    setTab(tab) {
+        this.setState({tab: tab});
     }
 
     render() {
-        const tabContent = this.state.action === 'Receive'
+        const tabContent = this.state.tab === 'Receive'
             ? <FormReceive
                     wallet={this.props.wallet}
                     onReceiveWebcash={this.props.onReceiveWebcash}
@@ -26,8 +26,8 @@ export class ViewTransfers extends React.Component {
                     wallet={this.props.wallet}
                     onSendAmount={this.props.onSendAmount}
                     lastSend={this.props.lastSend} />;
-        const selectedReceive = this.state.action === 'Receive' ? 'selected' : '';
-        const selectedSend = this.state.action === 'Send' ? 'selected' : '';
+        const selectedReceive = this.state.tab === 'Receive' ? 'selected' : '';
+        const selectedSend = this.state.tab === 'Send' ? 'selected' : '';
         const balance = formatBalance(this.props.wallet.getBalance());
 
         return (
@@ -38,8 +38,12 @@ export class ViewTransfers extends React.Component {
 
             <div id="ViewTransfers" className="card">
                 <div className="tabs">
-                    <div className={`tab left ${selectedReceive}`} onClick={this.onClickTab}>Receive</div>
-                    <div className={`tab right ${selectedSend}`} onClick={this.onClickTab}>Send</div>
+                    <div className={`tab left ${selectedReceive}`} onClick={()=>this.setTab('Receive')}>
+                        <i className='wide-icon icon-cloud-arrow-down-solid'></i>Receive
+                    </div>
+                    <div className={`tab right ${selectedSend}`} onClick={()=>this.setTab('Send')}>
+                        <i className='wide-icon icon-cloud-arrow-up-solid'></i>Send
+                    </div>
                 </div>
 
                 <div className="balance-indicator">

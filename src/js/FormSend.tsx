@@ -69,7 +69,9 @@ export class FormSend extends React.Component {
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <div className="centered">
-                        <button type="submit" className="pure-button pure-button-primary">Create payment</button>
+                        <button type="submit" className="pure-button pure-button-primary">
+                            Create payment
+                        </button>
                     </div>
                 </form>
 

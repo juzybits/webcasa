@@ -61,7 +61,9 @@ export class FormReceive extends React.Component {
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
                     <div className="centered">
-                        <button type="submit" className="pure-button pure-button-primary">Insert in wallet</button>
+                        <button type="submit" className="pure-button pure-button-primary">
+                            Insert in wallet
+                        </button>
                     </div>
                 </form>
 

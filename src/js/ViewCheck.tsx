@@ -40,7 +40,7 @@ export class ViewCheck extends React.Component {
         return (
         <div className="view-wrapper">
             <header className="header">
-                <h1>Check webcash</h1>
+                <h1><i className='button-icon icon-list-check-solid'></i>Check webcash</h1>
             </header>
             <div id="ViewCheck" className="card closable">
 
@@ -51,7 +51,7 @@ export class ViewCheck extends React.Component {
 
                 <div className="card-description">
                 <p>
-                    Check every webcash in the wallet and remove any invalid already-spent webcash.
+                    Validate every webcash in the wallet, and move already-spent secrets to "unconfirmed".
                 </p>
                 </div>
 

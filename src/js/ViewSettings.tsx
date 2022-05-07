@@ -20,21 +20,32 @@ export class ViewSettings extends React.Component {
 
                     <fieldset className="wallet-buttons">
                         <legend>WALLET FILE</legend>
-                        <button className={`pure-button ${export_btn_clazz}`}
-                                onClick={this.props.onDownloadWallet}>Export</button>
+                        <button className={`pure-button ${export_btn_clazz}`} onClick={this.props.onDownloadWallet}>
+                            <i className='button-icon icon-download-solid'></i>Export
+                        </button>
 
-                        <label className="pure-button btn-orange" htmlFor="bc-file-input">Import</label>
+                        <label className="pure-button btn-orange" htmlFor="bc-file-input">
+                            <i className='button-icon icon-upload-solid'></i>Import
+                        </label>
                         <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
                                onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
-                        <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Delete</button>
+                        <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>
+                            <i className='button-icon icon-trash-can-solid'></i>Delete
+                        </button>
                     </fieldset>
 
                     <fieldset className="wallet-buttons">
                         <legend>ADVANCED</legend>
-                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Password')}>Set password</button>
-                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
-                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
+                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Password')}>
+                            <i className='button-icon icon-unlock-solid'></i>Set password
+                        </button>
+                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Check')}>
+                            <i className='button-icon icon-list-check-solid'></i>Check webcash
+                        </button>
+                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Recover')}>
+                            <i className='button-icon icon-hammer-solid'></i>Recover wallet
+                        </button>
                     </fieldset>
 
                 <div className="clear"></div>
@@ -75,7 +86,7 @@ export class ViewSettings extends React.Component {
                     <legend>SELF-HOSTING</legend>
                     <p>You can run WebCasa.app on our own laptop.</p>
                     <p>Simply download the .zip file below and open <tt>index.html</tt> on a browser to get started.</p>
-                    <a className="pure-button" download href="/webcasa.zip">Download app</a>
+                    <a className="pure-button" download href="/webcasa.zip"><i className='button-icon icon-download-solid'></i>Download app</a>
                 </fieldset>
 
             </div>
