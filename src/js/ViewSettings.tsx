@@ -9,30 +9,7 @@ export class ViewSettings extends React.Component {
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster);
-        const manageWallet_OR_mandatoryExport = this.props.downloaded
-        ?
-        // Manage wallet buttons
-        <React.Fragment>
-            <fieldset id="wallet-buttons">
-                <legend>MANAGE WALLET</legend>
-                <button className="pure-button"
-                        onClick={this.props.onDownloadWallet}>Export</button>
-
-                <label className="pure-button btn-orange" htmlFor="bc-file-input">Import</label>
-                <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
-                       onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
-
-                <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Reset</button>
-            </fieldset>
-        </React.Fragment>
-        :
-        // Mandatory export button
-        <fieldset id="wallet-buttons">
-            <legend>MANAGE WALLET</legend>
-            <button className="pure-button unsaved"
-                    onClick={this.props.onDownloadWallet}>Export</button>
-        </fieldset>;
-
+        const export_btn_clazz = this.props.downloaded ? '' : 'unsaved';
         return (
         <div className="view-wrapper">
             <header className="header">
@@ -41,7 +18,17 @@ export class ViewSettings extends React.Component {
 
             <div id="ViewSettings" className="card">
 
-                    {manageWallet_OR_mandatoryExport}
+                    <fieldset id="wallet-buttons">
+                        <legend>MANAGE WALLET</legend>
+                        <button className={`pure-button ${export_btn_clazz}`}
+                                onClick={this.props.onDownloadWallet}>Export</button>
+
+                        <label className="pure-button btn-orange" htmlFor="bc-file-input">Import</label>
+                        <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
+                               onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
+
+                        <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Reset</button>
+                    </fieldset>
 
                     <fieldset id="wallet-buttons">
                         <legend>ADVANCED TOOLS</legend>

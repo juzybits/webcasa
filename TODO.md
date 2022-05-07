@@ -9,7 +9,6 @@
 # miranda's feedback
 - some more feedback on wallet, right now if you import a file, it doesn't rescan automatically.. might be good to make this auto
 - when re-import and scanning, secrets don't update unless you click around
-- under settings you sometimes have only EXPORT in green or when you export, you get the import/export/reset... not sure if this is a bug or feature... but maybe having all 3 buttons all the time... with the expected action, i.e. EXPORT show in green to guide user...
 
 # saunter's feedback
 - would be nice to add commas to amounts in the wallet (119,417,000 instead of 119417000)
