@@ -95,36 +95,38 @@ export class App extends React.Component {
 
         this.onAcceptTerms = this.onAcceptTerms.bind(this);
         this.onChangeView = this.onChangeView.bind(this);
-        this.onNavButtonClick = this.onNavButtonClick.bind(this);
-        this.onCreateWallet = this.onCreateWallet.bind(this);
-        this.onUploadWallet = this.onUploadWallet.bind(this);
-        this.onDownloadWallet = this.onDownloadWallet.bind(this);
         this.onCheckWallet = this.onCheckWallet.bind(this);
-        this.onRecoverWallet = this.onRecoverWallet.bind(this);
+        this.onCreateWallet = this.onCreateWallet.bind(this);
+        this.onDownloadWallet = this.onDownloadWallet.bind(this);
+        this.onExternalInsert = this.onExternalInsert.bind(this);
+        this.onNavButtonClick = this.onNavButtonClick.bind(this);
         this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
+        this.onRecoverWallet = this.onRecoverWallet.bind(this);
         this.onSendAmount = this.onSendAmount.bind(this);
         this.onSetPassword = this.onSetPassword.bind(this);
         this.onUnlockWallet = this.onUnlockWallet.bind(this);
+        this.onUploadWallet = this.onUploadWallet.bind(this);
+
+        /* On 1st visit - process URL parameters */
+
+        let externalReceive = null;
+        const params = new URLSearchParams(window.location.search);
+        const webcash_raw = params.get('receive');
+        if (webcash_raw) {
+            try {
+                const webcash = SecretWebcash.deserialize(webcash_raw)
+                const memo = params.get('memo') ?? '';
+                externalReceive = { webcash: webcash, memo: memo };
+            } catch (err) {
+                console.error(err);
+            }
+        }
 
         /* State initialization */
 
-        let wallet;
         const conf = this.loadConfig();
-        if (!CasaWallet.exists()) {
-            // Create and save a new wallet
-            wallet = CasaWallet.create();
-            wallet.setLegalAgreementsToTrue(); // wallet-level accept
-            wallet.save();
-        } else {
-            wallet = conf.encrypted ? null : CasaWallet.load();
-        }
-        if (wallet && !wallet.checkLegalAgreements()) {
-            // Handle corner cases like old/corrupted wallets
-            wallet.setLegalAgreementsToTrue(); // wallet-level accept
-            wallet.save();
-        }
         this.state = {
-            wallet: wallet,
+            wallet: (CasaWallet.exists() && !conf.encrypted) ? CasaWallet.load() : null,
             // Ephemeral app state
             view: 'Transfers',
             inProgress: false,
@@ -132,26 +134,13 @@ export class App extends React.Component {
             lastSend: null,
             lastCheck: [],
             lastRecover: [],
-            externalAction: null,
+            externalReceive: externalReceive,
+            bufferedReceive: null,
             // Persistent app config
             downloaded: conf.downloaded ?? true,
             encrypted: conf.encrypted ?? false,
             termsAccepted: conf.termsAccepted ?? false, // site-level accept
         };
-
-        /* On 1st visit - process URL parameters */
-
-        const params = new URLSearchParams(window.location.search);
-        const webcash_raw = params.get('receive');
-        if (webcash_raw) {
-            try {
-                const webcash = SecretWebcash.deserialize(webcash_raw)
-                const memo = params.get('memo') ?? '';
-                this.state.externalAction = ['receive', {webcash: webcash, memo: memo}];
-            } catch (err) {
-                console.error(err);
-            }
-        }
 
         /* On page exit - alert about unsaved changes */
 
@@ -194,16 +183,15 @@ export class App extends React.Component {
 
     }
 
-    private replaceWallet(wallet: WebcashWallet, state={}): bool {
-        const base = {
-            wallet: wallet,
+    private resetAppState(state={}) {
+        const defaults = {
             downloaded: true,
             encrypted: false,
             inProgress: false,
             lastReceive: '',
             lastSend: null,
         };
-        this.setState({...base, ...state}, this.saveConfig);
+        this.setState({...defaults, ...state}, this.saveConfig);
     }
 
     private saveModifiedWallet(alreadySaved=false) {
@@ -218,8 +206,27 @@ export class App extends React.Component {
 
     /* Handle navigation */
 
+    onExternalInsert() {
+        this.setState({
+            externalReceive: null,
+            bufferedReceive: this.state.externalReceive,
+            view: 'Transfers',
+        });
+        window.history.pushState({}, '', window.location.origin + window.location.pathname);
+    }
+
     onAcceptTerms() {
-        this.setState({termsAccepted: true}, this.saveConfig);
+        const state = {
+            termsAccepted: true
+        };
+        let wallet = this.state.wallet;
+        if (!wallet) {
+            wallet = CasaWallet.create();
+            wallet.setLegalAgreementsToTrue();
+            wallet.save();
+            state.wallet = wallet;
+        }
+        this.setState(state, this.saveConfig);
     }
 
     onChangeView(view) {
@@ -232,7 +239,7 @@ export class App extends React.Component {
 
     onNavButtonClick() {
         if (this.state.encrypted) {
-            this.replaceWallet(null, {encrypted: true});
+            this.resetAppState({wallet: null, encrypted: true});
         } else {
             this.onChangeView('Password');
         }
@@ -255,7 +262,7 @@ export class App extends React.Component {
         const wallet = CasaWallet.create();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         wallet.save();
-        this.replaceWallet(wallet);
+        this.resetAppState({wallet: wallet});
     }
 
     onUploadWallet(event) {
@@ -270,7 +277,7 @@ export class App extends React.Component {
             const wallet = CasaWallet.create(walletData);
             wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
-            dis.replaceWallet(wallet);
+            dis.resetAppState({wallet: wallet});
         };
         reader.onerror = function() {
             alert(reader.error);
@@ -363,7 +370,7 @@ export class App extends React.Component {
             console.log("(webcasa) Found balance:", formatBalance(wallet.getBalance()));
 
             if (!sameSecret) {
-                this.replaceWallet(wallet);
+                this.resetAppState({wallet: wallet});
             }
             this.saveModifiedWallet(true); // TODO: do this only if wallet changed
             console.log("(webcasa) Done!");
@@ -406,12 +413,8 @@ export class App extends React.Component {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
             this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} title='' /> });
         } finally {
-            if (this.state.externalAction) {
-                this.setState({
-                    externalAction: null,
-                    view: 'Transfers',
-                });
-                window.history.pushState({}, '', window.location.origin + window.location.pathname);
+            if (this.state.bufferedReceive) {
+                this.setState({ bufferedReceive: null });
             }
         }
     }
@@ -433,25 +436,24 @@ export class App extends React.Component {
         let view = '';
         let blur = '';
 
-        // Preempt with modal if there's an external action (e.g. '?receive=...')
-        if (this.state.externalAction) {
+        // Preempt with modal if there's an external action ('?receive=...')
+        if (this.state.externalReceive) {
             blur = 'blur';
-            const action = this.state.externalAction[0];
-            if (action === 'receive') {
-                const params = this.state.externalAction[1];
-                view = <ViewExternalReceive webcash={params.webcash} memo={params.memo}
-                            onReceiveWebcash={this.onReceiveWebcash} />;
-            }
-        } else
-        // Show password modal if wallet is encrypted
-        if (this.state.encrypted && !this.state.wallet) {
-            blur = 'blur';
-            view = <ViewUnlock onUnlockWallet={this.onUnlockWallet} />;
+            view = <ViewExternalReceive
+                webcash={this.state.externalReceive.webcash}
+                memo={this.state.externalReceive.memo}
+                onExternalInsert={this.onExternalInsert}
+            />;
         } else
         // Preempt with modal if terms are not accepted
         if (!this.state.termsAccepted) {
             blur = 'blur';
             view = <ViewTerms onAcceptTerms={this.onAcceptTerms} />;
+        } else
+        // Show password modal if wallet is encrypted
+        if (this.state.encrypted && !this.state.wallet) {
+            blur = 'blur';
+            view = <ViewUnlock onUnlockWallet={this.onUnlockWallet} />;
         } else
         // Regular view rendering
         if ('Settings' === this.state.view) {
@@ -469,6 +471,7 @@ export class App extends React.Component {
                 wallet={this.state.wallet}
                 onReceiveWebcash={this.onReceiveWebcash} lastReceive={this.state.lastReceive}
                 onSendAmount={this.onSendAmount} lastSend={this.state.lastSend}
+                bufferedReceive={this.state.bufferedReceive}
             />;
         } else
         if ('Secrets' === this.state.view) {

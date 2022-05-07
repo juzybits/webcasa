@@ -16,6 +16,13 @@ export class ViewTransfers extends React.Component {
         this.setState({tab: tab});
     }
 
+    componentDidMount() {
+        const params = this.props.bufferedReceive;
+        if (params) {
+            this.props.onReceiveWebcash(params.webcash, params.memo);
+        }
+    }
+
     render() {
         const tabContent = this.state.tab === 'Receive'
             ? <FormReceive

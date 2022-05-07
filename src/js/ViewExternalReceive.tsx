@@ -18,9 +18,7 @@ export class ViewExternalReceive extends React.Component {
 
     async onClickInsert() {
         event.preventDefault();
-        const webcash = this.props.webcash;
-        const memo = this.props.memo ?? "";
-        await this.props.onReceiveWebcash(webcash, memo);
+        this.props.onExternalInsert();
     }
 
     render() {
