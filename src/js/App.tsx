@@ -156,15 +156,10 @@ export class App extends React.Component {
 
         const dis = this;
         window.addEventListener("beforeunload", function(e) {
-            if (this.state.encrypted && !this.state.wallet) {
-                return true;
-            }
-            if (dis.state.locked || !dis.state.downloaded) {
+            if (dis.state.wallet && dis.state.locked) {
                 e.preventDefault();
-                // TODO: this doesn't work (default message is shown)
-                return e.returnValue = dis.state.locked
-                    ? "Please wait for the process to complete"
-                    : "You didn't download your updated wallet. Are you sure you want to exit?";
+                e.returnValue = "Are you sure?";
+                return "Are you sure?";
             }
         });
 
@@ -369,7 +364,7 @@ export class App extends React.Component {
         }
     }
 
-    onSetPassword(password: string = ''/*, autolock: number = 15*/) { // TODO
+    onSetPassword(password: string) {
         this.state.wallet.setPassword(password);
         this.state.wallet.save();
         if (!this.state.encrypted) {
@@ -377,13 +372,15 @@ export class App extends React.Component {
         }
     }
 
-    onUnlockWallet(password) {
+    onUnlockWallet(password): string {
+        let err = '';
         const wallet = CasaWallet.load(password);
         if (!wallet) {
-            alert("Incorrect password"); // TODO: pretty error
+            err = "Incorrect password";
         } else {
             this.setState({wallet: wallet});
         }
+        return err;
     }
 
     /* Handle Transfers (webcash operations) */

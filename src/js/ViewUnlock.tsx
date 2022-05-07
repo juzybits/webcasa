@@ -6,7 +6,8 @@ export class ViewUnlock extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-            passwd: ''
+            passwd: '',
+            error: '',
         };
     }
 
@@ -14,13 +15,16 @@ export class ViewUnlock extends React.Component {
         event.preventDefault();
         const target = event.target;
         this.setState({
-            [target.id]: target.value
+            [target.id]: target.value,
+            error: '',
         });
     }
 
     onSubmit() {
         event.preventDefault();
-        this.props.onUnlockWallet(this.state.passwd); // TODO: pretty errors
+        this.setState({
+            error: this.props.onUnlockWallet(this.state.passwd)
+        });
     }
 
     render() {
@@ -30,7 +34,6 @@ export class ViewUnlock extends React.Component {
             <label className="modal-logo"><a href="/">🏠 WebCasa<sup>(beta)</sup></a></label>
 
             <div className="modal-card">
-
 
                 <h1>Wallet is locked</h1>
 
@@ -43,13 +46,16 @@ export class ViewUnlock extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>
                         <label htmlFor="passwd">Password</label>
-                        <input type="text" id="passwd" minLength="6"
+                        <input type="password" id="passwd" minLength="6"
                                onFocus={this.onFocus} onChange={this.onChange}
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
 
+                    <label className="form-error">{this.state.error}</label>
+
                     <button type="submit" className="pure-button pure-button-primary">Unlock</button>
                 </form>
+
 
             </div>
         </div>

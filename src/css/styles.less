@@ -62,7 +62,7 @@ input[type="checkbox"] {
     border: 1px solid #bbb;
     box-shadow: none;
     margin-top: 5px;
-    &[type="text"], &[type="number"] {
+    &[type="text"], &[type="number"], &[type="password"] {
         width: 100%;
     }
 }
@@ -249,6 +249,9 @@ button.unsaved {
     &.failure {
         color: red;
     }
+}
+.form-error {
+    color: red;
 }
 .console-logs {
     border: 1px solid @border-grey;
@@ -500,13 +503,13 @@ button.unsaved {
 
 #tooltip {
     display: none;
-    background: #1277a4;
-    border: 2px solid #1277a4;
+    background: #157a00;
+    border: 2px solid #157a00;
     border-radius: @radius-lil;
     color: @text-color;
     font-size: 1.1em;
     letter-spacing: normal;
-    line-height: 1.5em;
+    line-height: 1.2em;
     margin: 10px 10px auto;
     min-width: 150px;
     padding: 12px;
@@ -745,7 +748,7 @@ button.unsaved {
     }
 
     #tooltip {
-        margin-left: 12px;
+        margin-left: 13px;
         max-width: 340px;
     }
 

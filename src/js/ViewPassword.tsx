@@ -1,5 +1,7 @@
 import React from "react";
 
+import { tooltip } from "./_util";
+
 export class ViewPassword extends React.Component {
     constructor(props) {
         super(props)
@@ -10,41 +12,52 @@ export class ViewPassword extends React.Component {
         this.state = {
             newPass: '',
             confirmPass: '',
-            // autolockMinutes: 15,
+            error: '',
         };
     }
 
-    onChange(event) {
-        event.preventDefault();
-        const target = event.target;
-        this.setState({
-            [target.id]: target.value
-        });
+    exitOnEscape(event) {
+        if (event.key === 'Escape') {
+            this.props.onChangeView('Settings');
+        }
+    }
+    componentDidMount() {
+        document.addEventListener('keydown', this.exitOnEscape);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.exitOnEscape);
     }
 
     onFocus(event) {
         event.currentTarget.select();
     }
 
-    onSubmit() {
+    onChange(event) {
         event.preventDefault();
-        if (this.state.newPass !== this.state.confirmPass) {
-            alert("Passwords don't match"); // TODO: pretty error
-            return;
-        }
-        this.props.onSetPassword(this.state.newPass, /*autolockMinutes*/); // TODO
+        const target = event.target;
+        this.setState({
+            [target.id]: target.value,
+            error: '',
+        });
     }
 
-    exitOnEscape(event) {
-        if (event.key === "Escape") {
-            this.props.onChangeView('Settings');
+    onSubmit() {
+        event.preventDefault();
+        let err = '';
+        if (this.state.newPass !== this.state.confirmPass) {
+            err = "Passwords don't match";
+        } else
+        if (this.state.newPass.length < 6) {
+            err = "Password is too short";
         }
-    }
-    componentDidMount() {
-        document.addEventListener("keydown", this.exitOnEscape);
-    }
-    componentWillUnmount() {
-        document.removeEventListener("keydown", this.exitOnEscape);
+
+        if (err) {
+            this.setState({ error: err });
+        } else {
+            this.props.onSetPassword(this.state.newPass);
+            this.props.onChangeView('Transfers');
+            tooltip("Success");
+        }
     }
 
     render() {
@@ -69,25 +82,19 @@ export class ViewPassword extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>
                         <label htmlFor="newPass">New password</label>
-                        <input type="text" id="newPass" minLength="6"
+                        <input type="password" id="newPass" minLength="6"
                                onFocus={this.onFocus} onChange={this.onChange}
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
 
                     <fieldset>
                         <label htmlFor="confirmPass">Confirm password</label>
-                        <input type="text" id="confirmPass" minLength="6"
+                        <input type="password" id="confirmPass" minLength="6"
                                onFocus={this.onFocus} onChange={this.onChange}
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
 
-                    {/*<fieldset>
-                        <label htmlFor="autolockMinutes">Autolock (minutes)</label>
-                        <input type="number" id="autolockMinutes" min="1" defaultValue={this.state.autolock}
-                               max="9999" step="1" onChange={this.onChange}
-                               disabled={this.state.inProgress}
-                               spellCheck='false' autoCorrect='off' autoComplete='off'/>
-                    </fieldset>*/}
+                    <label className="form-error">{this.state.error}</label>
 
                     <button type="submit" className="pure-button pure-button-primary">Set password</button>
                 </form>
