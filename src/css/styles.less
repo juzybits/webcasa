@@ -289,8 +289,8 @@ button.unsaved {
     color: @text-color;
     float: right;
     font-size: 1.4em;
+    margin-top: -14px;
     margin-right: -15px;
-    margin-top: -15px;
     &:hover {
         color: #ff9d9d;
         cursor: pointer;
@@ -576,11 +576,13 @@ button.unsaved {
         &:last-child {
             margin-bottom: 1em;
         }
-        &#wallet-buttons {
+        &.wallet-buttons {
             text-align: center;
             .pure-button {
-                margin-right: 8px;
-                margin-left: 8px;
+                display: table;
+                margin-left: auto;
+                margin-right: auto;
+                min-width: 66%;
             }
         }
         &#local-webcasa {
@@ -595,6 +597,10 @@ button.unsaved {
             padding: 0 10px;
             font-size: 1.1em;
             text-align: left;
+        }
+        .divider {
+            border-bottom: 1px solid @border-grey;
+            margin: 0.85em 0;
         }
 
     }
@@ -676,10 +682,12 @@ button.unsaved {
         &:first-of-type {
             margin-top: 2.2em;
         }
-        display: inline-block;
-        width: 65%;
-        margin-bottom: 0.5em;
+        display: block;
         font-size: 1.15em;
+        margin-bottom: 0.5em;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 70%;
     }
 }
 
@@ -743,7 +751,7 @@ button.unsaved {
         padding: 36px;
     }
     .close-x {
-        margin-top: -26px;
+        margin-top: -25px;
         margin-right: -26px;
     }
 
@@ -820,12 +828,23 @@ button.unsaved {
             &:first-child {
                 margin-top: 10px;
             }
+            &.wallet-buttons {
+                .pure-button {
+                    min-width: 40%;
+                }
+            }
         }
     }
 
     #ViewTransfers {
         &.card {
             border-top: 0;
+        }
+    }
+
+    .external-action {
+        .pure-button {
+            min-width: 50%;
         }
     }
 }

@@ -18,8 +18,8 @@ export class ViewSettings extends React.Component {
 
             <div id="ViewSettings" className="card">
 
-                    <fieldset id="wallet-buttons">
-                        <legend>MANAGE WALLET</legend>
+                    <fieldset className="wallet-buttons">
+                        <legend>WALLET FILE</legend>
                         <button className={`pure-button ${export_btn_clazz}`}
                                 onClick={this.props.onDownloadWallet}>Export</button>
 
@@ -27,14 +27,14 @@ export class ViewSettings extends React.Component {
                         <input type="file" id="bc-file-input" className="connect-file-input" name="connect-file-input"
                                onChange={this.props.onUploadWallet} style={{display: 'none'}}/>
 
-                        <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Reset</button>
+                        <button className="pure-button btn-orange" onClick={this.props.onCreateWallet}>Delete</button>
                     </fieldset>
 
-                    <fieldset id="wallet-buttons">
-                        <legend>ADVANCED TOOLS</legend>
-                        <button className="pure-button" onClick={()=>this.props.onChangeView('Password')}>Set password</button>
-                        <button className="pure-button" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
-                        <button className="pure-button" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
+                    <fieldset className="wallet-buttons">
+                        <legend>ADVANCED</legend>
+                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Password')}>Set password</button>
+                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Check')}>Check webcash</button>
+                        <button className="pure-button wide" onClick={()=>this.props.onChangeView('Recover')}>Recover wallet</button>
                     </fieldset>
 
                 <div className="clear"></div>
@@ -55,10 +55,8 @@ export class ViewSettings extends React.Component {
                         <label>accept <a target="_blank" href="https://webcash.org/terms">terms</a></label>
                         <TermsCheckbox accepted={data.legalese.terms} />
                     </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>WALLET DEPTHS</legend>
+                    <div className="setting divider">
+                    </div>
                     <div className="setting depth">
                         <label>RECEIVE depth</label>{data.walletdepths.RECEIVE}
                     </div>
