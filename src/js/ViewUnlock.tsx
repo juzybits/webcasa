@@ -35,7 +35,7 @@ export class ViewUnlock extends React.Component {
 
             <div className="modal-card">
 
-                <h1>Wallet is locked</h1>
+                <h1><i className='icon-lock-solid'></i>Wallet locked</h1>
 
                 <div className="card-description">
                     <p>

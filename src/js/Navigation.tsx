@@ -28,6 +28,8 @@ export class Navigation extends React.Component {
                       onClick={this.props.onChangeView} toggleMenu={this.toggleVisibility}/>
         );
 
+        const btnIcon = this.props.encrypted ? 'icon-unlock-solid' : 'icon-lock-open-solid';
+
         return (
             <div id="nav" className={"pure-u " + (this.state.visible ? "active" : '')}>
 
@@ -38,8 +40,8 @@ export class Navigation extends React.Component {
                 <div className="nav-inner">
 
                     <div id="nav-button">
-                        <button className="pure-button" onClick={this.props.onDownloadWallet}>
-                            {shorten(this.props.wallet.getContents().master_secret)}
+                        <button className="pure-button" onClick={this.props.onNavButtonClick}>
+                            <i className={`button-icon ${btnIcon}`}></i>{shorten(this.props.wallet.getContents().master_secret)}
                         </button>
                     </div>
 

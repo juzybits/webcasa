@@ -95,6 +95,7 @@ export class App extends React.Component {
 
         this.onAcceptTerms = this.onAcceptTerms.bind(this);
         this.onChangeView = this.onChangeView.bind(this);
+        this.onNavButtonClick = this.onNavButtonClick.bind(this);
         this.onCreateWallet = this.onCreateWallet.bind(this);
         this.onUploadWallet = this.onUploadWallet.bind(this);
         this.onDownloadWallet = this.onDownloadWallet.bind(this);
@@ -193,15 +194,16 @@ export class App extends React.Component {
 
     }
 
-    private replaceWallet(wallet: WebcashWallet): bool {
-        this.setState({
+    private replaceWallet(wallet: WebcashWallet, state={}): bool {
+        const base = {
             wallet: wallet,
             downloaded: true,
             encrypted: false,
             inProgress: false,
             lastReceive: '',
             lastSend: null,
-        }, this.saveConfig);
+        };
+        this.setState({...base, ...state}, this.saveConfig);
     }
 
     private saveModifiedWallet(alreadySaved=false) {
@@ -225,6 +227,14 @@ export class App extends React.Component {
             alert("Please wait for the process to complete");
         } else {
             this.setState({view: view});
+        }
+    }
+
+    onNavButtonClick() {
+        if (this.state.encrypted) {
+            this.replaceWallet(null, {encrypted: true});
+        } else {
+            this.onChangeView('Password');
         }
     }
 
@@ -488,8 +498,9 @@ export class App extends React.Component {
             <div id="layout" className={`content pure-g ${blur}`}>
                 <Navigation
                     wallet={this.state.wallet}
-                    onDownloadWallet={this.onDownloadWallet}
+                    onNavButtonClick={this.onNavButtonClick}
                     onChangeView={this.onChangeView}
+                    encrypted={this.state.encrypted}
                 />
 
                 {view}
