@@ -126,7 +126,7 @@ export class App extends React.Component {
             wallet: wallet,
             // Ephemeral app state
             view: 'Transfers',
-            locked: false,
+            inProgress: false,
             lastReceive: '',
             lastSend: null,
             lastCheck: [],
@@ -156,7 +156,7 @@ export class App extends React.Component {
 
         const dis = this;
         window.addEventListener("beforeunload", function(e) {
-            if (dis.state.wallet && dis.state.locked) {
+            if (dis.state.wallet && dis.state.inProgress) {
                 e.preventDefault();
                 e.returnValue = "Are you sure?";
                 return "Are you sure?";
@@ -198,7 +198,7 @@ export class App extends React.Component {
             wallet: wallet,
             downloaded: true,
             encrypted: false,
-            locked: false,
+            inProgress: false,
             lastReceive: '',
             lastSend: null,
         }, this.saveConfig);
@@ -221,7 +221,7 @@ export class App extends React.Component {
     }
 
     onChangeView(view) {
-        if (this.state.locked) {
+        if (this.state.inProgress) {
             alert("Please wait for the process to complete");
         } else {
             this.setState({view: view});
@@ -232,9 +232,6 @@ export class App extends React.Component {
 
     private confirmOverwriteWallet(): bool {
         const balance = this.state.wallet.getBalance();
-        if (balance.isZero()) {
-            return true;
-        }
         const master = shorten(this.state.wallet.master_secret);
         return confirm(`This will DELETE your current wallet '${master}' (₩ ${balance})`+
             "\n\nDo you want to continue?");
@@ -287,7 +284,7 @@ export class App extends React.Component {
     }
 
     async onCheckWallet() {
-        this.setState({lastCheck: [], locked: true});
+        this.setState({lastCheck: [], inProgress: true});
 
         // Capture console output from underlying wallet
         const realLog = window.console.log;
@@ -313,7 +310,7 @@ export class App extends React.Component {
             this.setState({ lastCheck: <ActionResult success={false} contents={errMsg} /> });
         } finally {
             window.console.log = realLog;
-            this.setState({locked: false});
+            this.setState({inProgress: false});
         }
     }
 
@@ -323,7 +320,7 @@ export class App extends React.Component {
             return;
         }
 
-        this.setState({lastRecover: [], locked: true});
+        this.setState({lastRecover: [], inProgress: true});
 
         // Capture console output from underlying wallet
         const realLog = window.console.log;
@@ -364,7 +361,7 @@ export class App extends React.Component {
             this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
         } finally {
             window.console.log = realLog;
-            this.setState({locked: false});
+            this.setState({inProgress: false});
         }
     }
 

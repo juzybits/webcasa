@@ -3,9 +3,6 @@ import React from "react";
 import { List, Row, NothingYet } from "./Common";
 import { json } from "./_util";
 
-// TODO: search
-// TODO: sorting
-// TODO: pagination
 export class ViewHistory extends React.Component {
     constructor(props) {
         super(props)

@@ -1,8 +1,6 @@
 # Security
-    - Locked/unlocked on nav button
-    - Settings > Password
-        - Set/update password
-        - Autolock: 15m
+    - Nav button to lock/set password
+    - Autolock: 15m
 
 # Donate button
     - BTC, ERC-20
