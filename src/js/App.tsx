@@ -130,11 +130,11 @@ export class App extends React.Component {
             termsAccepted: conf.termsAccepted ?? false, // site-level accept
         };
 
-        /* On page exit - alert about unsaved changes */
+        /* On page exit - alert if in progress */
 
         const dis = this;
         window.addEventListener("beforeunload", function(e) {
-            if (dis.state.wallet && dis.state.inProgress) {
+            if (dis.state.inProgress) {
                 e.preventDefault();
                 e.returnValue = "Are you sure?";
                 return "Are you sure?";
