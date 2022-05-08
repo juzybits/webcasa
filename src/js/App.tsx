@@ -131,6 +131,7 @@ export class App extends React.Component {
             view: 'Transfers',
             externalReceive: externalReceive,
             bufferedReceive: null,
+            bufferedRecover: null,
             // Persistent app config
             encrypted: conf.encrypted ?? false,
             termsAccepted: conf.termsAccepted ?? false, // site-level accept
@@ -253,7 +254,11 @@ export class App extends React.Component {
             const wallet = new CasaWallet(walletData, dis.state.wallet.getPassword());
             wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
-            dis.resetAppState({wallet: wallet});
+            dis.resetAppState({
+                wallet: wallet,
+                view: 'Recover',
+                bufferedRecover: true,
+            });
         };
         reader.onerror = function() {
             alert(reader.error);
@@ -332,10 +337,7 @@ export class App extends React.Component {
         };
 
         try {
-            const introMsg = sameSecret
-                ? "(webcasa) Updating current wallet (same master secret)"
-                : `(webcasa) Replacing current wallet with ${masterSecret}`;
-            console.log(introMsg)
+            console.log("(webcasa) Recovering wallet")
 
             const password = this.state.wallet.getPassword();
             const walletData = { master_secret: masterSecret };
@@ -354,7 +356,10 @@ export class App extends React.Component {
             this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
         } finally {
             window.console.log = realLog;
-            this.setState({inProgress: false});
+            this.setState({
+                inProgress: false,
+                bufferedRecover: null,
+            });
         }
     }
 
@@ -462,8 +467,13 @@ export class App extends React.Component {
             view = <ViewHistory wallet={this.state.wallet} logs={logs}/>;
         } else
         if ('Recover' === this.state.view) {
-            view = <ViewRecover wallet={this.state.wallet} onChangeView={this.onChangeView}
-                        onRecoverWallet={this.onRecoverWallet} lastRecover={this.state.lastRecover}/>;
+            view = <ViewRecover
+                        wallet={this.state.wallet}
+                        onChangeView={this.onChangeView}
+                        onRecoverWallet={this.onRecoverWallet}
+                        lastRecover={this.state.lastRecover}
+                        bufferedRecover={this.state.bufferedRecover}
+                    />;
         } else
         if ('Check' === this.state.view) {
             view = <ViewCheck wallet={this.state.wallet} onChangeView={this.onChangeView}

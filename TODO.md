@@ -5,9 +5,6 @@
     - BTC, ERC-20
     - Webcash via lambda
 
-# miranda's feedback
-    - if you import a file, it doesn't rescan automatically.. might be good to make this auto
-
 # Bugs
     - Bug: Balance indicator repaint on Safari
     - Bug: Prevent logo area elements from collapsing

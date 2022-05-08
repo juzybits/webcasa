@@ -27,8 +27,8 @@ export class ViewRecover extends React.Component {
         event.currentTarget.select();
     }
 
-    async onSubmit() {
-        event.preventDefault();
+    async onSubmit(event?) {
+        event && event.preventDefault();
         this.setState({inProgress: true});
         const masterSecret = this.state.masterSecret;
         const gapLimit = this.state.gapLimit;
@@ -43,6 +43,9 @@ export class ViewRecover extends React.Component {
     }
     componentDidMount(){
         document.addEventListener("keydown", this.exitOnEscape);
+        if (this.props.bufferedRecover) {
+            this.onSubmit();
+        }
     }
     componentWillUnmount(){
         document.removeEventListener("keydown", this.exitOnEscape);
