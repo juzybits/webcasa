@@ -125,7 +125,6 @@ export class App extends React.Component {
             externalReceive: externalReceive,
             bufferedReceive: null,
             // Persistent app config
-            downloaded: conf.downloaded ?? true,
             encrypted: conf.encrypted ?? false,
             termsAccepted: conf.termsAccepted ?? false, // site-level accept
         };
@@ -163,7 +162,6 @@ export class App extends React.Component {
     private saveConfig() {
         console.debug("(webcasa) saving config")
         const state = {
-            downloaded: this.state.downloaded,
             encrypted: this.state.encrypted,
             termsAccepted: this.state.termsAccepted,
         };
@@ -173,7 +171,6 @@ export class App extends React.Component {
 
     private resetAppState(state={}) {
         const defaults = {
-            downloaded: true,
             encrypted: false,
             inProgress: false,
             lastReceive: '',
@@ -277,7 +274,6 @@ export class App extends React.Component {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
-        this.setState({downloaded: true}, this.saveConfig);
     }
 
     async onCheckWallet() {
@@ -300,7 +296,7 @@ export class App extends React.Component {
             await this.state.wallet.check();
             await Promise.resolve(); // needed?
             this.state.wallet.save();
-            this.resetAppState({wallet: this.state.wallet, downloaded: false, encrypted: this.state.encrypted});
+            this.resetAppState({wallet: this.state.wallet, encrypted: this.state.encrypted});
             console.log("(webcasa) Done! New balance:", formatBalance(this.state.wallet.getBalance()));
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message}`}</div>;
@@ -345,7 +341,7 @@ export class App extends React.Component {
             await wallet.recover(gapLimit);
             await Promise.resolve();
             wallet.save();
-            this.resetAppState({wallet: wallet, downloaded: false, encrypted: this.state.encrypted});
+            this.resetAppState({wallet: wallet, encrypted: this.state.encrypted});
             console.log("(webcasa) Done! New balance:", formatBalance(wallet.getBalance()));
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
@@ -385,7 +381,6 @@ export class App extends React.Component {
             this.state.wallet.save();
             this.setState({
                 wallet: this.state.wallet, // force repaint
-                downloaded: false,
                 lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" />,
             }, this.saveConfig);
         } catch (e) {
@@ -404,7 +399,6 @@ export class App extends React.Component {
             this.state.wallet.save();
             this.setState({
                 wallet: this.state.wallet, // force repaint
-                downloaded: false,
                 lastSend: {webcash: webcash, memo: memo, error: null},
             }, this.saveConfig);
         } catch (e) {
@@ -442,7 +436,6 @@ export class App extends React.Component {
         if ('Settings' === this.state.view) {
             view = <ViewSettings
                         wallet={this.state.wallet}
-                        downloaded={this.state.downloaded}
                         onChangeView={this.onChangeView}
                         onUploadWallet={this.onUploadWallet}
                         onDownloadWallet={this.onDownloadWallet}

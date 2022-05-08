@@ -9,7 +9,6 @@ export class ViewSettings extends React.Component {
         const data = this.props.wallet.getContents();
         const fullMaster = this.props.wallet.getContents().master_secret;
         const abbrMaster = shorten(fullMaster);
-        const export_btn_clazz = this.props.downloaded ? '' : 'unsaved';
         return (
         <div className="view-wrapper">
             <header className="header">
@@ -20,7 +19,7 @@ export class ViewSettings extends React.Component {
 
                     <fieldset className="wallet-buttons">
                         <legend>WALLET FILE</legend>
-                        <button className={`pure-button ${export_btn_clazz}`} onClick={this.props.onDownloadWallet}>
+                        <button className='pure-button' onClick={this.props.onDownloadWallet}>
                             <i className='button-icon icon-download-solid'></i>Export
                         </button>
 

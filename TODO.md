@@ -1,5 +1,4 @@
 # Security
-    - Nav button to lock/set password
     - Autolock: 15m
 
 # Donate button
@@ -7,15 +6,13 @@
     - Webcash via lambda
 
 # miranda's feedback
-- if you import a file, it doesn't rescan automatically.. might be good to make this auto
+    - if you import a file, it doesn't rescan automatically.. might be good to make this auto
 
 # Bugs
     - Bug: Balance indicator repaint on Safari
     - Bug: Prevent logo area elements from collapsing
 
 # UX
-    - ExternalReceive: do not insert until terms accepted?, auto check secret?
-
     - Add info throughout the site / ViewAbout
     - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 
