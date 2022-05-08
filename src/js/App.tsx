@@ -79,6 +79,14 @@ export class CasaWallet extends WebcashWallet {
 
 export class App extends React.Component {
 
+    private static defaultState = {
+        inProgress: false,
+        lastReceive: '',
+        lastSend: null,
+        lastCheck: [],
+        lastRecover: [],
+    };
+
     constructor(props) {
         super(props);
 
@@ -119,12 +127,8 @@ export class App extends React.Component {
         this.state = {
             wallet: (CasaWallet.exists() && !conf.encrypted) ? CasaWallet.load() : null,
             // Ephemeral app state
+            ...App.defaultState,
             view: 'Transfers',
-            inProgress: false,
-            lastReceive: '',
-            lastSend: null,
-            lastCheck: [],
-            lastRecover: [],
             externalReceive: externalReceive,
             bufferedReceive: null,
             // Persistent app config
@@ -173,12 +177,7 @@ export class App extends React.Component {
     }
 
     private resetAppState(state={}) {
-        const defaults = {
-            inProgress: false,
-            lastReceive: '',
-            lastSend: null,
-        };
-        this.setState({...defaults, ...state}, this.saveConfig);
+        this.setState({...App.defaultState, ...state}, this.saveConfig);
     }
 
     /* Handle navigation */
