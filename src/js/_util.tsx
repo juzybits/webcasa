@@ -17,7 +17,7 @@ export function makeURL(params): string {
     return url.href;
 }
 
-export function makePassword(password?: string): string|null {
+export function makePassword(password: string|null): string|null {
     if (password === null || password === '') {
         return null;
     }

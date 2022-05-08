@@ -72,7 +72,7 @@ export class ViewRecover extends React.Component {
                 }}><i className="icon-circle-xmark"></i></a>
 
                 <div className="card-description">
-                    <p>Enter your "master secret" below to recover your wallet.</p>
+                    <p>You can rebuild a wallet from its master secret, because webcash secrets are generated in a deterministic manner.</p>
                     <p>The "gap limit" is the maximum window span that will be used, on the assumption that any valid webcash will be found within the last item + gap limit number of secrets.</p>
                 </div>
 

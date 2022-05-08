@@ -36,7 +36,7 @@ export class CasaWallet extends WebcashWallet {
         return null !== window.localStorage.getItem(CasaWallet.locStoKey);
     }
 
-    public setPassword(password: string) {
+    public setPassword(password: string|null) {
         this.password = password;
     }
     public getPassword(): string|null {
@@ -358,13 +358,11 @@ export class App extends React.Component {
         }
     }
 
-    onSetPassword(password: string) {
+    onSetPassword(password: string|null) {
         const pw = makePassword(password);
         this.state.wallet.setPassword(pw);
         this.state.wallet.save();
-        if (!this.state.encrypted) {
-            this.setState({encrypted: true}, this.saveConfig);
-        }
+        this.setState({encrypted: !!pw}, this.saveConfig);
     }
 
     onUnlockWallet(password): string {
@@ -473,7 +471,7 @@ export class App extends React.Component {
         } else
         if ('Password' === this.state.view) {
             view = <ViewPassword
-                        wallet={this.state.wallet}
+                        hasPassword={!!this.state.wallet.password}
                         onSetPassword={this.onSetPassword}
                         onChangeView={this.onChangeView}
                     />;

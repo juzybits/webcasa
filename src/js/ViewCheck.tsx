@@ -51,7 +51,7 @@ export class ViewCheck extends React.Component {
 
                 <div className="card-description">
                 <p>
-                    Validate every webcash in the wallet, and move already-spent secrets to "unconfirmed".
+                    Validate all webcash secrets in this wallet, and move any spent secrets to "unconfirmed".
                 </p>
                 </div>
 
