@@ -335,10 +335,15 @@ export class App extends React.Component {
         try {
             const introMsg = sameSecret
                 ? "(webcasa) Updating current wallet (same master secret)"
-                : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
+                : `(webcasa) Replacing current wallet with ${masterSecret}`;
             console.log(introMsg)
 
-            const wallet = new CasaWallet({"master_secret": masterSecret}, this.state.wallet.getPassword());
+            const password = this.state.wallet.getPassword();
+            const walletData = { master_secret: masterSecret };
+            if (sameSecret) { // preserve history
+                walletData.log = this.state.wallet.getContents().log;
+            }
+            const wallet = new CasaWallet(walletData, password);
             wallet.setLegalAgreementsToTrue();
             await wallet.recover(gapLimit);
             await Promise.resolve();
