@@ -22,6 +22,12 @@ export class ViewSecrets extends React.Component {
     }
 
     render() {
+        const description = this.state.isEmpty ? '' :
+            <div className="card-description">
+                <p>
+                    A "secret" is a string of text with some webcash associated to it.
+                </p>
+            </div>;
         return (
         <div className="view-wrapper">
 
@@ -30,8 +36,13 @@ export class ViewSecrets extends React.Component {
             </header>
 
             <div id="ViewSecrets" className="card">
+
                 <NothingYet cond={this.state.isEmpty} msg="Your wallet is empty." />
+
+                {description}
+
                 {this.makeSecretSections()}
+
             </div>
 
         </div>
@@ -52,7 +63,7 @@ export class ViewSecrets extends React.Component {
                 <input type="checkbox" id="webcashes" value="showWebcashes"
                        defaultChecked={this.state.showWebcashes}
                        onChange={this.onCheckboxChange}/>
-                <label htmlFor="webcashes">Webcashes ({weCount})</label>
+                <label htmlFor="webcashes">Valid secrets ({weCount})</label>
             </div>
 
             <div className="check-item">
@@ -65,6 +76,7 @@ export class ViewSecrets extends React.Component {
 
         function makeContents(type: string) {
             const rawItems = type==='Webcashes' ? wData.webcash : wData.unconfirmed;
+            const title = type==='Webcashes' ? 'Valid secrets' : 'Unconfirmed';
             let key = 0;
             const items = rawItems.slice(0).reverse().map((x) =>
                 <div className="list-item" key={key++}>
@@ -72,7 +84,7 @@ export class ViewSecrets extends React.Component {
                 </div>
             );
             return <React.Fragment>
-                <h2>{type}</h2>
+                <h2>{title}</h2>
                 <List items={items} />
             </React.Fragment>;
         }

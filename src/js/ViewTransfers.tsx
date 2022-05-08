@@ -1,8 +1,8 @@
 import React from "react";
 
 import { formatBalance, formatDate, json } from "./_util";
-import { FormReceive } from "./FormReceive";
-import { FormSend } from "./FormSend";
+import { FormReceive, HistoryReceive } from "./FormReceive";
+import { FormSend, HistorySend } from "./FormSend";
 
 export class ViewTransfers extends React.Component {
 
@@ -24,15 +24,19 @@ export class ViewTransfers extends React.Component {
     }
 
     render() {
-        const tabContent = this.state.tab === 'Receive'
+        const form = this.state.tab === 'Receive'
             ? <FormReceive
-                    wallet={this.props.wallet}
                     onReceiveWebcash={this.props.onReceiveWebcash}
                     lastReceive={this.props.lastReceive} />
             : <FormSend
                     wallet={this.props.wallet}
                     onSendAmount={this.props.onSendAmount}
                     lastSend={this.props.lastSend} />;
+
+        const history = this.state.tab === 'Receive'
+            ? <HistoryReceive log={this.props.wallet.log} />
+            : <HistorySend log={this.props.wallet.log} />;
+
         const selectedReceive = this.state.tab === 'Receive' ? 'selected' : '';
         const selectedSend = this.state.tab === 'Send' ? 'selected' : '';
         const balance = formatBalance(this.props.wallet.getBalance());
@@ -57,8 +61,12 @@ export class ViewTransfers extends React.Component {
                     <label className="balance-amount"><i className="nav-icon icon-webcash"></i> {balance}</label>
                 </div>
 
-                <div className="tab-content">{tabContent}</div>
+                <div className="tab-content">
+                    {form}
+                </div>
             </div>
+
+            {history}
         </div>
         );
     }

@@ -5,6 +5,16 @@
     - BTC, ERC-20
     - Webcash via lambda
 
+# ExternalSend
+    Flow:
+        - In 3rd party site, user clicks <a href="webcasa.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
+        - In WebCasa, "Create payment for W1.13?". User accepts.
+        - "Payment created". Shows QR.
+        - "How do you want to send it?"
+            A) "Send payment to POST 3rd.com?pay_api"
+            B) "Copy secret to clipboard"
+            C) "Copy payment URL"
+
 # Bugs
     - Bug: Balance indicator repaint on Safari
     - Bug: Prevent logo area elements from collapsing
@@ -19,7 +29,6 @@
 # Visual
     - Prettier pop-ups instead of native
     - Replace send form with "Success!" inline card
-    - Multiple cards (e.g. for History)
     - Mobile 4 buttons (display:fixed)
 
 # CORE: Review https://github.com/kanzure/webcash/pull/13/files

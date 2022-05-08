@@ -35,7 +35,7 @@ export class ViewSettings extends React.Component {
                     </fieldset>
 
                     <fieldset className="wallet-buttons">
-                        <legend>ADVANCED</legend>
+                        <legend>TOOLS</legend>
                         <button className="pure-button wide" onClick={()=>this.props.onChangeView('Password')}>
                             <i className='button-icon icon-unlock-solid'></i>Set password
                         </button>

@@ -31,19 +31,6 @@ export class FormReceive extends React.Component {
     }
 
     render() {
-        var key = 0;
-        const history = this.props.wallet.log
-            .filter((x) => x.type === "receive" || x.type === "insert" )
-            .slice(-100).reverse().map((x) => {
-                const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
-                return <div className="list-item" key={key++}>
-                    <Row title='timestamp' contents={ts} />
-                    <Row title='amount' contents={x.amount} />
-                    <Row title='memo' contents={x.memo} />
-                    <Row title='webcash' contents={x.webcash} isWebcash={true} />
-                    <Row title='new_webcash' contents={x.new_webcash} isWebcash={true} />
-                </div>;
-            });
         return (
             <div id="FormReceive">
 
@@ -69,9 +56,41 @@ export class FormReceive extends React.Component {
 
                 {this.props.lastReceive}
 
-                <List title="History" items={history} />
-
             </div>
         );
+    }
+}
+
+export class HistoryReceive extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        var key = 0;
+        const history = this.props.log
+            .filter((x) => x.type === "receive" || x.type === "insert" )
+            .slice(-100).reverse().map((x) => {
+                const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
+                return <div className="list-item" key={key++}>
+                    <Row title='timestamp' contents={ts} />
+                    <Row title='amount' contents={x.amount} />
+                    <Row title='memo' contents={x.memo} />
+                    <Row title='webcash' contents={x.webcash} isWebcash={true} />
+                    <Row title='new_webcash' contents={x.new_webcash} isWebcash={true} />
+                </div>;
+            });
+
+        this.state = {
+            history: history
+        };
+    }
+
+    render() {
+        if (this.state.history.length === 0) {
+            return '';
+        }
+        return <div className="ViewTransfersHistory card">
+            <List title="History (receive)" items={this.state.history} />
+        </div>;
     }
 }

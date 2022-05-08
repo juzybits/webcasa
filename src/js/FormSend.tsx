@@ -77,8 +77,6 @@ export class FormSend extends React.Component {
 
                 <LastResult last={this.props.lastSend} qrURL={this.state.qrURL} />
 
-                <History logs={this.props.wallet.log} />
-
             </div>
         );
     }
@@ -108,18 +106,35 @@ function LastResult(props) {
     </div>;
 }
 
-function History(props) {
-    let key = 0;
-    const history = props.logs
-        .filter((x) => x.type === "payment" )
-        .slice(-100).reverse().map((x) => {
-            const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
-            return <div className="list-item" key={key++}>
-                <Row title='timestamp' contents={ts} />
-                <Row title='amount' contents={x.amount} />
-                <Row title='memo' contents={x.memo} />
-                <Row title='webcash' contents={x.webcash} isWebcash={true} />
-            </div>;
-        });
-    return <List title="History" items={history} />;
+export class HistorySend extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        let key = 0;
+        const history = this.props.log
+            .filter((x) => x.type === "payment" )
+            .slice(-100).reverse().map((x) => {
+                const ts = !x.timestamp ? null : formatDate(new Date(Number(x.timestamp)));
+                return <div className="list-item" key={key++}>
+                    <Row title='timestamp' contents={ts} />
+                    <Row title='amount' contents={x.amount} />
+                    <Row title='memo' contents={x.memo} />
+                    <Row title='webcash' contents={x.webcash} isWebcash={true} />
+                </div>;
+            });
+
+        this.state = {
+            history: history
+        };
+    }
+
+    render() {
+        if (this.state.history.length === 0) {
+            return '';
+        }
+        return <div className="ViewTransfersHistory card">
+            <List title="History (send)" items={this.state.history} />
+        </div>;
+    }
 }
