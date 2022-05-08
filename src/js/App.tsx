@@ -39,6 +39,9 @@ export class CasaWallet extends WebcashWallet {
     public setPassword(password: string) {
         this.password = password;
     }
+    public getPassword(): string|null {
+        return this.password;
+    }
 
     public save(): boolean {
         const contents = this.getContents();
@@ -171,7 +174,6 @@ export class App extends React.Component {
 
     private resetAppState(state={}) {
         const defaults = {
-            encrypted: false,
             inProgress: false,
             lastReceive: '',
             lastSend: null,
@@ -214,7 +216,7 @@ export class App extends React.Component {
 
     onNavButtonClick() {
         if (this.state.encrypted) {
-            this.resetAppState({wallet: null, encrypted: true});
+            this.resetAppState({wallet: null});
         } else {
             this.onChangeView('Password');
         }
@@ -234,7 +236,7 @@ export class App extends React.Component {
         if (!this.confirmOverwriteWallet()) {
             return;
         }
-        const wallet = new CasaWallet();
+        const wallet = new CasaWallet({}, this.state.wallet.getPassword());
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         wallet.save();
         this.resetAppState({wallet: wallet});
@@ -249,7 +251,7 @@ export class App extends React.Component {
         const dis = this;
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
-            const wallet = new CasaWallet(walletData);
+            const wallet = new CasaWallet(walletData, dis.state.wallet.getPassword());
             wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
             dis.resetAppState({wallet: wallet});
@@ -296,7 +298,7 @@ export class App extends React.Component {
             await this.state.wallet.check();
             await Promise.resolve(); // needed?
             this.state.wallet.save();
-            this.resetAppState({wallet: this.state.wallet, encrypted: this.state.encrypted});
+            this.resetAppState({wallet: this.state.wallet});
             console.log("(webcasa) Done! New balance:", formatBalance(this.state.wallet.getBalance()));
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message}`}</div>;
@@ -336,12 +338,12 @@ export class App extends React.Component {
                 : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
             console.log(introMsg)
 
-            const wallet = new CasaWallet({"master_secret": masterSecret}, this.state.wallet.password);
+            const wallet = new CasaWallet({"master_secret": masterSecret}, this.state.wallet.getPassword());
             wallet.setLegalAgreementsToTrue();
             await wallet.recover(gapLimit);
             await Promise.resolve();
             wallet.save();
-            this.resetAppState({wallet: wallet, encrypted: this.state.encrypted});
+            this.resetAppState({wallet: wallet});
             console.log("(webcasa) Done! New balance:", formatBalance(wallet.getBalance()));
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
@@ -422,15 +424,15 @@ export class App extends React.Component {
                 onExternalInsert={this.onExternalInsert}
             />;
         } else
-        // Preempt with modal if terms are not accepted
-        if (!this.state.termsAccepted) {
-            blur = 'blur';
-            view = <ViewTerms onAcceptTerms={this.onAcceptTerms} />;
-        } else
         // Show password modal if wallet is encrypted
         if (this.state.encrypted && !this.state.wallet) {
             blur = 'blur';
             view = <ViewUnlock onUnlockWallet={this.onUnlockWallet} />;
+        } else
+        // Preempt with modal if terms are not accepted
+        if (!this.state.termsAccepted) {
+            blur = 'blur';
+            view = <ViewTerms onAcceptTerms={this.onAcceptTerms} />;
         } else
         // Regular view rendering
         if ('Settings' === this.state.view) {
