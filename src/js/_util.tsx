@@ -1,5 +1,6 @@
 /** Helper functions (non-React) **/
 
+import CryptoJS from 'crypto-js'
 import QRCode from 'qrcode';
 
 // TODO: turn into a React component
@@ -14,6 +15,14 @@ export function makeURL(params): string {
     const query = '?' + new URLSearchParams(params).toString();
     const url = new URL(window.location.origin + window.location.pathname + query);
     return url.href;
+}
+
+export function makePassword(password?: string): string|null {
+    if (password === null || password === '') {
+        return null;
+    }
+    const salted_pass = password + '_webcasa_salt_rdJpbXdL2YrPHymp';
+    return CryptoJS.SHA256(salted_pass).toString();
 }
 
 export function renderQR(elementId: string, contents: string): bool {

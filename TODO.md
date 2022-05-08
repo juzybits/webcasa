@@ -8,7 +8,6 @@
 
 # miranda's feedback
 - if you import a file, it doesn't rescan automatically.. might be good to make this auto
-- when re-import and scanning, secrets don't update unless you click around
 
 # Bugs
     - Bug: Balance indicator repaint on Safari

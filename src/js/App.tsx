@@ -4,7 +4,7 @@ import React from "react";
 import CryptoJS from 'crypto-js'
 import { WebcashWallet, SecretWebcash } from "webcash";
 
-import { formatBalance, shorten } from "./_util";
+import { formatBalance, makePassword, shorten } from "./_util";
 import { ActionResult } from "./Common";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
@@ -27,28 +27,17 @@ export class CasaWallet extends WebcashWallet {
     private static locStoKey = 'wallet';
     private password;
 
-    private constructor(walletData: Partial<WebcashWalletData> = {}, password?: string) {
+    constructor(walletData: Partial<WebcashWalletData> = {}, password?: string) {
         super(walletData);
         this.password = password;
-    }
-
-    public static create(walletdata: Partial<WebcashWalletData> = {}, password?: string): WebcashWallet {
-        const passHash = password ? CasaWallet.makePassword(password) : null;
-        const wallet = new CasaWallet(walletdata, passHash);
-        return wallet;
     }
 
     public static exists(): bool {
         return null !== window.localStorage.getItem(CasaWallet.locStoKey);
     }
 
-    private static makePassword(password: string): string {
-        const salted_pass = password + '_webcasa_salt_rdJpbXdL2YrPHymp';
-        return CryptoJS.SHA256(salted_pass).toString();
-    }
-
     public setPassword(password: string) {
-        this.password = CasaWallet.makePassword(password);
+        this.password = password;
     }
 
     public save(): boolean {
@@ -60,7 +49,7 @@ export class CasaWallet extends WebcashWallet {
         return true;
     }
 
-    public static load(password?: string): WebcashWallet | undefined {
+    public static load(password?: string): WebcashWallet|undefined {
         const rawWallet = window.localStorage.getItem(CasaWallet.locStoKey);
         if (!rawWallet) {
             console.warn("(webcasa) Wallet not found in localStorage");
@@ -72,9 +61,8 @@ export class CasaWallet extends WebcashWallet {
             wallet = new CasaWallet(JSON.parse(rawWallet));
         } else {
             try {
-                const passHash = CasaWallet.makePassword(password);
-                const strWallet = CryptoJS.AES.decrypt(rawWallet, passHash).toString(CryptoJS.enc.Utf8);
-                wallet = new CasaWallet(JSON.parse(strWallet), passHash);
+                const strWallet = CryptoJS.AES.decrypt(rawWallet, password).toString(CryptoJS.enc.Utf8);
+                wallet = new CasaWallet(JSON.parse(strWallet), password);
             } catch(err) {
                 console.warn("(webcasa) Incorrect password when loading wallet");
                 return;
@@ -194,16 +182,6 @@ export class App extends React.Component {
         this.setState({...defaults, ...state}, this.saveConfig);
     }
 
-    private saveModifiedWallet(alreadySaved=false) {
-        if (!alreadySaved) {
-            this.state.wallet.save();
-        }
-        this.setState({
-            wallet: this.state.wallet, // force repaint
-            downloaded: false,
-        }, this.saveConfig);
-    }
-
     /* Handle navigation */
 
     onExternalInsert() {
@@ -221,7 +199,7 @@ export class App extends React.Component {
         };
         let wallet = this.state.wallet;
         if (!wallet) {
-            wallet = CasaWallet.create();
+            wallet = new CasaWallet();
             wallet.setLegalAgreementsToTrue();
             wallet.save();
             state.wallet = wallet;
@@ -259,7 +237,7 @@ export class App extends React.Component {
         if (!this.confirmOverwriteWallet()) {
             return;
         }
-        const wallet = CasaWallet.create();
+        const wallet = new CasaWallet();
         wallet.setLegalAgreementsToTrue(); // already agreed on 1st page load
         wallet.save();
         this.resetAppState({wallet: wallet});
@@ -274,7 +252,7 @@ export class App extends React.Component {
         const dis = this;
         reader.onload = function() {
             const walletData = JSON.parse(reader.result);
-            const wallet = CasaWallet.create(walletData);
+            const wallet = new CasaWallet(walletData);
             wallet.setLegalAgreementsToTrue(); // user could have uploaded a wallet without accepted terms
             wallet.save();
             dis.resetAppState({wallet: wallet});
@@ -283,6 +261,7 @@ export class App extends React.Component {
             alert(reader.error);
         };
         reader.readAsText(file);
+        event.target.value = '';
     }
 
     onDownloadWallet(event) {
@@ -318,11 +297,11 @@ export class App extends React.Component {
 
         try {
             console.log("(webcasa) Checking wallet");
-            await this.state.wallet.check(); // changes wallet contents but doesn't call save()
+            await this.state.wallet.check();
             await Promise.resolve(); // needed?
-            this.saveModifiedWallet(); // TODO: do this only if wallet changed
-            console.log("(webcasa) New balance:", formatBalance(this.state.wallet.getBalance()));
-            console.log("(webcasa) Done!");
+            this.state.wallet.save();
+            this.resetAppState({wallet: this.state.wallet, downloaded: false, encrypted: this.state.encrypted});
+            console.log("(webcasa) Done! New balance:", formatBalance(this.state.wallet.getBalance()));
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message}`}</div>;
             this.setState({ lastCheck: <ActionResult success={false} contents={errMsg} /> });
@@ -356,24 +335,18 @@ export class App extends React.Component {
         };
 
         try {
-            const wallet = sameSecret
-                ? this.state.wallet
-                : CasaWallet.create({"master_secret": masterSecret});
             const introMsg = sameSecret
                 ? "(webcasa) Updating current wallet (same master secret)"
                 : `(webcasa) Replacing current wallet with '${shorten(wallet.master_secret)}'`;
             console.log(introMsg)
 
+            const wallet = new CasaWallet({"master_secret": masterSecret}, this.state.wallet.password);
             wallet.setLegalAgreementsToTrue();
-            await wallet.recover(gapLimit); // changes wallet and calls save() (writes local storage)
+            await wallet.recover(gapLimit);
             await Promise.resolve();
-            console.log("(webcasa) Found balance:", formatBalance(wallet.getBalance()));
-
-            if (!sameSecret) {
-                this.resetAppState({wallet: wallet});
-            }
-            this.saveModifiedWallet(true); // TODO: do this only if wallet changed
-            console.log("(webcasa) Done!");
+            wallet.save();
+            this.resetAppState({wallet: wallet, downloaded: false, encrypted: this.state.encrypted});
+            console.log("(webcasa) Done! New balance:", formatBalance(wallet.getBalance()));
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
             this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
@@ -384,7 +357,8 @@ export class App extends React.Component {
     }
 
     onSetPassword(password: string) {
-        this.state.wallet.setPassword(password);
+        const pw = makePassword(password);
+        this.state.wallet.setPassword(pw);
         this.state.wallet.save();
         if (!this.state.encrypted) {
             this.setState({encrypted: true}, this.saveConfig);
@@ -393,7 +367,8 @@ export class App extends React.Component {
 
     onUnlockWallet(password): string {
         let err = '';
-        const wallet = CasaWallet.load(password);
+        const pw = makePassword(password);
+        const wallet = CasaWallet.load(pw);
         if (!wallet) {
             err = "Incorrect password";
         } else {
@@ -407,8 +382,12 @@ export class App extends React.Component {
     async onReceiveWebcash(webcash, memo) {
         try {
             const new_webcash = await this.state.wallet.insert(webcash, memo);
-            this.setState({ lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" /> });
-            this.saveModifiedWallet();
+            this.state.wallet.save();
+            this.setState({
+                wallet: this.state.wallet, // force repaint
+                downloaded: false,
+                lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" />,
+            }, this.saveConfig);
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
             this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} title='' /> });
@@ -422,8 +401,12 @@ export class App extends React.Component {
     async onSendAmount(amount, memo) {
         try {
             const webcash = await this.state.wallet.pay(amount, memo);
-            this.setState({ lastSend: {webcash: webcash, memo: memo, error: null} });
-            this.saveModifiedWallet();
+            this.state.wallet.save();
+            this.setState({
+                wallet: this.state.wallet, // force repaint
+                downloaded: false,
+                lastSend: {webcash: webcash, memo: memo, error: null},
+            }, this.saveConfig);
         } catch (e) {
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
             this.setState({ lastSend: {webcash: null, memo: null, error: errMsg} });
