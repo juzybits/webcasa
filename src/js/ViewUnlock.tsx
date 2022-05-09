@@ -22,9 +22,13 @@ export class ViewUnlock extends React.Component {
 
     onSubmit() {
         event.preventDefault();
+        const error = this.props.onUnlockWallet(this.state.passwd);
         this.setState({
-            error: this.props.onUnlockWallet(this.state.passwd)
+            error: error
         });
+        if (error) {
+            document.getElementById('passwd').select();
+        }
     }
 
     render() {
