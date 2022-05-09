@@ -6,6 +6,7 @@ export class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.onClickToggleBtn = this.onClickToggleBtn.bind(this); // mobile-only
+        this.onClickNavButton = this.onClickNavButton.bind(this); // mobile-only
         this.toggleVisibility = this.toggleVisibility.bind(this); // mobile-only
         this.state = { visible: false }
     }
@@ -19,17 +20,25 @@ export class Navigation extends React.Component {
         this.toggleVisibility();
     }
 
+    onClickNavButton(event) {
+        event.preventDefault();
+        this.props.onNavButtonClick();
+        if (isMobile()) { // auto-close mobile menu
+            this.toggleVisibility();
+        }
+    }
+
     render() {
         if (!this.props.wallet) {
             return '';
         }
         const menuItems = ["Transfers", "Settings", "Secrets", "History"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
-                      onClick={this.props.onChangeView} toggleMenu={this.toggleVisibility}/>
+                      onClickChangeView={this.props.onChangeView} toggleMenu={this.toggleVisibility}/>
         );
 
         const btnIcon = this.props.encrypted ? 'icon-unlock-solid' : 'icon-lock-open-solid';
-
+        const shortMasterSecret = shorten(this.props.wallet.getContents().master_secret);
         return (
             <div id="nav" className={"pure-u " + (this.state.visible ? "active" : '')}>
 
@@ -40,8 +49,8 @@ export class Navigation extends React.Component {
                 <div className="nav-inner">
 
                     <div id="nav-button">
-                        <button className="pure-button" onClick={this.props.onNavButtonClick}>
-                            <i className={`button-icon ${btnIcon}`}></i>{shorten(this.props.wallet.getContents().master_secret)}
+                        <button className="pure-button" onClick={this.onClickNavButton}>
+                            <i className={`button-icon ${btnIcon}`}></i>{shortMasterSecret}
                         </button>
                     </div>
 
@@ -73,7 +82,7 @@ export class Navigation extends React.Component {
 function MenuItem(props) {
     const onClick = function(event) {
         event.preventDefault();
-        props.onClick(props.name);
+        props.onClickChangeView(props.name);
         if (isMobile()) { // auto-close mobile menu
             props.toggleMenu();
         }
