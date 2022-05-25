@@ -12,7 +12,11 @@ export function tooltip(text: string): void {
 }
 
 export function makeURL(params): string {
-    const query = '?' + new URLSearchParams(params).toString();
+    let safeParams = {};
+    for (const [key, value] of Object.entries(params)) {
+        safeParams[key] = encodeURI(value);
+    }
+    const query = '?' + new URLSearchParams(safeParams).toString();
     const url = new URL(window.location.origin + window.location.pathname + query);
     return url.href;
 }

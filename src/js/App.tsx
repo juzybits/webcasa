@@ -113,9 +113,9 @@ export class App extends React.Component {
         const webcash_raw = params.get('receive');
         if (webcash_raw) {
             try {
-                const webcash = SecretWebcash.deserialize(webcash_raw)
+                const webcash = SecretWebcash.deserialize( decodeURI(webcash_raw) )
                 const memo = params.get('memo') ?? '';
-                externalReceive = { webcash: webcash, memo: memo };
+                externalReceive = { webcash: webcash, memo: decodeURI(memo) };
             } catch (err) {
                 console.error(err);
             }

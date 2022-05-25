@@ -1,4 +1,10 @@
-# Security
+# Feedback
+    - kanzure: when the user starts typing in the input box for sending,
+                I think it should clear the last sent one from the screen,
+                until the user hits send, and then the new one should display.
+
+# Password
+    - "Forgot password?" -> Reset / Import
     - Autolock: 15m
 
 # Donate button
