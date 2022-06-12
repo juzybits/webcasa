@@ -1,7 +1,11 @@
 # Feedback
-    - kanzure: when the user starts typing in the input box for sending,
+    - kanzure:  When the user starts typing in the input box for sending,
                 I think it should clear the last sent one from the screen,
                 until the user hits send, and then the new one should display.
+    - kanzure:  On the "found webcash" screen, could you also render the QR code?
+                This is helpful for the use case where someone clicks the link on their desktop,
+                and then decides to switch it to mobile, without them having to learn they have to 'send' it first.
+    - mihailskkk: option to export the wallet file in an encrypted format
 
 # Password
     - "Forgot password?" -> Reset / Import
