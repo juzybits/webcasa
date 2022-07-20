@@ -1,11 +1,16 @@
 # Feedback
+    - kanzure:  Could I request a more prominent link to the webcash site in the webcasa app?
+                like a "Learn about webcash here:" ... some users are receiving webcash for the
+                first time into a webcasa wallet, and it's not really clear where to go to learn
+                more about it. I see you have a W button in the menu but perhaps something else?
+
     - kanzure:  When the user starts typing in the input box for sending,
                 I think it should clear the last sent one from the screen,
                 until the user hits send, and then the new one should display.
-    - kanzure:  On the "found webcash" screen, could you also render the QR code?
-                This is helpful for the use case where someone clicks the link on their desktop,
-                and then decides to switch it to mobile, without them having to learn they have to 'send' it first.
+
     - mihailskkk: option to export the wallet file in an encrypted format
+
+    - mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
 
 # Password
     - "Forgot password?" -> Reset / Import
