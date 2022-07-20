@@ -35,7 +35,7 @@ export class ViewUnlock extends React.Component {
         return (
         <div id="ViewPassword" className="modal">
 
-            <label className="modal-logo"><a href="/">🏠 WebCasa<sup>(beta)</sup></a></label>
+            <label className="modal-logo"><a href="/">🏠 WebCasa</a></label>
 
             <div className="modal-card">
 

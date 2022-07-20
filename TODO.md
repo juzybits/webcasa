@@ -12,41 +12,31 @@
 
     - mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
 
-# Password
-    - "Forgot password?" -> Reset / Import
-    - Autolock: 15m
-
 # Donate button
     - BTC, ERC-20
     - Webcash via lambda
 
-# ExternalSend
-    Flow:
-        - In 3rd party site, user clicks <a href="webcasa.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
-        - In WebCasa, "Create payment for W1.13?". User accepts.
-        - "Payment created". Shows QR.
-        - "How do you want to send it?"
-            A) "Send payment to POST 3rd.com?pay_api"
-            B) "Copy secret to clipboard"
-            C) "Copy payment URL"
-
-# Bugs
-    - Bug: Balance indicator repaint on Safari
-    - Bug: Prevent logo area elements from collapsing
-
 # UX
     - Add info throughout the site / ViewAbout
-    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 
+    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
     - Secret management: consolidate, check
     - ViewHistory pagination, filter, search, sorting
 
 # Visual
-    - Prettier pop-ups instead of native
     - Replace send form with "Success!" inline card
+
+    - Prettier pop-ups instead of native
     - Mobile 4 buttons (display:fixed)
 
-# CORE: Review https://github.com/kanzure/webcash/pull/13/files
+# Password
+    - "Forgot password?" -> Reset / Import
+    - Autolock: 15m
+
+# Bugs
+    - Bug: Balance indicator repaint on Safari
+
+##### IDEAS
 
 # Browser extension
 
@@ -64,9 +54,15 @@
     - Discord
     - Twitter
 
-# Code quality
-    - Review wallet saving.
-    - Unit tests.
+# ExternalSend
+    Flow:
+        - In 3rd party site, user clicks <a href="webcasa.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
+        - In WebCasa, "Create payment for W1.13?". User accepts.
+        - "Payment created". Shows QR.
+        - "How do you want to send it?"
+            A) "Send payment to POST 3rd.com?pay_api"
+            B) "Copy secret to clipboard"
+            C) "Copy payment URL"
 
 # "PinBoard: temporary text storage".
     - Abuse prevented with webcash fee

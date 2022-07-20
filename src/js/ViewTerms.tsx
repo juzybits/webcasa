@@ -25,7 +25,7 @@ export class ViewTerms extends React.Component {
     makeCasaTerms() {
         return (
         <React.Fragment>
-            <h1>🏠 Welcome to WebCasa<sup>(beta)</sup></h1>
+            <h1>🏠 Welcome to WebCasa</h1>
             <p>
                 WebCasa is a browser wallet for <a href="https://webcash.org" target="_blank">Webcash</a> (not affiliated).
             </p>
@@ -62,7 +62,7 @@ export class ViewTerms extends React.Component {
     render() {
         const terms = !this.state.casaTerms ? this.makeCasaTerms() : this.makeCashTerms();
         const logo = !this.state.casaTerms ? ''
-            : <label className="modal-logo"><a href="/">🏠 WebCasa<sup>(beta)</sup></a></label>;
+            : <label className="modal-logo"><a href="/">🏠 WebCasa</a></label>;
         return (
         <div id="ViewTerms" className="modal">
             {logo}
