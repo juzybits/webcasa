@@ -1,8 +1,3 @@
-# Replace send form with "Success!" inline card
-- @kanzure: When the user starts typing in the input box for sending,
-           I think it should clear the last sent one from the screen,
-           until the user hits send, and then the new one should display.
-
 # Donate button
     - BTC, ERC-20
     - Webcash via lambda
@@ -15,6 +10,7 @@
 - Autolock: 15m
 
 - Prettier pop-ups instead of native
+- Replace send form with "Success!" inline card
 
 - Bug: Balance indicator repaint on Safari
 

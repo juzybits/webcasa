@@ -27,11 +27,13 @@ export class ViewTransfers extends React.Component {
         const form = this.state.tab === 'Receive'
             ? <FormReceive
                     onReceiveWebcash={this.props.onReceiveWebcash}
-                    lastReceive={this.props.lastReceive} />
+                    lastReceive={this.props.lastReceive}
+                    resetLastReceive={this.props.resetLastReceive} />
             : <FormSend
                     wallet={this.props.wallet}
                     onSendAmount={this.props.onSendAmount}
-                    lastSend={this.props.lastSend} />;
+                    lastSend={this.props.lastSend}
+                    resetLastSend={this.props.resetLastSend} />;
 
         const history = this.state.tab === 'Receive'
             ? <HistoryReceive log={this.props.wallet.log} />

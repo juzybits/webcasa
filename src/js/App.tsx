@@ -103,6 +103,8 @@ export class App extends React.Component {
         this.onReceiveWebcash = this.onReceiveWebcash.bind(this);
         this.onRecoverWallet = this.onRecoverWallet.bind(this);
         this.onSendAmount = this.onSendAmount.bind(this);
+        this.resetLastSend = this.resetLastSend.bind(this);
+        this.resetLastReceive = this.resetLastReceive.bind(this);
         this.onSetPassword = this.onSetPassword.bind(this);
         this.onUnlockWallet = this.onUnlockWallet.bind(this);
         this.onUploadWallet = this.onUploadWallet.bind(this);
@@ -383,6 +385,14 @@ export class App extends React.Component {
         return err;
     }
 
+    resetLastSend() {
+        this.setState({lastSend: null});
+    }
+
+    resetLastReceive() {
+        this.setState({lastReceive: null});
+    }
+
     /* Handle Transfers (webcash operations) */
 
     async onReceiveWebcash(webcash, memo) {
@@ -458,6 +468,7 @@ export class App extends React.Component {
                 onReceiveWebcash={this.onReceiveWebcash} lastReceive={this.state.lastReceive}
                 onSendAmount={this.onSendAmount} lastSend={this.state.lastSend}
                 bufferedReceive={this.state.bufferedReceive}
+                resetLastSend={this.resetLastSend} resetLastReceive={this.resetLastReceive}
             />;
         } else
         if ('Secrets' === this.state.view) {

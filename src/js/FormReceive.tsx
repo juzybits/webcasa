@@ -16,11 +16,13 @@ export class FormReceive extends React.Component {
     }
 
     onChange(event) {
-        event.preventDefault();
         const target = event.target;
         this.setState({
             [target.id]: target.value
         });
+        if (this.props.lastReceive) {
+            this.props.resetLastReceive();
+        }
     }
 
     async onSubmit() {
@@ -28,6 +30,10 @@ export class FormReceive extends React.Component {
         const webcash = this.state.receiveWebcash;
         const memo = this.state.receiveMemo;
         await this.props.onReceiveWebcash(webcash, memo);
+        this.setState({
+            receiveWebcash: '',
+            receiveMemo: '',
+        });
     }
 
     render() {

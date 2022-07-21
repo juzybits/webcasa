@@ -20,14 +20,19 @@ export class FormSend extends React.Component {
     onSendAmountMax() {
         event.preventDefault();
         this.setState({sendAmount: this.props.wallet.getBalance()});
+        if (this.props.resetLastSend) {
+            this.props.resetLastSend();
+        }
     }
 
     onChange(event) {
-        event.preventDefault();
         const target = event.target;
         this.setState({
             [target.id]: target.value
         });
+        if (this.props.resetLastSend) {
+            this.props.resetLastSend();
+        }
     }
 
     async onSubmit() {
@@ -36,6 +41,10 @@ export class FormSend extends React.Component {
         const memo = this.state.sendMemo;
         await this.props.onSendAmount(amount, memo);
         this.showQR();
+        this.setState({
+            sendAmount: '',
+            sendMemo: '',
+        });
     }
 
     componentDidMount() {
