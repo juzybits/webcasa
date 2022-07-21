@@ -9,6 +9,7 @@ import { ActionResult } from "./Common";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
 import { ViewCheck } from "./ViewCheck";
+import { ViewDonate } from "./ViewDonate";
 import { ViewExternalReceive } from "./ViewExternalReceive";
 import { ViewFAQ } from "./ViewFAQ";
 import { ViewHistory } from "./ViewHistory";
@@ -500,6 +501,9 @@ export class App extends React.Component {
         } else
         if ('FAQ' === this.state.view) {
             view = <ViewFAQ />;
+        } else
+        if ('Donate' === this.state.view) {
+            view = <ViewDonate />;
         }
 
         return (

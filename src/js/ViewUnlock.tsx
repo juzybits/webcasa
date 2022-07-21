@@ -12,7 +12,6 @@ export class ViewUnlock extends React.Component {
     }
 
     onChange(event) {
-        event.preventDefault();
         const target = event.target;
         this.setState({
             [target.id]: target.value,
