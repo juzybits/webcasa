@@ -46,7 +46,7 @@ export class ViewTransfers extends React.Component {
         return (
         <div className="view-wrapper">
             <header className="header">
-                <h1>Transfers</h1>
+                <h1><i className="icon-h1 icon-send"></i> Transfers</h1>
             </header>
 
             <div id="ViewTransfers" className="card">

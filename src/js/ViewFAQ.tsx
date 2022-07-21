@@ -6,7 +6,7 @@ export class ViewFAQ extends React.Component {
         <div className="view-wrapper">
 
             <header className="header">
-                <h1>Frequently Asked Questions</h1>
+                <h1><i className="icon-h1 icon-circle-question-solid"></i> FAQ</h1>
             </header>
 
             <div id="ViewFAQ" className="card">

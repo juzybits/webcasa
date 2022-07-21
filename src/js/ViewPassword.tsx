@@ -112,7 +112,9 @@ export class ViewPassword extends React.Component {
     render() {
         return <div className="view-wrapper">
 
-            <h1><i className='button-icon icon-unlock-solid'></i>Set password</h1>
+            <header className="header">
+                <h1><i className="icon-h1 icon-unlock-solid"></i> Set password</h1>
+            </header>
 
             <div id="ViewPassword" className="card closable">
 

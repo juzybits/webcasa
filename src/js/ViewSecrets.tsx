@@ -32,7 +32,7 @@ export class ViewSecrets extends React.Component {
         <div className="view-wrapper">
 
             <header className="header">
-                <h1>Secrets</h1>
+                <h1><i className="icon-h1 icon-key"></i> Secrets</h1>
             </header>
 
             <div id="ViewSecrets" className="card">

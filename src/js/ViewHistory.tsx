@@ -12,7 +12,7 @@ export class ViewHistory extends React.Component {
         <div className="view-wrapper">
 
             <header className="header">
-                <h1>History</h1>
+                <h1><i className="icon-h1 icon-file-lines"></i> History</h1>
             </header>
 
             <div id="ViewHistory" className="card">

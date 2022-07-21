@@ -12,7 +12,7 @@ export class ViewSettings extends React.Component {
         return (
         <div className="view-wrapper">
             <header className="header">
-                <h1>Settings</h1>
+                <h1><i className="icon-h1 icon-gear"></i> Settings</h1>
             </header>
 
             <div id="ViewSettings" className="card">

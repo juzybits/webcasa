@@ -64,7 +64,7 @@ export class ViewRecover extends React.Component {
         return (
         <div className="view-wrapper">
             <header className="header">
-                <h1><i className='button-icon icon-hammer-solid'></i>Recover wallet</h1>
+                <h1><i className="icon-h1 icon-hammer-solid"></i> Recover wallet</h1>
             </header>
 
             <div id="ViewRecover" className="card closable">

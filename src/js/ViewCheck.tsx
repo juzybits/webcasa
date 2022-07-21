@@ -40,7 +40,7 @@ export class ViewCheck extends React.Component {
         return (
         <div className="view-wrapper">
             <header className="header">
-                <h1><i className='button-icon icon-list-check-solid'></i>Check webcash</h1>
+                <h1><i className="icon-h1 icon-list-check-solid"></i> Check webcash</h1>
             </header>
             <div id="ViewCheck" className="card closable">
 
