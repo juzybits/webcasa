@@ -33,7 +33,7 @@ export class ViewTerms extends React.Component {
                 This is a non-custodial wallet. You are responsible for securing and backing up your wallet file.
             </p>
             <p>
-                WebCasa is experimental software. It is offered for free and without any guarantees. There could be bugs so please use with care.
+                WebCasa is offered for free and without any guarantees. There could be bugs so please use with care.
             </p>
             <div className="check-item">
                 <input type="checkbox" id="casaTerms-chk" value="casaTerms" onChange={this.onCheckboxChange} defaultChecked={this.state.casaTerms}/>

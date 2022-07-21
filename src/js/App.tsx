@@ -10,6 +10,7 @@ import { Header } from "./Header";
 import { Navigation } from "./Navigation";
 import { ViewCheck } from "./ViewCheck";
 import { ViewExternalReceive } from "./ViewExternalReceive";
+import { ViewFAQ } from "./ViewFAQ";
 import { ViewHistory } from "./ViewHistory";
 import { ViewPassword } from "./ViewPassword";
 import { ViewRecover } from "./ViewRecover";
@@ -485,6 +486,9 @@ export class App extends React.Component {
                         onSetPassword={this.onSetPassword}
                         onChangeView={this.onChangeView}
                     />;
+        } else
+        if ('FAQ' === this.state.view) {
+            view = <ViewFAQ />;
         }
 
         return (

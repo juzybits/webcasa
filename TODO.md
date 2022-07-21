@@ -1,46 +1,35 @@
-# Feedback
-    - kanzure:  Could I request a more prominent link to the webcash site in the webcasa app?
-                like a "Learn about webcash here:" ... some users are receiving webcash for the
-                first time into a webcasa wallet, and it's not really clear where to go to learn
-                more about it. I see you have a W button in the menu but perhaps something else?
-
-    - kanzure:  When the user starts typing in the input box for sending,
-                I think it should clear the last sent one from the screen,
-                until the user hits send, and then the new one should display.
-
-    - mihailskkk: option to export the wallet file in an encrypted format
-
-    - mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
+# Replace send form with "Success!" inline card
+- @kanzure: When the user starts typing in the input box for sending,
+           I think it should clear the last sent one from the screen,
+           until the user hits send, and then the new one should display.
 
 # Donate button
     - BTC, ERC-20
     - Webcash via lambda
 
-# UX
-    - Add info throughout the site / ViewAbout
+- @mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
+- Secret management: consolidate, check
 
-    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
-    - Secret management: consolidate, check
-    - ViewHistory pagination, filter, search, sorting
+- @mihailskkk: option to export the wallet file in an encrypted format
+- "Forgot password?" -> Reset / Import
+- Autolock: 15m
 
-# Visual
-    - Replace send form with "Success!" inline card
+- Prettier pop-ups instead of native
 
-    - Prettier pop-ups instead of native
-    - Mobile 4 buttons (display:fixed)
-
-# Password
-    - "Forgot password?" -> Reset / Import
-    - Autolock: 15m
-
-# Bugs
-    - Bug: Balance indicator repaint on Safari
+- Bug: Balance indicator repaint on Safari
 
 ##### IDEAS
 
-# Browser extension
+# Initial walk-through
+    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
+
+# ViewHistory pagination, filter, search, sorting
+
+# Mobile 4 buttons (display:fixed)
 
 # Multi-wallet
+
+# Browser extension
 
 # Server-side
     - Payment server: JS/Python/PHP plugin to receive and replace payments
