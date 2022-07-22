@@ -21,19 +21,19 @@ export class ViewFAQ extends React.Component {
                             WebCasa is non-custodial: only you have access to your funds, and you are responsible for backing up your wallet.
                         </p>
                         <p>
-                            WebCasa is a serverless app: all communication happens directly between your browser and     Webcash.
+                            WebCasa is a serverless app: your browser communicates directly with Webcash™.
                         </p>
                     </div>
                     <h2 className="faq-title">What is Webcash?</h2>
                     <div className="faq-answer">
                         <p>
-                            <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments.
+                            <a href="https://webcash.org" target="_blank">Webcash™</a> is an experimental electronic cash system that enables instant global payments.
                         </p>
                         <p>
                             Users send webcash to one another directly on a peer-to-peer basis by copying-and-pasting their webcash to their recipient.
 
                         </p>
-                        <p>The central server helps webcash wallets detect double-spending and ensure the integrity of the monetary supply.
+                        <p>A central server helps webcash wallets detect double-spending and ensure the integrity of the monetary supply.
                         </p>
                         <p>
                         Learn how Webcash works: <a href="https://webcash.org/webcash-slides.pdf" target="_blank">https://webcash.org/webcash-slides.pdf</a>

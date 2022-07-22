@@ -1,5 +1,12 @@
-# How to run locally
+## How to run locally
 ```
 npm install
-npm exec parcel src/index.html
+npm run serve
+```
+
+## How to deploy to production
+```
+npm run build-firebase
+firebase serve # preview
+firebase deploy
 ```

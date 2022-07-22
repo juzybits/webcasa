@@ -1,56 +1,51 @@
-# Donate button
-    - BTC, ERC-20
-    - Webcash via lambda
+## New features
 
-- @mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
-- Secret management: consolidate, check
+#### Donate: add Webcash option
+#### @mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
+#### @mihailskkk: option to export the wallet file in an encrypted format
+#### Secret management: consolidate, check
+#### "Forgot password?" -> Reset / Import
+#### Password autolock
+#### Prettier pop-ups instead of native
+#### Replace send/receive form with closable success/error card
 
-- @mihailskkk: option to export the wallet file in an encrypted format
-- "Forgot password?" -> Reset / Import
-- Autolock: 15m
+## Ideas
 
-- Prettier pop-ups instead of native
-- Replace send form with "Success!" inline card
+#### Initial walk-through
+- ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
 
-- Bug: Balance indicator repaint on Safari
+#### ViewHistory pagination, filter, search, sorting
 
-##### IDEAS
+#### Mobile 4 buttons (display:fixed)
 
-# Initial walk-through
-    - ViewStart: Splash with "Get Started: create new / load from file / recover from master secret"
+#### Multi-wallet
 
-# ViewHistory pagination, filter, search, sorting
+#### Browser extension
 
-# Mobile 4 buttons (display:fixed)
+#### Server-side
+- Payment server: JS/Python/PHP plugin to receive and replace payments
+- Backups, 2FA, notifications, ...
 
-# Multi-wallet
+#### Payments
+- Send (to [John|Jane|Mike]) via [QR|email|SMS|Twitter|Discord|API request]
+- Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key). Address book.
 
-# Browser extension
+#### Integrations
+- Discord
+- Twitter
 
-# Server-side
-    - Payment server: JS/Python/PHP plugin to receive and replace payments
-    - Backups, 2FA, notifications, ...
+#### ExternalSend
+User flow:
+- In 3rd party site, user clicks <a href="webcasa.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
+- In WebCasa, "Create payment for W1.13?". User accepts.
+- "Payment created". Shows QR.
+- "How do you want to send it?"
+    A) "Send payment to POST 3rd.com?pay_api"
+    B) "Copy secret to clipboard"
+    C) "Copy payment URL"
 
-# Payments
-    - Send (to [John|Jane|Mike]) via [QR|email|SMS|Twitter|Discord|API request]
-    - Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key). Address book.
-
-# Integrations
-    - Discord
-    - Twitter
-
-# ExternalSend
-    Flow:
-        - In 3rd party site, user clicks <a href="webcasa.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
-        - In WebCasa, "Create payment for W1.13?". User accepts.
-        - "Payment created". Shows QR.
-        - "How do you want to send it?"
-            A) "Send payment to POST 3rd.com?pay_api"
-            B) "Copy secret to clipboard"
-            C) "Copy payment URL"
-
-# "PinBoard: temporary text storage".
-    - Abuse prevented with webcash fee
-    - How long to keep the pin around? Auto destroy after open/later?
-    - "Who can see this pin" everyone/private
-    - Private: User A creates bucket. User B sends webcash to bucket. User A claims.
+#### PinBoard: temporary text storage
+- Abuse prevented with webcash fee
+- How long to keep the pin around? Auto destroy after open/later?
+- "Who can see this pin" everyone/private
+- Private: User A creates bucket. User B sends webcash to bucket. User A claims.
