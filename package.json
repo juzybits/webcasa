@@ -17,9 +17,9 @@
   },
   "scripts": {
     "serve": "parcel src/index.html",
-    "build-github": "rm -rf dist/github   && parcel build src/index.html --target github   && bash bundle.sh github",
-    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && bash bundle.sh firebase",
-    "build-bundle": "rm -rf dist/bundle   && parcel build src/index.html --target bundle"
+    "build-github":   "rm -rf dist/github   && parcel build src/index.html --target github   && ./scripts/bundle.sh github",
+    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase",
+    "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle"
   },
   "targets": {
     "firebase": {

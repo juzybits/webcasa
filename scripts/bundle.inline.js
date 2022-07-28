@@ -1,3 +1,7 @@
+/**
+ * Inline all JavaScript into dist/bundle/index.html
+ */
+
 const fs = require('fs');
 const parser = require('node-html-parser');
 
