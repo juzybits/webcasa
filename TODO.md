@@ -1,6 +1,5 @@
 ## New features
 
-#### Donate: add Webcash option
 #### @mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
 #### @mihailskkk: option to export the wallet file in an encrypted format
 #### Secret management: consolidate, check

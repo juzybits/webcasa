@@ -24,19 +24,23 @@ export class ViewFAQ extends React.Component {
                             WebCasa is a serverless app: your browser communicates directly with Webcash™.
                         </p>
                     </div>
-                    <h2 className="faq-title">What is Webcash?</h2>
+                    <h2 className="faq-title">What is Webcash™?</h2>
                     <div className="faq-answer">
                         <p>
-                            <a href="https://webcash.org" target="_blank">Webcash™</a> is an experimental electronic cash system that enables instant global payments.
+                            <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments.
                         </p>
                         <p>
                             Users send webcash to one another directly on a peer-to-peer basis by copying-and-pasting their webcash to their recipient.
 
                         </p>
-                        <p>A central server helps webcash wallets detect double-spending and ensure the integrity of the monetary supply.
+                        <p>
+                            A central server helps webcash wallets detect double-spending and ensure the integrity of the monetary supply.
                         </p>
                         <p>
-                        Learn how Webcash works: <a href="https://webcash.org/webcash-slides.pdf" target="_blank">https://webcash.org/webcash-slides.pdf</a>
+                            - <a href="https://webcash.org/webcash-slides.pdf" target="_blank">Webcash PDF</a>
+                        </p>
+                        <p>
+                            - <a href="https://discord.com/invite/qf95KMqkPW">Webcash Discord</a>
                         </p>
                     </div>
                 </div>

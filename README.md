@@ -1,3 +1,11 @@
+# WebCasa
+
+WebCasa is a browser wallet for [webcash](https://webcash.org/) tokens.
+
+It uses React to build a user interface around the [webcashjs](https://github.com/kanzure/webcashjs) library.
+
+Live site: [webcasa.app](https://webcasa.app/)
+
 ## How to run locally
 ```
 npm install

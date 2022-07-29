@@ -63,12 +63,12 @@ export class Navigation extends React.Component {
                                 <i className={`nav-icon icon-twitter`}></i>
                             </a>
 
-                            <a className="social-icon" href="https://discord.com/invite/qf95KMqkPW" target="_blank">
+                            <a className="social-icon" href="https://discord.com/invite/seYMuUyZus" target="_blank">
                                 <i className={`nav-icon icon-discord`}></i>
                             </a>
 
-                            <a className="social-icon" href="https://webcash.org" target="_blank">
-                                <i className={`nav-icon icon-webcash`}></i>
+                            <a className="social-icon" href="https://github.com/juzybits/webcasa" target="_blank">
+                                <i className={`nav-icon icon-github`}></i>
                             </a>
                         </ul>
                     </div>
