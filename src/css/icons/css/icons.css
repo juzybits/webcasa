@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'icons';
-  src: url('../font/icons.eot?54644740');
-  src: url('../font/icons.eot?54644740#iefix') format('embedded-opentype'),
-       url('../font/icons.woff2?54644740') format('woff2'),
-       url('../font/icons.woff?54644740') format('woff'),
-       url('../font/icons.ttf?54644740') format('truetype'),
-       url('../font/icons.svg?54644740#icons') format('svg');
+  src: url('../font/icons.eot?44797830');
+  src: url('../font/icons.eot?44797830#iefix') format('embedded-opentype'),
+       url('../font/icons.woff2?44797830') format('woff2'),
+       url('../font/icons.woff?44797830') format('woff'),
+       url('../font/icons.ttf?44797830') format('truetype'),
+       url('../font/icons.svg?44797830#icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'icons';
-    src: url('../font/icons.svg?54644740#icons') format('svg');
+    src: url('../font/icons.svg?44797830#icons') format('svg');
   }
 }
 */
@@ -59,7 +59,7 @@
 .icon-key:before { content: '\e802'; } /* '' */
 .icon-file-lines:before { content: '\e803'; } /* '' */
 .icon-copy-solid-1:before { content: '\e804'; } /* '' */
-.icon-gift:before { content: '\e805'; } /* '' */
+.icon-github:before { content: '\e805'; } /* '' */
 .icon-copy:before { content: '\e806'; } /* '' */
 .icon-discord:before { content: '\e807'; } /* '' */
 .icon-twitter:before { content: '\e80a'; } /* '' */
@@ -74,6 +74,7 @@
 .icon-lock-open-solid:before { content: '\e819'; } /* '' */
 .icon-circle-question-solid:before { content: '\e81a'; } /* '' */
 .icon-gift-solid:before { content: '\e81b'; } /* '' */
+.icon-gift-solid-1:before { content: '\e81c'; } /* '' */
 .icon-upload-solid:before { content: '\e81d'; } /* '' */
 .icon-cloud-arrow-up-solid:before { content: '\e81e'; } /* '' */
 .icon-hammer-solid:before { content: '\e81f'; } /* '' */
