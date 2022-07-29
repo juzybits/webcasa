@@ -91,7 +91,6 @@ function MenuItem(props) {
 
     const wData = props.wallet.getContents();
     let clazz = '';
-    let count = '';
     let icon = '';
     if ("Transfers" === props.name) {
         icon = 'icon-send';
@@ -101,11 +100,9 @@ function MenuItem(props) {
     } else
     if ("Secrets" === props.name) {
         icon = 'icon-key';
-        count = (wData.unconfirmed.length + wData.webcash.length) || '';
     } else
     if ("History" === props.name) {
         icon = 'icon-file-lines';
-        count = wData.log.length || '';
     } else
     if ("FAQ" === props.name) {
         icon = 'icon-circle-question-solid';
@@ -114,14 +111,10 @@ function MenuItem(props) {
         icon = 'icon-gift-solid';
     }
 
-    if (count !== '') {
-        count = <span className="nav-count"> ({count})</span>;
-    }
-
     return (
         <li className="pure-menu-item">
             <a href="#" className="pure-menu-link" onClick={onClick}>
-                <i className={`nav-icon ${icon}`}></i>{props.name}{count}
+                <i className={`nav-icon ${icon}`}></i>{props.name}
             </a>
         </li>
     );
