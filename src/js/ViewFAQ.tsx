@@ -1,5 +1,7 @@
 import React from "react";
 
+import { CopiableValue } from "./Common";
+
 export class ViewFAQ extends React.Component {
     render() {
         return (
@@ -22,6 +24,14 @@ export class ViewFAQ extends React.Component {
                         </p>
                         <p>
                             WebCasa is a serverless app: your browser communicates directly with Webcash™.
+                        </p>
+                        <p>
+                            Support the development of WebCasa:
+                        </p>
+                        <p>
+                            - Bitcoin: <CopiableValue contents="bc1qcyh5e066trnnr3zds5mvmj4jlkkrleuukfaxr6"/>
+                            <br/>
+                            - Ethereum / EVM: <CopiableValue contents="0x9Da62ba08Ea4968396aBD900B1cE44EeeE77f837"/>
                         </p>
                     </div>
                     <h2 className="faq-title">What is Webcash™?</h2>
