@@ -32,7 +32,7 @@ export class Navigation extends React.Component {
         if (!this.props.wallet) {
             return '';
         }
-        const menuItems = ["Transfers", "Settings", "Secrets", "History", "FAQ"].map((item) =>
+        const menuItems = ["Transfers", "Settings", "Secrets", "History", "About"].map((item) =>
             <MenuItem key={item} name={item} wallet={this.props.wallet}
                       onClickChangeView={this.props.onChangeView} toggleMenu={this.toggleVisibility}/>
         );
@@ -104,7 +104,7 @@ function MenuItem(props) {
     if ("History" === props.name) {
         icon = 'icon-file-lines';
     } else
-    if ("FAQ" === props.name) {
+    if ("About" === props.name) {
         icon = 'icon-circle-question-solid';
     }
 

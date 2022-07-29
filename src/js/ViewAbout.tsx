@@ -2,20 +2,20 @@ import React from "react";
 
 import { CopiableValue } from "./Common";
 
-export class ViewFAQ extends React.Component {
+export class ViewAbout extends React.Component {
     render() {
         return (
         <div className="view-wrapper">
 
             <header className="header">
-                <h1><i className="icon-h1 icon-circle-question-solid"></i> FAQ</h1>
+                <h1><i className="icon-h1 icon-circle-question-solid"></i> About</h1>
             </header>
 
-            <div id="ViewFAQ" className="card">
+            <div id="ViewAbout" className="card">
 
-                <div className="faq-wrapper">
-                    <h2 className="faq-title">What is WebCasa?</h2>
-                    <div className="faq-answer">
+                <div className="about-wrapper">
+                    <h2 className="about-title">What is WebCasa?</h2>
+                    <div className="about-answer">
                         <p>
                             WebCasa is a browser wallet for <i>webcash</i> tokens.
                         </p>
@@ -28,14 +28,14 @@ export class ViewFAQ extends React.Component {
                         <p>
                             Support the development of WebCasa:
                         </p>
-                        <p>
+                        <div>
                             - Bitcoin: <CopiableValue contents="bc1qcyh5e066trnnr3zds5mvmj4jlkkrleuukfaxr6"/>
                             <br/>
                             - Ethereum / EVM: <CopiableValue contents="0x9Da62ba08Ea4968396aBD900B1cE44EeeE77f837"/>
-                        </p>
+                        </div>
                     </div>
-                    <h2 className="faq-title">What is Webcash™?</h2>
-                    <div className="faq-answer">
+                    <h2 className="about-title">What is Webcash™?</h2>
+                    <div className="about-answer">
                         <p>
                             <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments.
                         </p>
