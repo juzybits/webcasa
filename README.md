@@ -1,8 +1,8 @@
 # WebCasa
 
-WebCasa is a browser wallet for [webcash](https://webcash.org/) tokens.
+WebCasa is a non-custodial browser wallet for [Webcash](https://webcash.org/)™. It lets you send and receive webcash tokens.
 
-It uses React to build a user interface around the [webcashjs](https://github.com/kanzure/webcashjs) library.
+The wallet is a single-page serverless app. It uses React to build a user interface around the [webcashjs](https://github.com/kanzure/webcashjs) library.
 
 Live site: [webcasa.app](https://webcasa.app/)
 
@@ -12,7 +12,7 @@ npm install
 npm run serve
 ```
 
-## How to deploy to production
+## How to deploy (Firebase)
 ```
 npm run build-firebase
 firebase serve # preview

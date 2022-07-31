@@ -20,24 +20,25 @@ export class ViewAbout extends React.Component {
                             WebCasa is a browser wallet for <i>webcash</i> tokens.
                         </p>
                         <p>
-                            WebCasa is non-custodial: only you have access to your funds, and you are responsible for backing up your wallet.
+                            It is non-custodial: only you have access to your funds, and you are responsible for backing up your wallet.
                         </p>
                         <p>
-                            WebCasa is a serverless app: your browser communicates directly with Webcash™.
+                            It is serverless: your browser communicates directly with Webcash™. You can even download the app and self-host it.
                         </p>
                         <p>
-                            Support the development of WebCasa:
+                        Get in touch: <a className="social-icon" href="https://twitter.com/WebCasaApp" target="_blank">Twitter</a>
+                        , <a className="social-icon" href="https://discord.com/invite/seYMuUyZus" target="_blank">Discord</a>
+                        , <a className="social-icon" href="https://github.com/juzybits/webcasa" target="_blank">Github</a>.
+
                         </p>
-                        <div>
-                            - Bitcoin: <CopiableValue contents="bc1qcyh5e066trnnr3zds5mvmj4jlkkrleuukfaxr6"/>
-                            <br/>
-                            - Ethereum / EVM: <CopiableValue contents="0x9Da62ba08Ea4968396aBD900B1cE44EeeE77f837"/>
-                        </div>
                     </div>
+
                     <h2 className="about-title">What is Webcash™?</h2>
                     <div className="about-answer">
                         <p>
-                            <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments.
+                            <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments
+                            (<a href="https://webcash.org/webcash-slides.pdf" target="_blank">slides</a>,
+                            &nbsp;<a href="https://discord.com/invite/qf95KMqkPW">Discord</a>).
                         </p>
                         <p>
                             Users send webcash to one another directly on a peer-to-peer basis by copying-and-pasting their webcash to their recipient.
@@ -46,12 +47,18 @@ export class ViewAbout extends React.Component {
                         <p>
                             A central server helps webcash wallets detect double-spending and ensure the integrity of the monetary supply.
                         </p>
+                    </div>
+
+                    <h2 className="about-title">Do you accept donations?</h2>
+                    <div className="about-answer">
                         <p>
-                            - <a href="https://webcash.org/webcash-slides.pdf" target="_blank">Webcash PDF</a>
+                            Yes! Thank you for supporting the development of WebCasa:
                         </p>
-                        <p>
-                            - <a href="https://discord.com/invite/qf95KMqkPW">Webcash Discord</a>
-                        </p>
+                        <div>
+                            - Bitcoin: <CopiableValue contents="bc1qcyh5e066trnnr3zds5mvmj4jlkkrleuukfaxr6"/>
+                            <br/>
+                            - Ethereum / EVM: <CopiableValue contents="0x9Da62ba08Ea4968396aBD900B1cE44EeeE77f837"/>
+                        </div>
                     </div>
                 </div>
 

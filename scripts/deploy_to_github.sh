@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 #
 # Deploy WebCasa to a GitHub repo, to host the app on GitHub Pages
-# (in this case, https://juzybits.github.io/webcasa-dist/)
 #
-# You must first build the project: `npm run build-github`
+# Usage:
+# npm run build-github
+# ./scripts/deploy_to_github.sh
 
-target_dir=dist/github
-if [[ ! -d $target_dir ]]; then
-	echo "($0) ERROR | '$target_dir' is not a directory"
+REPO=git@github.com:juzybits/webcasa-dist.git
+DIST=dist/github
+
+if [[ ! -d $DIST ]]; then
+	echo "($0) ERROR | '$DIST' is not a directory"
 	exit 1
 fi
 
-cd $target_dir
+cd $DIST
 
 git init .
-git remote add origin git@github.com:juzybits/webcasa-dist.git
+git remote add origin $REPO
 git add .
 git commit -am"init"
 git push -f -u origin master

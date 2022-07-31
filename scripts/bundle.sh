@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #
 # Prepare a downloadable version of WebCasa so folks can self-host
+#
+# Usage:
+# ./scripts/bundle.sh [github|firebase]
 
 if [[ $# -ne 1 ]]; then
 	echo "($0) ERROR | Usage: $0 TARGET"
