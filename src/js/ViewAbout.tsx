@@ -38,7 +38,7 @@ export class ViewAbout extends React.Component {
                         <p>
                             <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments
                             (<a href="https://webcash.org/webcash-slides.pdf" target="_blank">slides</a>,
-                            &nbsp;<a href="https://discord.com/invite/qf95KMqkPW">Discord</a>).
+                            &nbsp;<a href="https://discord.com/invite/qf95KMqkPW" target="_blank">Discord</a>).
                         </p>
                         <p>
                             Users send webcash to one another directly on a peer-to-peer basis by copying-and-pasting their webcash to their recipient.

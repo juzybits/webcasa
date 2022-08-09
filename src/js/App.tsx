@@ -404,6 +404,9 @@ export class App extends React.Component {
                 lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" />,
             }, this.saveConfig);
         } catch (e) {
+            // Save the wallet just in case. If there was a network failure or something, there
+            // might be new information in the wallet that could help a recovery in the future.
+            this.state.wallet.save();
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (webcash=${webcash}, memo=${memo})`}</div>;
             this.setState({ lastReceive: <ActionResult success={false} contents={errMsg} title='' /> });
         } finally {
@@ -422,6 +425,9 @@ export class App extends React.Component {
                 lastSend: {webcash: webcash, memo: memo, error: null},
             }, this.saveConfig);
         } catch (e) {
+            // Save the wallet just in case. If there was a network failure or something, there
+            // might be new information in the wallet that could help a recovery in the future.
+            this.state.wallet.save();
             const errMsg = <div className="action-error">{`ERROR: ${e.message} (amount=${amount}, memo=${memo})`}</div>;
             this.setState({ lastSend: {webcash: null, memo: null, error: errMsg} });
         }
