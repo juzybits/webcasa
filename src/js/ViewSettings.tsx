@@ -83,7 +83,7 @@ export class ViewSettings extends React.Component {
 
                 <fieldset id="local-webcasa">
                     <legend>SELF-HOSTING</legend>
-                    <p>You can run WebCasa.app on our own laptop.</p>
+                    <p>You can run WebCasa.app on your own laptop.</p>
                     <p>Simply download the .zip file below and open <tt>index.html</tt> on a browser to get started.</p>
                     <a className="pure-button" download href="webcasa.zip"><i className='button-icon icon-download-solid'></i>Download app</a>
                 </fieldset>
