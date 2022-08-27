@@ -27,6 +27,7 @@
 
 #### Payments
 - Send (to [John|Jane|Mike]) via [QR|email|SMS|Twitter|Discord|API request]
+    - https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API
 - Payments/OTC/trading on Cosmos/Solana (Serum) (encrypt payload to receiver's public key). Address book.
 
 #### Integrations

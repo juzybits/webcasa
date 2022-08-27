@@ -26,19 +26,19 @@ export class ViewAbout extends React.Component {
                             It is serverless: your browser communicates directly with Webcash™. You can even download the app and self-host it.
                         </p>
                         <p>
-                        Get in touch: <a className="social-icon" href="https://twitter.com/WebCasaApp" target="_blank">Twitter</a>
-                        , <a className="social-icon" href="https://discord.com/invite/seYMuUyZus" target="_blank">Discord</a>
-                        , <a className="social-icon" href="https://github.com/juzybits/webcasa" target="_blank">Github</a>.
-
+                        Get in touch: <a href="https://twitter.com/WebCasaApp" target="_blank">Twitter</a>
+                        , <a href="https://discord.com/invite/seYMuUyZus" target="_blank">Discord</a>
+                        , <a href="https://github.com/juzybits/webcasa" target="_blank">Github</a>.
+                        </p>
+                        <p>
+                            WebCasa was built by <a href="https://twitter.com/juzybits" target="_blank">@juzybits</a>.
                         </p>
                     </div>
 
                     <h2 className="about-title">What is Webcash™?</h2>
                     <div className="about-answer">
                         <p>
-                            <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments
-                            (<a href="https://webcash.org/webcash-slides.pdf" target="_blank">slides</a>,
-                            &nbsp;<a href="https://discord.com/invite/qf95KMqkPW" target="_blank">Discord</a>).
+                            <a href="https://webcash.org" target="_blank">Webcash</a> is an experimental electronic cash system that enables instant global payments.
                         </p>
                         <p>
                             Users send webcash to one another directly on a peer-to-peer basis by copying-and-pasting their webcash to their recipient.
@@ -46,6 +46,14 @@ export class ViewAbout extends React.Component {
                         </p>
                         <p>
                             A central server helps webcash wallets detect double-spending and ensure the integrity of the monetary supply.
+                        </p>
+                        <p>
+                            Learn more: <a href="https://webcash.org/webcash-slides.pdf" target="_blank">slides</a>
+                            , <a href="https://freicoin.substack.com/p/webcash" target="_blank">article</a>
+                            , <a href="https://discord.com/invite/qf95KMqkPW" target="_blank">Discord</a>.
+                        </p>
+                        <p>
+                            Webcash was built by <a href="https://twitter.com/kanzure" target="_blank">@kanzure</a>.
                         </p>
                     </div>
 
