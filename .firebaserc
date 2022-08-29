@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "webcasa-1"
+  },
+  "targets": {
+    "webcasa-1": {
+      "hosting": {
+        "prod": [
+          "webcasa-1"
+        ],
+        "dev": [
+          "webcasa-dev-1"
+        ]
+      }
+    }
   }
 }

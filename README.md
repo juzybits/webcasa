@@ -15,8 +15,8 @@ npm run serve
 ## How to deploy (Firebase)
 ```
 npm run build-firebase
-firebase serve # preview
-firebase deploy
+npm run preview-prod
+npm run deploy-prod
 ```
 
 ## How to add new icons

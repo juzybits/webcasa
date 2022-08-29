@@ -17,16 +17,14 @@
   },
   "scripts": {
     "serve": "parcel src/index.html",
-    "build-github":   "rm -rf dist/github   && parcel build src/index.html --target github   && ./scripts/bundle.sh github",
     "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase",
-    "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle"
+    "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle",
+    "preview-prod": "firebase serve --only hosting:prod",
+    "deploy-dev": "firebase deploy --only hosting:dev",
+    "deploy-prod": "firebase deploy --only hosting:prod"
   },
   "targets": {
     "firebase": {
-      "sourceMap": false
-    },
-    "github": {
-      "publicUrl": "./",
       "sourceMap": false
     },
     "bundle": {
