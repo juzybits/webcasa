@@ -1,3 +1,8 @@
+## Bugs
+
+#### @maaku: don't show the new secret when you do an insert
+#### @player4250: if you insert an new code in webcasa and after that insert the new webcash code that webcasa gives you it counts twice
+
 ## New features
 
 #### @mihailskkk: option to insert secrets in bulk. Like just copy-paste 10-15 secrets
