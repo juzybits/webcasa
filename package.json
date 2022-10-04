@@ -17,7 +17,7 @@
   },
   "scripts": {
     "serve": "parcel src/index.html",
-    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase",
+    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase && cp src/static/* dist/firebase/",
     "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle",
     "preview-prod": "firebase serve --only hosting:prod",
     "deploy-dev": "firebase deploy --only hosting:dev",
