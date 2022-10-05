@@ -4,9 +4,9 @@
 
 DOWNLOADS=$HOME/Downloads
 
-cd $DOWNLOADS
-unzip fontello-*.zip
-rm fontello-*.zip
+unzip $DOWNLOADS/fontello-*.zip
+rm $DOWNLOADS/fontello-*.zip
 rm fontello-*/demo.html
+rm fontello-*/README.txt
 rm -rf src/css/icons/
 mv fontello-*/ src/css/icons
