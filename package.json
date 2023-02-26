@@ -1,19 +1,19 @@
 {
   "dependencies": {
-    "crypto-js": "4.x",
-    "qrcode": "1.x",
-    "react": "17.x",
-    "react-dom": "17.x",
-    "webcash": "1.x"
+    "crypto-js": "4",
+    "qrcode": "1",
+    "react": "17",
+    "react-dom": "17",
+    "webcash": "1"
   },
   "devDependencies": {
-    "@parcel/transformer-less": "2.x",
-    "buffer": "6.x",
-    "events": "3.x",
-    "node-html-parser": "5.x",
-    "parcel": "2.x",
-    "process": "0.x",
-    "stream-browserify": "3.x"
+    "@parcel/transformer-less": "latest",
+    "buffer": "5",
+    "events": "latest",
+    "node-html-parser": "latest",
+    "parcel": "latest",
+    "process": "latest",
+    "stream-browserify": "latest"
   },
   "scripts": {
     "serve": "parcel src/index.html",
