@@ -4,6 +4,7 @@ export class ViewRecover extends React.Component {
     constructor(props) {
         super(props)
         this.onChange = this.onChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.exitOnEscape = this.exitOnEscape.bind(this);
@@ -21,6 +22,13 @@ export class ViewRecover extends React.Component {
         const target = event.target;
         this.setState({
             [target.id]: target.value
+        });
+    }
+
+    onCheckboxChange(event) {
+        const target = event.target;
+        this.setState({
+            [target.value]: target.checked
         });
     }
 
@@ -102,11 +110,10 @@ export class ViewRecover extends React.Component {
                     <fieldset>
                         <label htmlFor="sweep_payments">sweep payments</label>
 
-                        // a boolean input defaulting to false
-                        <input type="checkbox" id="sweep_payments" defaultValue={this.state.sweep_payments}
-                               onChange={this.onChange}
+                        <input type="checkbox" id="sweep_payments" value="sweep_payments"
+                               defaultChecked={this.state.sweep_payments}
+                               onChange={this.onCheckboxChange}
                                disabled={this.state.inProgress}
-                               autoComplete='off'
                                />
                     </fieldset>
 
