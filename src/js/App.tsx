@@ -316,7 +316,7 @@ export class App extends React.Component {
         }
     }
 
-    async onRecoverWallet(masterSecret, gapLimit) {
+    async onRecoverWallet(masterSecret, gapLimit, sweepPayments) {
         const sameSecret = masterSecret === this.state.wallet.master_secret;
         if (!sameSecret && !this.confirmOverwriteWallet()) {
             return;
@@ -349,13 +349,13 @@ export class App extends React.Component {
             }
             const wallet = new CasaWallet(walletData, password);
             wallet.setLegalAgreementsToTrue();
-            await wallet.recover(gapLimit);
+            await wallet.recover(gapLimit, sweepPayments);
             await Promise.resolve();
             wallet.save();
             this.resetAppState({wallet: wallet});
             console.log("(webcasa) Done! New balance:", formatBalance(wallet.getBalance()));
         } catch (e) {
-            const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit})`}</div>;
+            const errMsg = <div className="action-error">{`ERROR: ${e.message} (masterSecret=${masterSecret}, gapLimit=${gapLimit}, sweepPayments=${sweepPayments})`}</div>;
             this.setState({ lastRecover: <ActionResult success={false} contents={errMsg} /> });
         } finally {
             window.console.log = realLog;

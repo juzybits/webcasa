@@ -1,4 +1,6 @@
 {
+  "name": "webcasa",
+  "author": "juzybits <https://twitter.com/juzybits>",
   "dependencies": {
     "crypto-js": "4",
     "qrcode": "1",
@@ -16,9 +18,9 @@
     "stream-browserify": "latest"
   },
   "scripts": {
-    "serve": "parcel src/index.html",
+    "serve": "rm -rf .parcel-cache/ dist/ && parcel src/index.html",
     "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase && cp src/static/* dist/firebase/",
-    "build-bundle":   "rm -rf dist/bundle   && parcel build src/index.html --target bundle",
+    "build-bundle": "rm -rf dist/bundle   && parcel build src/index.html --target bundle",
     "preview-prod": "firebase serve --only hosting:prod",
     "deploy-dev": "firebase deploy --only hosting:dev",
     "deploy-prod": "firebase deploy --only hosting:prod"
