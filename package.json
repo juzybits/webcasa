@@ -2,15 +2,15 @@
   "name": "webcasa",
   "author": "juzybits <https://twitter.com/juzybits>",
   "dependencies": {
-    "crypto-js": "4",
-    "qrcode": "1",
-    "react": "17",
-    "react-dom": "17",
-    "webcash": "1"
+    "crypto-js": "^4.0.0",
+    "qrcode": "^1.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "webcash": "^1.0.0"
   },
   "devDependencies": {
     "@parcel/transformer-less": "latest",
-    "buffer": "5",
+    "buffer": "^5.0.0",
     "events": "latest",
     "node-html-parser": "latest",
     "parcel": "latest",
