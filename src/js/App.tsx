@@ -397,6 +397,10 @@ export class App extends React.Component {
 
     async onReceiveWebcash(webcash, memo) {
         try {
+            const currentSecrets = this.state.wallet.getContents().webcash;
+            if (currentSecrets.includes(webcash)) {
+                throw new Error("The secret is already in your wallet");
+            }
             const new_webcash = await this.state.wallet.insert(webcash, memo);
             this.state.wallet.save();
             this.setState({
