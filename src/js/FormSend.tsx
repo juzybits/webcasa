@@ -35,12 +35,11 @@ export class FormSend extends React.Component {
         }
     }
 
-    async onSubmit() {
+    async onSubmit(event) {
         event.preventDefault();
         const amount = this.state.sendAmount;
         const memo = this.state.sendMemo;
         await this.props.onSendAmount(amount, memo);
-        this.showQR();
         this.setState({
             sendAmount: '',
             sendMemo: '',
@@ -49,6 +48,12 @@ export class FormSend extends React.Component {
 
     componentDidMount() {
         this.showQR();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.lastSend != this.props.lastSend) {
+            this.showQR();
+        }
     }
 
     showQR() {
