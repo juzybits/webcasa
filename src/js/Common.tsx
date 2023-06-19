@@ -11,7 +11,7 @@ export function ActionResult(props) {
     let contents = '';
     let clazz = '';
     if (props.success===true) {
-        contents = <Row title={props.title} contents={props.contents} />;
+        contents = <Row title={props.title} contents={props.contents} hidecontent={props.hidecontent||false} />;
         clazz = 'success';
     } else
     if (props.success===false) {
@@ -40,8 +40,10 @@ export function Row(props) {
     if (!props.contents) {
         return '';
     }
-    let title = !props.title ? '' : <label className="item-row-title">{props.title}:</label>;
-    let contents = props.isWebcash ? webcashToCopiableValues(props.contents) : <CopiableValue contents={props.contents}/>;
+    let title = !props.title ? '' : <label className="item-row-title">{props.title}{props.hidecontent ? '' : ':'}</label>;
+    let contents = props.hidecontent
+        ? <></>
+        : props.isWebcash ? webcashToCopiableValues(props.contents) : <CopiableValue contents={props.contents}/>;
     return (
         <div className="Row">
             {title}

@@ -405,7 +405,7 @@ export class App extends React.Component {
             this.state.wallet.save();
             this.setState({
                 wallet: this.state.wallet, // force repaint
-                lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! The new secret was saved" />,
+                lastReceive: <ActionResult success={true} contents={new_webcash} title="Success! A new secret has been added to your wallet." hidecontent={true} />,
             }, this.saveConfig);
         } catch (e) {
             // Save the wallet just in case. If there was a network failure or something, there
