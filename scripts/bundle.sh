@@ -17,7 +17,7 @@ if [[ ! -d $target_dir ]]; then
 fi
 
 echo -e "\n($0) Building 'bundle' target"
-npm run build-bundle
+pnpm run build-bundle
 echo -e "\n($0) Inlining JS into dist/bundle/index.html"
 node scripts/bundle.inline.js
 

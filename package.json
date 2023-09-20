@@ -23,8 +23,8 @@
   },
   "scripts": {
     "serve": "rm -rf .parcel-cache/ dist/ && parcel src/index.html",
-    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase && cp src/static/* dist/firebase/",
-    "build-bundle": "rm -rf dist/bundle   && parcel build src/index.html --target bundle",
+    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase && cp src/static/* dist/firebase/ && mkdir -p dist/firebase/img/ && cp src/img/open-graph.webp dist/firebase/img/",
+    "build-bundle": "rm -rf dist/bundle && parcel build src/index.html --target bundle",
     "preview-prod": "firebase serve --only hosting:prod",
     "deploy-dev": "firebase deploy --only hosting:dev",
     "deploy-prod": "firebase deploy --only hosting:prod"
