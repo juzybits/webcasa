@@ -1,5 +1,7 @@
 # WebCasa
 
+![WebCasa](./src/img/open-graph.webp)
+
 WebCasa is a non-custodial browser wallet for [Webcash](https://webcash.org/)™. It lets you send and receive webcash tokens.
 
 The wallet is a single-page serverless app. It uses React to build a user interface around the [webcashjs](https://github.com/kanzure/webcashjs) library.
