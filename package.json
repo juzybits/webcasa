@@ -2,7 +2,7 @@
   "name": "webcasa",
   "author": "juzybits <https://twitter.com/juzybits>",
   "dependencies": {
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -10,11 +10,11 @@
   },
   "devDependencies": {
     "@parcel/transformer-less": "latest",
-    "@types/react": "^18.2.22",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
     "buffer": "^6.0.3",
     "events": "^3.3.0",
-    "node-html-parser": "^6.1.10",
+    "node-html-parser": "^6.1.11",
     "parcel": "latest",
     "process": "latest",
     "react-devtools": "latest",
