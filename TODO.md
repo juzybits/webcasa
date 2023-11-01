@@ -1,7 +1,5 @@
-## Bugs
-
-#### @maaku: don't show the new secret when you do an insert
-#### @player4250: if you insert an new code in webcasa and after that insert the new webcash code that webcasa gives you it counts twice
+## Improvements
+#### Rewrite in functional React.
 
 ## New features
 

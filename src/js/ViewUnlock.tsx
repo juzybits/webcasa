@@ -11,6 +11,10 @@ export class ViewUnlock extends React.Component {
         };
     }
 
+    componentDidMount(){
+        document.getElementById('passwd')?.focus();
+    }
+
     onChange(event) {
         const target = event.target;
         this.setState({
@@ -49,8 +53,8 @@ export class ViewUnlock extends React.Component {
                 <form className="pure-form pure-form-stacked" onSubmit={this.onSubmit}>
                     <fieldset>
                         <label htmlFor="passwd">Password</label>
-                        <input type="password" id="passwd" minLength="6"
-                               onFocus={this.onFocus} onChange={this.onChange}
+                        <input type="password" id="passwd" minLength={6}
+                               onChange={this.onChange}
                                spellCheck='false' autoCorrect='off' autoComplete='off'/>
                     </fieldset>
 

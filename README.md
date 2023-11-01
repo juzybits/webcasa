@@ -11,14 +11,14 @@ Live site: [webcasa.app](https://webcasa.app/)
 ## How to run locally
 ```
 pnpm install
-pnpm run serve
+pnpm serve
 ```
 
 ## How to deploy (Firebase)
 ```
-pnpm run build-firebase
-pnpm run preview-prod
-pnpm run deploy-prod
+pnpm build-firebase
+pnpm preview-prod
+pnpm deploy-prod
 ```
 
 ## How to add new icons
