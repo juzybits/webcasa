@@ -20,15 +20,13 @@ export class ViewAbout extends React.Component {
                             WebCasa is a browser wallet for <i>webcash</i> tokens.
                         </p>
                         <p>
-                            It is non-custodial: only you have access to your funds, and you are responsible for backing up your wallet.
+                            Non-custodial: only you have access to your funds, and you are responsible for backing up your wallet.
                         </p>
                         <p>
-                            It is serverless: your browser communicates directly with Webcash™. You can even download the app and self-host it.
+                            Serverless: your browser communicates directly with Webcash™. You can even download the app and self-host it.
                         </p>
                         <p>
-                        Get in touch: <a href="https://twitter.com/WebCasaApp" target="_blank">Twitter</a>
-                        , <a href="https://discord.com/invite/seYMuUyZus" target="_blank">Discord</a>
-                        , <a href="https://github.com/juzybits/webcasa" target="_blank">Github</a>.
+                            Open-source: check out the code on <a href="https://github.com/juzybits/webcasa" target="_blank">Github</a>.
                         </p>
                         <p>
                             WebCasa was built by <a href="https://twitter.com/juzybits" target="_blank">@juzybits</a>.
