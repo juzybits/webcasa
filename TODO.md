@@ -39,7 +39,7 @@
 
 #### ExternalSend
 User flow:
-- In 3rd party site, user clicks <a href="webcasa.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
+- In 3rd party site, user clicks <a href="webcasa.polymedia.app?send=1.23&memo=Invoice123&callback=3rd.com?pay_api">Pay 1.23 webcash</a>
 - In WebCasa, "Create payment for W1.13?". User accepts.
 - "Payment created". Shows QR.
 - "How do you want to send it?"

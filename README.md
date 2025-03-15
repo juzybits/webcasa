@@ -6,7 +6,7 @@ WebCasa is a non-custodial browser wallet for [Webcash](https://webcash.org/)™
 
 The wallet is a single-page serverless app. It uses React to build a user interface around the [webcashjs](https://github.com/kanzure/webcashjs) library.
 
-Live site: [webcasa.app](https://webcasa.app/)
+Live site: [webcasa.polymedia.app](https://webcasa.polymedia.app/)
 
 ## How to run locally
 ```
