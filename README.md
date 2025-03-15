@@ -11,7 +11,7 @@ Live site: [webcasa.polymedia.app](https://webcasa.polymedia.app/)
 ## How to run locally
 ```
 pnpm install
-pnpm serve
+pnpm dev
 ```
 
 ## How to deploy (Firebase)

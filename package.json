@@ -1,41 +1,54 @@
 {
-  "name": "webcasa",
-  "author": "juzybits <https://twitter.com/juzybits>",
-  "dependencies": {
-    "crypto-js": "^4.2.0",
-    "qrcode": "^1.5.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "webcash": "^1.0.6"
-  },
-  "devDependencies": {
-    "@parcel/transformer-less": "latest",
-    "@types/react": "^18.2.38",
-    "@types/react-dom": "^18.2.17",
-    "buffer": "^6.0.3",
-    "events": "^3.3.0",
-    "node-html-parser": "^6.1.11",
-    "parcel": "latest",
-    "process": "latest",
-    "react-devtools": "latest",
-    "stream-browserify": "^3.0.0",
-    "string_decoder": "^1.3.0"
-  },
-  "scripts": {
-    "serve": "rm -rf .parcel-cache/ dist/ && parcel src/index.html",
-    "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase && cp src/static/* dist/firebase/ && mkdir -p dist/firebase/img/ && cp src/img/open-graph.webp dist/firebase/img/",
-    "build-bundle": "rm -rf dist/bundle && parcel build src/index.html --target bundle",
-    "preview-prod": "firebase serve --only hosting:prod",
-    "deploy-dev": "firebase deploy --only hosting:dev",
-    "deploy-prod": "firebase deploy --only hosting:prod"
-  },
-  "targets": {
-    "firebase": {
-      "sourceMap": false
+    "private": true,
+    "version": "0.0.0",
+    "name": "webcasa",
+    "author": "@juzybits (https://polymedia.app)",
+    "homepage": "https://webcasa.polymedia.app",
+    "description": "WebCasa is a browser wallet for webcash",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/juzybits/webcasa"
     },
-    "bundle": {
-      "publicUrl": "./",
-      "sourceMap": false
-    }
-  }
+    "keywords": [],
+    "scripts": {
+        "dev": "rm -rf .parcel-cache/ dist/ && parcel src/index.html",
+        "build-firebase": "rm -rf dist/firebase && parcel build src/index.html --target firebase && ./scripts/bundle.sh firebase && cp src/static/* dist/firebase/ && mkdir -p dist/firebase/img/ && cp src/img/open-graph.webp dist/firebase/img/",
+        "build-bundle": "rm -rf dist/bundle && parcel build src/index.html --target bundle",
+        "preview-prod": "firebase serve --only hosting:prod",
+        "deploy-dev": "firebase deploy --only hosting:dev",
+        "deploy-prod": "firebase deploy --only hosting:prod"
+    },
+    "dependencies": {
+        "crypto-js": "^4.2.0",
+        "qrcode": "^1.5.3",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "webcash": "^1.0.6"
+    },
+    "devDependencies": {
+        "@parcel/transformer-less": "latest",
+        "@types/react": "^18.2.38",
+        "@types/react-dom": "^18.2.17",
+        "buffer": "^6.0.3",
+        "events": "^3.3.0",
+        "node-html-parser": "^6.1.11",
+        "parcel": "latest",
+        "process": "latest",
+        "react-devtools": "latest",
+        "stream-browserify": "^3.0.0",
+        "string_decoder": "^1.3.0"
+    },
+    "targets": {
+        "firebase": {
+            "sourceMap": false
+        },
+        "bundle": {
+            "publicUrl": "./",
+            "sourceMap": false
+        }
+    },
+    "type": "module",
+    "sideEffects": false,
+    "packageManager": "pnpm@10.2.0"
 }
