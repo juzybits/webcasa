@@ -6,7 +6,6 @@ import { WebcashWallet, SecretWebcash } from "webcash";
 
 import { formatBalance, makePassword, shorten } from "./_util";
 import { ActionResult } from "./Common";
-import { Header } from "./Header";
 import { Navigation } from "./Navigation";
 import { ViewCheck } from "./ViewCheck";
 import { ViewExternalReceive } from "./ViewExternalReceive";
@@ -28,12 +27,12 @@ export class CasaWallet extends WebcashWallet {
     private static locStoKey = 'wallet';
     private password;
 
-    constructor(walletData: Partial<WebcashWalletData> = {}, password?: string) {
+    constructor(walletData, password?: string) {
         super(walletData);
         this.password = password;
     }
 
-    public static exists(): bool {
+    public static exists(): boolean {
         return null !== window.localStorage.getItem(CasaWallet.locStoKey);
     }
 
@@ -227,7 +226,7 @@ export class App extends React.Component {
 
     /* Handle Settings (wallet operations) */
 
-    private confirmOverwriteWallet(): bool {
+    private confirmOverwriteWallet(): boolean {
         const balance = formatBalance(this.state.wallet.getBalance());
         const master = shorten(this.state.wallet.master_secret);
         return confirm(`This will DELETE your wallet '${master}'` +
